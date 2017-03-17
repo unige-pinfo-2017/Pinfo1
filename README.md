@@ -1,7 +1,7 @@
 Les mauvais chasseurs
 Antoine Benquet x
 Aziz Ferchiou
-Mélanie Glauser
+Mélanie Glauser x
 Luca Joss
 Quang Minh Nguyen
 Joao Ramos
