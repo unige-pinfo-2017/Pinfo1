@@ -1,0 +1,34 @@
+package ch.unige.pinfo.login;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+import ch.unige.pinfo.user.ManageUser;
+import ch.unige.pinfo.user.User;
+
+public class Login {
+	@Inject
+	ManageUser mu;
+	
+	@Inject
+	ScreenLogin sl;
+	
+	public Login(){}
+	
+	public void authentication(String username, String password){
+		User user = mu.getUserByUsername(username);
+		
+		if (checkPassword(password, user.getPassword())){
+			sl.display("Authentication successful.");
+			mu.addConnectedUser(user);
+			// Afficher écran overview
+		} else {
+			sl.display("Authetication failed.");
+		}
+	}
+	
+	public boolean checkPassword(String inputPassword, String realPassword){
+		return realPassword.equals(inputPassword);
+	}
+}

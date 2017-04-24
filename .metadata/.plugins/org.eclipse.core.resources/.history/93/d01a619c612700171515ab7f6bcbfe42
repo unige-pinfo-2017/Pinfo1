@@ -1,0 +1,15 @@
+package ch.unige.pinfo.login;
+
+
+import org.junit.Test;
+
+public class LoginTest {
+	@Test
+	public void testCheckPassword(){
+		String input = "abc";
+		String real = "abc";
+		Login login = new Login();
+		assertTrue(login.checkPassword(inputPassword, realPassword))
+	}
+	
+}

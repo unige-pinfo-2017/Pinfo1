@@ -1,0 +1,12 @@
+package ch.unige.pinfo.user;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ManageUser {
+	List<User> listUser;
+	
+	public ManageUser(){
+		this.listUser = new ArrayList<User>();
+	}
+}

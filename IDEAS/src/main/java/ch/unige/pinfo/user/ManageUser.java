@@ -1,0 +1,40 @@
+package ch.unige.pinfo.user;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
+
+public class ManageUser {
+	private List<User> listUser;
+	private List<User> listConnectedUser;
+	
+	public ManageUser(){
+		this.listUser = new ArrayList<User>();
+		this.listConnectedUser = new ArrayList<User>();
+	}
+	
+	// Pour les tests
+	@Inject
+	public ManageUser(User user){
+		listUser = new ArrayList<User>();
+		listConnectedUser = new ArrayList<User>();
+		
+		listUser.add(user);
+	}
+	
+	public User getUserByUsername(String username){
+		for (int i=0; i<listUser.size(); i++){
+			User currentUser = listUser.get(i);
+			if (currentUser.getUsername().equals(username)){
+				return currentUser;
+			}
+		}
+		return null;
+	}
+	
+	public void addConnectedUser(User user){
+		listConnectedUser.add(user);
+	}
+}

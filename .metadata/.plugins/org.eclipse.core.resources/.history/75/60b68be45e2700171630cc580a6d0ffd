@@ -1,0 +1,9 @@
+package ch.unige.pinfo.login;
+
+public class ScreenLogin {
+	public ScreenLogin(){}
+	
+	public void display(String msg){
+		return msg;
+	}
+}

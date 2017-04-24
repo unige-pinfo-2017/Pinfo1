@@ -1,0 +1,15 @@
+package ch.unige.pinfo.user;
+
+import org.junit.Test;
+
+public class ManageUserTest {
+	
+	@Test
+	public void testGetUserByUserName(){
+		String username = "ideas";
+		User user = new User(0, username, "ideaspw", "manager");
+		ManageUser manageUser = new ManageUser(user);
+		User retrieved = manageUser.getUserByUsername(username)
+		
+	}
+}

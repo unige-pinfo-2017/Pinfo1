@@ -1,0 +1,29 @@
+package ch.unige.pinfo.login;
+
+import javax.inject.Inject;
+
+import ch.unige.pinfo.user.ManageUser;
+import ch.unige.pinfo.user.User;
+
+public class Login {
+	@Inject
+	ManageUser mu;
+	
+	@Inject
+	ScreenLogin sl;
+	
+	public Login(){}
+	
+	public void authentication(String username, String password){
+		User user = mu.getUserByUsername(username);
+		if checkPassword(password, user.getPassword()){
+			print("ok");
+		} else {
+			print("not ok");
+		}
+	}
+	
+	public boolean checkPassword(String inputPassword, String realPassword){
+		return realPassword.equals(inputPassword);
+	}
+}

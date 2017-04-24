@@ -1,0 +1,10 @@
+package ch.unige.pinfo.user;
+
+import org.junit.Test;
+
+public class ManageUserTest {
+	@Test
+	public void testGetUserByUserName(){
+		
+	}
+}

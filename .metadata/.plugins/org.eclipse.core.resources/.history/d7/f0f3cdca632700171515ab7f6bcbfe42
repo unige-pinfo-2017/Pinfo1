@@ -1,0 +1,35 @@
+package ch.unige.pinfo.user;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ManageUser {
+	private List<User> listUser;
+	private List<User> listConnectedUser;
+	
+	public ManageUser(){
+		this.listUser = new ArrayList<User>();
+		this.listConnectedUser = new ArrayList<User>();
+	}
+	
+	public ManageUser(User u){
+		this.listUser = new ArrayList<User>();
+		this.listConnectedUser = new ArrayList<User>();
+		
+		listUser.add(u)
+	}
+	
+	public User getUserByUsername(String name){
+		for (int i=0; i<listUser.size(); i++){
+			User currentUser = listUser.get(i);
+			if (currentUser.getUsername().equals(name)){
+				return currentUser;
+			}
+		}
+		return null;
+	}
+	
+	public void addConnectedUser(User user){
+		listConnectedUser.add(user);
+	}
+}

@@ -1,0 +1,45 @@
+package ch.unige.pinfo.user;
+
+import javax.persistence.Entity;
+
+@Entity
+public class User {
+	// Fields:
+	private int id;
+	private String username;
+	private String password;
+	private String role;
+	
+	// Constructor:
+	public User(){}
+	
+	public User(int id, String username, String password, String role ){
+		this.id = id;
+		this.username = username;
+		this.role = role;
+		this.password = password;
+	}
+
+	public boolean equals(User user){
+		if (this.id == user.id) 
+			&& (this.username.equals(user.username) 
+			&& (this.password.equals(user.password)))
+	}
+	
+	// Getters
+	public int getId() {
+		return id;
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+}

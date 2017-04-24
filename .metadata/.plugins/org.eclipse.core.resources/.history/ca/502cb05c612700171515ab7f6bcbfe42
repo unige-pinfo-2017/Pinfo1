@@ -1,0 +1,9 @@
+package ch.unige.pinfo.login;
+
+
+import org.junit.Test;
+
+public class LoginTest {
+	
+	
+}

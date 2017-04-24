@@ -1,0 +1,12 @@
+package ch.unige.pinfo.login;
+
+import javax.ws.rs.GET;
+
+public class ScreenLogin {
+	public ScreenLogin(){}
+	
+	@GET
+	public String display(String msg){
+		return msg;
+	}
+}

@@ -1,0 +1,9 @@
+package ch.unige.pinfo.login;
+
+public class ScreenLogin {
+	public ScreenLogin(){}
+	
+	public String displayErrMsg(){
+		return "Password does not match username. Please try again";
+	}
+}

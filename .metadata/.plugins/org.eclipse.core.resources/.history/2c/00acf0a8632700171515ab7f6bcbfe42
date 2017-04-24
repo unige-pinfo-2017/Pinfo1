@@ -1,0 +1,11 @@
+package ch.unige.pinfo.user;
+
+import org.junit.Test;
+
+public class ManageUserTest {
+	
+	@Test
+	public void testGetUserByUserName(){
+		User user = new User(0, "ideas", "ideaspw", "manager");
+	}
+}

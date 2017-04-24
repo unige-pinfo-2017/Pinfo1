@@ -1,0 +1,24 @@
+package ch.unige.pinfo.IDEAS;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+import ch.unige.pinfo.login.Login;
+
+@Path("/")
+public class IDEAS {
+	public IDEAS() {}
+	
+	@Inject
+	Login login;
+	
+	@GET
+	@Path("/login")
+	
+	@GET
+	@Path("/")
+	public String test(){
+		return "Welcome to IDEAS! The application is under construction.";
+	}
+}

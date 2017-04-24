@@ -1,0 +1,34 @@
+package ch.unige.pinfo.user;
+
+@Entity
+public class User {
+	// Fields:
+	private int id;
+	private String username;
+	private String role;
+	private String password;
+	
+	// Constructor:
+	public User(int id, String role, String password){
+		this.id = id;
+		this.role = role;
+		this.password = password;
+	}
+
+	// Getters
+	public int getId() {
+		return id;
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+}
