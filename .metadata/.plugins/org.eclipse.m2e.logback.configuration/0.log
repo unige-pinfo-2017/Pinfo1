@@ -1288,3 +1288,12 @@ java.lang.NullPointerException: null
 2017-04-24 11:24:05,384 [Worker-70] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2017-04-24 11:24:05,386 [Worker-70] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-04-24 11:24:05,386 [Worker-70] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/qm/UNIGE/projet_info/Pinfo1/IDEAS/src/test/resources
+2017-04-24 11:32:38,430 [main] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: ch.unige.pinfo:IDEAS2:0.0.1-SNAPSHOT @ /home/qm/UNIGE/projet_info/Pinfo1/IDEAS/pom.xml.
+2017-04-24 11:44:00,822 [Worker-75] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: ch.unige.pinfo:IDEAS:0.0.1-SNAPSHOT @ /home/qm/UNIGE/projet_info/Pinfo1/IDEAS/pom.xml.
+2017-04-24 11:44:00,970 [Worker-75] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-24 11:44:00,974 [Worker-75] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-04-24 11:44:00,980 [Worker-75] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-04-24 11:44:00,983 [Worker-75] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/qm/UNIGE/projet_info/Pinfo1/IDEAS/src/test/resources
+2017-04-24 11:44:00,984 [Worker-75] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of IDEAS
+2017-04-24 11:44:00,986 [Worker-75] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for IDEAS
+2017-04-24 11:44:01,000 [Worker-75] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
