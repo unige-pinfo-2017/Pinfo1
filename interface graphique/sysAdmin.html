@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>I.D.E.A.S Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+
+    .menu {
+  list-style: none;
+  border-bottom: 0em solid white;
+  margin-bottom: 0em;
+  padding: 0 0 0.5em;
+}
+
+.menu a {
+  background-color: #3167A5; /* Grey background color */
+    color: white; /* Black text color */
+    display: inline; /* Make the links appear below each other */
+    padding: 30px; /* Add some padding */
+    text-decoration: none;
+}
+
+.menu a.active {
+    background-color: #3167A5; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+
+.menu > li {
+  display: inline;
+  margin-right: 5px;
+}
+
+.menu > li + li:before {
+  padding-right: 0.3em;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>I.D.E.A.S DashBoard</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">link1</a></li>
+        <li><a href="#section2">Link2</a></li>
+        <li><a href="#section3">Link3</a></li>
+        <li><a href="#section3">Link4</a></li>
+      </ul><br>
+    </div>
+
+
+<div class="col-sm-9">
+    
+      <hr>
+      <h2>Connecté en tant que: <h3>SysAdmin</h3></h2>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <br><br>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>Développé par Benquet0</p>
+</footer>
+
+</body>
+</html>
