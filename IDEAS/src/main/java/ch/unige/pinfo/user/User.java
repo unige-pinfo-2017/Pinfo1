@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.gson.Gson;
+
 @Entity
 @Table( name = "user")
 public class User {
@@ -22,13 +24,18 @@ public class User {
 	@Column( name = "PASSWORD", nullable = false ) 
 	private String password;
 	
-	public boolean equals(User user){
+	public boolean equals(Object obj){
+		User user = (User) obj;
 		if (user == null){
 			return false;
 		}
 		return ((this.id == user.id) 
 			&& (this.getUsername().equals(user.username))
 			&& (this.password.equals(user.password)));
+	}
+	
+	public String Json(){
+		return new Gson().toJson(this);
 	}
 	
 	// Getters
