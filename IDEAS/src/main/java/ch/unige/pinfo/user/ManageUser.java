@@ -3,7 +3,6 @@ package ch.unige.pinfo.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 public class ManageUser {
