@@ -2,44 +2,33 @@ package ch.unige.pinfo.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "Utilisateur")
+@Table( name = "user")
 public class User {
 	// Fields:
 	@Id
-	@Column( name = "id" )
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column( name = "ID", nullable = false )
+	private Integer id;
 	
-	@Column( name = "username" )
+	@Column( name = "USERNAME", nullable = false ) 
 	private String username;
 	
-	@Column( name = "password" )
+	@Column( name = "PASSWORD", nullable = false ) 
 	private String password;
 	
-	@Column( name = "role" )
-	private String role;
-	
-	// Constructor:
-	public User(){}
-	
-	public User(int id, String username, String password, String role ){
-		this.id = id;
-		this.username = username;
-		this.role = role;
-		this.password = password;
-	}
-
 	public boolean equals(User user){
 		if (user == null){
 			return false;
 		}
 		return ((this.id == user.id) 
 			&& (this.getUsername().equals(user.username))
-			&& (this.password.equals(user.password))
-			&& (this.role.equals(user.role)));
+			&& (this.password.equals(user.password)));
 	}
 	
 	// Getters
@@ -51,11 +40,20 @@ public class User {
 		return username;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
 	public String getPassword() {
 		return password;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }
