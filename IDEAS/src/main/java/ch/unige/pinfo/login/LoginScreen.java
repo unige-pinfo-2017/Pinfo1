@@ -13,11 +13,12 @@ public class LoginScreen {
 	@Inject
 	private UserService userService;
 	
-	public LoginScreen(){}
+	public LoginScreen(){
+	}
 
 	@GET
 	//@Produces(MediaType.TEXT_HTML)
-	@Path("/log")
+	@Path("/")
 	public String logTest(){
 		
 		// ce que le user pourait entrer

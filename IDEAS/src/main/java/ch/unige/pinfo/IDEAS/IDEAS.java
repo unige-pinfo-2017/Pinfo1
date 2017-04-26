@@ -27,7 +27,7 @@ public class IDEAS {
 	
 	@GET
 	//@Produces(MediaType.TEXT_HTML)
-	@Path("/test")
+	@Path("/")
 	public String test(){
 		return "Welcome to IDEAS! The application is under construction.";
 	}
