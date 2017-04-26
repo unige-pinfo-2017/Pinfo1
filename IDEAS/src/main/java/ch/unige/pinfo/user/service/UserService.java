@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ch.unige.pinfo.user.User;
+import ch.unige.pinfo.user.dom.User;
 
 @Local
 public interface UserService{

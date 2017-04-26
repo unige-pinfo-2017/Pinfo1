@@ -3,7 +3,7 @@
 	<persistence-unit name="IDEAS">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:jboss/datasources/MysqlIDEAS</jta-data-source>
-		<class>ch.unige.pinfo.user.User</class>
+		<class>ch.unige.pinfo.user.dom.User</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

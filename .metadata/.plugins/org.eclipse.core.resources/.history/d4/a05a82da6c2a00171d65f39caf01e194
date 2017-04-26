@@ -1,0 +1,20 @@
+package ch.unige.pinfo.user.service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.junit.Test;
+
+public class UserServiceImplTest {
+	
+	@Test
+	public void testGetUserById(){
+		UserServiceImpl usi = new UserServiceImpl();
+		usi.getUserByID(9);
+	}
+	
+	@Test
+	public void testAddUser(){
+		
+	}
+}

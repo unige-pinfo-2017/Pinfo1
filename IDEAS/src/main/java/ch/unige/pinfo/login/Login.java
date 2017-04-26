@@ -4,8 +4,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import ch.unige.pinfo.user.ManageUser;
-import ch.unige.pinfo.user.User;
+import ch.unige.pinfo.user.dom.ManageUser;
+import ch.unige.pinfo.user.dom.User;
 
 public class Login {
 	@Inject

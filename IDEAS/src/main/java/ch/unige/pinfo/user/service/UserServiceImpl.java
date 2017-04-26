@@ -4,13 +4,15 @@ package ch.unige.pinfo.user.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import ch.unige.pinfo.user.User;
+import ch.unige.pinfo.user.dom.User;
 
 @Stateless
+@Default
 public class UserServiceImpl implements UserService{
 
 	@PersistenceContext

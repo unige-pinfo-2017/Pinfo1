@@ -35,8 +35,8 @@
 	</section>
 	<section name="org.eclipse.m2e.core.ui.internal.dialogs.MavenRepositorySearchDialog">
 		<item value="480" key="width"/>
-		<item value="722" key="x"/>
-		<item value="240" key="y"/>
+		<item value="1009" key="x"/>
+		<item value="299" key="y"/>
 		<item value="567" key="height"/>
 	</section>
 	<section name="MavenProjectImportWizardPage">
@@ -86,6 +86,7 @@
 	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="/home/qm/Workspace/Java"/>
 			<item value="/home/qm/UNIGE/projet_info/Pinfo1/IDEAS2/pom.xml"/>
 			<item value="/home/qm/UNIGE/projet_info/Pinfo1/"/>
 			<item value="/home/qm/UNIGE/projet_info/Pinfo1"/>
@@ -102,10 +103,18 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="ch.demoAngular2"/>
+			<item value="ch.dukes"/>
+			<item value="ch.demoAngular"/>
 		</list>
 		<list key="groupId">
+			<item value="ch"/>
+			<item value="ch."/>
 		</list>
 		<list key="artifactId">
+			<item value="demoAngular2"/>
+			<item value="dukes"/>
+			<item value="demoAngular"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
