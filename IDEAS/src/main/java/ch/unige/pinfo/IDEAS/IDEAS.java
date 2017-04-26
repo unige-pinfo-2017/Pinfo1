@@ -21,39 +21,14 @@ import ch.unige.pinfo.user.User;
 
 @Path("/home")
 public class IDEAS {
-	@PersistenceContext
-	private EntityManager em;
-	
-	@Resource
-	private UserTransaction userTransaction;
+
 	
 	public IDEAS() {}
 	
 	@GET
 	//@Produces(MediaType.TEXT_HTML)
 	@Path("/test")
-	public String test() throws ServletException{
-		
-		// on cree un user 
-	User u = new User();
-	u.setUsername("test");
-	u.setPassword("PAss");
-
-				
-	// inscrire
-
-		try {
-			userTransaction.begin();
-			em.persist(u);
-			userTransaction.commit();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-			    
-	//trouver par index
-	User u1 = em.find(User.class, 2);
-	
-	return "Welcome to IDEAS! The application is under construction. + "+u1.getUsername();
+	public String test(){
+		return "Welcome to IDEAS! The application is under construction.";
 	}
 }
