@@ -30,6 +30,7 @@ public class User {
 	@Column( name = "PASSWORD", nullable = false ) 
 	private String password;
 	
+	@Override
 	public boolean equals(Object obj){
 		User user = (User) obj;
 		if (user == null){
