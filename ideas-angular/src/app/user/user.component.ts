@@ -11,7 +11,7 @@ const USER: User = { id: 11, username: 'ideas', password: 'ideaspw'};
 	templateUrl: './user.component.html',
 	styleUrls: ['./user.component.css'],
 	providers: [
-		UserService, 
+		UserService,
 	]
 })
 
@@ -24,17 +24,16 @@ export class UserComponent implements OnInit {
 		private userService: UserService,
 		private route: ActivatedRoute) {}
 
-	ngOnInit(): void {
-		/*this.sub = this.route.params.subscribe(params => {
+	ngOnInit(): void { // Procédure qui s'exécute lorsque que le composant est initialisé
+		this.sub = this.route.params.subscribe(params => { // Récupération du paramètre "id" en parsant l'url
 			let id = Number.parseInt(params['id']);
 			this.userService
-				.getUser(id)
-				.subscribe(u => this.user = u);
-		})*/
-		this.user = USER;
+				.getUser(id)	// Récupère l'utilisateur spécifié par "id"
+				.subscribe(u => this.user = u); // Assignation à l'objet user local
+		})
 	}
 
-	ngOnDestroy() {
+	ngOnDestroy() { // Procédure qui s'exécute lorsque le composant est détruit
 		this.sub.unsubcribe();
 	}
 
