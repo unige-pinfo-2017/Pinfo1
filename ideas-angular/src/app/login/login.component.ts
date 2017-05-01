@@ -11,15 +11,15 @@ export class LoginComponent {
 	title = 'I.D.E.A.S';
 	private username = "";
 	private password = "";
-    private login: string ='';
-    private error: string = '';
+    private login: string =''; // stocke username et password
+    private error: string = ''; // message d'erreur
 
     private loginText(usernameValue: string, passwordValue: string): void {
-    	if (usernameValue == '') {
+    	if (usernameValue == '') { // username vide
 				this.error = ``;
     		this.error += `Veuillez ne pas laisser vide le username\n`;
     	}
-			else if (passwordValue == '') {
+			else if (passwordValue == '') { // password vide
 				this.error = ``;
 				this.error += `Veuillez ne pas laisser vide le password\n`;
 			}
