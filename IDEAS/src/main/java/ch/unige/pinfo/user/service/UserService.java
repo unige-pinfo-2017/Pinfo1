@@ -10,9 +10,9 @@ import ch.unige.pinfo.user.dom.User;
 public interface UserService{
 	
 	void addUser(User user);
-	void deleteUser(Integer Id);
-	User getUserByID(Integer Id);
-	User getUserByUsername(String username);
+	void deleteUser(Long Id);
+	User getUserById(Long Id);
+	List<User> getUserByUsername(String username);
 	List<User> getAllUsers();
 	
 }

@@ -12,10 +12,11 @@ import ch.unige.pinfo.user.dom.User;
 
 public class UserServiceImplTest {
 	
+	
 	@Inject
 	private UserService userService;
 	
-	/*@Test
+	@Test
 	public void testGetUserById(){
 		UserServiceImpl usi = new UserServiceImpl();
 		
@@ -23,8 +24,8 @@ public class UserServiceImplTest {
 		user.setUsername("IDEAS");
 		user.setPassword("IDEASPW");
 		
-		assertTrue(user.equals(usi.getUserByID(9)));
-	}*/
+		assertTrue(user.equals(usi.getUserById((long) 1)));
+	}
 	
 	@Test
 	public void testGetUserByUsername_null(){

@@ -7,7 +7,11 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.user.dom.User;
 
@@ -24,29 +28,34 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteUser(Integer Id) {
+	public void deleteUser(Long Id) {
 		User user = entityManager.find(User.class, Id);
 		entityManager.remove(user);		
 	}
 
 	@Override
-	public User getUserByID(Integer Id) {
+	public User getUserById(Long Id) {
 		return entityManager.find(User.class, Id);
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
-		Query query = entityManager.createNamedQuery("User.findByUsername");
-		query.setParameter("username", username);
-		if (query.getResultList().size() == 0)
-			return new User();
-		else
-			return (User) query.getResultList().get(0) ;
+	public List<User> getUserByUsername(String username) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> c = cb.createQuery(User.class);
+		Root<User> user = c.from(User.class);
+		Predicate condition = cb.equal(user.get("username"), username);
+		c.where(condition);
+		TypedQuery<User> query = entityManager.createQuery(c);
+		return query.getResultList();
 	}
 
 	@Override
 	public List<User> getAllUsers() {
-		Query query = entityManager.createNamedQuery("User.findAll");
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> c = cb.createQuery(User.class);
+		Root<User> users = c.from(User.class);
+		c.select(users);
+		TypedQuery<User> query = entityManager.createQuery(c);
 		return query.getResultList();
 	}
 }

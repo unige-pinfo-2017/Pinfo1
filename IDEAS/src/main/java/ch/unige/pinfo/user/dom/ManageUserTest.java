@@ -12,7 +12,7 @@ public class ManageUserTest {
 		String password = "ideaspw";
 		
 		User user = new User();
-		user.setId(0);
+		user.setId((long) 0);
 		user.setUsername(username);
 		user.setPassword(password);
 		
@@ -27,7 +27,7 @@ public class ManageUserTest {
 		String username = "ideas";
 		
 		User user = new User();
-		user.setId(0);
+		user.setId((long) 0);
 		user.setUsername(username);
 		
 		ManageUser manageUser = new ManageUser(user);

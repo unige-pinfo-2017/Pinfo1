@@ -8,26 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.google.gson.Gson;
 
 @Entity
 @Table( name = "user")
-@NamedQueries({
-    @NamedQuery(name="User.findAll", query="SELECT e FROM User e"),
-    @NamedQuery(name="User.findByUsername", query="SELECT e FROM User e where e.username=:username"),
-}) 
 public class User {
 	// Fields:
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column( name = "ID", nullable = false )
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column( name = "ID")
+	private Long id;
 	
 	@Column( name = "USERNAME", nullable = false ) 
+	@Size(min = 3, max = 40)
 	private String username;
 	
 	@Column( name = "PASSWORD", nullable = false ) 
+	@Size(min = 3, max = 40)
 	private String password;
 	
 	@Override
@@ -44,8 +43,8 @@ public class User {
 		return new Gson().toJson(this);
 	}
 	
-	// Getters
-	public int getId() {
+	// Getters 
+	public Long getId() {
 		return id;
 	}
 	
@@ -57,7 +56,8 @@ public class User {
 		return password;
 	}
 
-	public void setId(int id) {
+	// Setters
+	public void setId(Long id) {
 		this.id = id;
 	}
 
