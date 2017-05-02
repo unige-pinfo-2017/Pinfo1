@@ -9,6 +9,9 @@ import { UserComponent } from './user/user.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import {SidebarComponent} from './overview/sidebar/sidebar.component';
+import {TopbarComponent} from './overview/topbar/topbar.component';
+import {MiddlescreenComponent} from './overview/middlescreen/middlescreen.component';
 
 @NgModule({
   imports:      [
@@ -21,7 +24,10 @@ import { AppRoutingModule } from './app-routing.module';
 	  AppComponent,
 	  UserComponent,
 	  OverviewComponent,
-	  LoginComponent
+	  LoginComponent,
+    SidebarComponent,
+    TopbarComponent,
+    MiddlescreenComponent
   ],
   bootstrap:    [ AppComponent ]
 })
