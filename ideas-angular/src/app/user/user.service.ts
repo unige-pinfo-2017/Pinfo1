@@ -18,6 +18,13 @@ export class UserService {
 		return user$;
 	}
 
+	getUserByUsername(username: string): Observable<User>{
+		let user$ = this.http
+		.get(`${this.baseUrl}/user/byUsername/${username}`, {headers: this.getHeaders()}) // Récupère une donnée à l'url du serveur
+		.map(res => <User>res.json()); // Conversion des données formatées en JSON vers la classe User
+   		return user$;
+	}
+
 	private getHeaders() {
 		// Permet de récupérer les headers
 		let headers = new Headers();
@@ -25,29 +32,4 @@ export class UserService {
 		headers.append('Content-Type', 'application/json');
 		return headers;
 	}
-
-	/*getUserTest(id: number): Observable<User> {
-		let user$ = this.http // var$ suffix -> var est un Observable
-	      .get(`${this.testUrl}/user/${id}`, {headers: this.getHeaders()})
-	      .map(this.mapUser);
-		  return user$;
-	}*/
-
-	/*getUser2(id: number): Observable<User> {
-		let user$ = this.http // var$ suffix -> var est un Observable
-	      .get(`${this.baseUrl}/user/${id}`, {headers: this.getHeaders()})
-	      .map(this.mapUser);
-
-		  return user$;
-	}*/
-
-	/*private toUser(r: any): User {
-		return r;
-	}*/
-
-	/*private mapUser(response: Response): User {
-		return this.toUser(response.json());
-	}*/
-
-
 }

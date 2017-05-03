@@ -26,9 +26,10 @@ export class UserComponent implements OnInit {
 
 	ngOnInit(): void { // Procédure qui s'exécute lorsque que le composant est initialisé
 		this.sub = this.route.params.subscribe(params => { // Récupération du paramètre "id" en parsant l'url
-			let id = Number.parseInt(params['id']);
+			//let id = Number.parseInt(params['id']);
+			let username = params['username'];
 			this.userService
-				.getUser(id)	// Récupère l'utilisateur spécifié par "id"
+				.getUserByUsername(username)	// Récupère l'utilisateur spécifié par "id"
 				.subscribe(u => this.user = u); // Assignation à l'objet user local
 		})
 	}

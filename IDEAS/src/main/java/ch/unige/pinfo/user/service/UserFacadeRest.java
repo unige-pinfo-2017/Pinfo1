@@ -67,10 +67,17 @@ public class UserFacadeRest {
 	}
 	
 	@GET
-	@Path("/byUsername/{username}")
-	@Produces({ "application/json" })
+	//@Path("/byUsername/{username}")
+	//@Produces({ "application/json" })
 	public Response getByUsername(@PathParam("username") String username) {
 		return Response.ok().entity(userService.getUserByUsername(username)).build();
+	}
+	
+	@GET
+	@Path("/byUsername/{username}")
+	@Produces({ "application/json" })
+	public User getByUsername2(@PathParam("username") String username) {
+		return userService.getUserByUsername(username).get(0);
 	}
 	
 	/*@GET
