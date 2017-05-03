@@ -13,7 +13,7 @@ export class UserService {
 
 	getUser(id: number): Observable<User> {
 		let user$ = this.http
-			 .get(`${this.baseUrl}/user/${id}`, {headers: this.getHeaders()}) // Récupère une donnée à l'url du serveur
+			 .get(`${this.baseUrl}/user/byId/${id}`, {headers: this.getHeaders()}) // Récupère une donnée à l'url du serveur
 			 .map(res => <User>res.json()); // Conversion des données formatées en JSON vers la classe User
 		return user$;
 	}
