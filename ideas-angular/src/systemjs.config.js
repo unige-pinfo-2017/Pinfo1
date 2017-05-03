@@ -25,7 +25,13 @@
 
       // other libraries
       'rxjs':                      'npm:rxjs',
-      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+      'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
+	  'moment': 'node_modules/moment/moment.js',
+
+	  // IMPORTANT: To import correctly ng2-table and ng2-charts
+	  'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.js',
+	  'ng2-table': 'node_modules/ng2-table',
+	  'ng2-charts': 'node_modules/ng2-charts'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -39,7 +45,14 @@
       },
       rxjs: {
         defaultExtension: 'js'
-      }
-    }
+	  },
+	  // IMPORTANT: To import correctly ng2-table and ng2-charts
+	  'ng2-table': {
+		  defaultExtension: 'js'
+	  },
+	  'ng2-charts': {
+		  defaultExtension: 'js'
+	  },
+  }
   });
 })(this);

@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent }  from './user/user.component';
 import { OverviewComponent } from './overview/overview.component';
 import { LoginComponent } from './login/login.component';
+import { ChartComponent } from './chart/chart.component';
+import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
   	/*{
@@ -22,6 +24,14 @@ const routes: Routes = [
 		path: 'login',
 		component: LoginComponent
 	},
+	{
+		path: 'chart',
+		component: ChartComponent
+	},
+	{
+		path: 'table',
+		component: TableComponent
+	}
 ];
 
 @NgModule({
