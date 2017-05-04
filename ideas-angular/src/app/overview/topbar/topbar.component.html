@@ -15,13 +15,11 @@
       <li><a href="#!/view1">Blabla</a></li>
       <li><a href="#!/view1">Bloblo</a></li>-->
 
-      <li *ngFor="let dat of datas"><a href="#!/view2">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}</a></li>
+      <li *ngFor="let dat of datas"><a href="#">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}<a href="#">x</a></a></li>
       <div class="dropdown">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
+          <a *ngFor="let da of datash" href="#">{{da.name}}: <b>{{da.valeur}}</b> {{da.unite}}</a>
         </div>
       </div>
     </ul>

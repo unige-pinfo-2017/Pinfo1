@@ -20,7 +20,7 @@ footer {
 	height: auto;
 	padding: 15px;
   }
-  .row.content {height: auto;} 
+  .row.content {height: auto;}
 }
 
 .menu {
@@ -98,4 +98,11 @@ li a:hover:not(.active) {
 
 .dropdown:hover .dropbtn {
     background-color: #ADD8E6;
+}
+
+.croix {
+    font-size: 1em;
+    cursor: pointer;
+    right: 10px;
+    top: 5px;
 }
