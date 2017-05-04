@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 
+import { LoginService } from './login.service';
+
 @Component({
 	selector: 'login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],
-
+	providers: [
+		LoginService,
+	]
 })
 
 export class LoginComponent {
@@ -13,6 +17,11 @@ export class LoginComponent {
 	private password = "";
     private login: string =''; // stocke username et password
     private error: string = ''; // message d'erreur
+
+	private response: string;
+
+	constructor(
+		private loginService: LoginService) {}
 
     private loginText(usernameValue: string, passwordValue: string): void {
     	if (usernameValue == '') { // username vide
@@ -27,5 +36,18 @@ export class LoginComponent {
 		this.login += `Added user with username :'${usernameValue}' and password :'${passwordValue}'\n`;
 		this.error = ``;
 		}
+	}
+
+	private authentication(username: string, pw: string): void {
+		this.loginService.authentication(username, pw)
+		.then(r => this.response = r).then(r => {
+			console.log(r);
+			if (this.response === 'ok'){
+				this.login = 'Authentication successful.'
+			} else if (this.response === 'error'){
+				this.login = 'Authentication failed.'
+			}
+		}
+		);
 	}
 }

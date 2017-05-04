@@ -5,6 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.*;
@@ -18,7 +21,7 @@ public class LoginScreen {
 	public LoginScreen(){
 	}
 
-	@GET
+	/*@GET
 	//@Produces(MediaType.TEXT_HTML)
 	@Path("/")
 	public String logTest(){
@@ -27,6 +30,21 @@ public class LoginScreen {
 	
 	public String display(String msg){
 		return msg;
+	}*/
+	
+	
+	// @QueryParam("from") String from, @QueryParam("to") String to 
+	
+	@GET
+	@Produces({ MediaType.TEXT_PLAIN })
+	@Path("/")
+	public String authentication(@QueryParam("username") String username, @QueryParam("pw") String password){
+		User user = userService.getUserByUsername(username).get(0);
+		if (user.getPassword().equals(password)) {
+			return "ok";
+		} else {	
+			return "error";
+		}
 	}
 }
 

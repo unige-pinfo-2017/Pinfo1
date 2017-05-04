@@ -18,15 +18,22 @@
 	<!--onclick="location.href='#!./overview/overview.html'"-->
 	<!--routerLink="#!./overview/overview.component.html <router-outlet></router-outlet>-->
 	<nav>
+<!--
 	<button routerLink="#!./overview/overview.component.html" routerLinkActive="active" (click)="loginText(textbox1.value,textbox2.value)" type="submit" class="btn btn-primary btn-block btn-large">Login</button><router-outlet></router-outlet>
+-->
+	<button (click)="authentication(textbox1.value,textbox2.value)" class="btn btn-primary btn-block btn-large">Login</button>
 	</nav>
+
 	<br>
 	<br>
 	<h4><b>User actuel</b>: {{textbox1.value}} {{textbox2.value}}</h4>
 	<br>
+
 	<pre>{{login}}</pre>
+
 	<h1><font color="red">{{error}}</font></h1>
 	<h5><button (click)="login=''" type="submit" class="btn btn-primary">Delete users</button></h5>
+
 </div>
 
 </html>
