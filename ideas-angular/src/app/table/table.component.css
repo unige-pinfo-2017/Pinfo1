@@ -1,0 +1,69 @@
+/**
+ * State checkbox
+ */
+.stateCheckbox {
+	width: 120px;
+	height: 40px;
+	background: #666;
+	margin: 20px 60px;
+	border-radius: 50px;
+	position: relative;
+}
+
+/**
+ * Create the text for the On position
+ */
+.stateCheckbox:before {
+	content: 'ON';
+	position: absolute;
+	top: 12px;
+	left: 13px;
+	height: 2px;
+	color: #26ca28;
+	font-size: 16px;
+}
+
+/**
+ * Create the label for the off position
+ */
+.stateCheckbox:after {
+	content: 'OFF';
+	position: absolute;
+	top: 12px;
+	left: 74px;
+	height: 2px;
+	color: #FF0000;
+	font-size: 16px;
+}
+
+/**
+ * Create the pill to click
+ */
+.stateCheckbox label {
+	display: block;
+	width: 52px;
+	height: 22px;
+	border-radius: 50px;
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 12px;
+	background: #FF0000;
+}
+
+/**
+ * Start by hiding the checkboxes
+ */
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+/**
+ * Create the checkbox event for the label
+ */
+.stateCheckbox input[type=checkbox]:checked + label {
+	left: 60px;
+	background: #26ca28;
+}

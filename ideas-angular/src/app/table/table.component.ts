@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 // webpack html imports
 //let template = require('./table-demo.html');
@@ -8,19 +8,32 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
+
 export class TableComponent implements OnInit {
   public rows:Array<any> = [];
   public columns:Array<any> = [
     {
 		title: 'Name',
 		name: 'name',
-		filtering: {filterString: '', placeholder: 'Filter by name'}},
+		filtering: {filterString: '', placeholder: 'Filter by name'}
+	},
     {
-      title: 'Role',
-      name: 'role',
-      sort: false,
-      filtering: {filterString: '', placeholder: 'Filter by role'}
+		title: 'Role',
+		name: 'role',
+		sort: false,
+		filtering: {filterString: '', placeholder: 'Filter by role'}
     },
+	{
+		title: 'Conso (kW/h)', 
+		name: 'conso',
+		className: ['conso-header', 'text-success'], 
+		sort: 'asc'
+	},
+	{
+		title: 'State',
+		name: 'state'
+		//filtering: {filterString: '', placeholder: 'Filter by state'}
+	},
   ];
   public page:number = 1;
   public itemsPerPage:number = 10;
@@ -36,13 +49,13 @@ export class TableComponent implements OnInit {
   };
 
   private data: Array<any> = [
-    {name: 'Antoine', role: 'User Interface'},
-    {name: 'Aziz', role: 'User Interface'},
-    {name: 'Joao', role: 'Database'},
-    {name: 'Jason', role: 'Java'},
-    {name: 'Luca', role: 'SysAdmin'},
-    {name: 'Melanie', role: 'Java'},
-    {name: 'QM', role: 'Project leader'}
+    {name: 'Antoine', role: 'User Interface', conso: '1478', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'Aziz', role: 'User Interface', conso: '8051', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'Joao', role: 'Database', conso: '1581', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'Jason', role: 'Java', conso: '0', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'Luca', role: 'SysAdmin', conso: '2597', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'Melanie', role: 'Java', conso: '6976', state: '<font color="red"><b>OFF</b></font>'},
+    {name: 'QM', role: 'Project leader', conso: '4478', state: '<font color="red"><b>OFF</b></font>'}
   ];
 
   public constructor() {
@@ -142,6 +155,17 @@ export class TableComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+	console.log(data);
+	console.log(data.row);	
+    let state = data.row.state;
+	if(state === '<font color="red"><b>OFF</b></font>'){
+		console.log("Device deactivated");
+		data.row.state='<font color="green"><b>ON</b></font>';
+		
+	}
+	else if(state === '<font color="green"><b>ON</b></font>'){
+		console.log("Device activated");
+		data.row.state='<font color="red"><b>OFF</b></font>';
+	}
   }
 }
