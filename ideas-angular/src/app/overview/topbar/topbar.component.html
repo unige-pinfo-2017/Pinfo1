@@ -7,13 +7,15 @@
 <div class="col-sm-9">
   <div align="center">
     <ul class="menu">
-      <li><a href="https://google.ch">Consommation</a></li>
+      <!--<li><a href="https://google.ch">Consommation: <b>{{conso}}</b> kW/h</a></li>
       <li><a href="#!/view2">Température</a></li>
       <li><a href="#!/view2">Historique</a></li>
       <li><a href="#!/view2">Blib blob</a></li>
       <li><a href="#!/view2">Blab</a></li>
       <li><a href="#!/view1">Blabla</a></li>
-      <li><a href="#!/view1">Bloblo</a></li>
+      <li><a href="#!/view1">Bloblo</a></li>-->
+
+      <li *ngFor="let dat of datas"><a href="#!/view2">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}</a></li>
       <div class="dropdown">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
