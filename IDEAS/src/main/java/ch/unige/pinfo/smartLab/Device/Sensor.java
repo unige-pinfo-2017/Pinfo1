@@ -1,6 +1,6 @@
-package smartLab.Device;
+package ch.unige.pinfo.smartLab.Device;
 
-abstract public class Sensor {
+abstract class Sensor {
 	protected String value;
 	
 	String getValue(){

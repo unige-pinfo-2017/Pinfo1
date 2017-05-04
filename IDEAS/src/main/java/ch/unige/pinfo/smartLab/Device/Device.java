@@ -1,4 +1,4 @@
-package smartLab.Device;
+package ch.unige.pinfo.smartLab.Device;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,5 @@
-package smartLab.Device;
+package ch.unige.pinfo.smartLab.Device;
 
 public class PowerSocket extends Device {
+	
 }
