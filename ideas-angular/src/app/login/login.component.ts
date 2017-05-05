@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
 
@@ -21,7 +22,8 @@ export class LoginComponent {
 	private response: string;
 
 	constructor(
-		private loginService: LoginService) {}
+		private loginService: LoginService,
+		private router: Router) {}
 
     private loginText(usernameValue: string, passwordValue: string): void {
     	if (usernameValue == '') { // username vide
@@ -43,7 +45,8 @@ export class LoginComponent {
 		.then(r => this.response = r).then(r => {
 			console.log(r);
 			if (this.response === 'ok'){
-				this.login = 'Authentication successful.'
+				this.login = 'Authentication successful.';
+				this.router.navigateByUrl('/overview');
 			} else if (this.response === 'error'){
 				this.login = 'Authentication failed.'
 			}
