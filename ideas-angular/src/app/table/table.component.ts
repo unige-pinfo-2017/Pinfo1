@@ -49,13 +49,14 @@ export class TableComponent implements OnInit {
   };
 
   private data: Array<any> = [
-    {name: 'Antoine', role: 'User Interface', conso: '1478', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'Aziz', role: 'User Interface', conso: '8051', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'Joao', role: 'Database', conso: '1581', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'Jason', role: 'Java', conso: '0', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'Luca', role: 'SysAdmin', conso: '2597', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'Melanie', role: 'Java', conso: '6976', state: '<font color="red"><b>OFF</b></font>'},
-    {name: 'QM', role: 'Project leader', conso: '4478', state: '<font color="red"><b>OFF</b></font>'}
+    {name: 'Antoine', role: 'User Interface', conso: '1478', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'Aziz', role: 'User Interface', conso: '8051', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'Joao', role: 'Database', conso: '1581', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'Jason', role: 'Java', conso: '0', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'Luca', role: 'SysAdmin', conso: '2597', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'Melanie', role: 'Java', conso: '6976', state: '<button><font color="red"><b>OFF</b></font></button>'},
+    {name: 'QM', role: 'Project leader', conso: '4478', state: '<button><font color="red"><b>OFF</b></font></button>'}
+
   ];
 
   public constructor() {
@@ -158,14 +159,14 @@ export class TableComponent implements OnInit {
 	console.log(data);
 	console.log(data.row);	
     let state = data.row.state;
-	if(state === '<font color="red"><b>OFF</b></font>'){
+	if(state === '<button><font color="red"><b>OFF</b></font></button>'){
 		console.log("Device deactivated");
-		data.row.state='<font color="green"><b>ON</b></font>';
+		data.row.state='<button><font color="green"><b>ON</b></font></button>';
 		
 	}
-	else if(state === '<font color="green"><b>ON</b></font>'){
+	else if(state === '<button><font color="green"><b>ON</b></font></button>'){
 		console.log("Device activated");
-		data.row.state='<font color="red"><b>OFF</b></font>';
+		data.row.state='<button><font color="red"><b>OFF</b></font></button>';
 	}
   }
 }
