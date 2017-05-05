@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
 <div class="row">
 </div>
 <br>
@@ -27,12 +28,13 @@
             (pageChanged)="onChangeTable(config, $event)"
             (numPages)="numPages = $event">
 </pagination>
+<pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}<a routerLink="/overview" href="#"><h5>Back to overview</h5></a></pre>
+
 <h3>State checkbox</h3>
 <div class="stateCheckbox">
 	<input type="checkbox" value="0" id="stateCheckboxInput" name="" />
 	<label for="stateCheckboxInput"></label>
 </div>
-<pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
 </body>
 
 </html>
