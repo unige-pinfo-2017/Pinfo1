@@ -22,7 +22,7 @@ public class LoginTest {
 		assertFalse(login.checkPassword(inputPassword, realPassword));
 	}
 	
-	@Test
+	/*@Test
 	public void authentication(){
 		Login login = new Login();
 		
@@ -31,5 +31,5 @@ public class LoginTest {
 		
 		login.authentication(username, password);
 		
-	}
+	}*/
 }

@@ -16,7 +16,7 @@ public class Login {
 	
 	public Login(){}
 	
-	public void authentication(String username, String password){
+	/*public void authentication(String username, String password){
 		User user = mu.getUserByUsername(username);
 		
 		if (user == null){
@@ -27,7 +27,7 @@ public class Login {
 		} else {
 			sl.display("Authentication failed.");
 		}
-	}
+	}*/
 	
 	public boolean checkPassword(String inputPassword, String realPassword){
 		return realPassword.equals(inputPassword);
