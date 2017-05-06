@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 
 export class ChartComponent {
-	
+
 	// Line chart
 	public lineChartLegend:boolean = true;
   	public lineChartType:string = 'bar';
-	
+
 	public lineChartData:Array<any> = [
     	{data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
 		{data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
@@ -48,27 +48,30 @@ export class ChartComponent {
 		  pointHoverBackgroundColor: '#fff',
 		  pointHoverBorderColor: 'rgba(45,59,67,1)'
 		}
+		*/
 	];
-	
-	// Pie chart 
+
+
+	/*
+	// Pie chart
 	/*public pieChartType:string = 'pie';
 	public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
 	public pieChartData:number[] = [300, 500, 100];*/
 
- 
+
 	public switchToBar():void {
 		this.lineChartType = this.lineChartType === 'bar' ? 'pie' : 'bar';
 	}
-	
+
 	/*public switchToLine():void {
 		this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'pie';
 	}*/
-	
+
 	public switchToPie():void {
 		this.lineChartType = this.lineChartType === 'line' ? 'line' : 'pie';
 	}
-	
-	
+
+
 	public randomize():void {
 		let _lineChartData:Array<any> = new Array(this.lineChartData.length);
 		for (let i = 0; i < this.lineChartData.length; i++) {
