@@ -86,8 +86,6 @@ public class WSO2ServiceImpl implements WSO2Service {
 		Sensor sensor = sensorService.getSensorByName(sensorName);
 		if (sensor == null)
 			return "sensor null";
-		if (sensor.getTypeDevices() == null)
-			return "liste de type vide";
 				
 		Set<Device> devices = new HashSet<Device>();
 		
@@ -95,7 +93,7 @@ public class WSO2ServiceImpl implements WSO2Service {
 			devices.addAll(type.getDevices());
 		}
 
-		String sum ="";
+		String sum =" sum : ";
 		
 		for(Device device: devices){
 			String val = clientService.getValue(device.getDeviceId());

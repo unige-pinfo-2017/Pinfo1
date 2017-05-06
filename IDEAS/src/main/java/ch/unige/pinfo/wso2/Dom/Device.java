@@ -25,7 +25,7 @@ public class Device {
 	@Size(min = 3, max = 40)
 	private String deviceId;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	TypeDevice type;
 	
 	public Device(){}

@@ -40,13 +40,4 @@ public class WSO2FacadeRest {
 		}
 		return Response.ok().entity(sum).build();
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
 }
