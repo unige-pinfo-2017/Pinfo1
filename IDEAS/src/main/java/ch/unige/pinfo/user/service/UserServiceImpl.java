@@ -31,14 +31,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void deleteUser(Long Id) {
-		User user = entityManager.find(User.class, Id);
+	public void deleteUser(Long id) {
+		User user = entityManager.find(User.class, id);
 		entityManager.remove(user);		
 	}
 
 	@Override
-	public User getUserById(Long Id) {
-		return entityManager.find(User.class, Id);
+	public User getUserById(Long id) {
+		return entityManager.find(User.class, id);
 	}
 
 	@Override
