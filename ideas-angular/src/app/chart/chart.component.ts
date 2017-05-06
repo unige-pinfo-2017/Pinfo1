@@ -10,7 +10,7 @@ export class ChartComponent {
 
 	// Line chart
 	public lineChartLegend:boolean = true;
-  	public lineChartType:string = 'bar';
+  	public lineChartType:string = 'line';
 
 	public lineChartData:Array<any> = [
     	{data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
@@ -60,15 +60,27 @@ export class ChartComponent {
 
 
 	public switchToBar():void {
-		this.lineChartType = this.lineChartType === 'bar' ? 'pie' : 'bar';
+		this.lineChartType = this.lineChartType === 'bar' ? 'bar' : 'bar';
 	}
 
-	/*public switchToLine():void {
-		this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'pie';
-	}*/
+	public switchToLine():void {
+		this.lineChartType = this.lineChartType === 'line' ? 'line' : 'line';
+	}
 
 	public switchToPie():void {
-		this.lineChartType = this.lineChartType === 'line' ? 'line' : 'pie';
+		this.lineChartType = this.lineChartType === 'pie' ? 'pie' : 'pie';
+	}
+	
+	public switchToRadar():void {
+		this.lineChartType = this.lineChartType === 'radar' ? 'radar' : 'radar';
+	}
+	
+	public switchToPolarArea():void {
+		this.lineChartType = this.lineChartType === 'polarArea' ? 'polarArea' : 'polarArea';
+	}
+	
+	public switchToDoughnut():void {
+		this.lineChartType = this.lineChartType === 'doughnut' ? 'doughnut' : 'doughnut';
 	}
 
 

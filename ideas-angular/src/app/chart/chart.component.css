@@ -14,3 +14,70 @@ div.scrollmenu a {
 
 div.scrollmenu a:hover {
     background-color: #ADD8E6;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+.row.content {height: 1500px}
+
+/* Set gray background color and 100% height */
+
+.sidenav {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+/*footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}*/
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+	height: auto;
+	padding: 15px;
+  }
+  .row.content {height: auto;} 
+}
+
+.menu {
+list-style: none;
+border-bottom: 0em solid white;
+margin-bottom: 0em;
+padding: 0 0 0.5em;
+}
+
+.menu a {
+	background-color: #3167A5; /* blue background color */
+    color: white; /* white text color */
+    display: inline; /* Make the links appear below each other */
+    padding: 20px; /* Add some padding */
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #ADD8E6;
+    color: white;
+}
+
+.menu a:hover {background-color: #ADD8E6}
+
+.menu a.active {
+    background-color: #3167A5; /* Add a blue color to the "active/current" link */
+    color: white;
+}
+
+
+.menu > li {
+  display: inline;
+  margin-right: 4px;
+}
+
+.menu > li + li:before {
+  padding-right: 0.2em;
+}
+
+
+

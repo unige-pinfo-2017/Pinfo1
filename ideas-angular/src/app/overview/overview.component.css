@@ -2,17 +2,18 @@
 .row.content {height: 1500px}
 
 /* Set gray background color and 100% height */
+
 .sidenav {
   background-color: #f1f1f1;
   height: 100%;
 }
 
 /* Set black background color, white text and some padding */
-footer {
+/*footer {
   background-color: #555;
   color: white;
   padding: 15px;
-}
+}*/
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
@@ -31,8 +32,8 @@ padding: 0 0 0.5em;
 }
 
 .menu a {
-  background-color: #3167A5; /* Grey background color */
-    color: white; /* Black text color */
+	background-color: #3167A5; /* blue background color */
+    color: white; /* white text color */
     display: inline; /* Make the links appear below each other */
     padding: 20px; /* Add some padding */
     text-decoration: none;
@@ -46,7 +47,7 @@ li a:hover:not(.active) {
 .menu a:hover {background-color: #ADD8E6}
 
 .menu a.active {
-    background-color: #3167A5; /* Add a green color to the "active/current" link */
+    background-color: #3167A5; /* Add a blue color to the "active/current" link */
     color: white;
 }
 
