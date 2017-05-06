@@ -1,7 +1,6 @@
 package ch.unige.pinfo.wso2.Dom;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

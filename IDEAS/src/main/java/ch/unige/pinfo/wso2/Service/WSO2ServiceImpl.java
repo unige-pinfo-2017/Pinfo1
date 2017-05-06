@@ -93,13 +93,13 @@ public class WSO2ServiceImpl implements WSO2Service {
 			devices.addAll(type.getDevices());
 		}
 
-		String sum =" sum : ";
-		
+		double sum  = 0;
+		String val;
 		for(Device device: devices){
-			String val = clientService.getValue(device.getDeviceId());
-			sum = sum + val + " ";
+			val = clientService.getValue(device.getDeviceId());	
+			sum = sum + Double.parseDouble(val);
 		}
-		return sum;
+		return ""+sum;
 	}
 	
 	
