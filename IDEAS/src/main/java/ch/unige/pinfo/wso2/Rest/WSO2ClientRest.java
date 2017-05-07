@@ -1,10 +1,12 @@
 package ch.unige.pinfo.wso2.Rest;
 
 import javax.ws.rs.client.Client;
+
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 /*
  * Remarques: 
@@ -30,7 +32,7 @@ public class WSO2ClientRest {
 	}
 
 	//Client temporaire fonctionnant avec FakeWSO2Server:
-	public String getDevice(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
+	public JsonArray getDevice(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
 		WebTarget targetUpdated = wb
@@ -40,7 +42,10 @@ public class WSO2ClientRest {
 				.queryParam("sensorType", qpSensorType);
 		String response = targetUpdated.request("application/json").get(String.class);
 		
-		return response;
+		JsonParser parser = new JsonParser();
+		JsonArray responseJ =  parser.parse(response).getAsJsonArray();
+		
+		return responseJ;
 	}
 	
 	//Client officiel (non disponible):

@@ -2,7 +2,6 @@ package ch.unige.pinfo.wso2.Rest;
 
 import javax.ws.rs.*;
 
-
 @Path("/fakeWso2")
 public class FakeWSO2Server {
 	/*Faking a wso2 server that has Json object
