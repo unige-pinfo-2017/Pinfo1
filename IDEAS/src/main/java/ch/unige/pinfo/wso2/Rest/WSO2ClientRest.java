@@ -50,7 +50,7 @@ public class WSO2ClientRest {
 	
 	//Client officiel (non disponible):
 	/*
-	  public String getDevice(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
+	  public JsonArray getDevice(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
 		WebTarget targetUpdated = wb
@@ -60,6 +60,10 @@ public class WSO2ClientRest {
 				.queryParam("sensorType", qpSensorType)
 				.headers(<autorisation>);
 		String response = targetUpdated.request("application/json").get(String.class);
+		
+		JsonParser parser = new JsonParser();
+		JsonArray responseJ =  parser.parse(response).getAsJsonArray();
+		
 		return response;
 		
 	}*/
