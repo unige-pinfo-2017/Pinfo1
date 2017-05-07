@@ -24,9 +24,9 @@ export class TableComponent implements OnInit {
 		filtering: {filterString: '', placeholder: 'Filter by role'}
     },
 	{
-		title: 'Conso (kW/h)', 
+		title: 'Conso (kW/h)',
 		name: 'conso',
-		className: ['conso-header', 'text-success'], 
+		className: ['conso-header', 'text-success'],
 		sort: 'asc'
 	},
 	{
@@ -156,17 +156,20 @@ export class TableComponent implements OnInit {
   }
 
   public onCellClick(data: any): any {
-	console.log(data);
-	console.log(data.row);	
-    let state = data.row.state;
-	if(state === '<button><font color="red"><b>OFF</b></font></button>'){
-		console.log("Device deactivated");
-		data.row.state='<button><font color="green"><b>ON</b></font></button>';
-		
-	}
-	else if(state === '<button><font color="green"><b>ON</b></font></button>'){
-		console.log("Device activated");
-		data.row.state='<button><font color="red"><b>OFF</b></font></button>';
-	}
+  	console.log(data);
+  	console.log(data.row);
+      let state = data.row.state;
+  	if(state === '<button><font color="red"><b>OFF</b></font></button>'){
+  		console.log("Device deactivated");
+  		data.row.state='<button><font color="green"><b>ON</b></font></button>';
+
+  	}
+  	else if(state === '<button><font color="green"><b>ON</b></font></button>'){
+  		console.log("Device activated");
+  		data.row.state='<button><font color="red"><b>OFF</b></font></button>';
+  	}
+  }
+  public clickedRefresh():any {
+    location.reload();
   }
 }

@@ -17,6 +17,10 @@
           (cellClicked)="onCellClick($event)"
           [rows]="rows" [columns]="columns">
 </ng-table>
+<br>
+<div align="center">
+  <button (click)="onChangeTable(config, $event)">refresh</button>
+</div>
 <pagination *ngIf="config.paging"
             class="pagination-sm"
             [(ngModel)]="page"
