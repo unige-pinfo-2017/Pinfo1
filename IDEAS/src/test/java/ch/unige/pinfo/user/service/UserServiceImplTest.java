@@ -1,4 +1,4 @@
-package ch.unige.pinfo.user.service;
+/*package ch.unige.pinfo.user.service;
 
 import static org.junit.Assert.*;
 
@@ -48,5 +48,5 @@ public class UserServiceImplTest {
 		userToAdd.setPassword("testPassword");
 		
 		usi.addUser(userToAdd);
-	}*/
-}
+	}
+}*/

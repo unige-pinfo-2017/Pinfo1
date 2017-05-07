@@ -18,6 +18,7 @@
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
 	    <version>4.12</version>
+	    <scope>test</scope>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -29,7 +30,30 @@
 	
         
     </dependencies>
+    
     <build>
+    	<pluginManagement>
+    		<plugins>
+    			<plugin>
+    				<groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-surefire-plugin</artifactId>
+    				<version>2.20</version>
+    				<dependencies>
+    					<dependency>
+  							<groupId>org.apache.maven.surefire</groupId>
+  							<artifactId>surefire-junit47</artifactId>
+  							<version>2.12</version>
+  							</dependency>
+    				</dependencies>
+    				<configuration>
+    				<includes>
+    				<include>**/*.class</include>
+    				</includes>
+    					<excludedGroups>ch.unige.pinfo.user.service.IntegrationTest</excludedGroups>
+    				</configuration>
+    			</plugin>
+    		</plugins>
+    	</pluginManagement>
         <finalName>IDEAS</finalName>
     </build>
     <properties>
