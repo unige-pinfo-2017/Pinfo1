@@ -15,7 +15,7 @@
 <ng-table [config]="config"
           (tableChanged)="onChangeTable(config)"
           (cellClicked)="onCellClick($event)"
-          [rows]="rows" [columns]="columns">
+          [columns]="columns" [rows]="rows" >
 </ng-table>
 <br>
 <div align="center">
@@ -33,6 +33,13 @@
             (numPages)="numPages = $event">
 </pagination>
 <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}<a routerLink="/overview" href="#"><h5>Back to overview</h5></a></pre>
+
+<h3>Table demo test</h3>
+<div>
+	<button (click)="getDemo()" class="btn btn-primary btn-block btn-large">Demo</button>
+	<button (click)="getDeviceTable('powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+	<button (click)="getDeviceTable('beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+</div>
 
 <h3>State checkbox</h3>
 <div class="stateCheckbox">

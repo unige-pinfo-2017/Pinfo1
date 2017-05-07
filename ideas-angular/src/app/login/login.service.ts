@@ -11,7 +11,7 @@ export class LoginService {
 
 	constructor(private http: Http) {}
 
-	authentication(username: string, pw: string): Promise<string> {
+	public authentication(username: string, pw: string): Promise<string> {
 		return this.http
 			.get(`${this.baseUrl}/login?username=${username}&pw=${pw}`, {headers: this.getHeaders()})
 			.toPromise()
