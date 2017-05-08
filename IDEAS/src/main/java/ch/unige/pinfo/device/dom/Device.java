@@ -18,10 +18,10 @@ public class Device {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name = "ID")
+	@Column( name = "Id")
 	private Long id;
 	
-	@Column( name = "DEVICE_ID", nullable = false ) 
+	@Column( name = "DeviceId", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String deviceId;
 	

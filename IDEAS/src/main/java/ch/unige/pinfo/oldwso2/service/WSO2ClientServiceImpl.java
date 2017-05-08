@@ -10,7 +10,6 @@ public class WSO2ClientServiceImpl implements WSO2ClientService{
 	
 	@Override
 	public String getValue(String deviceType, String deviceId,  String SensorType, String From, String To){
-		// faire différence from to et additionner appeler getdevice renomer plutot en Etat
 		
 		WSO2ClientRest cr = new WSO2ClientRest();
 		JsonArray states = cr.getStates(deviceType, deviceId, SensorType, From, To);

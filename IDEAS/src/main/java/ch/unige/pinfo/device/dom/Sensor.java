@@ -1,6 +1,5 @@
 package ch.unige.pinfo.device.dom;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,10 +20,10 @@ import javax.validation.constraints.Size;
 public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name = "ID")
+	@Column( name = "Id")
 	private Long id;
     
-	@Column( name = "SENSOR_NAME", nullable = false ) 
+	@Column( name = "SensorName", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String name;
 	
@@ -32,7 +31,7 @@ public class Sensor {
     //private Set<TypeDevice> typeDevices = new HashSet<>();
 	
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)  
-    @JoinTable(name="TYPES_SENSORS", joinColumns=@JoinColumn(name="SENSOR_ID"), inverseJoinColumns=@JoinColumn(name="TYPE_DEVICE_ID")) 
+    @JoinTable(name="TypeDevices_Sensors", joinColumns=@JoinColumn(name="sensor_Id"), inverseJoinColumns=@JoinColumn(name="typeDevice_Id")) 
     private Set<TypeDevice> typeDevices;
     
     public Sensor(){}

@@ -18,14 +18,14 @@ public class User {
 	// Fields:
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name = "ID")
+	@Column( name = "Id")
 	private Long id;
 	
-	@Column( name = "USERNAME", nullable = false ) 
+	@Column( name = "Username", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String username;
 	
-	@Column( name = "PASSWORD", nullable = false ) 
+	@Column( name = "Password", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String password;
 	

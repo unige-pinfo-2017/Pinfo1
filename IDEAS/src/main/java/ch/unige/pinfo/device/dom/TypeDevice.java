@@ -1,6 +1,5 @@
 package ch.unige.pinfo.device.dom;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,10 +20,10 @@ public class TypeDevice {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column( name = "ID")
+	@Column( name = "Id")
 	private Long id;
     
-	@Column( name = "TYPE_NAME", nullable = false ) 
+	@Column( name = "TypeDeviceName", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String name;
 
