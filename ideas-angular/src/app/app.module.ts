@@ -17,7 +17,6 @@ import {TopbarComponent} from './overview/topbar/topbar.component';
 import {MiddlescreenComponent} from './overview/middlescreen/middlescreen.component';
 import { ChartComponent } from './chart/chart.component';
 import {TableComponent } from './table/table.component';
-import { TableAltComponent } from './table/table-alt.component';
 
 @NgModule({
   imports:      [
@@ -40,7 +39,6 @@ import { TableAltComponent } from './table/table-alt.component';
       MiddlescreenComponent,
 	  ChartComponent,
 	  TableComponent,
-	  TableAltComponent,
   ],
   bootstrap:    [ AppComponent ]
 })

@@ -6,7 +6,6 @@ import { OverviewComponent } from './overview/overview.component';
 import { LoginComponent } from './login/login.component';
 import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
-import { TableAltComponent } from './table/table-alt.component';
 
 const routes: Routes = [
   	/*{
@@ -33,10 +32,6 @@ const routes: Routes = [
 		path: 'table',
 		component: TableComponent
 	},
-	{
-		path: 'table-alt',
-		component: TableAltComponent
-	}
 ];
 
 @NgModule({
