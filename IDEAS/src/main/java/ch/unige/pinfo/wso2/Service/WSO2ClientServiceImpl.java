@@ -1,28 +1,29 @@
 package ch.unige.pinfo.wso2.Service;
 
+
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+
+import ch.unige.pinfo.wso2.Rest.WSO2ClientRest;
+
 public class WSO2ClientServiceImpl implements WSO2ClientService{
 	
 	@Override
-	public String getValue(String deviceId){
-		if (deviceId.equals("id1"))
-			return "1";
-		if (deviceId.equals("id2"))
-			return "2";
-		if (deviceId.equals("id3"))
-			return "3";
-		if (deviceId.equals("id4"))
-			return "4";
-		if (deviceId.equals("id5"))
-			return "5";
-		if (deviceId.equals("id6"))
-			return "6";
-		if (deviceId.equals("id7"))
-			return "7";
-		if (deviceId.equals("id8"))
-			return "8";
-		if (deviceId.equals("id9"))
-			return "9";
-		return "";
+	public String getValue(String deviceType, String deviceId,  String SensorType, String From, String To){
+		// faire différence from to et additionner appeler getdevice renomer plutot en Etat
+		
+		WSO2ClientRest cr = new WSO2ClientRest();
+		JsonArray states = cr.getStates(deviceType, deviceId, SensorType, From, To);
+		
+		JsonObject joFrom = (JsonObject) states.getJsonObject(0).get("values");
+		String valueFrom = joFrom.get(SensorType).toString();
+		
+		JsonObject joTo = (JsonObject) states.getJsonObject(1).get("values");
+		String valueTo = joTo.get(SensorType).toString();
+		
+		Double value = Double.parseDouble(valueTo) - Double.parseDouble(valueFrom);
+
+		return Double.toString(value);
 	}
 	
 

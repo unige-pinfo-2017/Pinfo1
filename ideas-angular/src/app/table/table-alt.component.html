@@ -1,0 +1,18 @@
+<div>
+      <ngx-datatable
+        class="material"
+        [rows]="rows"
+        [loadingIndicator]="loadingIndicator"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [reorderable]="reorderable">
+      </ngx-datatable>
+</div>
+
+<div>
+	<button (click)="getDeviceTable('powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+	<button (click)="getDeviceTable('beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+</div>

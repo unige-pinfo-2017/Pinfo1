@@ -1,32 +1,38 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, VERSION } from '@angular/core';
 
-// webpack html imports
-//let template = require('./table-demo.html');
+import { TableService } from './table.service';
+
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'my-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
+  providers: [
+	  TableService,
+  ]
 })
 
 export class TableComponent implements OnInit {
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
+  private rows:Array<any> = [];
+  private columns:Array<any> = [];
+  private columns2:Array<any> = [
     {
-		title: 'Name',
-		name: 'name',
-		filtering: {filterString: '', placeholder: 'Filter by name'}
+		"title": 'Name',
+		"name": 'name',
+		//filtering: {filterString: '', placeholder: 'Filter by name'}
 	},
     {
 		title: 'Role',
 		name: 'role',
 		sort: false,
-		filtering: {filterString: '', placeholder: 'Filter by role'}
+		//filtering: {filterString: '', placeholder: 'Filter by role'}
     },
 	{
-		title: 'Conso (kW/h)', 
+		title: 'Conso (kW/h)',
 		name: 'conso',
-		className: ['conso-header', 'text-success'], 
+		className: ['conso-header', 'text-success'],
 		sort: 'asc'
 	},
 	{
@@ -48,7 +54,8 @@ export class TableComponent implements OnInit {
     className: ['table-striped', 'table-bordered']
   };
 
-  private data: Array<any> = [
+  private data: Array<any> = [];
+  private data2: Array<any> = [
     {name: 'Antoine', role: 'User Interface', conso: '1478', state: '<button><font color="red"><b>OFF</b></font></button>'},
     {name: 'Aziz', role: 'User Interface', conso: '8051', state: '<button><font color="red"><b>OFF</b></font></button>'},
     {name: 'Joao', role: 'Database', conso: '1581', state: '<button><font color="red"><b>OFF</b></font></button>'},
@@ -56,15 +63,64 @@ export class TableComponent implements OnInit {
     {name: 'Luca', role: 'SysAdmin', conso: '2597', state: '<button><font color="red"><b>OFF</b></font></button>'},
     {name: 'Melanie', role: 'Java', conso: '6976', state: '<button><font color="red"><b>OFF</b></font></button>'},
     {name: 'QM', role: 'Project leader', conso: '4478', state: '<button><font color="red"><b>OFF</b></font></button>'}
-
   ];
 
-  public constructor() {
-    this.length = this.data.length;
+  public constructor(
+	  private tableService: TableService)
+	  {
+    	this.length = this.data.length;
   }
 
   public ngOnInit():void {
+	  //this.getDeviceTable("powersocket");
     this.onChangeTable(this.config);
+  }
+
+public getDeviceTable(deviceType: string): void {
+	let promises: Promise<any>[] = [];
+	promises.push(this.getDeviceColumns(deviceType));
+	promises.push(this.getDeviceData(deviceType));
+	Promise.all(promises).then(
+		() => this.onChangeTable(this.config)
+	);
+}
+
+public getDeviceColumns(deviceType: string): Promise<any> {
+	return this.tableService.getDeviceColumns(deviceType).then(
+		columns => this.columns = columns
+	);
+}
+
+public getDeviceData(deviceType: string): Promise<any> {
+	return this.tableService.getDeviceData(deviceType).then(
+		data => this.data = data
+	);
+}
+
+  public getDemo(): void {
+	  let promises: Promise<any>[] = [];
+	  promises.push(this.getColumnsDemo());
+	  promises.push(this.getDataDemo());
+	  Promise.all(promises).then(
+		() => this.onChangeTable(this.config)
+	  );
+  }
+
+
+  public getColumnsDemo(): Promise<any> {
+	  return this.tableService.getColumnsDemo()
+	  .then(columns => {
+		  //this.columns = [];
+		  this.columns = columns;
+		  console.log(this.columns);
+	  });
+  }
+
+  public getDataDemo(): Promise<any> {
+	 return this.tableService.getDataDemo().then(data => {
+		 this.data = data;
+		 console.log(this.data);
+	 });
   }
 
   public changePage(page:any, data:Array<any> = this.data):Array<any> {
@@ -149,24 +205,27 @@ export class TableComponent implements OnInit {
       Object.assign(this.config.sorting, config.sorting);
     }
 
-    let filteredData = this.changeFilter(this.data, this.config);
-    let sortedData = this.changeSort(filteredData, this.config);
+    let filteredData = this.data; //this.changeFilter(this.data, this.config);
+    let sortedData = this.data; // this.changeSort(filteredData, this.config);
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData;
     this.length = sortedData.length;
   }
 
   public onCellClick(data: any): any {
-	console.log(data);
-	console.log(data.row);	
-    let state = data.row.state;
-	if(state === '<button><font color="red"><b>OFF</b></font></button>'){
-		console.log("Device deactivated");
-		data.row.state='<button><font color="green"><b>ON</b></font></button>';
-		
-	}
-	else if(state === '<button><font color="green"><b>ON</b></font></button>'){
-		console.log("Device activated");
-		data.row.state='<button><font color="red"><b>OFF</b></font></button>';
-	}
+  	console.log(data);
+  	console.log(data.row);
+      let state = data.row.state;
+  	if(state === '<button><font color="red"><b>OFF</b></font></button>'){
+  		console.log("Device deactivated");
+  		data.row.state='<button><font color="green"><b>ON</b></font></button>';
+
+  	}
+  	else if(state === '<button><font color="green"><b>ON</b></font></button>'){
+  		console.log("Device activated");
+  		data.row.state='<button><font color="red"><b>OFF</b></font></button>';
+  	}
+  }
+  public clickedRefresh():any {
+    location.reload();
   }
 }

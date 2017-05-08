@@ -1,6 +1,7 @@
 package ch.unige.pinfo.wso2.Dom;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,13 +25,12 @@ public class Device {
 	@Size(min = 3, max = 40)
 	private String deviceId;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	TypeDevice type;
 	
 	public Device(){}
-	public Device(String deviceId, TypeDevice type){
+	public Device(String deviceId){
 		this.deviceId = deviceId;
-		this.type = type;
 	}
 	
 	@Override

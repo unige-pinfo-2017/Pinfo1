@@ -12,8 +12,6 @@ import ch.unige.pinfo.wso2.Dom.TypeDevice;
 public class WSO2ServiceImpl implements WSO2Service {
 	
 	@Inject 
-	private DeviceService deviceService;
-	@Inject 
 	private TypeDeviceService typeDeviceService;
 	@Inject 
 	private SensorService sensorService;
@@ -22,6 +20,36 @@ public class WSO2ServiceImpl implements WSO2Service {
 	
 	@Override
 	public void initDB() {
+		
+		Set<TypeDevice> powerSensor = new HashSet<TypeDevice>(); 
+		Set<TypeDevice> statusSensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> currentSensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> temperatureSensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> lightSensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> batterySensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> brightnessSensor = new HashSet<TypeDevice>();  
+		Set<TypeDevice> colorSensor = new HashSet<TypeDevice>();  
+	          
+		Set<Sensor> PowerSocketSensors = new HashSet<Sensor>();  
+		Set<Sensor> BeaconSensors = new HashSet<Sensor>();  
+		Set<Sensor> LightSensors = new HashSet<Sensor>();  
+		
+		TypeDevice td1 = new TypeDevice("PowerSocket");
+		TypeDevice td2 = new TypeDevice("Beacon");
+		TypeDevice td3 = new TypeDevice("Light");
+		
+		powerSensor.add(td1);
+		statusSensor.add(td1);
+		currentSensor.add(td1);
+		
+		temperatureSensor.add(td2);
+		lightSensor.add(td2); 
+		batterySensor.add(td2);
+		
+		powerSensor.add(td3);
+		brightnessSensor.add(td3);
+		colorSensor.add(td3);
+
 		Sensor s1 = new Sensor("powerSensor");
 		Sensor s2 = new Sensor("statusSensor");
 		Sensor s3 = new Sensor("currentSensor");
@@ -31,58 +59,55 @@ public class WSO2ServiceImpl implements WSO2Service {
 		Sensor s7 = new Sensor("brightnessSensor");
 		Sensor s8 = new Sensor("colorSensor");
 		
-		TypeDevice td1 = new TypeDevice("PowerSocket");
-		TypeDevice td2 = new TypeDevice("Beacon");
-		TypeDevice td3 = new TypeDevice("Light");
+		PowerSocketSensors.add(s1);
+		PowerSocketSensors.add(s2);
+		PowerSocketSensors.add(s3);
+		BeaconSensors.add(s4);
+		BeaconSensors.add(s5);
+		BeaconSensors.add(s6);
+		LightSensors.add(s7);
+		LightSensors.add(s8);
+		LightSensors.add(s1);
 		
-		s1.getTypeDevices().add(td1);
-		s2.getTypeDevices().add(td1);
-		s3.getTypeDevices().add(td1);
-		s4.getTypeDevices().add(td2);
-		s5.getTypeDevices().add(td2);
-		s6.getTypeDevices().add(td2);
-		s7.getTypeDevices().add(td3);
-		s8.getTypeDevices().add(td3);
-				
-		td1.getSensors().add(s1);
-		td1.getSensors().add(s2);
-		td1.getSensors().add(s3);
+		td1.setSensors(PowerSocketSensors);
+		td2.setSensors(BeaconSensors);
+		td3.setSensors(LightSensors);
 
-		td2.getSensors().add(s4);
-		td2.getSensors().add(s5);
-		td2.getSensors().add(s6);
+		s1.setTypeDevices(powerSensor);
+		s2.setTypeDevices(statusSensor);
+		s3.setTypeDevices(currentSensor);
+		s4.setTypeDevices(temperatureSensor);
+		s5.setTypeDevices(lightSensor);
+		s6.setTypeDevices(batterySensor);
+		s7.setTypeDevices(brightnessSensor);
+		s8.setTypeDevices(colorSensor);
 		
-		td3.getSensors().add(s7);
-		td3.getSensors().add(s8);
+          
+        Set<Device> devicesPowerSocket = new HashSet<Device>();
+        Set<Device> devicesBeacon = new HashSet<Device>();  
+        Set<Device> devicesLight = new HashSet<Device>();  
+
+		Device d1 = new Device("id1");
+		d1.setType(td1);
+		devicesPowerSocket.add(d1);
+		Device d2 = new Device("id2");
+		d2.setType(td2);
+		devicesBeacon.add(d2);
+		Device d3 = new Device("id3");
+		d3.setType(td3);
+		devicesLight.add(d3);
+
+		td1.setDevices(devicesPowerSocket);
+		td2.setDevices(devicesBeacon);
+		td3.setDevices(devicesLight);
 		
 		typeDeviceService.addTypeDevice(td1);
 		typeDeviceService.addTypeDevice(td2);
 		typeDeviceService.addTypeDevice(td3);
-
-		
-		Device d1 = new Device("id1", td1);
-		Device d2 = new Device("id2", td2);
-		Device d3 = new Device("id3", td3);
-		Device d4 = new Device("id4", td1);
-		Device d5 = new Device("id5", td2);
-		Device d6 = new Device("id6", td3);
-		Device d7 = new Device("id7", td1);
-		Device d8 = new Device("id8", td2);
-		Device d9 = new Device("id9", td3);
-		
-		deviceService.addDevice(d1);
-		deviceService.addDevice(d2);
-		deviceService.addDevice(d3);
-		deviceService.addDevice(d4);
-		deviceService.addDevice(d5);
-		deviceService.addDevice(d6);
-		deviceService.addDevice(d7);
-		deviceService.addDevice(d8);
-		deviceService.addDevice(d9);	
 	}
 	
 	@Override
-	public String getSumBySensor(String sensorName){
+	public String getSumBySensor(String sensorName, String from, String to){
 		Sensor sensor = sensorService.getSensorByName(sensorName);
 		if (sensor == null)
 			return "sensor null";
@@ -94,9 +119,9 @@ public class WSO2ServiceImpl implements WSO2Service {
 		}
 
 		double sum  = 0;
-		String val;
+		String val = null;
 		for(Device device: devices){
-			val = clientService.getValue(device.getDeviceId());	
+			val = clientService.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);	
 			sum = sum + Double.parseDouble(val);
 		}
 		return ""+sum;

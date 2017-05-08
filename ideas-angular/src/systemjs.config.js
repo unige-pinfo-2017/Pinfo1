@@ -31,7 +31,9 @@
 	  // IMPORTANT: To import correctly ng2-table and ng2-charts
 	  'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.js',
 	  'ng2-table': 'node_modules/ng2-table',
-	  'ng2-charts': 'node_modules/ng2-charts'
+	  'ng2-charts': 'node_modules/ng2-charts',
+	  'ng2-smart-table': 'node_modules/ng2-smart-table',
+	  '@swimlane/ngx-datatable': 'npm:@swimlane/ngx-datatable/release/index.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -51,6 +53,9 @@
 		  defaultExtension: 'js'
 	  },
 	  'ng2-charts': {
+		  defaultExtension: 'js'
+	  },
+	  'ng2-smart-table': {
 		  defaultExtension: 'js'
 	  },
   }

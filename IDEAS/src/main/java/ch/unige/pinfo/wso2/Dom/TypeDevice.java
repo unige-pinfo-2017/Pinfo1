@@ -28,12 +28,15 @@ public class TypeDevice {
 	@Size(min = 3, max = 40)
 	private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="type", cascade = {CascadeType.ALL})
-    private Set<Device> devices = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="type")
+    private Set<Device> devices;
     
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    private Set<Sensor> sensors = new HashSet<>() ;
-
+	//@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    //private Set<Sensor> sensors = new HashSet<>() ;
+	
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="typeDevices")  
+    private Set<Sensor> sensors;
+    
 	public TypeDevice(){}
 	
 	public TypeDevice(String name){

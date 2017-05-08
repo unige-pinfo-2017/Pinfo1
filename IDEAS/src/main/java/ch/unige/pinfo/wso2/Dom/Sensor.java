@@ -3,12 +3,15 @@ package ch.unige.pinfo.wso2.Dom;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -25,8 +28,12 @@ public class Sensor {
 	@Size(min = 3, max = 40)
 	private String name;
 	
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy="sensors")
-    private Set<TypeDevice> typeDevices = new HashSet<>();
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //private Set<TypeDevice> typeDevices = new HashSet<>();
+	
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)  
+    @JoinTable(name="TYPES_SENSORS", joinColumns=@JoinColumn(name="SENSOR_ID"), inverseJoinColumns=@JoinColumn(name="TYPE_DEVICE_ID")) 
+    private Set<TypeDevice> typeDevices;
     
     public Sensor(){}
     
