@@ -59,4 +59,8 @@ public class UserServiceImpl implements UserService{
 		TypedQuery<User> query = entityManager.createQuery(c);
 		return query.getResultList();
 	}
+	
+	public double getSumBySensor(int userId, String sensorName, String from, String to) {
+		return 0;
+	}
 }

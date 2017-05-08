@@ -9,7 +9,7 @@ import org.junit.Test;
 public class LoginTest {
 	@Test
 	public void testCheckPassword(){
-		Login login = new Login();
+		LoginService login = new LoginService();
 		String inputPassword = "abc";
 		String realPassword = "abc";
 		assertTrue(login.checkPassword(inputPassword, realPassword));
@@ -17,7 +17,7 @@ public class LoginTest {
 	
 	@Test
 	public void testCheckPassword_fail(){
-		Login login = new Login();
+		LoginService login = new LoginService();
 		String inputPassword = "abc";
 		String realPassword = "def";
 		assertFalse(login.checkPassword(inputPassword, realPassword));

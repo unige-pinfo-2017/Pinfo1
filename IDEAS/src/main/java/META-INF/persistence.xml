@@ -4,9 +4,9 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:jboss/datasources/MysqlIDEAS</jta-data-source>
 		<class>ch.unige.pinfo.user.dom.User</class>
-		<class>ch.unige.pinfo.wso2.Dom.Device</class>
-		<class>ch.unige.pinfo.wso2.Dom.TypeDevice</class>
-		<class>ch.unige.pinfo.wso2.Dom.Sensor</class>
+		<class>ch.unige.pinfo.device.dom.Device</class>
+		<class>ch.unige.pinfo.device.dom.TypeDevice</class>
+		<class>ch.unige.pinfo.device.dom.Sensor</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
