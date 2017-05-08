@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import ch.unige.pinfo.wso2.Service.WSO2Service;
 
@@ -22,7 +25,9 @@ public class WSO2FacadeRest {
 	public String test(){
 		return "test";
 	}
+	
 	@GET
+	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/init")
 	public String init(){
 		wso2Service.initDB();
@@ -30,11 +35,15 @@ public class WSO2FacadeRest {
 	}
 	
 	@GET
+	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/sum/sensor/{sensorName}")
-	public Response getSumBySensor(@NotNull @PathParam("sensorName") String sensorName){
+	public Response getSumBySensor(@NotNull @PathParam("sensorName") String sensorName,
+									@QueryParam("from") String from,
+									@QueryParam("to") String to) {
+		
 		String sum = "";
 		try {
-			sum = wso2Service.getSumBySensor(sensorName);
+			sum = wso2Service.getSumBySensor(sensorName, from, to);
 		} catch (NoResultException e) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}

@@ -1,12 +1,13 @@
 package ch.unige.pinfo.wso2.Rest;
 
 import javax.ws.rs.client.Client;
-
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
+import java.io.StringReader;
+
+import javax.json.Json;
+import javax.json.JsonArray;
 
 /*
  * Remarques: 
@@ -27,12 +28,12 @@ public class WSO2ClientRest {
 		//url de base pour le fake server (temporaire):
 		urlBase = "http://localhost:8080/IDEAS/fakeWso2";
 		
-		//url réel (non disponible actuellement):
+		//url rï¿½el (non disponible actuellement):
 		//urlBase = "<wso2 ip address>:8243";   
 	}
 
 	//Client temporaire fonctionnant avec FakeWSO2Server:
-	public JsonArray getDevice(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
+	public JsonArray getStates(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
 		WebTarget targetUpdated = wb
@@ -42,9 +43,7 @@ public class WSO2ClientRest {
 				.queryParam("sensorType", qpSensorType);
 		String response = targetUpdated.request("application/json").get(String.class);
 		
-		JsonParser parser = new JsonParser();
-		JsonArray responseJ =  parser.parse(response).getAsJsonArray();
-		
+		JsonArray responseJ = (JsonArray) Json.createReader(new StringReader(response)).readArray();
 		return responseJ;
 	}
 	
