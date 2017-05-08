@@ -26,7 +26,8 @@ const DATA: Data[] = [
 	{name: 'Conso', valeur: 573, unite: 'kW/h'},
 	{name: 'Temperature', valeur: 25, unite: '°C'},
 	{name: 'elec', valeur: 450, unite: 'W'},
-	{name: 'blib blab', valeur: 24874, unite: 'sec'}
+	{name: 'blib blab', valeur: 24874, unite: 'sec'},
+	{name: 'power', valeur: 45.5, unite: 'Jl'}
 ];
 
 const DATAH: DataHidden[] = [

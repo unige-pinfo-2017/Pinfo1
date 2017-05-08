@@ -102,8 +102,10 @@ li a:hover:not(.active) {
 }
 
 .croix {
-    font-size: 1em;
+    font-size: 2em;
     cursor: pointer;
     right: 10px;
     top: 5px;
+    background-color: red;
+    color: red;
 }

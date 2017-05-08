@@ -5,7 +5,6 @@
 </head>
 
 <div class="col-sm-9">
-  <div align="center">
     <ul class="menu">
       <!--<li><a href="https://google.ch">Consommation: <b>{{conso}}</b> kW/h</a></li>
       <li><a href="#!/view2">Température</a></li>
@@ -15,7 +14,9 @@
       <li><a href="#!/view1">Blabla</a></li>
       <li><a href="#!/view1">Bloblo</a></li>-->
 
-      <li *ngFor="let dat of datas"><a href="#">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}<a href="#">x</a></a></li>
+      <li *ngFor="let dat of datas"><a href="#">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}
+        <!--<button class="close">x</button>--></a></li>
+
       <div class="dropdown">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
@@ -23,5 +24,4 @@
         </div>
       </div>
     </ul>
-  </div>
 </div>
