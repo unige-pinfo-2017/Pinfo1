@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table( name = "DEVICES")
+@Table( name = "Devices")
 public class Device {
 	
 	@Id

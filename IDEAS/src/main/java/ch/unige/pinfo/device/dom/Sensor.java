@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table( name = "SENSORS")
+@Table( name = "Sensors")
 public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

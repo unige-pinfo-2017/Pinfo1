@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table( name = "TYPE_DEVICES")
+@Table( name = "TypeDevices")
 public class TypeDevice {
 	
     @Id

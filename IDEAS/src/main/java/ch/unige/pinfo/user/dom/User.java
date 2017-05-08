@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import com.google.gson.Gson;
 
 @Entity
-@Table( name = "USERS")
+@Table( name = "Users")
 public class User {
 	// Fields:
 	@Id
