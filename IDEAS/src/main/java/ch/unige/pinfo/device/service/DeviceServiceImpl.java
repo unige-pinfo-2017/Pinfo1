@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Device;
@@ -19,14 +18,19 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
+import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 @Stateless
 @Default
 public class DeviceServiceImpl implements DeviceService {
 	@Inject 
 	private UserService userService;
+	
 	@Inject 
 	private SensorService sensorService;
+	
+	@Inject
+	private WSO2Wrapper wso2Wrapper;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -73,7 +77,17 @@ public class DeviceServiceImpl implements DeviceService {
 		return devices;
 	}
 	
-	
+	@Override
+	public double getSumSensorForUser(long userId, String sensorName, String from, String to) {
+		double sum = 0;
+		
+		List<Device> ld = this.getDevicesBySensor4User(userId, sensorName);
+		for (Device device: ld){
+			sum += wso2Wrapper.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);
+		}
+		
+		return sum;
+	}
 	
 /*
 	@Override

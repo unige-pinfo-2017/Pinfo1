@@ -24,8 +24,6 @@ import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 public class UserServiceImpl implements UserService{
 	@Inject 
 	private DeviceService deviceService;
-	@Inject
-	private WSO2Wrapper wso2Wrapper;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -69,12 +67,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public double getSumBySensor(Long userId, String sensorName, String from, String to) {
-		List<Device> devices = deviceService.getDevicesBySensor4User(userId, sensorName);
-		
-		double sum  = 0;
-		for(Device device: devices){
-			sum = sum + wso2Wrapper.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);	
-		}
-		return sum;
+		return deviceService.getSumSensorForUser(userId, sensorName, from, to);
 	}
+
 }
