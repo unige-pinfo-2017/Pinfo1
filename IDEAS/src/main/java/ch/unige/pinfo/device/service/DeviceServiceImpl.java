@@ -1,9 +1,11 @@
 package ch.unige.pinfo.device.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -13,12 +15,19 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
+import ch.unige.pinfo.user.dom.User;
+import ch.unige.pinfo.user.service.UserService;
 
 @Stateless
 @Default
 public class DeviceServiceImpl implements DeviceService {
-
+	@Inject 
+	private UserService userService;
+	@Inject 
+	private SensorService sensorService;
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -49,6 +58,25 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
+	public List<Device> getDevicesBySensor4User(Long userId, String sensorName) {
+		User user = userService.getUserById(userId);
+		Sensor sensor = sensorService.getSensorByName(sensorName);
+		
+		List<Device> devices = new ArrayList<Device>();
+		for(Device device: user.getDevices()){
+			for(TypeDevice type: sensor.getTypeDevices()){
+				if (device.getType().getId() == type.getId()){
+					devices.add(device);
+				}
+			}
+		}
+		return devices;
+	}
+	
+	
+	
+/*
+	@Override
 	public List<Device> getDevicesByType(TypeDevice type) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Device> c = cb.createQuery(Device.class);
@@ -58,5 +86,5 @@ public class DeviceServiceImpl implements DeviceService {
 		TypedQuery<Device> query = entityManager.createQuery(c);
 		return query.getResultList();
 	}
-	
+*/
 }
