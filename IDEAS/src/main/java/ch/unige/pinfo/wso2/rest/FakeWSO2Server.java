@@ -1,6 +1,8 @@
 package ch.unige.pinfo.wso2.rest;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/fakeWso2")
 public class FakeWSO2Server {
@@ -59,7 +61,7 @@ public class FakeWSO2Server {
 			return res;
 		}
 	}
-	
+
 	@GET
 	@Path("/Light/device/stats/{deviceId}")
 	@Produces({ "application/json" })
@@ -83,6 +85,115 @@ public class FakeWSO2Server {
 		else{
 			String res = "[{\"Sensor type\":\"this sensor doesn't exist for Light\"}]";
 			return res;
+		}
+	}
+
+	//@POST
+	@GET
+	@Path("/PowerSocket/device/{deviceId}/change-status")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postPowerSocket(
+			@QueryParam("state") String state){
+
+		if (state.equals("ON") || state.equals("OFF")){
+			String st = "status :"+state;
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for PowerSocket";
+			return Response.status(500).entity(st).build();
+		}
+	}
+
+
+	//@POST
+	@GET
+	@Path("/Light/device/{deviceId}/change-status")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postLightStatus(
+			@QueryParam("state") String state){
+
+		if (state.equals("ON") || state.equals("OFF")){
+			String st = "status :"+state;
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for Light";
+			return Response.status(500).entity(st).build();
+		}
+	}
+
+	//@POST
+	@GET
+	@Path("/Light/device/{deviceId}/change-brightness")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postLightBright(
+			@QueryParam("state") double state){
+
+		if (0 <= state && state <= 1){
+			String st = "status: "+state+" brightness";
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for Light";
+			return Response.status(500).entity(st).build();
+		}
+	}
+
+	//@POST
+	@GET
+	@Path("/Light/device/{deviceId}/change-hue")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postLightHue(
+			@QueryParam("state") int state){
+
+		if (0 <= state && state <= 360){
+			String st = "status: "+state+" hue";
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for Light";
+			return Response.status(500).entity(st).build();
+		}
+	}
+
+	//@POST
+	@GET
+	@Path("/Light/device/{deviceId}/change-saturation")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postLightSat(
+			@QueryParam("state") double state){
+
+		if (0 <= state && state <= 1){
+			String st = "status: "+state+" saturation";
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for Light";
+			return Response.status(500).entity(st).build();
+		}
+	}
+
+	//@POST
+	@GET
+	@Path("/Light/device/{deviceId}/change-kelvin")
+	@Produces(MediaType.TEXT_PLAIN)
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public Response postLightKev(
+			@QueryParam("state") int state){
+
+		if (5000 <= state && state <= 9999){
+			String st = "status: "+state+" kelvin";
+			return Response.status(200).entity(st).build();
+		}
+		else{
+			String st = "This status doesn't exist for Light";
+			return Response.status(500).entity(st).build();
 		}
 	}
 
