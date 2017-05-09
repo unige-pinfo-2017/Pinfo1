@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import ch.unige.pinfo.user.dom.User;
+
 @Entity
 @Table( name = "Devices")
 public class Device {
@@ -28,6 +30,10 @@ public class Device {
 	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	TypeDevice type;
 	
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	User owner;
+	
+
 	public Device(){}
 	public Device(String deviceId){
 		this.deviceId = deviceId;
@@ -69,5 +75,11 @@ public class Device {
 
 	public void setType(TypeDevice type) {
 		this.type = type;
+	}
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 }

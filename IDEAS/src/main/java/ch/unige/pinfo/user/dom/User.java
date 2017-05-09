@@ -1,16 +1,21 @@
 package ch.unige.pinfo.user.dom;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.google.gson.Gson;
+
+import ch.unige.pinfo.device.dom.Device;
 
 @Entity
 @Table( name = "Users")
@@ -28,6 +33,9 @@ public class User {
 	@Column( name = "Password", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String password;
+	
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="owner")
+    private Set<Device> devices;
 	
 	@Override
 	public boolean equals(Object obj){
@@ -69,4 +77,11 @@ public class User {
 		this.password = password;
 	}
 	
+	public Set<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(Set<Device> devices) {
+		this.devices = devices;
+	}
 }

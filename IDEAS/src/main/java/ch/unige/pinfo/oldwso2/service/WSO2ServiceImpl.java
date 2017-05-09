@@ -10,6 +10,7 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.device.service.SensorService;
 import ch.unige.pinfo.device.service.TypeDeviceService;
+import ch.unige.pinfo.user.dom.User;
 
 public class WSO2ServiceImpl implements WSO2Service {
 	
@@ -89,19 +90,34 @@ public class WSO2ServiceImpl implements WSO2Service {
         Set<Device> devicesBeacon = new HashSet<Device>();  
         Set<Device> devicesLight = new HashSet<Device>();  
 
+        Set<Device> devicesIdeasUser = new HashSet<Device>(); 
+        User user = new User();
+        user.setUsername("ideas");
+        user.setPassword("ideaspw");
+        
 		Device d1 = new Device("id1");
 		d1.setType(td1);
+		d1.setOwner(user);
 		devicesPowerSocket.add(d1);
+		devicesIdeasUser.add(d1);
+		
 		Device d2 = new Device("id2");
 		d2.setType(td2);
+		d2.setOwner(user);
 		devicesBeacon.add(d2);
+		devicesIdeasUser.add(d2);
+
 		Device d3 = new Device("id3");
 		d3.setType(td3);
+		d3.setOwner(user);
 		devicesLight.add(d3);
+		devicesIdeasUser.add(d3);
 
 		td1.setDevices(devicesPowerSocket);
 		td2.setDevices(devicesBeacon);
 		td3.setDevices(devicesLight);
+		
+		user.setDevices(devicesIdeasUser);
 		
 		typeDeviceService.addTypeDevice(td1);
 		typeDeviceService.addTypeDevice(td2);
@@ -112,7 +128,8 @@ public class WSO2ServiceImpl implements WSO2Service {
 	public String getSumBySensor(String sensorName, String from, String to){
 		return null;
 	}
-/*		Sensor sensor = sensorService.getSensorByName(sensorName);
+	public String test(String sensorName, String from, String to){
+		Sensor sensor = sensorService.getSensorByName(sensorName);
 		if (sensor == null)
 			return "sensor null";
 				
@@ -129,7 +146,7 @@ public class WSO2ServiceImpl implements WSO2Service {
 			sum = sum + Double.parseDouble(val);
 		}
 		return ""+sum;
-	}*/
+	}
 	
 	
 }
