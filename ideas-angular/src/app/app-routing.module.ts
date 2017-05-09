@@ -8,10 +8,10 @@ import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
-  	/*{
-		path: '', redirectTo: '/overview',
+  	{
+		path: '', redirectTo: '/login',
 		pathMatch: 'full'
-	},*/
+	},
   	{
 		path: 'user/:username',
 		component: UserComponent
