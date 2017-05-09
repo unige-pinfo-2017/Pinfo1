@@ -1,38 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { TopbarService } from './topbar.service';
 
 @Component({
 	selector: 'topbar',
 	templateUrl: './topbar.component.html',
 	styleUrls: ['./topbar.component.css'],
+	providers: [ TopbarService ]
 })
 
-export class TopbarComponent {
+export class TopbarComponent implements OnInit {
 	datas = DATA;
 	datash = DATAH;
+
+	public constructor(
+		private topbarService: TopbarService
+	) {}
+
+	public ngOnInit(){
+		this.getLiveData(9); // Pour le moment on peut mettre n'importe quel value, elle ne va pas influencé la requête
+	}
+
+	public getLiveData(userId: number){
+		this.topbarService.getLiveData(userId).then(data => this.datas = data);
+	}
 }
 export class Data {
 	name: string;
-	valeur: number;
-	unite: string;
+	value: number;
+	unit: string;
 }
 
 export class DataHidden {
 	name: string;
-	valeur: number;
-	unite: string;
+	value: number;
+	unit: string;
 }
 
 const DATA: Data[] = [
-	{name: 'Conso', valeur: 573, unite: 'kW/h'},
-	{name: 'Temperature', valeur: 25, unite: '°C'},
-	{name: 'elec', valeur: 450, unite: 'W'},
-	{name: 'blib blab', valeur: 24874, unite: 'sec'},
-	{name: 'power', valeur: 45.5, unite: 'Jl'}
+	{name: 'Conso', value: 573, unit: 'kW/h'},
+	{name: 'Temperature', value: 25, unit: '°C'},
+	{name: 'elec', value: 450, unit: 'W'},
+	{name: 'blib blab', value: 24874, unit: 'sec'},
+	{name: 'power', value: 45.5, unit: 'Jl'}
 ];
 
 const DATAH: DataHidden[] = [
-	{name: 'Conso', valeur: 573, unite: 'kW/h'},
-	{name: 'Temperature', valeur: 25, unite: '°C'},
-	{name: 'elec', valeur: 450, unite: 'W'},
-	{name: 'blib blab', valeur: 24874, unite: 'sec'}
+	{name: 'Conso', value: 573, unit: 'kW/h'},
+	{name: 'Temperature', value: 25, unit: '°C'},
+	{name: 'elec', value: 450, unit: 'W'},
+	{name: 'blib blab', value: 24874, unit: 'sec'}
 ];
