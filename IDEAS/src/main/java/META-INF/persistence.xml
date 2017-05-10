@@ -7,6 +7,7 @@
 		<class>ch.unige.pinfo.device.dom.Device</class>
 		<class>ch.unige.pinfo.device.dom.TypeDevice</class>
 		<class>ch.unige.pinfo.device.dom.Sensor</class>
+		<class>ch.unige.pinfo.overview.dom.LiveData</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

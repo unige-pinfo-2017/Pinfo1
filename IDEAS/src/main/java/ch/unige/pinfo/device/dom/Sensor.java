@@ -27,17 +27,24 @@ public class Sensor {
 	@Size(min = 3, max = 40)
 	private String name;
 	
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //private Set<TypeDevice> typeDevices = new HashSet<>();
+	@Column( name = "UnitName", nullable = false ) 
+	@Size(min = 1, max = 10)
+	private String unit;
 	
+	@Column( name = "MeasureName", nullable = false ) 
+	@Size(min = 3, max = 40)
+	private String measureName;
+		
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)  
     @JoinTable(name="TypeDevices_Sensors", joinColumns=@JoinColumn(name="sensor_Id"), inverseJoinColumns=@JoinColumn(name="typeDevice_Id")) 
     private Set<TypeDevice> typeDevices;
     
     public Sensor(){}
     
-    public Sensor(String name){
+    public Sensor(String name, String unitName, String measureName){
     	this.name = name;
+    	this.unit = unitName;
+    	this.measureName = measureName;
     }
     
 	@Override
@@ -78,6 +85,23 @@ public class Sensor {
 
 	public void setTypeDevices(Set<TypeDevice> typeDevices) {
 		this.typeDevices = typeDevices;
+	}
+	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getMeasureName() {
+		return measureName;
+	}
+
+	public void setMeasureName(String measureName) {
+		this.measureName = measureName;
 	}
 
 }

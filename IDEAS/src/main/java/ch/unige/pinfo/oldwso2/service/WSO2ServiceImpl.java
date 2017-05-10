@@ -8,19 +8,21 @@ import javax.inject.Inject;
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
-import ch.unige.pinfo.device.service.SensorService;
 import ch.unige.pinfo.device.service.TypeDeviceService;
+import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.User;
 
 public class WSO2ServiceImpl implements WSO2Service {
 	
 	@Inject 
 	private TypeDeviceService typeDeviceService;
+	@Inject 
+	private LiveDataService liveDataService;
 
 	
 	@Override
 	public void initDB() {
-		
 		Set<TypeDevice> powerSensor = new HashSet<TypeDevice>(); 
 		Set<TypeDevice> statusSensor = new HashSet<TypeDevice>();  
 		Set<TypeDevice> currentSensor = new HashSet<TypeDevice>();  
@@ -50,14 +52,14 @@ public class WSO2ServiceImpl implements WSO2Service {
 		brightnessSensor.add(td3);
 		colorSensor.add(td3);
 
-		Sensor s1 = new Sensor("powerSensor");
-		Sensor s2 = new Sensor("statusSensor");
-		Sensor s3 = new Sensor("currentSensor");
-		Sensor s4 = new Sensor("temperatureSensor");
-		Sensor s5 = new Sensor("lightSensor");
-		Sensor s6 = new Sensor("batterySensor");
-		Sensor s7 = new Sensor("brightnessSensor");
-		Sensor s8 = new Sensor("colorSensor");
+		Sensor s1 = new Sensor("powerSensor", "W", "Power");
+		Sensor s2 = new Sensor("statusSensor", "ON/OFF", "Status");
+		Sensor s3 = new Sensor("currentSensor", "A","Current");
+		Sensor s4 = new Sensor("temperatureSensor", "°C", "Temperature");
+		Sensor s5 = new Sensor("lightSensor", "I", "Intensity");
+		Sensor s6 = new Sensor("batterySensor", "%", "Battery");
+		Sensor s7 = new Sensor("brightnessSensor", "%","Brightness");
+		Sensor s8 = new Sensor("colorSensor", "RGB", "Color");
 		
 		PowerSocketSensors.add(s1);
 		PowerSocketSensors.add(s2);
@@ -115,7 +117,7 @@ public class WSO2ServiceImpl implements WSO2Service {
 		td3.setDevices(devicesLight);
 		
 		user.setDevices(devicesIdeasUser);
-		
+				
 		typeDeviceService.addTypeDevice(td1);
 		typeDeviceService.addTypeDevice(td2);
 		typeDeviceService.addTypeDevice(td3);
