@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import ch.unige.pinfo.device.dom.Sensor;
 
 @Entity
 @Table( name = "LiveData")
@@ -20,11 +24,9 @@ public class LiveData {
 	@Size(min = 3, max = 40)
 	private String computeType;
     
-    /*
     @OneToOne
     @JoinColumn(name="Sensor_Id")
     private Sensor sensor;
-*/
     
     // Getters & Setters
 	public Long getId() {
@@ -42,12 +44,12 @@ public class LiveData {
 	public void setComputeType(String computeType) {
 		this.computeType = computeType;
 	}
-/*
+
 	public Sensor getSensor() {
 		return sensor;
 	}
 
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
-	}*/
+	}
 }

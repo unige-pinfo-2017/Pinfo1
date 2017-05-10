@@ -38,15 +38,6 @@ public class IDEAS {
 	}
 	
 	@GET
-	@Path("/test")
-	public String initLive(){
-		LiveData ld1 = new LiveData();
-		ld1.setComputeType("Sum");
-		liveDataService.addLiveData(ld1);
-		return "reussi";
-	}
-
-	@GET
 	@Path("/init")
 	public String initDevicesUserSensorsTypes() {
 		Set<TypeDevice> powerSensor = new HashSet<TypeDevice>(); 
@@ -144,14 +135,31 @@ public class IDEAS {
 		
 		user.setDevices(devicesIdeasUser);
 		
+		LiveData ld1 = new LiveData();
+		ld1.setComputeType("Sum");
+		ld1.setSensor(s1);
+		
+		LiveData ld2 = new LiveData();
+		ld2.setComputeType("Sum");
+		ld2.setSensor(s3);
+		
+		LiveData ld3 = new LiveData();
+		ld3.setComputeType("Average");
+		ld3.setSensor(s4);
+		
 		try {
 			typeDeviceService.addTypeDevice(td1);
 			typeDeviceService.addTypeDevice(td2);
 			typeDeviceService.addTypeDevice(td3);
 		} catch (Exception e) {
-			return "erreur";
+			liveDataService.addLiveData(ld1);
+			liveDataService.addLiveData(ld2);
+			liveDataService.addLiveData(ld3);
+
+			return "Reussi - avec erreur console";
 		} 
-		return "reussi";
+		
+		return "reussi - sans erreur console";
 	}
 	
 
