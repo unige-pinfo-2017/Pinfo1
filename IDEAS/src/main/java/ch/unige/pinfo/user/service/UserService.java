@@ -14,6 +14,6 @@ public interface UserService{
 	User getUserById(Long Id);
 	List<User> getUserByUsername(String username);
 	List<User> getAllUsers();
-	double getSumBySensor(int userId, String sensorName, String from, String to);
+	double getSumBySensor(Long userId, String sensorName, String from, String to);
 	
 }

@@ -16,10 +16,7 @@ public class WSO2ServiceImpl implements WSO2Service {
 	
 	@Inject 
 	private TypeDeviceService typeDeviceService;
-	@Inject 
-	private SensorService sensorService;
-	@Inject
-	private WSO2ClientService clientService;
+
 	
 	@Override
 	public void initDB() {
@@ -123,30 +120,5 @@ public class WSO2ServiceImpl implements WSO2Service {
 		typeDeviceService.addTypeDevice(td2);
 		typeDeviceService.addTypeDevice(td3);
 	}
-	
-	@Override
-	public String getSumBySensor(String sensorName, String from, String to){
-		return null;
-	}
-	public String test(String sensorName, String from, String to){
-		Sensor sensor = sensorService.getSensorByName(sensorName);
-		if (sensor == null)
-			return "sensor null";
-				
-		Set<Device> devices = new HashSet<Device>();
-		
-		for(TypeDevice type: sensor.getTypeDevices()){
-			devices.addAll(type.getDevices());
-		}
 
-		double sum  = 0;
-		String val = null;
-		for(Device device: devices){
-			val = clientService.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);	
-			sum = sum + Double.parseDouble(val);
-		}
-		return ""+sum;
-	}
-	
-	
 }

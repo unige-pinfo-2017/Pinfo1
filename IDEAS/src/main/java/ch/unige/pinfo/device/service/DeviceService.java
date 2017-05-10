@@ -14,6 +14,6 @@ public interface DeviceService {
 	void deleteDevice(Long id);
 	Device getDeviceById(Long id);
 	List<Device> getAllDevices();
-	List<Device> getDevicesByType(TypeDevice type);
-	
+	List<Device> getDevicesBySensor4User(Long userId, String sensorName);
+	public double getSumSensorForUser(long userId, String sensorName, String from, String to);
 }

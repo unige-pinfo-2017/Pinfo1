@@ -14,13 +14,13 @@
       <li><a href="#!/view1">Blabla</a></li>
       <li><a href="#!/view1">Bloblo</a></li>-->
 
-      <li *ngFor="let dat of datas"><a href="#">{{dat.name}}: <b>{{dat.valeur}}</b> {{dat.unite}}
+      <li *ngFor="let dat of datas"><a href="#">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
         <!--<button class="close">x</button>--></a></li>
 
       <div class="dropdown">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
-          <a *ngFor="let da of datash" href="#">{{da.name}}: <b>{{da.valeur}}</b> {{da.unite}}</a>
+          <a *ngFor="let da of datash" href="#">{{da.name}}: <b>{{da.value}}</b> {{da.unit}}</a>
         </div>
       </div>
     </ul>

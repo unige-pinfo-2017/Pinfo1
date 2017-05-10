@@ -12,14 +12,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.oldwso2.service.WSO2Service;
+import ch.unige.pinfo.user.service.UserService;
 
 
-@Path("/wso2")
+@Path("/wso2Old")
 public class WSO2FacadeRest {
 
 	@Inject 
 	private WSO2Service wso2Service;
-
+	@Inject 
+	private UserService userService;
 	
 	@GET
 	@Path("/")
@@ -40,11 +42,11 @@ public class WSO2FacadeRest {
 	@Path("/sum/sensor/{sensorName}")
 	public Response getSumBySensor(@NotNull @PathParam("sensorName") String sensorName,
 									@QueryParam("from") String from,
-									@QueryParam("to") String to) {
-		
+									@QueryParam("to") String to,
+									@QueryParam("userId") Long userId) {
 		String sum = "";
 		try {
-			sum = wso2Service.getSumBySensor(sensorName, from, to);
+			sum = Double.toString(userService.getSumBySensor(userId, sensorName, from, to));
 		} catch (NoResultException e) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -13,13 +14,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-
+import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.service.DeviceService;
 import ch.unige.pinfo.user.dom.User;
+import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 @Stateless
 @Default
 public class UserServiceImpl implements UserService{
-
+	@Inject 
+	private DeviceService deviceService;
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -60,7 +65,9 @@ public class UserServiceImpl implements UserService{
 		return query.getResultList();
 	}
 	
-	public double getSumBySensor(int userId, String sensorName, String from, String to) {
-		return 0;
+	@Override
+	public double getSumBySensor(Long userId, String sensorName, String from, String to) {
+		return deviceService.getSumSensorForUser(userId, sensorName, from, to);
 	}
+
 }

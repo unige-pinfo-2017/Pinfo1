@@ -9,6 +9,7 @@ export class UserService {
 
 	constructor(private http: Http) {}
 
+	// Pas utilisé pour le moment
 	getReadings(): Observable<Number[]> {
 		let readings = this.http
 		.get(`${this.baseUrl}/overview/live`, {headers: this.getHeaders()})
