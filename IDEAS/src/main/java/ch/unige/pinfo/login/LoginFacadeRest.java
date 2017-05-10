@@ -18,23 +18,8 @@ public class LoginFacadeRest {
 	@Inject
 	private UserService userService;
 	
-	public LoginFacadeRest(){
-	}
+	public LoginFacadeRest(){}
 
-	/*@GET
-	//@Produces(MediaType.TEXT_HTML)
-	@Path("/")
-	public String logTest(){
-		return "WIP";
-	}
-	
-	public String display(String msg){
-		return msg;
-	}*/
-	
-	
-	// @QueryParam("from") String from, @QueryParam("to") String to 
-	
 	@GET
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/")

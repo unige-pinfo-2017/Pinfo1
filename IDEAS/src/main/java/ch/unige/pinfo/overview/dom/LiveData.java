@@ -29,6 +29,8 @@ public class LiveData {
     @JoinColumn(name="Sensor_Id")
     private Sensor sensor;
     
+    //public LiveData() {}
+    
     // Getters & Setters
 	public Long getId() {
 		return id;

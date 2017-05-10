@@ -1,19 +1,30 @@
 package ch.unige.pinfo.overview;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.service.UserService;
 
 @Path("/overview")
 public class OverviewFacadeRest {
 	@Inject
 	private UserService userService;
+	
+	@Inject 
+	private OverviewJsonBuilder overviewJsonBuilder;
+	
+	@Inject
+	private LiveDataService liveDataService;
 	
 	@GET
 	@Path("/live")
@@ -27,26 +38,59 @@ public class OverviewFacadeRest {
 		
 		// userService.getSumBySensor(userId, sensorName, "0", "0");
 		
-		// Mock pour l'instant
-		JsonArray data = Json.createArrayBuilder()
-							.add(Json.createObjectBuilder()
-									.add("name", "Power")
-									.add("unit", "W")
-									.add("value", "120")
-									)
-							.add(Json.createObjectBuilder()
-									.add("name", "Temperature")
-									.add("unit", "°C")
-									.add("value", "25")
-									)
-							.add(Json.createObjectBuilder()
-									.add("name", "Current")
-									.add("unit", "A")
-									.add("value", "25")
-									)
-							.build();
+		// Pseudo code:
+		// Récupérer les objets LiveData
+		// Créer le JsonArray nécessaire
 		
+		// Mock pour l'instant
+		/*
+		JsonArrayBuilder builder = Json.createArrayBuilder();
+		builder.add(Json.createObjectBuilder()
+			.add("name", "Power")
+			.add("unit", "W")
+			.add("value", "120"));
+		builder.add(Json.createObjectBuilder()
+			.add("name", "Temperature")
+			.add("unit", "°C")
+			.add("value", "25"));
+		builder.add(Json.createObjectBuilder()
+						.add("name", "Current")
+						.add("unit", "A")
+						.add("value", "25"));
+		JsonArray data = builder.build();
+		*/
+			
+		JsonArray data = buildLiveData(liveDataService.getAllLiveData(), userId);
 		return data;
+	
+		/*List<LiveData> liveDataList = liveDataService.getAllLiveData();
+		String s = "";
+		for (LiveData ld: liveDataList){
+			s += ld.getSensor().getMeasureName() + " " + ld.getSensor().getUnit() + "\n";
+		}
+		return s;*/
+		
+
 	}
 	
+	public JsonArray buildLiveData(List<LiveData> liveDatas, Long userId) {
+		// Pour chaque liveData:
+		// 	Récupérer le nom de la ressource -> ok
+		//	Récupérer l'unité de la ressource -> ok
+		//  Faire le calcul de la valeur à afficher
+		
+		JsonArray arr = Json.createArrayBuilder().build();
+		JsonArrayBuilder builder = Json.createArrayBuilder();
+		
+		for (int i=0; i<liveDatas.size(); i++){
+			LiveData ld = liveDatas.get(i);
+			String measure = ld.getSensor().getMeasureName();
+			String unit = ld.getSensor().getUnit();
+			String value = "4"; // Mock
+			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
+		}
+	
+		return builder.build();
+	}
 }
+
