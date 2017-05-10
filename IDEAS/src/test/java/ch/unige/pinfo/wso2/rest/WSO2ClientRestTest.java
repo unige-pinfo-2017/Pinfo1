@@ -9,9 +9,6 @@ import javax.json.JsonArray;
 
 import org.junit.Test;
 
-import ch.unige.pinfo.oldwso2.rest.WSO2ClientRest;
-
-
 public class WSO2ClientRestTest {
 	
 	WSO2ClientRest cr = new WSO2ClientRest();

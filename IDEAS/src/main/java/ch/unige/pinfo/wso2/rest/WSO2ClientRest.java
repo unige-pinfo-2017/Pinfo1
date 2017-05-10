@@ -2,12 +2,9 @@ package ch.unige.pinfo.wso2.rest;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.ClientResponse;
 
 import java.io.StringReader;
 
@@ -52,7 +49,7 @@ public class WSO2ClientRest {
 		return responseJ;
 	}
 
-	//Post peut être accédé avec des strig, int et double pour le query param qpState:
+	//Post peut etre accede avec des strig, int et double pour le query param qpState:
 	public String postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
 
