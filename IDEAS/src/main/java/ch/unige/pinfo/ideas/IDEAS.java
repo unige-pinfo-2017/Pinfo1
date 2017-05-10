@@ -1,16 +1,18 @@
 package ch.unige.pinfo.ideas;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.ejb.EJBException;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
+import ch.unige.pinfo.device.service.DeviceService;
 import ch.unige.pinfo.device.service.SensorService;
 import ch.unige.pinfo.device.service.TypeDeviceService;
 import ch.unige.pinfo.overview.dom.LiveData;
@@ -27,15 +29,31 @@ public class IDEAS {
 	private SensorService sensorService;
 	@Inject 
 	private LiveDataService liveDataService;
+	@Inject 
+	private DeviceService deviceService;
 	
 	public IDEAS() {}
 	
 	@GET
 	//@Produces(MediaType.TEXT_HTML)
 	@Path("/home")
-	public String test(){
+	public String home(){
 		return "Welcome to IDEAS! The application is under construction.";
 	}
+
+	
+	@GET
+	@Path("/test")
+	//@Transactional
+	public String test(){
+		List<LiveData> liste =liveDataService.getAllLiveData();
+		String sensorName = "powerSensor"; 
+		String test = Double.toString(deviceService.getSumSensorForUser(1, sensorName, "", ""));
+		return "Sensor name for first item liveData :"+sensorName+" ------ function getsum for previous sensor return : "+test;
+		//return ""+liste.get(0).getSensor().getName();
+	}
+	
+	
 	
 	@GET
 	@Path("/init")

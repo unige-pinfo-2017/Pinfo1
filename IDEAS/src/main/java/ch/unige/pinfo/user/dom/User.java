@@ -34,7 +34,7 @@ public class User {
 	@Size(min = 3, max = 40)
 	private String password;
 	
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="owner")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Device> devices;
 	
 	@Override

@@ -27,10 +27,10 @@ public class Device {
 	@Size(min = 3, max = 40)
 	private String deviceId;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	TypeDevice type;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	User owner;
 	
 

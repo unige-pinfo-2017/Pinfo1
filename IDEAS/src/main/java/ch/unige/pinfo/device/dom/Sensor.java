@@ -35,7 +35,7 @@ public class Sensor {
 	@Size(min = 3, max = 40)
 	private String measureName;
 		
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)  
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  
     @JoinTable(name="TypeDevices_Sensors", joinColumns=@JoinColumn(name="sensor_Id"), inverseJoinColumns=@JoinColumn(name="typeDevice_Id")) 
     private Set<TypeDevice> typeDevices;
     

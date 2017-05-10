@@ -27,10 +27,10 @@ public class TypeDevice {
 	@Size(min = 3, max = 40)
 	private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy="type")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "type")
     private Set<Device> devices;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="typeDevices")  
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "typeDevices")  
     private Set<Sensor> sensors;
     
 	public TypeDevice(){}
