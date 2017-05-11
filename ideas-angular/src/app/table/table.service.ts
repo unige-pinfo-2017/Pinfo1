@@ -26,7 +26,17 @@ export class TableService {
 		.catch(this.handleError);
 	}
 
-	public getColumnsDemo(): Promise<Array<any>> {
+	public getTable(deviceType: string, userid:number): Promise<any[]> {
+		return this.http
+		.get(`${this.baseUrl}/columns?type=${deviceType}&userid=${userid}`, {headers: this.getHeaders()})
+		.toPromise()
+		.then(res => res.json() as Array<any>)
+		.catch(this.handleError);
+	}
+
+	// http://localhost:8080/IDEAS/table/columns?type=PowerSocket&userid=1
+
+	/*public getColumnsDemo(): Promise<Array<any>> {
 		// Récupère un Promise des colonnes d'une liste d'un certain type de device
 		return this.http
 		.get(`${this.baseUrl}/demo/columns`, {headers: this.getHeaders()})
@@ -40,7 +50,7 @@ export class TableService {
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 		.catch(this.handleError);
-	}
+	}*/
 
 	private getHeaders() {
 		let headers = new Headers();

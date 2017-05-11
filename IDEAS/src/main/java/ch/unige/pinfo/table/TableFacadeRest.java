@@ -1,14 +1,30 @@
 package ch.unige.pinfo.table;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.user.service.UserService;
+
 @Path("/table")
 public class TableFacadeRest {
+	@Inject
+	private UserService userService;
+	
+	@Inject
+	private TableJsonBuilder tableJsonBuilder;
 	
 	@GET
 	@Path("/device/columns")
@@ -17,7 +33,7 @@ public class TableFacadeRest {
 		
 		JsonArray powerSocket = Json.createArrayBuilder()
 				.add(Json.createObjectBuilder()
-						.add("prop", "deviceId"))
+						.add("prop", "deviceId:" + "unit"))
 				.add(Json.createObjectBuilder()
 						.add("prop", "power"))
 				.add(Json.createObjectBuilder()
@@ -86,5 +102,49 @@ public class TableFacadeRest {
 		}
 	}
 	
-	// public JsonObject buildColumn
+	@GET
+	@Path("/columns")
+	@Produces({"application/json"})
+	@Transactional
+	public JsonArray buildColumns (@QueryParam("type") String deviceType, @QueryParam("userid") Long userId) {
+		// Initialisation des structures necessaires
+		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder columnsBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder rowsBuilder = Json.createArrayBuilder();
+		
+		List<String> columns = new ArrayList<String>();
+		List<String> values = new ArrayList<String>();
+		
+		// Recuperation des senseurs et des devices du user
+		Set<Sensor> sensors = userService.getSensorsForTypeDevice(deviceType);
+		List<Device> devices = userService.getAllDevicesForUserByTypeDevice(userId, deviceType);
+		
+		
+		//TODO: Accéder directement aux columns plutot que de copier
+		// Creation du JSON de la colonne
+		columnsBuilder.add(tableJsonBuilder.buildDeviceColumns("DeviceId"));
+		columns.add("DeviceId");
+		for (Sensor sensor: sensors){
+			String measure = sensor.getMeasureName();
+			String unit = sensor.getUnit();
+			String content = measure + ": " + unit;
+			columnsBuilder.add(tableJsonBuilder.buildDeviceColumns(content));
+			columns.add(content);
+		}
+		
+		
+		// Creation du JSON des lignes
+		for (Device device: devices){
+			values.clear();
+			values.add(device.getDeviceId()); // Ajout du device id
+			for (Sensor sensor: sensors) {
+				values.add(Double.toString((userService.getDeviceData(device.getId(), sensor.getName(), "0", "0")))); // Ajout des valeurs pour chaque senseur du device
+			}
+			rowsBuilder.add(tableJsonBuilder.buildDeviceRows(columns, values)); // Ajout d'un row
+		}
+		
+		tableBuilder.add(columnsBuilder.build()); // Ajout du JSON des columns
+		tableBuilder.add(rowsBuilder.build()); // Ajout du JSON des rows
+		return tableBuilder.build(); // Construction du JSON final
+	}
 }

@@ -47,6 +47,12 @@ public class DeviceManagerImpl implements DeviceManager {
 	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
 		return deviceService.getDevicesByTypeDeviceForUser(userId, typeDevice);
 	}
+
+	@Override
+	public double getDeviceData(Long deviceId, String sensorName, String from, String to) {
+		Device device = deviceService.getDeviceById(deviceId);
+		return wso2Wrapper.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);
+	}
 	
 	
 

@@ -2,6 +2,7 @@ package ch.unige.pinfo.user.service;
 
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -15,6 +16,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.device.service.DeviceService;
 import ch.unige.pinfo.user.dom.User;
@@ -71,4 +73,20 @@ public class UserServiceImpl implements UserService{
 		return deviceManager.getSumSensorForUser(userId, sensorName, from, to);
 	}
 
+	@Override
+	public Set<Sensor> getSensorsForTypeDevice(String name) {
+		return deviceManager.getSensorsForTypeDevice(name);
+	}
+
+	@Override
+	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
+		return deviceManager.getAllDevicesForUserByTypeDevice(userId, typeDevice);
+	}	
+	
+	@Override
+	public double getDeviceData(Long deviceId, String sensorName, String from, String to) {
+		return deviceManager.getDeviceData(deviceId, sensorName, from, to);
+	}
+
+	
 }

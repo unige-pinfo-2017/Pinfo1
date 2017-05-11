@@ -50,7 +50,7 @@ export class LoginComponent {
 				if (this.response === 'ok'){
 					this.login = 'Authentication successful.';
 					this.router.navigateByUrl('/overview');
-					
+
 					// A traiter plus tard
 				} else if (this.response === 'error'){
 					this.login = 'Authentication failed.';

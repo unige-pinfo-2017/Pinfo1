@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableService } from './table.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TableService } from './table.service';
 	]
 })
 
-export class TableComponent {
+export class TableComponent implements OnInit {
 	private rows:any[] = [];
 	private columns:any[] = [];
 
@@ -40,15 +40,26 @@ export class TableComponent {
 		private tableService: TableService
 	) {}
 
+	public ngOnInit(): void {
+		this.getTable("PowerSocket",1);
+	}
+
 	public getDemo(){
 		this.columns = this.columnsExample;
 		this.rows = this.rowsExample;
 	}
 
+	public getTable(deviceType: string, userid: number): void {
+		this.tableService.getTable(deviceType, userid)
+		.then(arr => {
+			this.columns = arr[0];
+			this.rows = arr[1];
+		})
+	}
+
 	public getDeviceTable(deviceType: string): void {
 		this.getDeviceColumns(deviceType);
 		this.getDeviceData(deviceType);
-
 	}
 
 	public getDeviceColumns(deviceType: string): Promise<any> {
