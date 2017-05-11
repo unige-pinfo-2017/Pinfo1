@@ -17,7 +17,7 @@ export class TopbarComponent implements OnInit {
 	) {}
 
 	public ngOnInit(){
-		this.getLiveData(9); // Pour le moment on peut mettre n'importe quel value, elle ne va pas influencé la requête
+		this.getLiveData(1); // Pour le moment on peut mettre n'importe quel value, elle ne va pas influencé la requête
 	}
 
 	public getLiveData(userId: number){

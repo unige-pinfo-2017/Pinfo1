@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -29,6 +30,7 @@ public class OverviewFacadeRest {
 	@GET
 	@Path("/live")
 	@Produces({ "application/json" })
+	@Transactional
 	public JsonArray getLiveData(@QueryParam("userid") Long userId){
 		// Dans l'api actuel, seuls ces types de données sont intéressants 
 		// pour l'overview.
@@ -60,7 +62,7 @@ public class OverviewFacadeRest {
 		JsonArray data = builder.build();
 		*/
 			
-		JsonArray data = buildLiveData(liveDataService.getAllLiveData(), userId);
+		JsonArray data = buildLiveData(userId);
 		return data;
 	
 		/*List<LiveData> liveDataList = liveDataService.getAllLiveData();
@@ -69,24 +71,25 @@ public class OverviewFacadeRest {
 			s += ld.getSensor().getMeasureName() + " " + ld.getSensor().getUnit() + "\n";
 		}
 		return s;*/
-		
-
 	}
 	
-	public JsonArray buildLiveData(List<LiveData> liveDatas, Long userId) {
+	public JsonArray buildLiveData(Long userId) {
 		// Pour chaque liveData:
 		// 	Récupérer le nom de la ressource -> ok
 		//	Récupérer l'unité de la ressource -> ok
 		//  Faire le calcul de la valeur à afficher
 		
-		JsonArray arr = Json.createArrayBuilder().build();
+		//JsonArray arr = Json.createArrayBuilder().build();
 		JsonArrayBuilder builder = Json.createArrayBuilder();
+		
+		List<LiveData> liveDatas = liveDataService.getAllLiveData(); 
 		
 		for (int i=0; i<liveDatas.size(); i++){
 			LiveData ld = liveDatas.get(i);
 			String measure = ld.getSensor().getMeasureName();
 			String unit = ld.getSensor().getUnit();
-			String value = "4"; // Mock
+			//String value = "5"; // Mock
+			String value = Double.toString(userService.getSumBySensor(userId, ld.getSensor().getName(), "0", "0"));
 			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
 		}
 	
