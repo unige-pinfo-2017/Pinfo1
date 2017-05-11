@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ch.unige.pinfo.device.dom.Device;
-import ch.unige.pinfo.device.dom.TypeDevice;
 
 @Local
 public interface DeviceService {
@@ -14,5 +13,6 @@ public interface DeviceService {
 	void deleteDevice(Long id);
 	Device getDeviceById(Long id);
 	List<Device> getAllDevices();
-	List<Device> getDevicesBySensor4User(Long userId, String sensorName);
+	List<Device> getDevicesBySensorForUser(Long userId, String sensorName);
+	List<Device> getDevicesByTypeDeviceForUser(Long userId, String typeDeviceName);
 }

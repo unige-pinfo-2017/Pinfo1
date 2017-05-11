@@ -1,7 +1,6 @@
 package ch.unige.pinfo.device.service;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;

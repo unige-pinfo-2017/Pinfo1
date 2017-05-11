@@ -18,7 +18,6 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
-import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 @Stateless
 @Default
@@ -28,6 +27,9 @@ public class DeviceServiceImpl implements DeviceService {
 	
 	@Inject 
 	private SensorService sensorService;
+	
+	@Inject 
+	private TypeDeviceService typeDeviceService;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -59,7 +61,7 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
-	public List<Device> getDevicesBySensor4User(Long userId, String sensorName) {
+	public List<Device> getDevicesBySensorForUser(Long userId, String sensorName) {
 		User user = userService.getUserById(userId);
 		Sensor sensor = sensorService.getSensorByName(sensorName);
 		
@@ -69,6 +71,20 @@ public class DeviceServiceImpl implements DeviceService {
 				if (device.getType().getId() == type.getId()){
 					devices.add(device);
 				}
+			}
+		}
+		return devices;
+	}
+	
+	@Override
+	public List<Device> getDevicesByTypeDeviceForUser(Long userId, String typeDeviceName) {
+		User user = userService.getUserById(userId);
+		TypeDevice typeDevice = typeDeviceService.getTypeDeviceByName(typeDeviceName);
+		
+		List<Device> devices = new ArrayList<Device>();
+		for(Device device: user.getDevices()){
+			if (device.getType().getId() == typeDevice.getId()){
+				devices.add(device);
 			}
 		}
 		return devices;
