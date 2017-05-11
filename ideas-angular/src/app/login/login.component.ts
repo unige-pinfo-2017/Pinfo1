@@ -41,16 +41,21 @@ export class LoginComponent {
 	}
 
 	private authentication(username: string, pw: string): void {
-		this.loginService.authentication(username, pw)
-		.then(r => this.response = r).then(r => {
-			console.log(r);
-			if (this.response === 'ok'){
-				this.login = 'Authentication successful.';
-				this.router.navigateByUrl('/overview');
-			} else if (this.response === 'error'){
-				this.login = 'Authentication failed.'
-			}
+		if (username === ''){
+			this.login='Authentication failed.';
+		} else {
+			this.loginService.authentication(username, pw)
+			.then(r => this.response = r).then(r => {
+				console.log(r);
+				if (this.response === 'ok'){
+					this.login = 'Authentication successful.';
+					this.router.navigateByUrl('/overview');
+					
+					// A traiter plus tard
+				} else if (this.response === 'error'){
+					this.login = 'Authentication failed.';
+				}
+			}).catch(error => this.login = 'Authentication failed');
 		}
-		);
 	}
 }
