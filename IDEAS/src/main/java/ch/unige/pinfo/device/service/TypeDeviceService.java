@@ -16,5 +16,4 @@ public interface TypeDeviceService {
 	TypeDevice getTypeDeviceById(Long id);
 	List<TypeDevice> getAllTypeDevices();
 	TypeDevice getTypeDeviceByName(String name);
-	Set<Sensor> getListSensors4TypeDevice(String name);
 }

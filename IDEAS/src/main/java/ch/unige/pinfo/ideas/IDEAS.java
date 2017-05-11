@@ -44,13 +44,10 @@ public class IDEAS {
 	
 	@GET
 	@Path("/test")
+	@Transactional
 	//@Transactional
 	public String test(){
-		List<LiveData> liste =liveDataService.getAllLiveData();
-		String sensorName = "powerSensor"; 
-		String test = Double.toString(deviceService.getSumSensorForUser(1, sensorName, "", ""));
-		return "Sensor name for first item liveData :"+sensorName+" ------ function getsum for previous sensor return : "+test;
-		//return ""+liste.get(0).getSensor().getName();
+		return null;
 	}
 	
 	

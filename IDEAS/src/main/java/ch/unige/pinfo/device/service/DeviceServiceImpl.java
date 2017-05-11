@@ -29,9 +29,6 @@ public class DeviceServiceImpl implements DeviceService {
 	@Inject 
 	private SensorService sensorService;
 	
-	@Inject
-	private WSO2Wrapper wso2Wrapper;
-	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -76,29 +73,4 @@ public class DeviceServiceImpl implements DeviceService {
 		}
 		return devices;
 	}
-	
-	@Override
-	public double getSumSensorForUser(long userId, String sensorName, String from, String to) {
-		double sum = 0;
-		
-		List<Device> ld = this.getDevicesBySensor4User(userId, sensorName);
-		for (Device device: ld){
-			sum += wso2Wrapper.getValue(device.getType().getName(), device.getDeviceId(), sensorName, from, to);
-		}
-		
-		return sum;
-	}
-	
-/*
-	@Override
-	public List<Device> getDevicesByType(TypeDevice type) {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Device> c = cb.createQuery(Device.class);
-		Root<Device> device = c.from(Device.class);
-		Predicate condition = cb.equal(device.get("type"), type);
-		c.where(condition);
-		TypedQuery<Device> query = entityManager.createQuery(c);
-		return query.getResultList();
-	}
-*/
 }

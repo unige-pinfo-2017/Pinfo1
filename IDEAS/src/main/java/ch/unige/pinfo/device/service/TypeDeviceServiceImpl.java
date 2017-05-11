@@ -13,7 +13,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
 
 @Stateless
@@ -61,11 +60,5 @@ public class TypeDeviceServiceImpl implements TypeDeviceService {
 			return new TypeDevice();
 		return query.getResultList().get(0);
 	}
-	
-	
-	@Override
-	public Set<Sensor> getListSensors4TypeDevice(String name){
-		TypeDevice td = this.getTypeDeviceByName(name);	
-		return td.getSensors();
-	}
+
 }

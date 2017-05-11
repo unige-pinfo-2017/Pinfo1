@@ -15,6 +15,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.device.service.DeviceService;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
@@ -23,7 +24,7 @@ import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 @Default
 public class UserServiceImpl implements UserService{
 	@Inject 
-	private DeviceService deviceService;
+	private DeviceManager deviceManager;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -67,7 +68,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public double getSumBySensor(Long userId, String sensorName, String from, String to) {
-		return deviceService.getSumSensorForUser(userId, sensorName, from, to);
+		return deviceManager.getSumSensorForUser(userId, sensorName, from, to);
 	}
 
 }

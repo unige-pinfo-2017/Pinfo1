@@ -15,5 +15,4 @@ public interface DeviceService {
 	Device getDeviceById(Long id);
 	List<Device> getAllDevices();
 	List<Device> getDevicesBySensor4User(Long userId, String sensorName);
-	public double getSumSensorForUser(long userId, String sensorName, String from, String to);
 }
