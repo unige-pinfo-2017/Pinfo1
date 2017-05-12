@@ -1,12 +1,8 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-=======
-import { Location, Component, ViewEncapsulation, ViewChild } from '@angular/core';
->>>>>>> Stashed changes
+import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import { TableService } from './table.service';
 
-//@import '/node_modules/@swimlane/ngx-datatable/release/datatable.css'; 
-//@import '/node_modules/@swimlane/ngx-datatable/release/themes/material.css'; 
+//@import '/node_modules/@swimlane/ngx-datatable/release/datatable.css';
+//@import '/node_modules/@swimlane/ngx-datatable/release/themes/material.css';
 //@import '/node_modules/@swimlane/ngx-datatable/release/assets/icons.css';
 
 @Component({
@@ -22,25 +18,21 @@ import { TableService } from './table.service';
 	],
 	providers: [
 		TableService,
-	]
+	],
 	encapsulation: ViewEncapsulation.None
 })
 
-<<<<<<< Updated upstream
 export class TableComponent implements OnInit {
-=======
-export class TableComponent {
 
 	@ViewChild('myTable') table: any;
 
->>>>>>> Stashed changes
 	private rows:any[] = [];
 	private columns:any[] = [];
 	expanded: any = {};
 	selected: any[] = [];
 	timeout: any;
 
-	
+
 
 	private columnsExample:any[] = [
 	    { "prop": "deviceId" },
@@ -51,7 +43,7 @@ export class TableComponent {
 	];
 
 	private rowsExample:any[] = [
-		
+
 		{
 			"deviceId":	"1",
 			"power":	"12.0",
@@ -72,19 +64,9 @@ export class TableComponent {
 		private tableService: TableService
 	) {}
 
-<<<<<<< Updated upstream
 	public ngOnInit(): void {
 		this.getTable("PowerSocket",1);
 	}
-=======
-
-	onPage(event) {
-	    clearTimeout(this.timeout);
-	    this.timeout = setTimeout(() => {
-	      console.log('paged!', event);
-	    }, 100);
-  	}
->>>>>>> Stashed changes
 
 	public getDemo(){
 		this.columns = this.columnsExample;
@@ -122,12 +104,12 @@ export class TableComponent {
   	onActivate(event: any) {
     	console.log('Event: activate', event);
 	}
-	toggleExpandRow(row) {
+	toggleExpandRow(row: any[]) {
     	console.log('Toggled Expand Row!', row);
     	this.table.rowDetail.toggleExpandRow(row);
   	}
 
-  	onDetailToggle(event) {
+  	onDetailToggle(event: any) {
     	console.log('Detail Toggled', event);
 	}
 }
