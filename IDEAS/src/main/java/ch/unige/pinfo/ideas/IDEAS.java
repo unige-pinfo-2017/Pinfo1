@@ -85,7 +85,7 @@ public class IDEAS {
 		colorSensor.add(td3);
 
 		Sensor s1 = new Sensor("powerSensor", "W", "Power");
-		Sensor s2 = new Sensor("statusSensor", "ON/OFF", "Status");
+		Sensor s2 = new Sensor("statusSensor", "On/Off", "Status");
 		Sensor s3 = new Sensor("currentSensor", "A","Current");
 		Sensor s4 = new Sensor("temperatureSensor", "°C", "Temperature");
 		Sensor s5 = new Sensor("lightSensor", "I", "Intensity");

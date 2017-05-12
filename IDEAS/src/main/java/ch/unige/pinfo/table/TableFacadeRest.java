@@ -127,7 +127,7 @@ public class TableFacadeRest {
 		for (Sensor sensor: sensors){
 			String measure = sensor.getMeasureName();
 			String unit = sensor.getUnit();
-			String content = measure + ": " + unit;
+			String content = measure + "  [" + unit + " ]";
 			columnsBuilder.add(tableJsonBuilder.buildDeviceColumns(content));
 			columns.add(content);
 		}
