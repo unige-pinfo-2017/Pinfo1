@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { HeadersService } from '../headers/headers.service';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -9,11 +11,13 @@ import 'rxjs/add/operator/toPromise';
 export class LoginService {
 	private baseUrl: string = "http://localhost:8080/IDEAS";
 
-	constructor(private http: Http) {}
+	constructor(private http: Http,
+				private headersService: HeadersService
+				) {}
 
 	public authentication(username: string, pw: string): Promise<string> {
 		return this.http
-			.get(`${this.baseUrl}/login?username=${username}&pw=${pw}`, {headers: this.getHeaders()})
+			.get(`${this.baseUrl}/login?username=${username}&pw=${pw}`, {headers: this.headersService.getHeadersPlainText()})
 			.toPromise()
 			.then(res => res.text() as string)
 	}
@@ -27,10 +31,10 @@ export class LoginService {
 	}
 	*/
 
-	private getHeaders() {
+	/*private getHeaders() {
 		let headers = new Headers();
 		headers.append('Accept', 'text/plain');	// Spécifie le type de données accepté
 		headers.append('Content-Type', 'text/plain');
 		return headers;
-	}
+	}*/
 }
