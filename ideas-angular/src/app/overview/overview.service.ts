@@ -4,18 +4,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class UserService {
-	private baseUrl: string = 'http://localhost:8080/IDEAS';
+export class OverviewService {
+	private baseUrl: string = 'http://localhost:8080/IDEAS/overview';
 
 	constructor(private http: Http) {}
 
-	// Pas utilisé pour le moment
-	getReadings(): Observable<Number[]> {
-		let readings = this.http
-		.get(`${this.baseUrl}/overview/live`, {headers: this.getHeaders()})
-		.map(res => <Number[]>res.json());
-
-		return readings;
+	public getLiveData(userId: number): Promise<Array<any>> {
+		return this.http
+		.get(`${this.baseUrl}/live?userid=${userId}`, {headers: this.getHeaders()})
+		.toPromise()
+		.then(res => res.json() as Array<any>)
 	}
 
 	private getHeaders() {
