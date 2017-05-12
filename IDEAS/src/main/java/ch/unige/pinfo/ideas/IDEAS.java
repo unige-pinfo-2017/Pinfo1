@@ -18,6 +18,7 @@ import ch.unige.pinfo.device.service.TypeDeviceService;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.User;
+import ch.unige.pinfo.user.service.UserService;
 
 
 @Path("/")
@@ -31,6 +32,8 @@ public class IDEAS {
 	private LiveDataService liveDataService;
 	@Inject 
 	private DeviceService deviceService;
+	@Inject 
+	private UserService userService;
 	
 	public IDEAS() {}
 	
@@ -40,21 +43,11 @@ public class IDEAS {
 	public String home(){
 		return "Welcome to IDEAS! The application is under construction.";
 	}
-
-	
-	@GET
-	@Path("/test")
-	@Transactional
-	//@Transactional
-	public String test(){
-		return null;
-	}
-	
-	
-	
+		
 	@GET
 	@Path("/init")
-	public String initDevicesUserSensorsTypes() {
+	@Transactional
+	public String initDB() {
 		Set<TypeDevice> powerSensor = new HashSet<TypeDevice>(); 
 		Set<TypeDevice> statusSensor = new HashSet<TypeDevice>();  
 		Set<TypeDevice> currentSensor = new HashSet<TypeDevice>();  
@@ -162,19 +155,14 @@ public class IDEAS {
 		ld3.setComputeType("Average");
 		ld3.setSensor(s4);
 		
-		try {
-			typeDeviceService.addTypeDevice(td1);
-			typeDeviceService.addTypeDevice(td2);
-			typeDeviceService.addTypeDevice(td3);
-		} catch (Exception e) {
-			liveDataService.addLiveData(ld1);
-			liveDataService.addLiveData(ld2);
-			liveDataService.addLiveData(ld3);
+		typeDeviceService.addTypeDevice(td1);
+		typeDeviceService.addTypeDevice(td2);
+		typeDeviceService.addTypeDevice(td3);
+		liveDataService.addLiveData(ld1);
+		liveDataService.addLiveData(ld2);
+		liveDataService.addLiveData(ld3);
 
-			return "Reussi - avec erreur console";
-		} 
-		
-		return "reussi - sans erreur console";
+		return "reussi";
 	}
 	
 
