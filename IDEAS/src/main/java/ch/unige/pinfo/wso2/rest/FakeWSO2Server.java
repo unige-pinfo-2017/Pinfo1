@@ -75,7 +75,7 @@ public class FakeWSO2Server {
 			return res;
 		}
 		else if(sensorType.equals("colorSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":5000,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":5000,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":{\"hue\":100, \"saturation\":1, \"kelvin\": 5000},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":{\"hue\":100, \"saturation\":1, \"kelvin\": 5000},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("powerSensor")){
@@ -131,9 +131,9 @@ public class FakeWSO2Server {
 	@Produces(MediaType.TEXT_PLAIN)
 	//@Consumes(MediaType.TEXT_PLAIN)
 	public Response postLightBright(
-			@QueryParam("state") double state){
+			@QueryParam("state") int state){
 
-		if (0 <= state && state <= 1){
+		if (0 == state || state == 1){
 			String st = "status: "+state+" brightness";
 			return Response.status(200).entity(st).build();
 		}
@@ -148,6 +148,7 @@ public class FakeWSO2Server {
 	@Path("/Light/device/{deviceId}/change-hue")
 	@Produces(MediaType.TEXT_PLAIN)
 	//@Consumes(MediaType.TEXT_PLAIN)
+	//modifie la couleur
 	public Response postLightHue(
 			@QueryParam("state") int state){
 
@@ -166,10 +167,11 @@ public class FakeWSO2Server {
 	@Path("/Light/device/{deviceId}/change-saturation")
 	@Produces(MediaType.TEXT_PLAIN)
 	//@Consumes(MediaType.TEXT_PLAIN)
+	//modifie la saturation de la couleur
 	public Response postLightSat(
-			@QueryParam("state") double state){
+			@QueryParam("state") int state){
 
-		if (0 <= state && state <= 1){
+		if (0 == state || state == 1){
 			String st = "status: "+state+" saturation";
 			return Response.status(200).entity(st).build();
 		}
@@ -184,6 +186,7 @@ public class FakeWSO2Server {
 	@Path("/Light/device/{deviceId}/change-kelvin")
 	@Produces(MediaType.TEXT_PLAIN)
 	//@Consumes(MediaType.TEXT_PLAIN)
+	//imite la lumiere du soleil selon la journee (ex: 2200K = leve du soleil(jaune/orange) 6500: soleil de midi (blanc))
 	public Response postLightKev(
 			@QueryParam("state") int state){
 

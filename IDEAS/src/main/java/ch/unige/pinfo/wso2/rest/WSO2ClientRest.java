@@ -30,7 +30,7 @@ public class WSO2ClientRest {
 		//url de base pour le fake server (temporaire):
 		urlBase = "http://localhost:8080/IDEAS/fakeWso2";
 
-		//url r�el (non disponible actuellement):
+		//url reel (non disponible actuellement):
 		//urlBase = "<wso2 ip address>:8243";   
 	}
 
@@ -72,19 +72,7 @@ public class WSO2ClientRest {
 		return response;
 	}
 
-	public String postStatus(String deviceType, String deviceId, String status, double qpState){
-		Client client = ClientBuilder.newClient();
-
-		WebTarget wb = client.target(urlBase);
-		WebTarget targetUpdated = wb
-				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status)
-				.queryParam("satate", qpState);
-		String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
-		return response;
-	}
-
-
-
+	
 	//Client officiel (non disponible):
 	/*
 	  public JsonArray getStates(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
