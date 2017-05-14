@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TableService {
-	private baseUrl: string = "http://localhost:8080/IDEAS/table";
+	private baseUrl: string = "http://localhost:8080/IDEAS";
 
 	constructor(private http: Http,
 				private HeadersService: HeadersService
@@ -15,7 +15,7 @@ export class TableService {
 
 	public getTable(deviceType: string, userid:number): Promise<any[]> {
 		return this.http
-		.get(`${this.baseUrl}/columns?type=${deviceType}&userid=${userid}`, {headers: this.HeadersService.getHeadersJson()})
+		.get(`${this.baseUrl}/table/${userid}/${deviceType}`, {headers: this.HeadersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 		.catch(this.handleError);

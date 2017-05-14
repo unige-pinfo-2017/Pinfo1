@@ -5,8 +5,8 @@ import javax.json.JsonArray;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 
 @Path("/overview")
 public class OverviewFacadeRest {
@@ -14,10 +14,10 @@ public class OverviewFacadeRest {
 	private OverviewService overviewService;
 	
 	@GET
-	@Path("/live")
+	@Path("/live-data/{userId}")
 	@Produces({ "application/json" })
 	@Transactional
-	public JsonArray getLiveData(@QueryParam("userid") Long userId){
+	public JsonArray getLiveData(@PathParam("userId") Long userId){
 		return overviewService.buildLiveData(userId);
 	}
 }

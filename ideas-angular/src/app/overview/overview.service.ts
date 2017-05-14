@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OverviewService {
-	private baseUrl: string = 'http://localhost:8080/IDEAS/overview';
+	private baseUrl: string = 'http://localhost:8080/IDEAS';
 
 	constructor(private http: Http,
 				private headersService: HeadersService
@@ -16,7 +16,7 @@ export class OverviewService {
 
 	public getLiveData(userId: number): Promise<Array<any>> {
 		return this.http
-		.get(`${this.baseUrl}/live?userid=${userId}`, {headers: this.headersService.getHeadersJson()})
+		.get(`${this.baseUrl}/overview/live-data/${userId}`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 	}
