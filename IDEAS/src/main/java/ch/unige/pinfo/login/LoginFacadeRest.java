@@ -16,20 +16,15 @@ import ch.unige.pinfo.user.service.*;
 public class LoginFacadeRest {
 	
 	@Inject
-	private UserService userService;
+	private LoginService loginService;
 	
 	public LoginFacadeRest(){}
 
 	@GET
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/")
-	public String authentication(@QueryParam("username") String username, @QueryParam("pw") String password){
-		User user = userService.getUserByUsername(username).get(0);
-		if (user.getPassword().equals(password)) {
-			return "ok";
-		} else {	
-			return "error";
-		}
+	public String authentication(@QueryParam("username") String username, @QueryParam("pw") String inputPw){
+		return loginService.authenticate(username, inputPw);
 	}
 }
 

@@ -47,14 +47,21 @@ export class LoginComponent {
 			this.loginService.authentication(username, pw)
 			.then(r => this.response = r).then(r => {
 				console.log(r);
-				if (this.response === 'ok'){
+				if (this.response == 'error') {
+					this.login = 'Authentication failed';
+				} else {
 					this.login = 'Authentication successful.';
-					this.router.navigateByUrl('/overview');
+					this.router.navigateByUrl(`/overview/${this.response}`);
+					//this.router.navigate(['/overview', this.response]);
+				}
+				/*if (this.response === 'ok'){
+					this.login = 'Authentication successful.';
+					this.router.navigateByUrl('/overview/{userId}');
 
 					// A traiter plus tard
 				} else if (this.response === 'error'){
 					this.login = 'Authentication failed.';
-				}
+				}*/
 			}).catch(error => this.login = 'Authentication failed');
 		}
 	}

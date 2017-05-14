@@ -5,11 +5,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import ch.unige.pinfo.user.dom.User;
+import ch.unige.pinfo.user.service.UserService;
 
 public class LoginService {
 	
 	@Inject
-	private LoginFacadeRest sl;
+	private UserService userService;
 	
 	public LoginService(){}
 	
@@ -25,6 +26,14 @@ public class LoginService {
 			sl.display("Authentication failed.");
 		}
 	}*/
+	
+	public String authenticate(String username, String inputPw) {
+		User user = userService.getUserByUsername(username).get(0);
+		if (user.getPassword().equals(inputPw)) {
+			return Long.toString(user.getId());
+		}
+		return "error";
+	}
 	
 	public boolean checkPassword(String inputPassword, String realPassword){
 		return realPassword.equals(inputPassword);
