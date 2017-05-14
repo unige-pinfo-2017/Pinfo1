@@ -21,6 +21,10 @@ const routes: Routes = [
 		component: OverviewComponent
 	},
 	{
+		path: 'overview/:userId',
+		component: OverviewComponent,
+	},
+	{
 		path: 'login',
 		component: LoginComponent
 	},
@@ -30,6 +34,10 @@ const routes: Routes = [
 	},
 	{
 		path: 'table',
+		component: TableComponent
+	},
+	{
+		path: 'table/:userId',
 		component: TableComponent
 	},
 ];

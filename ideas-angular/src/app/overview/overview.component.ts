@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 
@@ -25,34 +27,56 @@ const DATAH: any[] = [
 
 export class OverviewComponent implements OnInit, OnDestroy {
 	private refreshRate: number = 20*1000; // refreshRate en milliseconde
-	private subscription: Subscription;
+	private timerSubscription: Subscription;
+	private routeSubscripton: Subscription;
 	private liveData: any[];
 	private hiddenLiveData: any[];
 
-	public constructor(private overviewService: OverviewService){}
+	public constructor(
+		private overviewService: OverviewService,
+		private router: Router,
+		private route: ActivatedRoute
+	){}
 
-	public ngOnInit():void {
-		this.getLiveData(1);
+	public ngOnInit(): void {
+		this.getLiveDataFromPath();
 		this.hiddenLiveData = DATAH;
 		this.startTimer(this.refreshRate);
 	}
 
-	public ngOnDestroy() {
-		this.subscription.unsubscribe();
+	public ngOnDestroy(): void {
+		this.timerSubscription.unsubscribe();
+		this.routeSubscripton.unsubscribe();
 	}
 
 	public startTimer(refreshRate: number): void {
 		// Rafraichit la liste des données live toutes les N millisecondes
 		// Ne bloque pas l'exécution
 		let timer = TimerObservable.create(0, refreshRate); // Créer un timer qui s'enclenche toutes les N secondes
-		this.subscription = timer.subscribe(t => {
+		this.timerSubscription = timer.subscribe(t => {
 			// A chaque tick du timer, on rafraichit les donnees live
-			this.getLiveData(1);
+			this.getLiveDataFromPath();
 			//console.log("Refreshing live data");
+		})
+	}
+
+	public getLiveDataFromPath(): void {
+		// Récupère userId depuis l'url du browser
+		this.routeSubscripton = this.route.params.subscribe(params => {
+			let userId = params['userId'];
+			// Appel getLiveData
+			this.getLiveData(userId);
 		})
 	}
 
 	public getLiveData(userId: number): void {
 		this.overviewService.getLiveData(userId).then(liveData => this.liveData = liveData);
+	}
+
+	public navigateToTable(): void {
+		this.routeSubscripton = this.route.params.subscribe(params => {
+			let userId = params['userId'];
+			this.router.navigateByUrl(`/table/${userId}`);
+		})
 	}
 }

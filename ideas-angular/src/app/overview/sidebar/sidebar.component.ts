@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
 	selector: 'sidebar',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class SidebarComponent {
+	@Output() tableButtonClickEvent = new EventEmitter();
+
+	public callParent() {
+		this.tableButtonClickEvent.next();
+	}
 }

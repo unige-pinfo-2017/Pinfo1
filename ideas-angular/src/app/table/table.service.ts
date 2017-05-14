@@ -13,9 +13,9 @@ export class TableService {
 				private HeadersService: HeadersService
 				) {}
 
-	public getTable(deviceType: string, userid:number): Promise<any[]> {
+	public getTable(userId: number, deviceType: string): Promise<any[]> {
 		return this.http
-		.get(`${this.baseUrl}/table/${userid}/${deviceType}`, {headers: this.HeadersService.getHeadersJson()})
+		.get(`${this.baseUrl}/table/${userId}/${deviceType}`, {headers: this.HeadersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 		.catch(this.handleError);

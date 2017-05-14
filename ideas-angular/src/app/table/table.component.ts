@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 
@@ -30,7 +32,9 @@ export class TableComponent implements OnInit, OnDestroy {
 	@ViewChild('myTable') table: any;
 
 	private refreshRate: number = 20*1000; // Fréquence de rafraichissement en milliseconde
-	private subscription: Subscription;
+	private timerSubscription: Subscription;
+
+	private routeSubscription: Subscription;
 
 	private currentTable: string;
 	private rows:any[] = [];
@@ -66,17 +70,19 @@ export class TableComponent implements OnInit, OnDestroy {
 	];
 
 	public constructor(
-		private tableService: TableService
+		private tableService: TableService,
+		private route: ActivatedRoute
 	) {}
 
 	public ngOnInit(): void {
 		this.currentTable="PowerSocket";
-		this.getTable(this.currentTable, 1);
+		this.getTableFromPath(this.currentTable);
 		this.startTimer(5*1000);
 	}
 
 	public ngOnDestroy(): void {
-		this.subscription.unsubscribe();
+		this.timerSubscription.unsubscribe();
+		this.routeSubscription.unsubscribe();
 	}
 
 	public getDemo(){
@@ -84,20 +90,27 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.rows = this.rowsExample;
 	}
 
-	public getTable(deviceType: string, userid: number): void {
-		this.tableService.getTable(deviceType, userid)
-		.then(arr => {
-			this.columns = arr[0];
-			this.rows = arr[1];
-		});
-		this.currentTable = deviceType;
+	public getTableFromPath(deviceType: string): void {
+		// Récupère userId depuis l'url du browser
+		this.routeSubscription = this.route.params.subscribe(params => {
+			let userId = params['userId'];
+			// Appel getTable
+			this.getTable(userId, deviceType);
+		})
+	}
+
+	public getTable(userId: number, deviceType: string): void {
+		this.tableService.getTable(userId, deviceType).then(arr => {
+				this.columns = arr[0];
+				this.rows = arr[1];
+			});
 	}
 
 	public startTimer(refreshRate: number): void {
 		// Rafraichit la liste des données toutes les N millisecondes
 		let timer = TimerObservable.create(0, refreshRate);
-		this.subscription = timer.subscribe(t => {
-			this.getTable(this.currentTable, 1);
+		this.timerSubscription = timer.subscribe(t => {
+			this.getTableFromPath(this.currentTable);
 			console.log("table refreshing");
 		})
 	}
