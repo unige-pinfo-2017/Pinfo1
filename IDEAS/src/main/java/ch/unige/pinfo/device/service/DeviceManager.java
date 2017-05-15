@@ -11,4 +11,5 @@ public interface DeviceManager {
 	double getSumSensorForUser(Long userId, String sensorName, String from, String to);
 	Set<Sensor> getSensorsForTypeDevice(String name);
 	List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
+	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
 } 
