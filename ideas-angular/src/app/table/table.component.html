@@ -21,7 +21,16 @@
 
 <div>
       <h3>
-        Listes Devices
+        Row Detail Demo
+        <small>
+          <a href="https://github.com/swimlane/ngx-datatable/blob/master/demo/basic/row-detail.component.ts" target="_blank">
+            Source
+          </a>
+        </small>
+        <small>
+          <a href="#" (click)="table.rowDetail.expandAllRows()">Expand All</a> |
+          <a href="#" (click)="table.rowDetail.collapseAllRows()">Collapse All</a>
+        </small>
       </h3>
       <ngx-datatable
         #myTable
@@ -30,6 +39,7 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="50"
+        [scrollbarV]="50"
         [rows]='rows'
         (page)="onPage($event)">
         <!-- Row Detail Template -->
@@ -45,10 +55,10 @@
          <ngx-datatable-column
           [width]="50"
           [resizeable]="false"
+          [sortable]="false"
           [draggable]="false"
           [canAutoResize]="false">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <div style="cursor:pointer;"><p>-></p></div>
             <a
               href="#"
               [class.datatable-icon-right]="!row.$$expanded"
@@ -68,8 +78,19 @@
             <strong>{{row.$$expanded === 1}}</strong>
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="Name" width="200">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Gender" width="300">
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <i [innerHTML]="row['name']"></i> and <i>{{value}}</i>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Age" ></ngx-datatable-column>
       </ngx-datatable>
-</div>
+    </div>
 
 
 <div>
@@ -82,6 +103,8 @@
 	<button (click)="getTableFromPath('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
 	<button (click)="getTableFromPath('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
 </div>
+
+<button (click)="refresh()">Refresh (style TODO)</button>
 
 <!--
 <div>

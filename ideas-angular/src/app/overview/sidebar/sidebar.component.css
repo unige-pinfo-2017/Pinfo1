@@ -99,3 +99,35 @@ li a:hover:not(.active) {
 .dropdown:hover .dropbtn {
     background-color: #ADD8E6;
 }
+.floating-box {
+    float: left;
+    font-size: 17px;
+    width: 270px;
+    height: 200px;
+    margin: 10px;
+    border: 3px solid gray;
+    border-radius: 5px;
+}
+.⚠ {
+    position: relative; /* So we can position the content as absolute */
+
+    /* Using the borders to create a triangle  */
+    border-left: 0.70em solid transparent;
+    border-right: 0.70em solid transparent;
+    border-bottom: 1.35em solid yellow;
+
+    top: -1.2em;          /* Correction because of the CSS Triangle trick*/
+}
+.⚠::before {
+
+        content: "⚠";
+
+        /* Position the character over the triangle */
+        top: 0.45em;
+        left: -0.45em;
+        position: absolute;
+
+        color: black;
+        font-size: 2em;
+        line-height: 1em;
+}

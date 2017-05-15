@@ -151,4 +151,9 @@ export class TableComponent implements OnInit, OnDestroy {
   	onDetailToggle(event: any) {
     	console.log('Detail Toggled', event);
 	}
+
+
+  public refresh() {
+    this.getTableFromPath(this.currentType, this.currentSubtype);
+  }
 }
