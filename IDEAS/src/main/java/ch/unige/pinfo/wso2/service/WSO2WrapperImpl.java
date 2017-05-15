@@ -12,11 +12,11 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	WSO2ClientRest wcr;
 	
 	@Override
-	public double getValueLive(String deviceType, String deviceId,  String SensorType, String From, String To){
+	public double getValueLive(String deviceType, String deviceId,  String SensorType){
 		// Retourne la dernière valeur live
 		// A remplacer quand la vraie methode sera donnee
 		
-		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
+		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 		
 		JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 		String valueTo = joTo.get(SensorType).toString();

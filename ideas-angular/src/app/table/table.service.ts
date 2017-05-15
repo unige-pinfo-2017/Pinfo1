@@ -13,9 +13,12 @@ export class TableService {
 				private HeadersService: HeadersService
 				) {}
 
-	public getTable(userId: number, deviceType: string): Promise<any[]> {
+	public getTable(userId: number, type: string, subtype: string): Promise<any[]> {
+		// type = device ou sensor
+		// subtype = PowerSocket, Light, etc pour device
+		// et powerSensor, lightSensor, etc pour sensor
 		return this.http
-		.get(`${this.baseUrl}/table/${userId}/${deviceType}`, {headers: this.HeadersService.getHeadersJson()})
+		.get(`${this.baseUrl}/table/${userId}/${type}/${subtype}`, {headers: this.HeadersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 		.catch(this.handleError);

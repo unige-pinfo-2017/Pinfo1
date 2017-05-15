@@ -7,9 +7,10 @@ import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 
 public interface DeviceManager {
-	double getDeviceData(Long deviceId, String sensorName, String from, String to);
-	double getSumSensorForUser(Long userId, String sensorName, String from, String to);
+	double getDeviceDataLive(Long deviceId, String sensorName);
+	double getSumSensorLiveForUser(Long userId, String sensorName);
 	Set<Sensor> getSensorsForTypeDevice(String name);
 	List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
 	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
+	Sensor getSensorFromSensorName(String sensorName);
 } 

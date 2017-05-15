@@ -73,11 +73,15 @@
 
 
 <div>
-	<button (click)="getTableFromPath('powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
-	<button (click)="getTableFromPath('Beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
-	<button (click)="getTableFromPath('Light')" class="btn btn-primary btn-block btn-large">Light</button>
+	<button (click)="getTableFromPath('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+	<button (click)="getTableFromPath('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+	<button (click)="getTableFromPath('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
 </div>
-
+<div>
+	<button (click)="getTableFromPath('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
+	<button (click)="getTableFromPath('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
+	<button (click)="getTableFromPath('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
+</div>
 
 <!--
 <div>

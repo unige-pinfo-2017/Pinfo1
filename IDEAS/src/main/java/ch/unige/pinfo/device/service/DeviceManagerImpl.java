@@ -27,12 +27,12 @@ public class DeviceManagerImpl implements DeviceManager {
 	private WSO2Wrapper wso2Wrapper;
 	
 	@Override
-	public double getSumSensorForUser(Long userId, String sensorName, String from, String to) {
+	public double getSumSensorLiveForUser(Long userId, String sensorName) {
 		double sum = 0;
 		
 		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		for (Device device: ld){
-			sum += wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName, from, to);
+			sum += wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 		}
 		
 		return sum;
@@ -54,11 +54,13 @@ public class DeviceManagerImpl implements DeviceManager {
 	}
 	
 	@Override
-	public double getDeviceData(Long deviceId, String sensorName, String from, String to) {
+	public double getDeviceDataLive(Long deviceId, String sensorName) {
 		Device device = deviceService.getDeviceById(deviceId);
-		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName, from, to);
+		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
-	
-	
 
+	@Override
+	public Sensor getSensorFromSensorName(String sensorName) {
+		return sensorService.getSensorByName(sensorName);
+	}
 }
