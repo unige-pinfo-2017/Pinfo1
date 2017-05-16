@@ -49,9 +49,9 @@ public class WSO2WrapperTest {
 		when(mockClient.getStates(deviceType, deviceId, sensorType, from, to)).thenReturn(testJ);
 		
 		// Calculate the result which must be tested
-		double[] res = wrapper.getValue(deviceType, deviceId, sensorType, from, to);
+		String[] res = wrapper.getValue(deviceType, deviceId, sensorType, from, to);
 		
-		assertTrue(res[0] == 0 && res[1] == 1.98);
+		assertTrue(res[0].equals("0.0") && res[1].equals("1.98"));
 	}
 		
 }

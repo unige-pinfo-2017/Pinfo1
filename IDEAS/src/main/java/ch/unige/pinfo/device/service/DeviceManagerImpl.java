@@ -32,7 +32,7 @@ public class DeviceManagerImpl implements DeviceManager {
 		
 		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		for (Device device: ld){
-			sum += wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
+			sum += Double.parseDouble(wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName));
 		}
 		
 		return sum;
@@ -56,7 +56,7 @@ public class DeviceManagerImpl implements DeviceManager {
 	@Override
 	public double getDeviceDataLive(Long deviceId, String sensorName) {
 		Device device = deviceService.getDeviceById(deviceId);
-		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
+		return Double.parseDouble(wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName));
 	}
 
 	@Override
