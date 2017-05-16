@@ -32,7 +32,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
 		double[] readings = new double[states.size()];
 		for (int i=0; i<states.size(); i++) {
-			readings[i] = Double.parseDouble(states.getJsonObject(i).get("values").toString());
+			readings[i] = Double.parseDouble(((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString());
 		}
 		
 		return readings;
