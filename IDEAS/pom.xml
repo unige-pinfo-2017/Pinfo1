@@ -14,10 +14,10 @@
         </dependency>
         
         <dependency>
-  			<groupId>org.glassfish</groupId>
-			<artifactId>javax.json</artifactId>
-  			<version>1.0.4</version>
-		</dependency>
+  		<groupId>org.glassfish</groupId>
+		<artifactId>javax.json</artifactId>
+  		<version>1.0.4</version>
+	</dependency>
                 
     <!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
@@ -38,7 +38,6 @@
       <groupId>org.jboss.resteasy</groupId> 
       <artifactId>resteasy-client</artifactId> 
       <version>3.0.2.Final</version>
-      <scope>test</scope>
     </dependency>
     
     <dependency>
