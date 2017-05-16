@@ -11,6 +11,8 @@ import javax.json.JsonArrayBuilder;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 
 public class TableService {
@@ -103,5 +105,53 @@ public class TableService {
 		tableBuilder.add(columnsBuilder.build());
 		tableBuilder.add(valuesBuilder.build());
 		return tableBuilder.build();
+	}
+	
+	public JsonArray buildTableForUser(Long userId){
+		// Colonnes: device id, owner, type device, value
+		
+		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder columnsBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder valuesBuilder = Json.createArrayBuilder();
+		
+		List<String> columnsList = new ArrayList<String>();
+		List<String> valuesList = new ArrayList<String>();
+		
+		// TODO: A remplacer par getUserForManager() / getUserForSysadmin
+		List<User> users = new ArrayList<User>();
+		List<LiveData> liveDatas = userService.getAllLiveData();
+		
+		columnsBuilder.add(tableJsonBuilder.buildColumn("Username"));
+		columnsList.add("Username");
+		for (LiveData liveData: liveDatas) {
+			Sensor sensor = liveData.getSensor();
+			String content =  sensor.getMeasureName() + "  [" + sensor.getUnit() + " ]";
+			columnsBuilder.add(tableJsonBuilder.buildColumn(content));
+			columnsList.add(content);
+		}
+		
+		for (User user: users) {
+			valuesList.clear();
+			valuesList.add(user.getUsername());
+			for (LiveData liveData: liveDatas) {
+				valuesList.add(Double.toString(computeLiveData(userId, liveData)));
+			}
+			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
+		}
+		
+	
+		tableBuilder.add(columnsBuilder.build());
+		tableBuilder.add(valuesBuilder.build());
+		return tableBuilder.build();		
+	}
+	
+	public double computeLiveData(Long userId, LiveData liveData) {
+		double res = 0;
+		if (liveData.getComputeType().equals("Sum")) {
+			res = userService.getSumSensorLiveForUser(userId, liveData.getSensor().getName());
+		} else if (liveData.getComputeType().equals("Average")) {
+			res = userService.getAvgSensorLiveForUser(userId, liveData.getSensor().getName());
+		}
+		return res;
 	}
 }
