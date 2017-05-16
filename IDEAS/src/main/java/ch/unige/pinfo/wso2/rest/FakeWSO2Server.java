@@ -131,9 +131,9 @@ public class FakeWSO2Server {
 	@Produces(MediaType.TEXT_PLAIN)
 	//@Consumes(MediaType.TEXT_PLAIN)
 	public Response postLightBright(
-			@QueryParam("state") int state){
+			@QueryParam("state") double state){
 
-		if (0 == state || state == 1){
+		if (0 <= state && state <= 1){
 			String st = "status: "+state+" brightness";
 			return Response.status(200).entity(st).build();
 		}
@@ -169,9 +169,9 @@ public class FakeWSO2Server {
 	//@Consumes(MediaType.TEXT_PLAIN)
 	//modifie la saturation de la couleur
 	public Response postLightSat(
-			@QueryParam("state") int state){
+			@QueryParam("state") double state){
 
-		if (0 == state || state == 1){
+		if (0 <= state && state <= 1){
 			String st = "status: "+state+" saturation";
 			return Response.status(200).entity(st).build();
 		}

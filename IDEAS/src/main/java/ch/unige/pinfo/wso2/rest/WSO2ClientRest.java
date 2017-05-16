@@ -52,27 +52,33 @@ public class WSO2ClientRest {
 	//Post peut etre accede avec des strig, int et double pour le query param qpState:
 	public String postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
-
 		WebTarget wb = client.target(urlBase);
-		WebTarget targetUpdated = wb
-				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status)
-				.queryParam("satate", qpState);
-		String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
-		return response;
+		
+		if(deviceType.equals("Light") && (status.equals("brightness") || status.equals("saturation")) ){
+			double sta = Double.parseDouble(status);
+			WebTarget targetUpdated = wb
+					.path("/"+deviceType+"/device/"+deviceId+"/change-"+sta)
+					.queryParam("satate", qpState);
+			String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
+			return response;
+		}
+		else if (deviceType.equals("Light") && (status.equals("hue") || status.equals("kelvin")) ){
+			int sta = Integer.parseInt(status);
+			WebTarget targetUpdated = wb
+					.path("/"+deviceType+"/device/"+deviceId+"/change-"+sta)
+					.queryParam("satate", qpState);
+			String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
+			return response;
+		}
+		else{
+			WebTarget targetUpdated = wb
+					.path("/"+deviceType+"/device/"+deviceId+"/change-"+status)
+					.queryParam("satate", qpState);
+			String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
+			return response;
+		}
 	}
 
-	public String postStatus(String deviceType, String deviceId, String status, int qpState){
-		Client client = ClientBuilder.newClient();
-
-		WebTarget wb = client.target(urlBase);
-		WebTarget targetUpdated = wb
-				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status)
-				.queryParam("satate", qpState);
-		String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
-		return response;
-	}
-
-	
 	//Client officiel (non disponible):
 	/*
 	  public JsonArray getStates(String deviceType, String deviceId,  String qpSensorType, String qpFrom, String qpTo){
