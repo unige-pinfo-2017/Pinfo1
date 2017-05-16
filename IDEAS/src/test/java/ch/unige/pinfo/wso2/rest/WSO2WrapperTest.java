@@ -43,7 +43,7 @@ public class WSO2WrapperTest {
 		String to = "07.05.2017";
 		
 		when(mockClient.getStates(deviceType, deviceId, sensorType, from, to)).thenReturn(testJ);
-		double res = wrapper.getValueLive(deviceType, deviceId, sensorType, from, to);
+		double res = wrapper.getValueLive(deviceType, deviceId, sensorType);
 		
 		assertTrue(res == 1.98);
 	}
