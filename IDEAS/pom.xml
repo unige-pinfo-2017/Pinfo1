@@ -38,6 +38,7 @@
       <groupId>org.jboss.resteasy</groupId> 
       <artifactId>resteasy-client</artifactId> 
       <version>3.0.2.Final</version>
+      <scope>provided</scope>
     </dependency>
     
     <dependency>
