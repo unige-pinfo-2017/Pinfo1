@@ -36,10 +36,24 @@ public class OverviewService {
 			String measure = ld.getSensor().getMeasureName();
 			String unit = ld.getSensor().getUnit();
 			//String value = "5"; // Mock
-			String value = Double.toString(userService.getSumBySensor(userId, ld.getSensor().getName(), "0", "0"));
+			String value = Double.toString(computeLiveData(userId, ld));
 			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
 		}
 	
 		return builder.build();
+	}
+	
+	public LiveDataService getLiveDataService() {
+		return this.liveDataService;
+	}
+	
+	public double computeLiveData(Long userId, LiveData liveData) {
+		double res = 0;
+		if (liveData.getComputeType().equals("Sum")) {
+			res = userService.getSumSensorLiveForUser(userId, liveData.getSensor().getName());
+		} else if (liveData.getComputeType().equals("Average")) {
+			res = userService.getAvgSensorLiveForUser(userId, liveData.getSensor().getName());
+		}
+		return res;
 	}
 }

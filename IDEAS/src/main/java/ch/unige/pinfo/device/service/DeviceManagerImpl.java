@@ -27,6 +27,18 @@ public class DeviceManagerImpl implements DeviceManager {
 	private WSO2Wrapper wso2Wrapper;
 	
 	@Override
+	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
+		double sum = 0;
+		
+		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
+		for (Device device: ld){
+			sum += Double.parseDouble(wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName));
+		}
+		
+		return sum/ld.size();
+	}
+	
+	@Override
 	public double getSumSensorLiveForUser(Long userId, String sensorName) {
 		double sum = 0;
 		

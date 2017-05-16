@@ -18,15 +18,18 @@ import javax.persistence.criteria.Root;
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
-import ch.unige.pinfo.device.service.DeviceService;
+import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.overview.service.OverviewService;
 import ch.unige.pinfo.user.dom.User;
-import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 @Stateless
 @Default
 public class UserServiceImpl implements UserService{
 	@Inject 
 	private DeviceManager deviceManager;
+	
+	@Inject
+	private OverviewService overviewService;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -69,7 +72,12 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public double getSumBySensor(Long userId, String sensorName, String from, String to) {
+	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
+		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);
+	}
+	
+	@Override
+	public double getSumSensorLiveForUser(Long userId, String sensorName) {
 		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
 	}
 
@@ -98,5 +106,8 @@ public class UserServiceImpl implements UserService{
 		return deviceManager.getSensorFromSensorName(sensorName);
 	}
 
-	
+	@Override
+	public List<LiveData> getAllLiveData() {
+		return overviewService.getLiveDataService().getAllLiveData();
+	}
 }
