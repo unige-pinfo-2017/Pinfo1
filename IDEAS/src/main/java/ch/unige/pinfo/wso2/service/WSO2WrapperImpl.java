@@ -1,5 +1,7 @@
 package ch.unige.pinfo.wso2.service;
 
+import java.awt.Color;
+
 import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -16,12 +18,32 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		// Retourne la dernière valeur live
 		// A remplacer quand la vraie methode sera donnee
 		
-		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
-		
-		JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
-		String valueTo = joTo.get(SensorType).toString();
-		
-		return valueTo; // - Double.parseDouble(valueFrom);
+		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
+			//Recupere la couleur HSB la converti en RGB et la renvoit en String:
+			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			JsonArray statesB = wcr.getStates(deviceType, deviceId, "brightnessSensor", "0", "0");
+			
+			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
+			JsonObject joToB = (JsonObject) statesB.getJsonObject(statesB.size()-1).get("values");
+			
+			JsonObject valueTo = (JsonObject) joTo.get(SensorType);
+			
+			String hueString = valueTo.get("hue").toString();
+			String satString = valueTo.get("saturation").toString();
+			String briString = joToB.get("brightnessSensor").toString();
+			
+			String rgb = getHSBColor(hueString, satString, briString);
+			
+			return rgb;
+		}
+		else{
+			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			
+			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
+			String valueTo = joTo.get(SensorType).toString();
+			
+			return valueTo; // - Double.parseDouble(valueFrom);
+		}
 	}
 
 	@Override
@@ -37,4 +59,25 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		
 		return readings;
 	}
+	
+	private String getHSBColor(String hueS, String saturation, String brightness){
+		float hue = Float.parseFloat(hueS); 
+		float sat = Float.parseFloat(saturation);
+		float bri = Float.parseFloat(brightness);
+		
+		int RGB = Color.HSBtoRGB(hue, sat, bri);
+		int red = (RGB>>16)&0xFF;
+		int green = (RGB>>8)&0xFF;
+		int blue = RGB&0xFF;
+		
+		String rgb = red+";"+green+";"+blue;
+		
+		return rgb;
+	}
+	
+	/*
+	private String getKelvinColor(String kelvin){
+		return "null";
+	}
+	*/
 }
