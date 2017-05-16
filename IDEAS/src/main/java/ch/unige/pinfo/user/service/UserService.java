@@ -20,5 +20,7 @@ public interface UserService{
 	double getSumBySensor(Long userId, String sensorName, String from, String to);
 	Set<Sensor> getSensorsForTypeDevice(String name);
 	List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
-	double getDeviceData(Long deviceId, String sensorName, String from, String to);
+	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
+	double getDeviceDataLive(Long deviceId, String sensorName);
+	Sensor getSensorFromSensorName(String sensorName);
 }

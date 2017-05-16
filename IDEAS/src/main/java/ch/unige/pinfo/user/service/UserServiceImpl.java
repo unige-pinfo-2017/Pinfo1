@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public double getSumBySensor(Long userId, String sensorName, String from, String to) {
-		return deviceManager.getSumSensorForUser(userId, sensorName, from, to);
+		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
 	}
 
 	@Override
@@ -84,8 +84,18 @@ public class UserServiceImpl implements UserService{
 	}	
 	
 	@Override
-	public double getDeviceData(Long deviceId, String sensorName, String from, String to) {
-		return deviceManager.getDeviceData(deviceId, sensorName, from, to);
+	public double getDeviceDataLive(Long deviceId, String sensorName) {
+		return deviceManager.getDeviceDataLive(deviceId, sensorName);
+	}
+
+	@Override
+	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName) {
+		return deviceManager.getAllDevicesForUserBySensorName(userId, sensorName);
+	}
+
+	@Override
+	public Sensor getSensorFromSensorName(String sensorName) {
+		return deviceManager.getSensorFromSensorName(sensorName);
 	}
 
 	

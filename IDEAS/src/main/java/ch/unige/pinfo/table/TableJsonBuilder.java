@@ -7,12 +7,12 @@ import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 public class TableJsonBuilder {
-	public JsonObject buildDeviceColumns(String colName) {
+	public JsonObject buildColumn(String colName) {
 		// Construit un JsonObject au format {prop: colName}
 		return Json.createObjectBuilder().add("prop", colName).build();
 	}
 	
-	public JsonObject buildDeviceRows(List<String> columns, List<String> values) {
+	public JsonObject buildRow(List<String> columns, List<String> values) {
 		// Construit un JsonObject au format {columns1: values1, ..., columnsN: valuesN}
 		JsonObjectBuilder builder = Json.createObjectBuilder();
 		for (int i=0; i<columns.size(); i++){

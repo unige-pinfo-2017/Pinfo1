@@ -26,7 +26,7 @@ const DATAH: any[] = [
 })
 
 export class OverviewComponent implements OnInit, OnDestroy {
-	private refreshRate: number = 20*1000; // refreshRate en milliseconde
+	private refreshRate: number = 5*1000; // refreshRate en milliseconde
 	private timerSubscription: Subscription;
 	private routeSubscripton: Subscription;
 	private liveData: any[];

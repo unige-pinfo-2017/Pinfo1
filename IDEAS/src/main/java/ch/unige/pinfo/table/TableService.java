@@ -20,11 +20,13 @@ public class TableService {
 	@Inject
 	private TableJsonBuilder tableJsonBuilder;
 	
-	public JsonArray buildColumns (String deviceType, Long userId) {
+	public JsonArray buildTableForDeviceType(String deviceType, Long userId) {
+		// Colonnes: Device Id, sensorValue1, sensorValue2, ..., sensorValueN
+		
 		// Initialisation des structures necessaires
 		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
 		JsonArrayBuilder columnsBuilder = Json.createArrayBuilder();
-		JsonArrayBuilder rowsBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder valuesBuilder = Json.createArrayBuilder();
 		
 		List<String> columnsList = new ArrayList<String>();
 		List<String> valuesList = new ArrayList<String>();
@@ -35,14 +37,15 @@ public class TableService {
 		
 		
 		//TODO: Accéder directement aux columns plutot que de copier
+		
 		// Creation du JSON de la colonne
-		columnsBuilder.add(tableJsonBuilder.buildDeviceColumns("DeviceId"));
+		columnsBuilder.add(tableJsonBuilder.buildColumn("DeviceId"));
 		columnsList.add("DeviceId");
 		for (Sensor sensor: sensors){
 			String measure = sensor.getMeasureName();
 			String unit = sensor.getUnit();
 			String content = measure + "  [" + unit + " ]";
-			columnsBuilder.add(tableJsonBuilder.buildDeviceColumns(content));
+			columnsBuilder.add(tableJsonBuilder.buildColumn(content));
 			columnsList.add(content);
 		}
 		
@@ -52,13 +55,53 @@ public class TableService {
 			valuesList.clear();
 			valuesList.add(device.getDeviceId()); // Ajout du device id
 			for (Sensor sensor: sensors) {
-				valuesList.add(Double.toString((userService.getDeviceData(device.getId(), sensor.getName(), "0", "0")))); // Ajout des valeurs pour chaque senseur du device
+				valuesList.add(Double.toString((userService.getDeviceDataLive(device.getId(), sensor.getName())))); // Ajout des valeurs pour chaque senseur du device
 			}
-			rowsBuilder.add(tableJsonBuilder.buildDeviceRows(columnsList, valuesList)); // Ajout d'un row
+			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList)); // Ajout d'un row
 		}
 		
 		tableBuilder.add(columnsBuilder.build()); // Ajout du JSON des columns
-		tableBuilder.add(rowsBuilder.build()); // Ajout du JSON des rows
+		tableBuilder.add(valuesBuilder.build()); // Ajout du JSON des rows
 		return tableBuilder.build(); // Construction du JSON final
+	}
+	
+	
+	public JsonArray buildTableForSensorType(String sensorName, Long userId) {
+		// Colonnes: device id, owner, type device, value
+		
+		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder columnsBuilder = Json.createArrayBuilder();
+		JsonArrayBuilder valuesBuilder = Json.createArrayBuilder();
+		
+		List<String> columnsList = new ArrayList<String>();
+		List<String> valuesList = new ArrayList<String>();
+		
+		List<Device> devices = userService.getAllDevicesForUserBySensorName(userId, sensorName);
+		
+		Sensor sensor = userService.getSensorFromSensorName(sensorName);
+		String valueColumn = sensor.getMeasureName() + "  [" + sensor.getUnit() + " ]";
+		
+		columnsBuilder.add(tableJsonBuilder.buildColumn("DeviceId"));
+		columnsBuilder.add(tableJsonBuilder.buildColumn("Owner"));
+		columnsBuilder.add(tableJsonBuilder.buildColumn("DeviceType"));
+		columnsBuilder.add(tableJsonBuilder.buildColumn(valueColumn));
+		
+		columnsList.add("DeviceId");
+		columnsList.add("Owner");
+		columnsList.add("DeviceType");
+		columnsList.add(valueColumn);
+		
+		for (Device device: devices) {
+			valuesList.clear();
+			valuesList.add(device.getDeviceId());
+			valuesList.add(device.getOwner().getUsername());
+			valuesList.add(device.getType().getName());
+			valuesList.add(Double.toString(userService.getDeviceDataLive(device.getId(), sensorName)));
+			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
+		}
+	
+		tableBuilder.add(columnsBuilder.build());
+		tableBuilder.add(valuesBuilder.build());
+		return tableBuilder.build();
 	}
 }

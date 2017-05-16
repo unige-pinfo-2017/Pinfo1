@@ -17,10 +17,26 @@ public class TableFacadeRest {
 	private TableService tableService;
 	
 	@GET
+	@Path("/{userId}/device/{type}")
+	@Produces({"application/json"})
+	@Transactional
+	public JsonArray getTableForDeviceType(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
+		return tableService.buildTableForDeviceType(deviceType, userId);
+	}
+	
+	@GET
+	@Path("/{userId}/sensor/{type}")
+	@Produces({"application/json"})
+	@Transactional
+	public JsonArray getTableForSensorType(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
+		return tableService.buildTableForSensorType(deviceType, userId);
+	}
+	
+	@GET
 	@Path("/{userId}/{type}")
 	@Produces({"application/json"})
 	@Transactional
-	public JsonArray getColumsAndData(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
-		return tableService.buildColumns(deviceType, userId);
+	public JsonArray getTable(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
+		return tableService.buildTableForSensorType(deviceType, userId);
 	}
 }
