@@ -70,9 +70,9 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		int green = (RGB>>8)&0xFF;
 		int blue = RGB&0xFF;
 		
-		String rgb = red+";"+green+";"+blue;
+		String hex = String.format("#%02x%02x%02x", red, green, blue);
 		
-		return rgb;
+		return hex;
 	}
 	
 	/*
