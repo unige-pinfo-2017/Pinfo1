@@ -66,10 +66,8 @@ public class DeviceManagerImpl implements DeviceManager {
 	}
 	
 	@Override
-	public double getDeviceDataLive(Long deviceId, String sensorName) {
 	public String getDeviceDataLive(Long deviceId, String sensorName) {
 		Device device = deviceService.getDeviceById(deviceId);
-		return Double.parseDouble(wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName));
 		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
 
