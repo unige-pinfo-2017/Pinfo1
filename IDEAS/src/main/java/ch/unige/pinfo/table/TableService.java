@@ -58,6 +58,7 @@ public class TableService {
 			valuesList.add(device.getDeviceId()); // Ajout du device id
 			for (Sensor sensor: sensors) {
 				valuesList.add(Double.toString((userService.getDeviceDataLive(device.getId(), sensor.getName())))); // Ajout des valeurs pour chaque senseur du device
+				valuesList.add(userService.getDeviceDataLive(device.getId(), sensor.getName())); // Ajout des valeurs pour chaque senseur du device
 			}
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList)); // Ajout d'un row
 		}
@@ -99,6 +100,7 @@ public class TableService {
 			valuesList.add(device.getOwner().getUsername());
 			valuesList.add(device.getType().getName());
 			valuesList.add(Double.toString(userService.getDeviceDataLive(device.getId(), sensorName)));
+			valuesList.add(userService.getDeviceDataLive(device.getId(), sensorName));
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
 		}
 	

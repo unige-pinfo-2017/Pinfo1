@@ -93,6 +93,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public double getDeviceDataLive(Long deviceId, String sensorName) {
+	public String getDeviceDataLive(Long deviceId, String sensorName) {
 		return deviceManager.getDeviceDataLive(deviceId, sensorName);
 	}
 

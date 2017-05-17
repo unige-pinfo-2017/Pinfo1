@@ -8,6 +8,7 @@ import ch.unige.pinfo.device.dom.Sensor;
 
 public interface DeviceManager {
 	double getDeviceDataLive(Long deviceId, String sensorName);
+	String getDeviceDataLive(Long deviceId, String sensorName);
 	double getAvgSensorLiveForUser(Long userId, String sensorName);
 	double getSumSensorLiveForUser(Long userId, String sensorName);
 	Set<Sensor> getSensorsForTypeDevice(String name);
