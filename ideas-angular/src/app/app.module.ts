@@ -17,6 +17,7 @@ import {TopbarComponent} from './overview/topbar/topbar.component';
 import {MiddlescreenComponent} from './overview/middlescreen/middlescreen.component';
 import { ChartComponent } from './chart/chart.component';
 import {TableComponent } from './table/table.component';
+import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 
 @NgModule({
   imports:      [
@@ -39,6 +40,7 @@ import {TableComponent } from './table/table.component';
       MiddlescreenComponent,
 	  ChartComponent,
 	  TableComponent,
+    EditingMenuComponent,
   ],
   bootstrap:    [ AppComponent ]
 })

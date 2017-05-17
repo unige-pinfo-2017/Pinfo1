@@ -1,10 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-@Component({
-	selector: 'editing-menu',
-	templateUrl: './editing-menu.component.html',
-	styleUrls: ['./editing-menu.component.css'],
-})
+
 
 
 const PARAM: any[] = [
@@ -14,14 +10,18 @@ const PARAM: any[] = [
 	{name: 'blib blab', value: 24874, unit: 'sec'}
 	];
 
+	@Component({
+		selector: 'editing-menu',
+		templateUrl: './editing-menu.component.html',
+		styleUrls: ['./editing-menu.component.css'],
+	})
 
 export class EditingMenuComponent {
-	
-	var a: any;
-	
-	
-	
+	param = PARAM;
 }
 
-
-
+export class a {
+	name: string;
+	value: number;
+	unit: string;
+}

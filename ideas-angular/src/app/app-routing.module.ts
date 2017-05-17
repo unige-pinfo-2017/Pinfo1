@@ -6,6 +6,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { LoginComponent } from './login/login.component';
 import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
+import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 
 const routes: Routes = [
   	{
@@ -40,6 +41,10 @@ const routes: Routes = [
 		path: 'table/:userId',
 		component: TableComponent
 	},
+  {
+    path: 'editing-menu',
+    component: EditingMenuComponent
+  }
 ];
 
 @NgModule({
