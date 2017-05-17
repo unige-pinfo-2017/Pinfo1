@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -59,6 +60,12 @@ public class UserServiceImpl implements UserService{
 		c.where(condition);
 		TypedQuery<User> query = entityManager.createQuery(c);
 		return query.getResultList();
+	}
+	
+	@Override
+	public String getUserRoleById(Long id) {		
+		User user = entityManager.find(User.class, id);
+		return user.getClass().getAnnotation(DiscriminatorValue.class).value();
 	}
 
 	@Override

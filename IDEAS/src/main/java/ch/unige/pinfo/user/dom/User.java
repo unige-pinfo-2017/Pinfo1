@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import ch.unige.pinfo.device.dom.Device;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="Role", discriminatorType = DiscriminatorType.STRING, length = 20)
 @DiscriminatorValue("User")
 @Table( name = "Users")

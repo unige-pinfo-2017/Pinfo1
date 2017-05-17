@@ -16,6 +16,7 @@ public interface UserService{
 	void addUser(User user);
 	void deleteUser(Long Id);
 	User getUserById(Long Id);
+	String getUserRoleById(Long id);
 	List<User> getUserByUsername(String username);
 	List<User> getAllUsers();
 	double getSumSensorLiveForUser(Long userId, String sensorName);

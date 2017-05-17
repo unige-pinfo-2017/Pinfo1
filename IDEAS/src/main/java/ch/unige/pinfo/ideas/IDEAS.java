@@ -42,6 +42,18 @@ public class IDEAS {
 	public String home(){
 		return "Welcome to IDEAS! The application is under construction.";
 	}
+	
+	@GET
+	@Path("/test")
+	@Transactional
+	public String test() {
+		Manager m  = (Manager) userService.getUserById((long) 5);
+		String test = "";
+		for (User u : m.getUsers()){
+			test = test +"  "+ u.getUsername();
+		}
+		return test;
+	}
 		
 	@GET
 	@Path("/init")
