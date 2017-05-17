@@ -23,6 +23,7 @@ public interface UserService{
 	Set<Sensor> getSensorsForTypeDevice(String name);
 	List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
 	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
+	String getDeviceDataLive(Long deviceId, String sensorName);
 	Sensor getSensorFromSensorName(String sensorName);
 	List<LiveData> getAllLiveData();
 }
