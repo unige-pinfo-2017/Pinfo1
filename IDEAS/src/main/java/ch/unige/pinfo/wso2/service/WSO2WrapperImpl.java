@@ -62,13 +62,14 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	private String getHSBColor(String hueS, String saturation, String brightness){
 		float hue = Float.parseFloat(hueS); 
+		hue = hue/360f;
 		float sat = Float.parseFloat(saturation);
 		float bri = Float.parseFloat(brightness);
 		
 		int RGB = Color.HSBtoRGB(hue, sat, bri);
-		int red = (RGB>>16)&0xFF;
-		int green = (RGB>>8)&0xFF;
-		int blue = RGB&0xFF;
+		int red = (RGB >> 16) & 0xFF;
+		int green = (RGB >> 8) & 0xFF;
+		int blue = RGB & 0xFF;
 		
 		String hex = String.format("#%02x%02x%02x", red, green, blue);
 		
