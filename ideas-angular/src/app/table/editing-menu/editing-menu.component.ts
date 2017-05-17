@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 
-
-
 const PARAM: any[] = [
 	{name: 'Brightness', value: 0, unit: 'kW/h'},
 	{name: 'Temperature', value: 25, unit: '°C'},
@@ -18,10 +16,6 @@ const PARAM: any[] = [
 
 export class EditingMenuComponent {
 	param = PARAM;
-}
+	a: { state: string; value: string; } = { state: "Status", value: "ON" };
 
-export class a {
-	name: string;
-	value: number;
-	unit: string;
 }
