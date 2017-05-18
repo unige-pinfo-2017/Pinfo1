@@ -179,14 +179,12 @@ public class IDEAS {
         user8.setDevices(new HashSet<Device>());
       
         user1.getUsers().add(user2);
-        user1.getUsers().add(user3);
-        
-        user2.getUsers().add(user3);
-        user2.getUsers().add(user4);
-        user2.getUsers().add(user5);
-        user2.getUsers().add(user6);
-        user2.getUsers().add(user7);
-        user2.getUsers().add(user8);
+        user1.getUsers().add(user3);        
+        user1.getUsers().add(user4);
+        user1.getUsers().add(user5);
+        user1.getUsers().add(user6);
+        user1.getUsers().add(user7);
+        user1.getUsers().add(user8);
 
         user3.getUsers().add(user2);
         user3.getUsers().add(user4);
