@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -21,6 +22,7 @@ import javax.validation.constraints.Size;
 import com.google.gson.Gson;
 
 import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.overview.dom.LiveData;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -44,6 +46,9 @@ public class User {
 	
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Device> devices;
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")  
+    private Set<LiveData> preferences;
 	
 	@Override
 	public boolean equals(Object obj){
@@ -91,5 +96,13 @@ public class User {
 
 	public void setDevices(Set<Device> devices) {
 		this.devices = devices;
+	}
+	
+	public Set<LiveData> getPreferences() {
+		return preferences;
+	}
+
+	public void setPreferences(Set<LiveData> preferences) {
+		this.preferences = preferences;
 	}
 }

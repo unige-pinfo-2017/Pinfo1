@@ -1,5 +1,8 @@
 package ch.unige.pinfo.overview.dom;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,11 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.device.dom.TypeDevice;
+import ch.unige.pinfo.user.dom.User;
 
 @Entity
 @Table( name = "LiveData")
@@ -29,9 +36,15 @@ public class LiveData {
     @JoinColumn(name="Sensor_Id")
     private Sensor sensor;
     
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  
+    @JoinTable(name="Prefereneces", joinColumns=@JoinColumn(name="LiveData_Id"), inverseJoinColumns=@JoinColumn(name="User_Id")) 
+    private Set<User> users;
+    
     //public LiveData() {}
     
-    // Getters & Setters
+
+
+	// Getters & Setters
 	public Long getId() {
 		return id;
 	}
@@ -54,5 +67,13 @@ public class LiveData {
 
 	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+	}
+	
+    public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

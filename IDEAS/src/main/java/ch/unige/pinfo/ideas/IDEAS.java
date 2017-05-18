@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -44,13 +45,14 @@ public class IDEAS {
 	}
 	
 	@GET
-	@Path("/test")
+	@Path("/test/{userId}")
 	@Transactional
-	public String test() {
-		Manager m  = (Manager) userService.getUserById((long) 5);
-		String test = "";
-		for (User u : m.getUsers()){
-			test = test +"  "+ u.getUsername();
+	public String test(@PathParam("userId") Long userId) {
+		
+		String test = "Liste des preferences : ";
+		
+		for (LiveData ld : userService.getUserById(userId).getPreferences()){
+			test = test + ld.getSensor().getMeasureName() + " ";
 		}
 		return test;
 	}
@@ -264,21 +266,99 @@ public class IDEAS {
 		LiveData ld1 = new LiveData();
 		ld1.setComputeType("Sum");
 		ld1.setSensor(s1);
+		ld1.setUsers(new HashSet<User>());
 		
 		LiveData ld2 = new LiveData();
 		ld2.setComputeType("Sum");
 		ld2.setSensor(s3);
+		ld2.setUsers(new HashSet<User>());
 		
 		LiveData ld3 = new LiveData();
 		ld3.setComputeType("Average");
 		ld3.setSensor(s4);
+		ld3.setUsers(new HashSet<User>());
+		
+		LiveData ld4 = new LiveData();
+		ld4.setComputeType("Average");
+		ld4.setSensor(s5);
+		
+		LiveData ld5 = new LiveData();
+		ld5.setComputeType("Average");
+		ld5.setSensor(s7);
+		
+		user1.setPreferences(new HashSet<LiveData>());
+		user1.getPreferences().add(ld1);
+		user1.getPreferences().add(ld2);
+		user1.getPreferences().add(ld3);
+		ld1.getUsers().add(user1);
+		ld2.getUsers().add(user1);
+		ld3.getUsers().add(user1);
+
+		user2.setPreferences(new HashSet<LiveData>());
+		user2.getPreferences().add(ld1);
+		user2.getPreferences().add(ld2);
+		user2.getPreferences().add(ld3);
+		ld1.getUsers().add(user2);
+		ld2.getUsers().add(user2);
+		ld3.getUsers().add(user2);
+		
+		user3.setPreferences(new HashSet<LiveData>());
+		user3.getPreferences().add(ld1);
+		user3.getPreferences().add(ld2);
+		user3.getPreferences().add(ld3);
+		ld1.getUsers().add(user3);
+		ld2.getUsers().add(user3);
+		ld3.getUsers().add(user3);
+		
+		user4.setPreferences(new HashSet<LiveData>());
+		user4.getPreferences().add(ld1);
+		user4.getPreferences().add(ld2);
+		user4.getPreferences().add(ld3);
+		ld1.getUsers().add(user4);
+		ld2.getUsers().add(user4);
+		ld3.getUsers().add(user4);
+		
+		user5.setPreferences(new HashSet<LiveData>());
+		user5.getPreferences().add(ld1);
+		user5.getPreferences().add(ld2);
+		user5.getPreferences().add(ld3);
+		ld1.getUsers().add(user5);
+		ld2.getUsers().add(user5);
+		ld3.getUsers().add(user5);
+		
+		user6.setPreferences(new HashSet<LiveData>());
+		user6.getPreferences().add(ld1);
+		user6.getPreferences().add(ld2);
+		user6.getPreferences().add(ld3);
+		ld1.getUsers().add(user6);
+		ld2.getUsers().add(user6);
+		ld3.getUsers().add(user6);
+		
+		user7.setPreferences(new HashSet<LiveData>());
+		user7.getPreferences().add(ld1);
+		user7.getPreferences().add(ld2);
+		user7.getPreferences().add(ld3);
+		ld1.getUsers().add(user7);
+		ld2.getUsers().add(user7);
+		ld3.getUsers().add(user7);
+		
+		user8.setPreferences(new HashSet<LiveData>());
+		user8.getPreferences().add(ld1);
+		user8.getPreferences().add(ld2);
+		user8.getPreferences().add(ld3);
+		ld1.getUsers().add(user8);
+		ld2.getUsers().add(user8);
+		ld3.getUsers().add(user8);
 		
 		typeDeviceService.addTypeDevice(td1);
 		typeDeviceService.addTypeDevice(td2);
 		typeDeviceService.addTypeDevice(td3);
+		
 		liveDataService.addLiveData(ld1);
 		liveDataService.addLiveData(ld2);
 		liveDataService.addLiveData(ld3);
+		liveDataService.addLiveData(ld4);
+		liveDataService.addLiveData(ld5);
 
 		return "reussi";
 	}
