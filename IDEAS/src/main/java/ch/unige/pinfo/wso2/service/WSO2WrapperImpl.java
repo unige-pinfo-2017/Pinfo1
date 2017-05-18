@@ -60,6 +60,20 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return readings;
 	}
 	
+	/**
+	 * <b>getHSBColor</b>
+	 * <p>
+	 * {@code private String getHSBColor(String hueS, String saturation, String brightness)}
+	 * <p>
+	 *
+	 * Convert HSB color into hexadecimal value
+	 *
+	 * @param hueS - The hue value. Integer between [0..360].
+	 * @param saturation - The saturation value. Double between [0..1]
+	 * @param brightness - The brightness value. Double between [0..1]
+	 * @return
+	 * hexadecimal {@code String} format
+	 */
 	private String getHSBColor(String hueS, String saturation, String brightness){
 		float hue = Float.parseFloat(hueS); 
 		hue = hue/360f;
@@ -76,9 +90,4 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return hex;
 	}
 	
-	/*
-	private String getKelvinColor(String kelvin){
-		return "null";
-	}
-	*/
 }

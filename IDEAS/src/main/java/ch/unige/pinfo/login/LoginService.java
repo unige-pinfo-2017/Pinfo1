@@ -27,6 +27,19 @@ public class LoginService {
 		}
 	}*/
 	
+	/**
+	 * <b>authenticate</b> 
+	 * <p>
+	 *   {@code public String authenticate(String username, String inputPw)}
+	 * <p>
+	 * Compare the {@code username} with the user name in data base and compare the corresponding password to the {@code InputPw}.
+	 * <br>
+	 * 
+	 * @param username - The user name to compare with the one in data base.
+	 * @param inputPw - The password to compare with the one corresponding to the user name in data base.
+	 * @return
+	 * User Id if both parameters match the data in database, {@code error} otherwise.
+	 */
 	public String authenticate(String username, String inputPw) {
 		User user = userService.getUserByUsername(username).get(0);
 		if (user.getPassword().equals(inputPw)) {
@@ -35,6 +48,18 @@ public class LoginService {
 		return "error";
 	}
 	
+	/**
+	 * <b>checkPassword</b> 
+	 * <p>
+	 *   {@code public public boolean checkPassword(String inputPassword, String realPassword)}
+	 * <p>
+	 * Compare {@code realPassword} with {@code inputPassword}. 
+	 * 
+	 * @param inputPassword - The password to compare with the real password
+	 * @param realPassword - The real password.
+	 * @return
+	 * {@code true} if the parameters match, {@code false} otherwise.
+	 */
 	public boolean checkPassword(String inputPassword, String realPassword){
 		return realPassword.equals(inputPassword);
 	}
