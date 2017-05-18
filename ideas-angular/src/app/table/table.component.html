@@ -1,11 +1,8 @@
 
 
 <div>
+  <button (click)="refresh()">Refresh</button>
 
-  <div *ngIf="show">
-    <div align="right" style="padding-right: 500px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
-  <editing-menu></editing-menu>
-  </div>
     <div class="table">
       <ngx-datatable
         class="material"
@@ -26,87 +23,26 @@
   </div>
 </div>
 <br>
-<br>
-<h3>Test inline editing:</h3>
 <div>
-      <ngx-datatable
-        #myTable
-        class='material expandable'
-        [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [rowHeight]="50"
-        [scrollbarV]="50"
-        [rows]='rows'
-        (page)="show = !show">
-        <!-- Row Detail Template -->
-        <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
-          <ng-template let-row="row" ngx-datatable-row-detail-template>
-            <div style="padding-left:35px;">
-              <div><strong>Address</strong></div>
-              <div>{{row.address.city}}, {{row.address.state}}</div>
-            </div>
-          </ng-template>
-        </ngx-datatable-row-detail>
-        <!-- Column Templates -->
-         <ngx-datatable-column
-          [width]="50"
-          [resizeable]="false"
-          [sortable]="false"
-          [draggable]="false"
-          [canAutoResize]="false">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <a
-              href="#"
-              [class.datatable-icon-right]="!row.$$expanded"
-              [class.datatable-icon-down]="row.$$expanded"
-              title="Expand/Collapse Row"
-              (click)="toggleExpandRow(row)">
-            </a>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Index" width="80">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{row.$$index}}</strong>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Expanded" width="80">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{row.$$expanded === 1}}</strong>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Name" width="200">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <strong>{{value}}</strong>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Gender" width="300">
-          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <i [innerHTML]="row['name']"></i> and <i>{{value}}</i>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Age" ></ngx-datatable-column>
-      </ngx-datatable>
-    </div>
+  <button (click)="getTableFromPath('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+  <button (click)="getTableFromPath('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+  <button (click)="getTableFromPath('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
+</div>
+<div>
+  <button (click)="getTableFromPath('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
+  <button (click)="getTableFromPath('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
+  <button (click)="getTableFromPath('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
+</div>
+<div>
+  <button (click)="getTableFromPath('users', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
+</div>
 
 
-<div>
-	<button (click)="getTableFromPath('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
-	<button (click)="getTableFromPath('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
-	<button (click)="getTableFromPath('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
+
+<div *ngIf="show">
+  <div align="right" style="padding-right: 500px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
+<editing-menu></editing-menu>
 </div>
-<div>
-	<button (click)="getTableFromPath('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
-	<button (click)="getTableFromPath('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
-	<button (click)="getTableFromPath('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
-</div>
-<div>
-	<button (click)="getTableFromPath('users', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
-</div>
-<br>
-<button (click)="refresh()">Refresh</button>
-<br>
-<br>
 
 <!--
 <div>

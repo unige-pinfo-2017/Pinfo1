@@ -138,8 +138,9 @@ export class TableComponent implements OnInit, OnDestroy {
 	}*/
 
   onSelect(event: any) {
+      console.log(this.currentType);
     	console.log('Event: select', event, this.selected);
-      if(this.currentType="device") {
+      if((this.currentType === "device") || (this.currentType === "sensor")) {
       this.show = !this.show;
       }
   	}
