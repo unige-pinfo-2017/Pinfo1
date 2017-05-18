@@ -51,7 +51,8 @@ export class LoginComponent {
 					this.login = 'Authentication failed';
 				} else {
 					this.login = 'Authentication successful.';
-					this.router.navigateByUrl(`/overview/${this.response}`);
+					sessionStorage.setItem('id', this.response);
+					this.router.navigateByUrl(`/overview`);
 					//this.router.navigate(['/overview', this.response]);
 				}
 				/*if (this.response === 'ok'){
