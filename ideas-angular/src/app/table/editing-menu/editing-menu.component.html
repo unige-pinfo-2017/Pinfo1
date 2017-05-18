@@ -2,8 +2,12 @@
 </head>
 
 <div align="center">
-  <div *ngIf="show">
-    <div class="floating-box" align="center"><h2><b>Editing menu</b></h2>
+
+    <div class="floating-box" align="center">
+      
+
+      <h2><b>Editing menu</b></h2>
+
   			<div class="small-2 columns">
     			<input type="number" placeholder="Brightness" min="0" max="100" id="days-off-count" />
     			<br>
@@ -18,7 +22,5 @@
     			<input type="submit" value="Update">
         </div>
   	</div>
-  </div>
   <!--<div> {{a.state}} et {{a.value}}</div>-->
-  <input type="submit" (click)="show = !show" value="Update">
 </div>

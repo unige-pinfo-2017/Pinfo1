@@ -1,9 +1,11 @@
 
 
 <div>
-  
-  <editing-menu></editing-menu>
 
+  <div *ngIf="show">
+    <div align="right" style="padding-right: 500px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
+  <editing-menu></editing-menu>
+  </div>
     <div class="table">
       <ngx-datatable
         class="material"
@@ -18,7 +20,7 @@
         [reorderable]="reorderable"
         [selected]="selected"
         [selectionType]="'cell'"
-        (select)="onSelect($event)"
+        (select)="show = !show"
         (activate)="onActivate($event)">
       </ngx-datatable>
   </div>
@@ -36,7 +38,7 @@
         [rowHeight]="50"
         [scrollbarV]="50"
         [rows]='rows'
-        (page)="onPage($event)">
+        (page)="show = !show">
         <!-- Row Detail Template -->
         <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
           <ng-template let-row="row" ngx-datatable-row-detail-template>

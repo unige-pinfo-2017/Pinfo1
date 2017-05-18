@@ -27,6 +27,7 @@ import { TableService } from './table.service';
 	encapsulation: ViewEncapsulation.None
 })
 
+
 export class TableComponent implements OnInit, OnDestroy {
 
 	@ViewChild('myTable') table: any;
@@ -138,6 +139,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
 	onSelect(event: any) {
     	console.log('Event: select', event, this.selected);
+
   	}
 
   	onActivate(event: any) {
