@@ -41,7 +41,7 @@ public class TableFacadeRest {
 	}*/
 	
 	@GET
-	@Path("/{userId}/users")
+	@Path("/{userId}/users/all")
 	@Produces({"application/json"})
 	@Transactional
 	public JsonArray getTableOfUsers(@PathParam("userId") Long userId) {
