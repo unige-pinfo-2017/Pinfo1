@@ -39,35 +39,41 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	){}
 
 	public ngOnInit(): void {
-		this.getLiveDataFromPath();
-		this.hiddenLiveData = DATAH;
-		this.startTimer(this.refreshRate);
+		console.log(sessionStorage.getItem('id'));
+		if (sessionStorage.getItem('id') === null) {
+			this.router.navigate([`/login`]);
+		} else {
+			console.log("Past navigate url");
+			this.getLiveData(Number(sessionStorage.getItem('id')));
+			this.hiddenLiveData = DATAH;
+			this.startTimer(this.refreshRate);
+		}
 	}
 
 	public ngOnDestroy(): void {
-		this.timerSubscription.unsubscribe();
-		this.routeSubscripton.unsubscribe();
+		if (this.timerSubscription != null) this.timerSubscription.unsubscribe();
+		if (this.routeSubscripton != null) this.routeSubscripton.unsubscribe();
 	}
 
 	public startTimer(refreshRate: number): void {
 		// Rafraichit la liste des données live toutes les N millisecondes
 		// Ne bloque pas l'exécution
-		let timer = TimerObservable.create(0, refreshRate); // Créer un timer qui s'enclenche toutes les N secondes
+		let timer = TimerObservable.create(1000, refreshRate); // Créer un timer qui s'enclenche toutes les N secondes
 		this.timerSubscription = timer.subscribe(t => {
 			// A chaque tick du timer, on rafraichit les donnees live
-			this.getLiveDataFromPath();
+			this.getLiveData(Number(sessionStorage.getItem('id')));
 			//console.log("Refreshing live data");
 		})
 	}
 
-	public getLiveDataFromPath(): void {
+	/*public getLiveDataFromPath(): void {
 		// Récupère userId depuis l'url du browser
 		this.routeSubscripton = this.route.params.subscribe(params => {
 			let userId = params['userId'];
 			// Appel getLiveData
 			this.getLiveData(userId);
 		})
-	}
+	}*/
 
 	public getLiveData(userId: number): void {
 		this.overviewService.getLiveData(userId).then(liveData => this.liveData = liveData);

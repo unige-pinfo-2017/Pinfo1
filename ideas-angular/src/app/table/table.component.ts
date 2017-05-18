@@ -73,19 +73,24 @@ export class TableComponent implements OnInit, OnDestroy {
 
 	public constructor(
 		private tableService: TableService,
+		private router: Router,
 		private route: ActivatedRoute
 	) {}
 
 	public ngOnInit(): void {
-		this.currentType="device";
-		this.currentSubtype="PowerSocket";
-		this.getTableFromPath(this.currentType, this.currentSubtype);
-		this.startTimer(this.refreshRate);
+		if (sessionStorage.getItem('id') === null) {
+			this.router.navigate([`/login`]);
+		} else {
+			this.currentType="device";
+			this.currentSubtype="PowerSocket";
+			this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
+			this.startTimer(this.refreshRate);
+		}
 	}
 
 	public ngOnDestroy(): void {
-		this.timerSubscription.unsubscribe();
-		this.routeSubscription.unsubscribe();
+		if (this.timerSubscription != null) this.timerSubscription.unsubscribe();
+		if (this.routeSubscription != null) this.routeSubscription.unsubscribe();
 	}
 
 	public getDemo(){
@@ -93,14 +98,14 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.rows = this.rowsExample;
 	}
 
-	public getTableFromPath(type: string, subtype: string): void {
+	/*public getTableFromPath(type: string, subtype: string): void {
 		// Récupère userId depuis l'url du browser
 		this.routeSubscription = this.route.params.subscribe(params => {
 			let userId = params['userId'];
 			// Appel getTable
 			this.getTable(userId, type, subtype);
 		})
-	}
+	}*/
 
 	public getTable(userId: number, type: string, subtype: string): void {
 		this.tableService.getTable(userId, type, subtype).then(arr => {
@@ -115,7 +120,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		// Rafraichit la liste des données toutes les N millisecondes
 		let timer = TimerObservable.create(0, refreshRate);
 		this.timerSubscription = timer.subscribe(t => {
-			this.getTableFromPath(this.currentType, this.currentSubtype);
+			this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
 			console.log("table refreshing");
 		})
 	}
@@ -159,6 +164,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
 
   public refresh() {
-    this.getTableFromPath(this.currentType, this.currentSubtype);
+    this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
   }
 }
