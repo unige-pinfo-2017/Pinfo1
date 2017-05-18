@@ -36,7 +36,7 @@ export class TableComponent implements OnInit, OnDestroy {
 	private timerSubscription: Subscription;
 
 	private routeSubscription: Subscription;
-
+  public show: boolean = false;
 	private currentType: string;
 	private currentSubtype: string;
 	private rows:any[] = [];
@@ -137,13 +137,15 @@ export class TableComponent implements OnInit, OnDestroy {
 		);
 	}*/
 
-	onSelect(event: any) {
+  onSelect(event: any) {
     	console.log('Event: select', event, this.selected);
-
+      if(this.currentType="device") {
+      this.show = !this.show;
+      }
   	}
 
-  	onActivate(event: any) {
-    	console.log('Event: activate', event);
+  onActivate(event: any) {
+    console.log('Event: activate', event);
 	}
 	toggleExpandRow(row: any[]) {
     	console.log('Toggled Expand Row!', row);

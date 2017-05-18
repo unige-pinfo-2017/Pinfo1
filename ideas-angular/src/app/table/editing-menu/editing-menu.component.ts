@@ -19,6 +19,3 @@ export class EditingMenuComponent {
 	a: { state: string; value: string; } = { state: "Status", value: "ON" };
 
 }
-class NgIfSimple {
-  show: boolean = true;
-}

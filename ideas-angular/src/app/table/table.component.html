@@ -20,7 +20,7 @@
         [reorderable]="reorderable"
         [selected]="selected"
         [selectionType]="'cell'"
-        (select)="show = !show"
+        (select)="onSelect($event)"
         (activate)="onActivate($event)">
       </ngx-datatable>
   </div>
