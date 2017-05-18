@@ -117,8 +117,18 @@ public class TableService {
 		List<String> columnsList = new ArrayList<String>();
 		List<String> valuesList = new ArrayList<String>();
 		
-		// TODO: A remplacer par getUserForManager() / getUserForSysadmin
-		List<User> users = new ArrayList<User>();
+		// TODO: A réfactorer avec la nouvelle architecture
+		List<User> users;
+		String role = userService.getUserRoleById(userId);
+		
+		if (role.equals("Manager")) {
+			users = userService.getUsersOfManager(userId);
+		} else if (role.equals("SysAdmin")) {
+			users = userService.getUsersOfSysAdmin(userId);
+		} else {
+			users = new ArrayList<User>();
+		}
+		
 		List<LiveData> liveDatas = userService.getAllLiveData();
 		
 		columnsBuilder.add(tableJsonBuilder.buildColumn("Username"));
@@ -134,7 +144,7 @@ public class TableService {
 			valuesList.clear();
 			valuesList.add(user.getUsername());
 			for (LiveData liveData: liveDatas) {
-				valuesList.add(Double.toString(computeLiveData(userId, liveData)));
+				valuesList.add(Double.toString(computeLiveData(user.getId(), liveData)));
 			}
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
 		}

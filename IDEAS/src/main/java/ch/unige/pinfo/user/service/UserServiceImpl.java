@@ -1,6 +1,7 @@
 package ch.unige.pinfo.user.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,6 +22,9 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.OverviewService;
+import ch.unige.pinfo.user.dom.Basic;
+import ch.unige.pinfo.user.dom.Manager;
+import ch.unige.pinfo.user.dom.SysAdmin;
 import ch.unige.pinfo.user.dom.User;
 
 @Stateless
@@ -116,5 +120,49 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<LiveData> getAllLiveData() {
 		return overviewService.getLiveDataService().getAllLiveData();
+	}
+
+	@Override
+	public Basic getBasicById(Long id) {
+		return entityManager.find(Basic.class, id);
+	}
+	
+	@Override
+	public Manager getManagerById(Long id) {
+		return entityManager.find(Manager.class, id);
+	}
+
+	@Override
+	public SysAdmin getSysAdminById(Long id) {
+		return entityManager.find(SysAdmin.class, id);
+	}
+	
+	@Override
+	public List<User> getUsersOfManager(Long userId) {
+		Manager manager = getManagerById(userId);
+		return new ArrayList<User>(manager.getUsers());
+	}
+
+	@Override
+	public List<User> getUsersOfSysAdmin(Long userId) {
+		SysAdmin sysAdmin = getSysAdminById(userId);
+		return new ArrayList<User>(sysAdmin.getUsers());
+	}
+
+	@Override
+	public double getSumSensorLiveForUsers(List<User> users, String sensorName) {
+		double res = 0;
+		for (User user: users) {
+			res += getSumSensorLiveForUser(user.getId(), sensorName);
+		}
+		return res;
+	}
+
+	@Override
+	public double getAvgSensorLiveForUsers(List<User> users, String sensorName) {
+		if (users.size() == 0) {
+			return 0;
+		}
+		return getSumSensorLiveForUsers(users, sensorName)/users.size();
 	}
 }

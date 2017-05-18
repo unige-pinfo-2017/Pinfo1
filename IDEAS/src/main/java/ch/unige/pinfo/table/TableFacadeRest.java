@@ -32,11 +32,19 @@ public class TableFacadeRest {
 		return tableService.buildTableForSensorType(deviceType, userId);
 	}
 	
-	@GET
+	/*@GET
 	@Path("/{userId}/{type}")
 	@Produces({"application/json"})
 	@Transactional
 	public JsonArray getTable(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
 		return tableService.buildTableForSensorType(deviceType, userId);
+	}*/
+	
+	@GET
+	@Path("/{userId}/users")
+	@Produces({"application/json"})
+	@Transactional
+	public JsonArray getTableOfUsers(@PathParam("userId") Long userId) {
+		return tableService.buildTableForUser(userId);
 	}
 }

@@ -54,6 +54,16 @@ public class IDEAS {
 		}
 		return test;
 	}
+	
+	@GET
+	@Path("test/role")
+	@Transactional
+	public String testRole() {
+		String manager = userService.getUserRoleById(new Long(1));
+		String basic = userService.getUserRoleById(new Long(2));
+		String sysadmin = userService.getUserRoleById(new Long(4));
+		return manager + " " + basic + " " + sysadmin;
+	}
 		
 	@GET
 	@Path("/init")

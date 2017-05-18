@@ -31,6 +31,11 @@ public class DeviceManagerImpl implements DeviceManager {
 		double sum = 0;
 		
 		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
+		
+		if (ld.size() == 0) {
+			return 0;
+		}
+		
 		for (Device device: ld){
 			sum += Double.parseDouble(wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName));
 		}
