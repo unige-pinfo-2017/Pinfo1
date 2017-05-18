@@ -12,12 +12,13 @@ const PARAM: any[] = [
 		templateUrl: './editing-menu.component.html',
 		styleUrls: ['./editing-menu.component.css'],
 	})
-	
+
 
 export class EditingMenuComponent {
 	param = PARAM;
 	a: { state: string; value: string; } = { state: "Status", value: "ON" };
 
 }
-
-
+class NgIfSimple {
+  show: boolean = true;
+}
