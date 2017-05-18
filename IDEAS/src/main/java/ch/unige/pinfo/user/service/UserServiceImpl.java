@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService{
 		return query.getResultList();
 	}
 	
+
 	@Override
 	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
 		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);

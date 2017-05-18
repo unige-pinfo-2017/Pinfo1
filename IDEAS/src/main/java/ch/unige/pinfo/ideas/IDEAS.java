@@ -49,7 +49,16 @@ public class IDEAS {
 	@Transactional
 	public String test(@PathParam("userId") Long userId) {
 		
-		String test = "Liste des preferences : ";
+		LiveData ldDel = null;
+		String test = "Liste des preferences avant : ";
+		for (LiveData ld : userService.getUserById(userId).getPreferences()){
+			test = test + ld.getSensor().getMeasureName() + " ";
+			ldDel = ld;
+		}
+		userService.getUserById(userId).getPreferences().remove(ldDel);
+		ldDel.getUsers().remove(userService.getUserById(userId));
+		
+		test = test + " pref apres : ";
 		
 		for (LiveData ld : userService.getUserById(userId).getPreferences()){
 			test = test + ld.getSensor().getMeasureName() + " ";
