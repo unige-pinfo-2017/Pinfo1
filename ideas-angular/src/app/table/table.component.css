@@ -2,6 +2,7 @@
 .ngx-datatable {
   text-align: left;
   width:75%;
+  height: 350px;
   margin:0 auto;
   border-bottom: 1px solid black;
   border-top: 1px solid black;
@@ -392,11 +393,11 @@
 @keyframes query {
   0% {
     opacity: 1;
-    transform: translateX(35%) scale(.3, 1); 
+    transform: translateX(35%) scale(.3, 1);
   }
 
   100% {
     opacity: 0;
-    transform: translateX(-50%) scale(0, 1); 
-  } 
+    transform: translateX(-50%) scale(0, 1);
+  }
 }
