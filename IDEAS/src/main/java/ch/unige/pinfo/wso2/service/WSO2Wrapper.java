@@ -36,4 +36,21 @@ public interface WSO2Wrapper {
 	 * The values of the sensor type in {@code String} format.
 	 */
 	String[] getValue(String deviceType, String deviceId,  String SensorType, String From, String To);
+	
+	/**
+	 * <b>setValue</b>
+	 * <p>
+	 * {@code String setValue(String deviceType, String deviceId, String status, String state)}
+	 * <p>
+	 * 
+	 * Set the value of a {@code deviceType}'s {@code SensorType} 
+	 * 
+	 * @param deviceType - The type of device
+	 * @param deviceId - The Id of the device type
+	 * @param status - The type of sensor we want to change the value corresponding to the device type
+	 * @param state - The value we want to set
+	 * @return
+	 * Response in {@code String}, error otherwise.
+	 */
+	String setValue(String deviceType, String deviceId, String status, String state);
 }

@@ -60,6 +60,12 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return readings;
 	}
 	
+	public String setValue(String deviceType, String deviceId, String status, String state){
+		
+		String reponse = wcr.postStatus(deviceType, deviceId, status, state);
+		return reponse;
+	}
+	
 	/**
 	 * <b>getHSBColor</b>
 	 * <p>
