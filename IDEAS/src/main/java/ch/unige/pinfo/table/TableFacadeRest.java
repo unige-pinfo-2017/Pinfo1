@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -41,10 +42,16 @@ public class TableFacadeRest {
 	}*/
 	
 	@GET
-	@Path("/{userId}/users/all")
+	@Path("/{userId}/user/all")
 	@Produces({"application/json"})
 	@Transactional
 	public JsonArray getTableOfUsers(@PathParam("userId") Long userId) {
 		return tableService.buildTableForUser(userId);
+	}
+	
+	@POST
+	@Path("/change-state/{deviceId}/{action}")
+	public void changeState(@PathParam("deviceId") Long deviceId, @PathParam("action") String action, @QueryParam("state") String state){
+		
 	}
 }
