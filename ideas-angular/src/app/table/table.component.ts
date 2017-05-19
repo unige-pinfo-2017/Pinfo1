@@ -86,10 +86,9 @@ export class TableComponent implements OnInit, OnDestroy {
 			this.getTable(sessionStorage.getItem('id'), this.currentType, this.currentSubtype);
 			this.startTimer(this.refreshRate);
 		}*/
-		console.log(sessionStorage.getItem('id'));
 		this.currentType="device";
 		this.currentSubtype="PowerSocket";
-		this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
+		this.getTableFromStorage(this.currentType, this.currentSubtype);
 		this.startTimer(this.refreshRate);
 	}
 
@@ -103,14 +102,14 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.rows = this.rowsExample;
 	}
 
-	/*public getTableFromPath(type: string, subtype: string): void {
+	public getTableFromPath(type: string, subtype: string): void {
 		// Récupère userId depuis l'url du browser
 		this.routeSubscription = this.route.params.subscribe(params => {
 			let userId = params['userId'];
 			// Appel getTable
 			this.getTable(userId, type, subtype);
 		})
-	}*/
+	}
 
 	public getTableFromStorage(type: string, subtype: string):  void {
 		this.getTable(Number(sessionStorage.getItem('id')), type, subtype);

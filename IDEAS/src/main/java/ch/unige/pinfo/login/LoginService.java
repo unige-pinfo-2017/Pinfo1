@@ -1,8 +1,10 @@
 package ch.unige.pinfo.login;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import javax.json.JsonArray;
 
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
@@ -11,6 +13,9 @@ public class LoginService {
 	
 	@Inject
 	private UserService userService;
+	
+	@Inject
+	private LoginJsonBuilder loginJsonBuilder;
 	
 	public LoginService(){}
 	
@@ -62,6 +67,19 @@ public class LoginService {
 	 */
 	public boolean checkPassword(String inputPassword, String realPassword){
 		return realPassword.equals(inputPassword);
+	}
+
+	public JsonArray getSubordinates(Long userId) {
+		String role = userService.getUserRoleById(userId);
+		List<User> users ;
+		if (role.equals("Manager")) {
+			users = userService.getUsersOfManager(userId);
+		} else if (role.equals("SysAdmin")) {
+			users = userService.getUsersOfSysAdmin(userId);
+		} else {
+			users = new ArrayList<User>();
+		}
+		return loginJsonBuilder.buildIds(users);
 	}
 
 }

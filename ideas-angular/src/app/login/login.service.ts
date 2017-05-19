@@ -22,6 +22,13 @@ export class LoginService {
 			.then(res => res.text() as string)
 	}
 
+	public getSubordinates(userId: string){
+		return this.http
+			.get(`${this.baseUrl}/login/get-subordinates/${userId}`, {headers: this.headersService.getHeadersJson()})
+			.toPromise()
+			.then(res => res.json())
+	}
+
 	/*
 	getHeroes(): Promise<Hero[]> {
 		return this.http.get(this.heroesUrl)

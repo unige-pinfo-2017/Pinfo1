@@ -24,14 +24,11 @@ const routes: Routes = [
 		component: OverviewComponent,
 		canActivate: [ AuthGuard ]
 	},
-
-  {
-    path: 'overview/:userId',
-    component: OverviewComponent,
-    canActivate: [AuthGuard, RoleGuard]
-
-  },
-  
+	{
+		path: 'overview/:userId',
+		component: OverviewComponent,
+		canActivate: [ AuthGuard, RoleGuard ]
+	},
 	{
 		path: 'login',
 		component: LoginComponent

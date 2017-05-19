@@ -26,6 +26,7 @@ const DATAH: any[] = [
 })
 
 export class OverviewComponent implements OnInit, OnDestroy {
+	private currentId: number;
 	private refreshRate: number = 5*1000; // refreshRate en milliseconde
 	private timerSubscription: Subscription;
 	private routeSubscripton: Subscription;
@@ -39,16 +40,8 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	){}
 
 	public ngOnInit(): void {
-		console.log(sessionStorage.getItem('id'));
-		/*if (sessionStorage.getItem('id') === null) {
-			this.router.navigate([`/login`]);
-		} else {
-			console.log("Past navigate url");
-			this.getLiveData(Number(sessionStorage.getItem('id')));
-			this.hiddenLiveData = DATAH;
-			this.startTimer(this.refreshRate);
-		}*/
-		this.getLiveData(Number(sessionStorage.getItem('id')));
+		this.initCurrentId();
+		this.getLiveData(this.currentId);
 		this.hiddenLiveData = DATAH;
 		this.startTimer(this.refreshRate);
 	}
@@ -64,9 +57,24 @@ export class OverviewComponent implements OnInit, OnDestroy {
 		let timer = TimerObservable.create(1000, refreshRate); // Créer un timer qui s'enclenche toutes les N secondes
 		this.timerSubscription = timer.subscribe(t => {
 			// A chaque tick du timer, on rafraichit les donnees live
-			this.getLiveData(Number(sessionStorage.getItem('id')));
-			//console.log("Refreshing live data");
+			this.getLiveData(this.currentId);
 		})
+	}
+
+	private initCurrentId(): void {
+		this.currentId = this.getCurrentId();
+	}
+
+	private getCurrentId(): number {
+		let currentId: number;
+		this.route.params.subscribe(params => {
+			currentId = params['userId'];
+		});
+		if (currentId == undefined) {
+			return +sessionStorage.getItem('id');
+		}
+		//this.routeSubscripton.unsubscribe();
+		return currentId;
 	}
 
 	/*public getLiveDataFromPath(): void {
