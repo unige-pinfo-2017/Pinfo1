@@ -52,6 +52,10 @@ export class LoginComponent {
 				} else {
 					this.login = 'Authentication successful.';
 					sessionStorage.setItem('id', this.response);
+
+					//Mock avec les id des users assignés au Manager
+					sessionStorage.setItem('Users', JSON.stringify({ UsersA: [ {id: 1}, {id: 2}, {id: 3}] }));
+
 					this.router.navigateByUrl(`/overview`);
 					//this.router.navigate(['/overview', this.response]);
 				}

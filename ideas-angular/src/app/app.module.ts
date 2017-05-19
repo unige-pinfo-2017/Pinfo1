@@ -20,6 +20,7 @@ import {TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 
 import { AuthGuard } from './guard/auth-guard.service';
+import { RoleGuard } from './guard/role-guard.service';
 
 @NgModule({
   imports:      [
@@ -45,6 +46,6 @@ import { AuthGuard } from './guard/auth-guard.service';
       EditingMenuComponent,
   ],
   bootstrap:    [ AppComponent ],
-  providers: [ AuthGuard ]
+  providers: [ AuthGuard, RoleGuard ]
 })
 export class AppModule { }

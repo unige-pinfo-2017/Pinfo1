@@ -70,15 +70,15 @@ export class ChartComponent {
 	public switchToPie():void {
 		this.lineChartType = this.lineChartType === 'pie' ? 'pie' : 'pie';
 	}
-	
+
 	public switchToRadar():void {
 		this.lineChartType = this.lineChartType === 'radar' ? 'radar' : 'radar';
 	}
-	
+
 	public switchToPolarArea():void {
 		this.lineChartType = this.lineChartType === 'polarArea' ? 'polarArea' : 'polarArea';
 	}
-	
+
 	public switchToDoughnut():void {
 		this.lineChartType = this.lineChartType === 'doughnut' ? 'doughnut' : 'doughnut';
 	}
