@@ -24,17 +24,17 @@
 </div>
 <br>
 <div>
-  <button (click)="getTableFromPath('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
-  <button (click)="getTableFromPath('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
-  <button (click)="getTableFromPath('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
+  <button (click)="getTableFromStorage('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+  <button (click)="getTableFromStorage('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+  <button (click)="getTableFromStorage('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
 </div>
 <div>
-  <button (click)="getTableFromPath('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
-  <button (click)="getTableFromPath('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
-  <button (click)="getTableFromPath('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
+  <button (click)="getTableFromStorage('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
+  <button (click)="getTableFromStorage('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
+  <button (click)="getTableFromStorage('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
 </div>
 <div>
-  <button (click)="getTableFromPath('users', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
+  <button (click)="getTableFromStorage('user', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
 </div>
 
 

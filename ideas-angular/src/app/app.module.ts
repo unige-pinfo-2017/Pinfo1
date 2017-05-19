@@ -19,6 +19,8 @@ import { ChartComponent } from './chart/chart.component';
 import {TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 
+import { AuthGuard } from './guard/auth-guard.service';
+
 @NgModule({
   imports:      [
 	  BrowserModule,
@@ -40,8 +42,9 @@ import {EditingMenuComponent} from './table/editing-menu/editing-menu.component'
       MiddlescreenComponent,
 	  ChartComponent,
 	  TableComponent,
-    EditingMenuComponent,
+      EditingMenuComponent,
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [ AuthGuard ]
 })
 export class AppModule { }

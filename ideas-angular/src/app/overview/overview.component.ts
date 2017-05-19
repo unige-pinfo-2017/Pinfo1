@@ -40,14 +40,17 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
 	public ngOnInit(): void {
 		console.log(sessionStorage.getItem('id'));
-		if (sessionStorage.getItem('id') === null) {
+		/*if (sessionStorage.getItem('id') === null) {
 			this.router.navigate([`/login`]);
 		} else {
 			console.log("Past navigate url");
 			this.getLiveData(Number(sessionStorage.getItem('id')));
 			this.hiddenLiveData = DATAH;
 			this.startTimer(this.refreshRate);
-		}
+		}*/
+		this.getLiveData(Number(sessionStorage.getItem('id')));
+		this.hiddenLiveData = DATAH;
+		this.startTimer(this.refreshRate);
 	}
 
 	public ngOnDestroy(): void {
@@ -82,7 +85,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	public navigateToTable(): void {
 		this.routeSubscripton = this.route.params.subscribe(params => {
 			let userId = params['userId'];
-			this.router.navigateByUrl(`/table/${userId}`);
+			this.router.navigate([`/table`]);
 		})
 	}
 }

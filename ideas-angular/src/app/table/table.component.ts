@@ -78,14 +78,19 @@ export class TableComponent implements OnInit, OnDestroy {
 	) {}
 
 	public ngOnInit(): void {
-		if (sessionStorage.getItem('id') === null) {
+		/*if (sessionStorage.getItem('id') === null) {
 			this.router.navigate([`/login`]);
 		} else {
 			this.currentType="device";
 			this.currentSubtype="PowerSocket";
-			this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
+			this.getTable(sessionStorage.getItem('id'), this.currentType, this.currentSubtype);
 			this.startTimer(this.refreshRate);
-		}
+		}*/
+		console.log(sessionStorage.getItem('id'));
+		this.currentType="device";
+		this.currentSubtype="PowerSocket";
+		this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
+		this.startTimer(this.refreshRate);
 	}
 
 	public ngOnDestroy(): void {
@@ -107,6 +112,10 @@ export class TableComponent implements OnInit, OnDestroy {
 		})
 	}*/
 
+	public getTableFromStorage(type: string, subtype: string):  void {
+		this.getTable(Number(sessionStorage.getItem('id')), type, subtype);
+	}
+
 	public getTable(userId: number, type: string, subtype: string): void {
 		this.tableService.getTable(userId, type, subtype).then(arr => {
 				this.columns = arr[0];
@@ -120,7 +129,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		// Rafraichit la liste des données toutes les N millisecondes
 		let timer = TimerObservable.create(0, refreshRate);
 		this.timerSubscription = timer.subscribe(t => {
-			this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
+			this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
 			console.log("table refreshing");
 		})
 	}
@@ -145,9 +154,11 @@ export class TableComponent implements OnInit, OnDestroy {
   onSelect(event: any) {
       console.log(this.currentType);
     	console.log('Event: select', event, this.selected);
-      if((this.currentType === "device") || (this.currentType === "sensor")) {
-      this.show = !this.show;
-      }
+		if((this.currentType === "device") || (this.currentType === "sensor")) {
+      		this.show = !this.show;
+  		} else if (this.currentType === "user") {
+			console.log(this.selected);
+		}
   	}
 
   onActivate(event: any) {
@@ -164,6 +175,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
 
   public refresh() {
-    this.getTable(sessionStorage.getItem['id'], this.currentType, this.currentSubtype);
+    this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
   }
 }

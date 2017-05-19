@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
+import { AuthGuard } from './guard/auth-guard.service';
 
 const routes: Routes = [
   	{
@@ -19,11 +20,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'overview',
-		component: OverviewComponent
-	},
-	{
-		path: 'overview/:userId',
 		component: OverviewComponent,
+		canActivate: [ AuthGuard ]
 	},
 	{
 		path: 'login',
@@ -35,16 +33,13 @@ const routes: Routes = [
 	},
 	{
 		path: 'table',
-		component: TableComponent
+		component: TableComponent,
+		canActivate: [ AuthGuard ]
 	},
 	{
-		path: 'table/:userId',
-		component: TableComponent
+		path: 'editing-menu',
+		component: EditingMenuComponent
 	},
-  {
-    path: 'editing-menu',
-    component: EditingMenuComponent
-  }
 ];
 
 @NgModule({
