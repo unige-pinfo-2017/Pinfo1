@@ -1,3 +1,9 @@
+.icon-refresh{
+	background-color: #2B5591;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
 .menu {
 list-style: none;
 border-bottom: 0em solid white;
