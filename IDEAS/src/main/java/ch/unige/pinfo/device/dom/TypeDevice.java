@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.criteria.Expression;
 import javax.validation.constraints.Size;
@@ -29,9 +30,11 @@ public class TypeDevice {
 	private String name;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "type")
+    @OrderBy("id asc")
     private Set<Device> devices;
     
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "typeDevices")  
+    @OrderBy("id asc")
     private Set<Sensor> sensors;
     
 	public TypeDevice(){}

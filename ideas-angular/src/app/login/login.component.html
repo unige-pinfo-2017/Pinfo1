@@ -21,7 +21,7 @@
 <!--
 	<button routerLink="#!./overview/overview.component.html" routerLinkActive="active" (click)="loginText(textbox1.value,textbox2.value)" type="submit" class="btn btn-primary btn-block btn-large">Login</button><router-outlet></router-outlet>
 -->
-	<button (click)="authentication(textbox1.value,textbox2.value)" class="btn btn-primary btn-block btn-large">Login</button>
+	<button  (click)="authentication(textbox1.value,textbox2.value)" class="btn btn-primary btn-block btn-large">Login</button>
 	</nav>
 
 <!--
@@ -31,8 +31,8 @@
 	<br>
 -->
 
-	<pre>{{login}}</pre>
-	
+	<pre><font color="red"> {{login}} </font></pre>
+
 <!--
 	<h1><font color="red">{{error}}</font></h1>
 	<h5><button (click)="login=''" type="submit" class="btn btn-primary">Delete users</button></h5>

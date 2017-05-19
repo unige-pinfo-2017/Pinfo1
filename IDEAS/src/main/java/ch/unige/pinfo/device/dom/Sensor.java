@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -37,6 +38,7 @@ public class Sensor {
 		
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  
     @JoinTable(name="TypeDevices_Sensors", joinColumns=@JoinColumn(name="sensor_Id"), inverseJoinColumns=@JoinColumn(name="typeDevice_Id")) 
+    @OrderBy("id asc")
     private Set<TypeDevice> typeDevices;
     
     public Sensor(){}

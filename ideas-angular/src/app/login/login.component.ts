@@ -48,7 +48,7 @@ export class LoginComponent {
 			.then(r => this.response = r).then(r => {
 				console.log(r);
 				if (this.response == 'error') {
-					this.login = 'Authentication failed';
+					this.login = 'Authentication failed.';
 				} else {
 					this.login = 'Authentication successful.';
 					sessionStorage.setItem('id', this.response);

@@ -13,11 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import ch.unige.pinfo.device.dom.Sensor;
-import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.dom.User;
 
 @Entity
@@ -38,6 +38,7 @@ public class LiveData {
     
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)  
     @JoinTable(name="Prefereneces", joinColumns=@JoinColumn(name="LiveData_Id"), inverseJoinColumns=@JoinColumn(name="User_Id")) 
+    @OrderBy("id asc")
     private Set<User> users;
     
     //public LiveData() {}
