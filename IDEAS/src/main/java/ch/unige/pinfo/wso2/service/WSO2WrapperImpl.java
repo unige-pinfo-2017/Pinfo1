@@ -62,8 +62,20 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	public String setValue(String deviceType, String deviceId, String status, String state){
 		
-		String reponse = wcr.postStatus(deviceType, deviceId, status, state);
-		return reponse;
+		if(deviceType.equals("Light") && (status.equals("brightness") || status.equals("saturation")) ){
+			double stateParse = Double.parseDouble(state);
+			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
+			return reponse;
+		}
+		else if (deviceType.equals("Light") && (status.equals("hue") || status.equals("kelvin")) ){
+			int stateParse = Integer.parseInt(state);
+			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
+			return reponse;
+		}
+		else{
+			String reponse = wcr.postStatus(deviceType, deviceId, status, state);
+			return reponse;
+		}
 	}
 	
 	/**
