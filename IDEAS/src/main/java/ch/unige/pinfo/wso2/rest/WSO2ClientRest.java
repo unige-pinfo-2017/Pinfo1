@@ -50,7 +50,7 @@ public class WSO2ClientRest {
 	}
 
 	//Post peut etre accede avec des strig, int et double pour le query param qpState:
-	public String postStatus(String deviceType, String deviceId, String status, Object qpState){
+	public String postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
 

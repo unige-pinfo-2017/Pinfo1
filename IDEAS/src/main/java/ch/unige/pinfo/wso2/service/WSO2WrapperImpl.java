@@ -60,21 +60,47 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return readings;
 	}
 	
-	public String setValue(String deviceType, String deviceId, String status, String state){
+	public String setValue(String deviceType, String deviceId, String status, Object state){
 		
-		if(deviceType.equals("Light") && (status.equals("brightness") || status.equals("saturation")) ){
-			double stateParse = Double.parseDouble(state);
+		String stateParse = state.toString();
+		
+		if(deviceType.equals("PowerSocket") && 
+				status.equals("status") && 
+				(stateParse.toUpperCase().equals("ON") || stateParse.toUpperCase().equals("OFF")) ){
+			
 			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
 			return reponse;
 		}
-		else if (deviceType.equals("Light") && (status.equals("hue") || status.equals("kelvin")) ){
-			int stateParse = Integer.parseInt(state);
+		else if(deviceType.equals("Light") && 
+				status.equals("status") && 
+				(stateParse.toUpperCase().equals("ON") || stateParse.toUpperCase().equals("OFF")) ){
+			
+			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
+			return reponse;
+		}
+		else if( deviceType.equals("Light") && 
+				(status.equals("brightness") || status.equals("saturation")) && 
+				(0 <= Double.parseDouble(stateParse) && Double.parseDouble(stateParse) <= 1) ){ 
+			
+			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
+			return reponse;
+		}
+		else if( deviceType.equals("Light") && 
+				status.equals("hue") && 
+				(0 <= Integer.parseInt(stateParse) && Integer.parseInt(stateParse) <= 360) ){
+			
+			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
+			return reponse;
+		}
+		else if( deviceType.equals("Light") && 
+				status.equals("kelvin") && 
+				(5000 <= Integer.parseInt(stateParse) && Integer.parseInt(stateParse) <= 9999) ){
+			
 			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
 			return reponse;
 		}
 		else{
-			String reponse = wcr.postStatus(deviceType, deviceId, status, state);
-			return reponse;
+			return "Error";
 		}
 	}
 	

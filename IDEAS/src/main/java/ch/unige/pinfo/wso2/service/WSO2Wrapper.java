@@ -40,10 +40,10 @@ public interface WSO2Wrapper {
 	/**
 	 * <b>setValue</b>
 	 * <p>
-	 * {@code String setValue(String deviceType, String deviceId, String status, String state)}
+	 * {@code String setValue(String deviceType, String deviceId, String status, Object state)}
 	 * <p>
 	 * 
-	 * Set the value of a {@code deviceType}'s {@code SensorType}. Wrapper change {@code String} state into
+	 * Set the value of a {@code deviceType}'s {@code SensorType}. Wrapper change {@code Object} state into
 	 * <br> {@code double}, {@code int} or {@code String} depending of the deviceType.  
 	 * 
 	 * @param deviceType - The type of device
@@ -53,5 +53,5 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response in {@code String}, error otherwise.
 	 */
-	String setValue(String deviceType, String deviceId, String status, String state);
+	String setValue(String deviceType, String deviceId, String status, Object state);
 }
