@@ -6,12 +6,16 @@ import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
+import ch.unige.pinfo.device.service.TypeDeviceService;
 import ch.unige.pinfo.wso2.rest.WSO2ClientRest;
 
 public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	@Inject
 	WSO2ClientRest wcr;
+	
+	@Inject
+	TypeDeviceService tds;
 	
 	@Override
 	public String getValueLive(String deviceType, String deviceId,  String SensorType){
@@ -60,48 +64,74 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return readings;
 	}
 	
-	public String setValue(String deviceType, String deviceId, String status, Object state){
+	public String changePowerSocketStatus(String deviceId, String state){
+		Long id = Long.parseLong(deviceId);
+		String device = "PowerSocket";
+		String response = "Error"; 
+
+		if (hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "status", state.toUpperCase());
+		}
+		return response;
+	}
+	
+	public String changeLightStatus(String deviceId, String state){
+		Long id = Long.parseLong(deviceId);
+		String device = "Light";
+		String response = "Error"; 
+
+		if (hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "status", state.toUpperCase());
+		}
+		return response;
+	}
+	
+	public String changeLightBrightness(String deviceId, double state){
+		Long id = Long.parseLong(deviceId);
+		String device = "Light";
+		String response = "Error"; 
+		String stateParse = String.valueOf(state);
 		
-		String stateParse = state.toString();
-		
-		if(deviceType.equals("PowerSocket") && 
-				status.equals("status") && 
-				(stateParse.toUpperCase().equals("ON") || stateParse.toUpperCase().equals("OFF")) ){
-			
-			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
-			return reponse;
+		if (hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "brightness", stateParse);
 		}
-		else if(deviceType.equals("Light") && 
-				status.equals("status") && 
-				(stateParse.toUpperCase().equals("ON") || stateParse.toUpperCase().equals("OFF")) ){
-			
-			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
-			return reponse;
+		return response;
+	}
+	
+	public String changeLightSaturation(String deviceId, double state){
+		Long id = Long.parseLong(deviceId);
+		String device = "Light";
+		String response = "Error"; 
+		String stateParse = String.valueOf(state);
+
+		if(hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "saturation", stateParse);
 		}
-		else if( deviceType.equals("Light") && 
-				(status.equals("brightness") || status.equals("saturation")) && 
-				(0 <= Double.parseDouble(stateParse) && Double.parseDouble(stateParse) <= 1) ){ 
-			
-			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
-			return reponse;
+		return response;
+	}
+	
+	public String changeLightHue(String deviceId, int state){
+		Long id = Long.parseLong(deviceId);
+		String device = "Light";
+		String response = "Error"; 
+		String stateParse = String.valueOf(state);
+
+		if(hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "hue", stateParse);
 		}
-		else if( deviceType.equals("Light") && 
-				status.equals("hue") && 
-				(0 <= Integer.parseInt(stateParse) && Integer.parseInt(stateParse) <= 360) ){
-			
-			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
-			return reponse;
+		return response;
+	}
+	
+	public String changeLightKelvin(String deviceId, int state){
+		Long id = Long.parseLong(deviceId);
+		String device = "Light";
+		String response = "Error"; 
+		String stateParse = String.valueOf(state);
+
+		if(hasSensor(id, device)){
+			response = wcr.postStatus(device, deviceId, "kelvin", stateParse);
 		}
-		else if( deviceType.equals("Light") && 
-				status.equals("kelvin") && 
-				(5000 <= Integer.parseInt(stateParse) && Integer.parseInt(stateParse) <= 9999) ){
-			
-			String reponse = wcr.postStatus(deviceType, deviceId, status, stateParse);
-			return reponse;
-		}
-		else{
-			return "Error";
-		}
+		return response;
 	}
 	
 	/**
@@ -132,6 +162,30 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		String hex = String.format("#%02x%02x%02x", red, green, blue);
 		
 		return hex;
+	}
+	
+	/**
+	 * <b>hasSensor</b>
+	 * <p>
+	 * {@code private private boolean hasSensor(Long deviceId, String sensorName)}
+	 * <p>
+	 * 
+	 * Check if the {@code deviceId} correspond to the {@code sensorName}.
+	 * 
+	 * @param deviceId - The Id of the device
+	 * @param sensorName - The sensor type name.
+	 * @return
+	 * {@code true} if correspond, {@code false} otherwise.
+	 */
+	private boolean hasSensor(Long deviceId, String sensorName){
+		Long id = tds.getTypeDeviceByName(sensorName).getId();
+		
+		if(id == deviceId){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
 }
