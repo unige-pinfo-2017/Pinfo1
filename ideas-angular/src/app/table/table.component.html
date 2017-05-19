@@ -46,15 +46,26 @@
       <a href="#">Light</a></div></div></li>
 
       <li><div class="dropdown">
-        <button class="dropbtn">Sensor</button>
+        <button class="dropbtn">Sensor &nbsp; &or;</button>
         <div class="dropdown-content">
           <a href="#">Power</a>
           <a href="#">Temperature</a>
-          <a href="#">Current</a></div>
+          <a href="#">Current</a>
+        </div>
         </div></li>
 </ul>
-
-
+<p>Devices:</p>
+<select>
+  <option value="volvo">PowerSocket</option>
+  <option value="saab">Beacon</option>
+  <option value="opel">Light</option>
+</select>
+<p>Sensors:</p>
+<select>
+  <option value="volvo">Power</option>
+  <option value="saab">Temperature</option>
+  <option value="opel">Current</option>
+</select>
 
 <div *ngIf="show">
   <div align="right" style="padding-right: 500px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>

@@ -9,13 +9,14 @@ list-style: none;
 border-bottom: 0em solid white;
 margin-bottom: 0em;
 padding: 0 0 0.5em;
+
 }
 
 .menu a {
   background-color: #3167A5; /* bbackground color */
     color: white; /* Black text color */
     display: inline; /* Make the links appear below each other */
-    padding: 20px; /* Add some padding */
+    padding: 50px; /* Add some padding */
     text-decoration: none;
 }
 
@@ -46,15 +47,18 @@ li a:hover:not(.active) {
 .dropbtn {
     background-color: #3167A5;
     color: white;
+    width: 160px;
     padding: 20px;
-    font-size: 13px;
+    font-size: 17px;
     border: none;
     cursor: pointer;
+    display: inline;
+    height: 70px;
 }
 
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: inline;
 }
 
 .dropdown-content {
@@ -62,6 +66,8 @@ li a:hover:not(.active) {
     position: absolute;
     background-color: #ADD8E6;
     min-width: 160px;
+    font-size: 17px;
+    height: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
     z-index: 1;
 	right: 0;
