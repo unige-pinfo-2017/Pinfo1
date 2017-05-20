@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
@@ -79,5 +80,18 @@ public class DeviceManagerImpl implements DeviceManager {
 	@Override
 	public Sensor getSensorFromSensorName(String sensorName) {
 		return sensorService.getSensorByName(sensorName);
+	}
+	
+	@Override
+	public Device getDeviceBySensorName(String sensorName){
+		Sensor sensor = sensorService.getSensorByName(sensorName);
+		Device device = new Device();
+		
+		for (TypeDevice type : sensor.getTypeDevices()){
+			if(device.getType().getId() == type.getId()){
+				return device;
+			}
+		}
+		return device;
 	}
 }

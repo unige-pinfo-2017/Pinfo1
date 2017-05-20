@@ -14,4 +14,5 @@ public interface DeviceManager {
 	List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
 	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
 	Sensor getSensorFromSensorName(String sensorName);
+	Device getDeviceBySensorName(String sensorName);
 } 

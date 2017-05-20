@@ -6,7 +6,8 @@ import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 
-import ch.unige.pinfo.device.service.TypeDeviceService;
+import ch.unige.pinfo.device.dom.Device;
+import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.wso2.rest.WSO2ClientRest;
 
 public class WSO2WrapperImpl implements WSO2Wrapper {
@@ -15,7 +16,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	WSO2ClientRest wcr;
 	
 	@Inject
-	TypeDeviceService tds;
+	DeviceManager dm;
 	
 	@Override
 	public String getValueLive(String deviceType, String deviceId,  String SensorType){
@@ -170,15 +171,16 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	 * {@code private private boolean hasSensor(Long deviceId, String sensorName)}
 	 * <p>
 	 * 
-	 * Check if the {@code deviceId} correspond to the {@code sensorName}.
+	 * Check if a sensor with {@code deviceId} have a {@code sensorName}.
 	 * 
 	 * @param deviceId - The Id of the device
 	 * @param sensorName - The sensor type name.
 	 * @return
 	 * {@code true} if correspond, {@code false} otherwise.
 	 */
-	private boolean hasSensor(Long deviceId, String sensorName){
-		Long id = tds.getTypeDeviceByName(sensorName).getId();
+	public boolean hasSensor(Long deviceId, String sensorName){
+		Device device = dm.getDeviceBySensorName(sensorName);		
+		Long id = device.getId();
 		
 		if(id == deviceId){
 			return true;
