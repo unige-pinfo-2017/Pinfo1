@@ -27,12 +27,4 @@ export class UserService {
 		.map(res => <User>res.json()); // Conversion des données formatées en JSON vers la classe User
    		return user$;
 	}
-
-	/*private getHeaders() {
-		// Permet de récupérer les headers
-		let headers = new Headers();
-		headers.append('Accept', 'application/json');	// Spécifie le type de données accepté
-		headers.append('Content-Type', 'application/json');
-		return headers;
-	}*/
 }

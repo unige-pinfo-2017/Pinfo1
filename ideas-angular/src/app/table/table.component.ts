@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
@@ -74,7 +74,6 @@ export class TableComponent implements OnInit, OnDestroy {
 	public constructor(
 		private tableService: TableService,
 		private router: Router,
-		private route: ActivatedRoute
 	) {}
 
 	public ngOnInit(): void {
@@ -102,14 +101,14 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.rows = this.rowsExample;
 	}
 
-	public getTableFromPath(type: string, subtype: string): void {
+	/*public getTableFromPath(type: string, subtype: string): void {
 		// Récupère userId depuis l'url du browser
 		this.routeSubscription = this.route.params.subscribe(params => {
 			let userId = params['userId'];
 			// Appel getTable
 			this.getTable(userId, type, subtype);
 		})
-	}
+	}*/
 
 	public getTableFromStorage(type: string, subtype: string):  void {
 		this.getTable(Number(sessionStorage.getItem('id')), type, subtype);
@@ -128,7 +127,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		// Rafraichit la liste des données toutes les N millisecondes
 		let timer = TimerObservable.create(0, refreshRate);
 		this.timerSubscription = timer.subscribe(t => {
-			this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
+			this.getTableFromStorage(this.currentType, this.currentSubtype);
 			console.log("table refreshing");
 		})
 	}
@@ -151,17 +150,18 @@ export class TableComponent implements OnInit, OnDestroy {
 	}*/
 
   onSelect(event: any) {
-      console.log(this.currentType);
-    	console.log('Event: select', event, this.selected);
+      //console.log(this.currentType);
+		// console.log('Event: select', event, this.selected);
 		if((this.currentType === "device") || (this.currentType === "sensor")) {
-      		this.show = !this.show;
-  		} else if (this.currentType === "user") {
-			console.log(this.selected);
+				this.show = !this.show;
+			} else if (this.currentType === "user") {
+				let selectedUserId = this.selected[0]['UserId'];
+				this.router.navigate(['/overview', selectedUserId]);
 		}
-  	}
+	}
 
   onActivate(event: any) {
-    console.log('Event: activate', event);
+    /*console.log('Event: activate', event);
 	}
 	toggleExpandRow(row: any[]) {
     	console.log('Toggled Expand Row!', row);
@@ -169,7 +169,7 @@ export class TableComponent implements OnInit, OnDestroy {
   	}
 
   	onDetailToggle(event: any) {
-    	console.log('Detail Toggled', event);
+    	console.log('Detail Toggled', event);*/
 	}
 
 

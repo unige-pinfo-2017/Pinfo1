@@ -26,7 +26,7 @@ const DATAH: any[] = [
 })
 
 export class OverviewComponent implements OnInit, OnDestroy {
-	private currentId: number;
+	private currentId: number; // L'id de l'utilisateur dont on génère la table, n'est pas forcément l'id de l'utilisateur authentifié
 	private refreshRate: number = 5*1000; // refreshRate en milliseconde
 	private timerSubscription: Subscription;
 	private routeSubscripton: Subscription;

@@ -10,7 +10,7 @@ export class TableService {
 	private baseUrl: string = "http://localhost:8080/IDEAS";
 
 	constructor(private http: Http,
-				private HeadersService: HeadersService
+				private headersService: HeadersService
 				) {}
 
 	public getTable(userId: number, type: string, subtype: string): Promise<any[]> {
@@ -18,7 +18,7 @@ export class TableService {
 		// subtype = PowerSocket, Light, etc pour device
 		// et powerSensor, lightSensor, etc pour sensor
 		return this.http
-		.get(`${this.baseUrl}/table/${userId}/${type}/${subtype}`, {headers: this.HeadersService.getHeadersJson()})
+		.get(`${this.baseUrl}/table/${userId}/${type}/${subtype}`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 		.catch(this.handleError);

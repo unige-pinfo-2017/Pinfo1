@@ -131,7 +131,9 @@ public class TableService {
 		
 		List<LiveData> liveDatas = userService.getAllLiveData();
 		
+		columnsBuilder.add(tableJsonBuilder.buildColumn("UserId"));
 		columnsBuilder.add(tableJsonBuilder.buildColumn("Username"));
+		columnsList.add("UserId");
 		columnsList.add("Username");
 		for (LiveData liveData: liveDatas) {
 			Sensor sensor = liveData.getSensor();
@@ -142,6 +144,7 @@ public class TableService {
 		
 		for (User user: users) {
 			valuesList.clear();
+			valuesList.add(Long.toString(user.getId()));
 			valuesList.add(user.getUsername());
 			for (LiveData liveData: liveDatas) {
 				valuesList.add(Double.toString(computeLiveData(user.getId(), liveData)));
