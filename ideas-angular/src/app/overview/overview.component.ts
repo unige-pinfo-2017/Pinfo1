@@ -31,7 +31,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	private timerSubscription: Subscription;
 	private routeSubscripton: Subscription;
 	private liveData: any[];
-	private hiddenLiveData: any[];
+	private hiddenData: any[];
 
 	public constructor(
 		private overviewService: OverviewService,
@@ -42,7 +42,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	public ngOnInit(): void {
 		this.initCurrentId();
 		this.getLiveData(this.currentId);
-		this.hiddenLiveData = DATAH;
+		this.getHiddenData(this.currentId);
 		this.startTimer(this.refreshRate);
 	}
 
@@ -88,6 +88,11 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
 	public getLiveData(userId: number): void {
 		this.overviewService.getLiveData(userId).then(liveData => this.liveData = liveData);
+	}
+
+	public getHiddenData(userId: number): void {
+		this.overviewService.getHiddenData(userId).then(hiddenData => this.hiddenData = hiddenData);
+
 	}
 
 	public navigateToTable(): void {

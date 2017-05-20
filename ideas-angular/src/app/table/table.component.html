@@ -69,7 +69,7 @@
 
 <div *ngIf="show">
   <div align="right" style="padding-right: 500px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
-<editing-menu></editing-menu>
+<editing-menu [tableColumns]="columns" [tableRows]="rows"></editing-menu>
 </div>
 
 <!--

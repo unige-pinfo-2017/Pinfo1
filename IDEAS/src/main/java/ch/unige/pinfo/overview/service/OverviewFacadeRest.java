@@ -7,18 +7,37 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @Path("/overview")
 public class OverviewFacadeRest {
 	@Inject
 	private OverviewService overviewService;
 	
+	/*
+	@GET
+	@Path("/live-data2/{userId}")
+	@Produces({ "application/json" })
+	@Transactional
+	public JsonArray getLiveData2(@PathParam("userId") Long userId) {
+		return overviewService.buildLiveData2(userId);
+	}*/
+	
 	@GET
 	@Path("/live-data/{userId}")
 	@Produces({ "application/json" })
 	@Transactional
-	public JsonArray getLiveData(@PathParam("userId") Long userId){
+	public JsonArray getLiveData(@PathParam("userId") Long userId) {
 		return overviewService.buildLiveData(userId);
 	}
+	
+	@GET
+	@Path("/hidden-data/{userId}")
+	@Produces({ "application/json" })
+	@Transactional
+	public JsonArray getHiddenData(@PathParam("userId") Long userId) {
+		return overviewService.buildHiddenData(userId);
+	}
+	
 }
 

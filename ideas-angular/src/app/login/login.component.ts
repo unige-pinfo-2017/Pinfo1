@@ -46,7 +46,6 @@ export class LoginComponent {
 		} else {
 			this.loginService.authentication(username, pw)
 			.then(r => this.response = r).then(r => {
-				console.log(r);
 				if (this.response == 'error') {
 					this.login = 'Authentication failed.';
 				} else {
@@ -56,18 +55,9 @@ export class LoginComponent {
 						.then(subordinates => sessionStorage.setItem('subordinates', JSON.stringify(subordinates)));
 					//Mock avec les id des users assignés au Manager
 					//sessionStorage.setItem('Users', JSON.stringify([{id: 1}, {id: 2}, {id: 3}]));
-					console.log(sessionStorage.getItem('subordinates'));
 					this.router.navigateByUrl(`/overview`);
 					//this.router.navigate(['/overview', this.response]);
 				}
-				/*if (this.response === 'ok'){
-					this.login = 'Authentication successful.';
-					this.router.navigateByUrl('/overview/{userId}');
-
-					// A traiter plus tard
-				} else if (this.response === 'error'){
-					this.login = 'Authentication failed.';
-				}*/
 			}).catch(error => this.login = 'Authentication failed');
 		}
 	}

@@ -33,9 +33,6 @@ public class UserServiceImpl implements UserService{
 	@Inject 
 	private DeviceManager deviceManager;
 	
-	@Inject
-	private OverviewService overviewService;
-	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
@@ -81,48 +78,24 @@ public class UserServiceImpl implements UserService{
 		TypedQuery<User> query = entityManager.createQuery(c);
 		return query.getResultList();
 	}
-	
-
-	@Override
-	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
-		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);
-	}
-	
-	@Override
-	public double getSumSensorLiveForUser(Long userId, String sensorName) {
-		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
-	}
 
 	@Override
 	public Set<Sensor> getSensorsForTypeDevice(String name) {
 		return deviceManager.getSensorsForTypeDevice(name);
 	}
-
-	@Override
-	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
-		return deviceManager.getAllDevicesForUserByTypeDevice(userId, typeDevice);
-	}	
 	
 	@Override
-	public String getDeviceDataLive(Long deviceId, String sensorName) {
-		return deviceManager.getDeviceDataLive(deviceId, sensorName);
+	public List<User> getUsersOfManager(Long userId) {
+		Manager manager = getManagerById(userId);
+		return new ArrayList<User>(manager.getUsers());
 	}
 
 	@Override
-	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName) {
-		return deviceManager.getAllDevicesForUserBySensorName(userId, sensorName);
+	public List<User> getUsersOfSysAdmin(Long userId) {
+		SysAdmin sysAdmin = getSysAdminById(userId);
+		return new ArrayList<User>(sysAdmin.getUsers());
 	}
-
-	@Override
-	public Sensor getSensorFromSensorName(String sensorName) {
-		return deviceManager.getSensorFromSensorName(sensorName);
-	}
-
-	@Override
-	public List<LiveData> getAllLiveData() {
-		return overviewService.getLiveDataService().getAllLiveData();
-	}
-
+	
 	@Override
 	public Basic getBasicById(Long id) {
 		return entityManager.find(Basic.class, id);
@@ -137,20 +110,32 @@ public class UserServiceImpl implements UserService{
 	public SysAdmin getSysAdminById(Long id) {
 		return entityManager.find(SysAdmin.class, id);
 	}
+
+	/*
+	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
+		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);
+	}
 	
-	@Override
-	public List<User> getUsersOfManager(Long userId) {
-		Manager manager = getManagerById(userId);
-		return new ArrayList<User>(manager.getUsers());
+	public double getSumSensorLiveForUser(Long userId, String sensorName) {
+		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
+	}
+	
+	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
+		return deviceManager.getAllDevicesForUserByTypeDevice(userId, typeDevice);
+	}	
+	
+	public String getDeviceDataLive(String deviceId, String sensorName) {
+		return deviceManager.getDeviceDataLive(deviceId, sensorName);
 	}
 
-	@Override
-	public List<User> getUsersOfSysAdmin(Long userId) {
-		SysAdmin sysAdmin = getSysAdminById(userId);
-		return new ArrayList<User>(sysAdmin.getUsers());
+	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName) {
+		return deviceManager.getAllDevicesForUserBySensorName(userId, sensorName);
 	}
 
-	@Override
+	public Sensor getSensorFromSensorName(String sensorName) {
+		return deviceManager.getSensorFromSensorName(sensorName);
+	}
+	
 	public double getSumSensorLiveForUsers(List<User> users, String sensorName) {
 		double res = 0;
 		for (User user: users) {
@@ -158,12 +143,12 @@ public class UserServiceImpl implements UserService{
 		}
 		return res;
 	}
-
-	@Override
+	
 	public double getAvgSensorLiveForUsers(List<User> users, String sensorName) {
 		if (users.size() == 0) {
 			return 0;
 		}
 		return getSumSensorLiveForUsers(users, sensorName)/users.size();
 	}
+	*/
 }

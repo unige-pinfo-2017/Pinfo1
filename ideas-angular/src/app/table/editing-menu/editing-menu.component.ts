@@ -15,7 +15,10 @@ const PARAM: any[] = [
 
 
 export class EditingMenuComponent {
-	param = PARAM;
-	a: { state: string; value: string; } = { state: "Status", value: "ON" };
+	@Input() tableColumns: any[];
+	@Input() tableRows: any[];
 
+	private buildMenu(): void {
+		
+	}
 }

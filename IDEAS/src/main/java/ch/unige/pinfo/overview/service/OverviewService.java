@@ -1,53 +1,83 @@
 package ch.unige.pinfo.overview.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 
+import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.overview.dom.LiveData;
-import ch.unige.pinfo.user.dom.Basic;
-import ch.unige.pinfo.user.dom.Manager;
-import ch.unige.pinfo.user.dom.SysAdmin;
-import ch.unige.pinfo.user.dom.User;
-import ch.unige.pinfo.user.service.UserService;
 
-public class OverviewService {
-	@Inject
-	private LiveDataService liveDataService;
-	
-	@Inject
-	private UserService userService;
-	
+public class OverviewService {	
 	@Inject
 	private OverviewJsonBuilder overviewJsonBuilder;
 	
-	/*public JsonArray buildLiveData2(Long userId) {
-		// Pour chaque liveData:
-		// 	Récupérer le nom de la ressource -> ok
-		//	Récupérer l'unité de la ressource -> ok
-		//  Faire le calcul de la valeur à afficher
-		
-		//JsonArray arr = Json.createArrayBuilder().build();
-		JsonArrayBuilder builder = Json.createArrayBuilder();
-		
-		List<LiveData> liveDatas = liveDataService.getAllLiveData(); 
-		
-		for (int i=0; i<liveDatas.size(); i++){
-			LiveData ld = liveDatas.get(i);
-			String measure = ld.getSensor().getMeasureName();
-			String unit = ld.getSensor().getUnit();
-			//String value = "5"; // Mock
-			String value = Double.toString(computeLiveData(userId, ld));
-			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
-		}
+	@Inject
+	private BackEndFacade backendFacade;
 	
-		return builder.build();
-	}*/
+	private final int decimalNumber = 2;
 	
 	public JsonArray buildLiveData(Long userId) {
+		Set<LiveData> preferences = backendFacade.getUserPreferences(userId);
+		List<String> measureNames = getMeasureNames(preferences);
+		List<String> units = getUnits(preferences);
+		List<Double> values = backendFacade.getLiveDatas(userId);
+		JsonArrayBuilder builder = Json.createArrayBuilder();
+		
+		for (int i=0; i<measureNames.size(); i++) {
+			builder.add(overviewJsonBuilder.buildLiveDataJson(
+					measureNames.get(i), 
+					units.get(i),
+					Double.toString(roundDecimal(values.get(i), decimalNumber))
+			));
+		}
+		
+		return builder.build();
+	}
+	
+	public JsonArray buildHiddenData(Long userId) {
+		List<LiveData> liveDatas = backendFacade.getAllLiveDatas();
+		Set<LiveData> preferences = backendFacade.getUserPreferences(userId);
+		
+		Iterator<LiveData> it = liveDatas.iterator();
+		while (it.hasNext()) {
+		   LiveData liveData = it.next(); // must be called before you can call i.remove()
+		   if (preferences.contains(liveData)) {
+			   it.remove();
+		   }
+		}
+		
+		return overviewJsonBuilder.buildHiddenDatas(liveDatas);
+	}
+	
+	public List<String> getMeasureNames(Set<LiveData> liveDatas) {
+		List<String> measureNames = new ArrayList<String>();
+		for (LiveData liveData: liveDatas) {
+			measureNames.add(liveData.getSensor().getMeasureName());
+		}
+		return measureNames;
+	}
+	
+	public List<String> getUnits(Set<LiveData> liveDatas) {
+		List<String> units = new ArrayList<String>();
+		for (LiveData liveData: liveDatas) {
+			units.add(liveData.getSensor().getUnit());
+		}
+		return units;
+	}
+	
+	public double roundDecimal(double value, int decimalNumber) {
+		double powerOfTen = Math.pow(10, decimalNumber);
+		return Math.round(value*powerOfTen)/powerOfTen;
+	}
+	
+	
+	/*public JsonArray buildLiveData2(Long userId) {
 		String role = userService.getUserRoleById(userId);
 		if (role.equals("Manager")) {
 			return buildLiveDataManager(userId);
@@ -109,11 +139,6 @@ public class OverviewService {
 		return builder.build();
 	}
 	
-	
-	public LiveDataService getLiveDataService() {
-		return this.liveDataService;
-	}
-	
 	public double combineLiveData(List<User> users, LiveData liveData) {
 		double res = 0;
 		if (liveData.getComputeType().equals("Sum")) {
@@ -132,10 +157,5 @@ public class OverviewService {
 			res = userService.getAvgSensorLiveForUser(userId, liveData.getSensor().getName());
 		}
 		return roundDecimal(res,2);
-	}
-	
-	public double roundDecimal(double value, int decimalNumber) {
-		double powerOfTen = Math.pow(10, decimalNumber);
-		return Math.round(value*powerOfTen)/powerOfTen;
-	}
+	}*/
 }

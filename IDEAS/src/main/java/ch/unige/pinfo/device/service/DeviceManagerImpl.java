@@ -11,10 +11,7 @@ import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
-public class DeviceManagerImpl implements DeviceManager {
-	@Inject 
-	private UserService userService;
-	
+public class DeviceManagerImpl implements DeviceManager {	
 	@Inject 
 	private SensorService sensorService;
 	
@@ -72,8 +69,8 @@ public class DeviceManagerImpl implements DeviceManager {
 	}
 	
 	@Override
-	public String getDeviceDataLive(Long deviceId, String sensorName) {
-		Device device = deviceService.getDeviceById(deviceId);
+	public String getDeviceDataLive(String deviceId, String sensorName) {
+		Device device = deviceService.getDeviceByDeviceId(deviceId);
 		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
 

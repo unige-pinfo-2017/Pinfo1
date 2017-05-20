@@ -21,6 +21,13 @@ export class OverviewService {
 		.then(res => res.json() as Array<any>)
 	}
 
+	public getHiddenData(userId: number): Promise<Array<any>> {
+		return this.http
+		.get(`${this.baseUrl}/overview/hidden-data/${userId}`, {headers: this.headersService.getHeadersJson()})
+		.toPromise()
+		.then(res => res.json() as Array<any>)
+	}
+
 	/*private getHeaders() {
 		// Permet de récupérer les headers
 		let headers = new Headers();

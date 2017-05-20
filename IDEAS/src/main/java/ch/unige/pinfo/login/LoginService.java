@@ -6,16 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 
+import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.user.dom.User;
-import ch.unige.pinfo.user.service.UserService;
 
 public class LoginService {
-	
-	@Inject
-	private UserService userService;
-	
 	@Inject
 	private LoginJsonBuilder loginJsonBuilder;
+	
+	@Inject
+	private BackEndFacade backEndFacade;
 	
 	public LoginService(){}
 	
@@ -46,7 +45,7 @@ public class LoginService {
 	 * User Id if both parameters match the data in database, {@code error} otherwise.
 	 */
 	public String authenticate(String username, String inputPw) {
-		User user = userService.getUserByUsername(username).get(0);
+		User user = backEndFacade.getUserByUsername(username);
 		if (user.getPassword().equals(inputPw)) {
 			return Long.toString(user.getId());
 		}
@@ -70,12 +69,12 @@ public class LoginService {
 	}
 
 	public JsonArray getSubordinates(Long userId) {
-		String role = userService.getUserRoleById(userId);
+		String role = backEndFacade.getUserRoleById(userId);
 		List<User> users ;
 		if (role.equals("Manager")) {
-			users = userService.getUsersOfManager(userId);
+			users = backEndFacade.getUsersOfManager(userId);
 		} else if (role.equals("SysAdmin")) {
-			users = userService.getUsersOfSysAdmin(userId);
+			users = backEndFacade.getUsersOfSysAdmin(userId);
 		} else {
 			users = new ArrayList<User>();
 		}

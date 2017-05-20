@@ -77,14 +77,6 @@ export class TableComponent implements OnInit, OnDestroy {
 	) {}
 
 	public ngOnInit(): void {
-		/*if (sessionStorage.getItem('id') === null) {
-			this.router.navigate([`/login`]);
-		} else {
-			this.currentType="device";
-			this.currentSubtype="PowerSocket";
-			this.getTable(sessionStorage.getItem('id'), this.currentType, this.currentSubtype);
-			this.startTimer(this.refreshRate);
-		}*/
 		this.currentType="device";
 		this.currentSubtype="PowerSocket";
 		this.getTableFromStorage(this.currentType, this.currentSubtype);
@@ -100,15 +92,6 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.columns = this.columnsExample;
 		this.rows = this.rowsExample;
 	}
-
-	/*public getTableFromPath(type: string, subtype: string): void {
-		// Récupère userId depuis l'url du browser
-		this.routeSubscription = this.route.params.subscribe(params => {
-			let userId = params['userId'];
-			// Appel getTable
-			this.getTable(userId, type, subtype);
-		})
-	}*/
 
 	public getTableFromStorage(type: string, subtype: string):  void {
 		this.getTable(Number(sessionStorage.getItem('id')), type, subtype);
@@ -132,26 +115,10 @@ export class TableComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	/*public getDeviceTable(deviceType: string): void {
-		this.getDeviceColumns(deviceType);
-		this.getDeviceData(deviceType);
-	}
-
-	public getDeviceColumns(deviceType: string): Promise<any> {
-		return this.tableService.getDeviceColumns(deviceType).then(
-			columns => this.columns = columns
-		);
-	}
-
-	public getDeviceData(deviceType: string): Promise<any> {
-		return this.tableService.getDeviceData(deviceType).then(
-			data => this.rows = data
-		);
-	}*/
-
   onSelect(event: any) {
       //console.log(this.currentType);
 		// console.log('Event: select', event, this.selected);
+		console.log(this.currentType);
 		if((this.currentType === "device") || (this.currentType === "sensor")) {
 				this.show = !this.show;
 			} else if (this.currentType === "user") {
@@ -160,17 +127,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		}
 	}
 
-  onActivate(event: any) {
-    /*console.log('Event: activate', event);
-	}
-	toggleExpandRow(row: any[]) {
-    	console.log('Toggled Expand Row!', row);
-    	this.table.rowDetail.toggleExpandRow(row);
-  	}
-
-  	onDetailToggle(event: any) {
-    	console.log('Detail Toggled', event);*/
-	}
+  onActivate(event: any) {}
 
 
   public refresh() {

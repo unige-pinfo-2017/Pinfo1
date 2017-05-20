@@ -15,4 +15,5 @@ public interface DeviceService {
 	List<Device> getAllDevices();
 	List<Device> getDevicesBySensorForUser(Long userId, String sensorName);
 	List<Device> getDevicesByTypeDeviceForUser(Long userId, String typeDeviceName);
+	Device getDeviceByDeviceId(String deviceId);
 }

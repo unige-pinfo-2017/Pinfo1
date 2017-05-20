@@ -5,24 +5,106 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
 
+import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.user.dom.User;
-import ch.unige.pinfo.user.service.UserService;
 
 public class TableService {
-	@Inject
-	private UserService userService;
 	
 	@Inject
 	private TableJsonBuilder tableJsonBuilder;
+
+	@Inject
+	private BackEndFacade backEndFacade;	
 	
 	public JsonArray buildTableForDeviceType(String deviceType, Long userId) {
+		// Initialise data structures
+		List<String> columns = new ArrayList<String>();
+		List<List<String>> allValues = new ArrayList<List<String>>();
+		
+		// Fetch data
+		Set<Sensor> sensors = backEndFacade.getSensorsForTypeDevice(deviceType);
+		List<Device> devices = backEndFacade.getAllDevicesForUserByTypeDevice(userId, deviceType);
+		
+		// Construct columns list
+		columns.add("DeviceId");
+		columns.add("Owner");
+		for (Sensor sensor: sensors) {
+			columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]" );
+		}
+		
+		// Construct values list
+		for (Device device: devices) {
+			List<String> values = new ArrayList<String>();
+			values.add(device.getDeviceId());
+			values.add(device.getOwner().getUsername());
+			for (Sensor sensor: sensors) {
+				values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensor.getName()));
+			}
+			allValues.add(values);
+		}
+		
+		// Build table from lists
+		return tableJsonBuilder.buildTable(columns, allValues);
+	}
+	
+	
+	public JsonArray buildTableForUser(Long userId) {
+		List<String> columns = new ArrayList<String>();
+		List<List<String>> allValues = new ArrayList<List<String>>();
+		
+		List<LiveData> liveDatas = backEndFacade.getAllLiveDatas();
+		List<User> users = backEndFacade.getUsersList(userId);
+		
+		columns.add("UserId");
+		columns.add("Username");
+		for (LiveData liveData: liveDatas) {
+			Sensor sensor = liveData.getSensor();
+			columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]");
+		}
+		
+		for (User user: users) {
+			List<String> values = new ArrayList<String>();
+			values.add(Long.toString(user.getId()));
+			values.add(user.getUsername());
+			for (LiveData liveData: liveDatas) {
+				values.add(Double.toString(backEndFacade.getLiveDataValueForUser(user.getId(), liveData.getComputeType(), liveData.getSensor().getName())));
+			}
+			allValues.add(values);
+		}
+		
+		return tableJsonBuilder.buildTable(columns, allValues);
+	}
+
+	public JsonArray buildTableForSensorType(String sensorName, Long userId) {
+		List<String> columns = new ArrayList<String>();
+		List<List<String>> allValues = new ArrayList<List<String>>();
+		
+		List<Device> devices = backEndFacade.getAllDevicesForUserBySensorName(userId, sensorName);
+		Sensor sensor = backEndFacade.getSensorFromSensorName(sensorName);
+		
+		columns.add("DeviceId");
+		columns.add("DeviceType");
+		columns.add("Owner");
+		columns.add("Value [" + sensor.getUnit() + " ]");
+		
+		for (Device device: devices) {
+			List<String> values = new ArrayList<String>();
+			values.add(device.getDeviceId());
+			values.add(device.getType().getName());
+			values.add(device.getOwner().getUsername());
+			values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));
+			allValues.add(values);
+		}
+		
+		return tableJsonBuilder.buildTable(columns, allValues);
+	}
+	
+	/*public JsonArray buildTableForDeviceType2(String deviceType, Long userId) {
 		// Colonnes: Device Id, sensorValue1, sensorValue2, ..., sensorValueN
 		
 		// Initialisation des structures necessaires
@@ -34,8 +116,8 @@ public class TableService {
 		List<String> valuesList = new ArrayList<String>();
 		
 		// Recuperation des senseurs et des devices du user
-		Set<Sensor> sensors = userService.getSensorsForTypeDevice(deviceType);
-		List<Device> devices = userService.getAllDevicesForUserByTypeDevice(userId, deviceType);
+		Set<Sensor> sensors = backEndFacade.getSensorsForTypeDevice(deviceType);
+		List<Device> devices = backEndFacade.getAllDevicesForUserByTypeDevice(userId, deviceType);
 		
 		
 		//TODO: Accéder directement aux columns plutot que de copier
@@ -51,13 +133,12 @@ public class TableService {
 			columnsList.add(content);
 		}
 		
-		
 		// Creation du JSON des lignes
 		for (Device device: devices){
 			valuesList.clear();
 			valuesList.add(device.getDeviceId()); // Ajout du device id
 			for (Sensor sensor: sensors) {
-				valuesList.add(userService.getDeviceDataLive(device.getId(), sensor.getName())); // Ajout des valeurs pour chaque senseur du device
+				valuesList.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensor.getName())); // Ajout des valeurs pour chaque senseur du device
 			}
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList)); // Ajout d'un row
 		}
@@ -65,10 +146,9 @@ public class TableService {
 		tableBuilder.add(columnsBuilder.build()); // Ajout du JSON des columns
 		tableBuilder.add(valuesBuilder.build()); // Ajout du JSON des rows
 		return tableBuilder.build(); // Construction du JSON final
-	}
+	}*/
 	
-	
-	public JsonArray buildTableForSensorType(String sensorName, Long userId) {
+	/*public JsonArray buildTableForSensorType2(String sensorName, Long userId) {
 		// Colonnes: device id, owner, type device, value
 		
 		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
@@ -78,9 +158,9 @@ public class TableService {
 		List<String> columnsList = new ArrayList<String>();
 		List<String> valuesList = new ArrayList<String>();
 		
-		List<Device> devices = userService.getAllDevicesForUserBySensorName(userId, sensorName);
+		List<Device> devices = backEndFacade.getAllDevicesForUserBySensorName(userId, sensorName);
 		
-		Sensor sensor = userService.getSensorFromSensorName(sensorName);
+		Sensor sensor = backEndFacade.getSensorFromSensorName(sensorName);
 		String valueColumn = sensor.getMeasureName() + "  [" + sensor.getUnit() + " ]";
 		
 		columnsBuilder.add(tableJsonBuilder.buildColumn("DeviceId"));
@@ -98,16 +178,19 @@ public class TableService {
 			valuesList.add(device.getDeviceId());
 			valuesList.add(device.getOwner().getUsername());
 			valuesList.add(device.getType().getName());
-			valuesList.add(userService.getDeviceDataLive(device.getId(), sensorName));
+			valuesList.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
 		}
 	
 		tableBuilder.add(columnsBuilder.build());
 		tableBuilder.add(valuesBuilder.build());
 		return tableBuilder.build();
-	}
+	}*/
 	
-	public JsonArray buildTableForUser(Long userId){
+
+	
+	
+	/*public JsonArray buildTableForUser2(Long userId){
 		// Colonnes: device id, owner, type device, value
 		
 		JsonArrayBuilder tableBuilder = Json.createArrayBuilder();
@@ -119,17 +202,17 @@ public class TableService {
 		
 		// TODO: A réfactorer avec la nouvelle architecture
 		List<User> users;
-		String role = userService.getUserRoleById(userId);
+		String role = backEndFacade.getUserRoleById(userId);
 		
 		if (role.equals("Manager")) {
-			users = userService.getUsersOfManager(userId);
+			users = backEndFacade.getUsersOfManager(userId);
 		} else if (role.equals("SysAdmin")) {
-			users = userService.getUsersOfSysAdmin(userId);
+			users = backEndFacade.getUsersOfSysAdmin(userId);
 		} else {
 			users = new ArrayList<User>();
 		}
 		
-		List<LiveData> liveDatas = userService.getAllLiveData();
+		List<LiveData> liveDatas = backEndFacade.getAllLiveDatas();
 		
 		columnsBuilder.add(tableJsonBuilder.buildColumn("UserId"));
 		columnsBuilder.add(tableJsonBuilder.buildColumn("Username"));
@@ -147,7 +230,8 @@ public class TableService {
 			valuesList.add(Long.toString(user.getId()));
 			valuesList.add(user.getUsername());
 			for (LiveData liveData: liveDatas) {
-				valuesList.add(Double.toString(computeLiveData(user.getId(), liveData)));
+				//valuesList.add(Double.toString(computeLiveData(user.getId(), liveData)));
+				valuesList.add(Double.toString(backEndFacade.getLiveDataValueForUser(user.getId(), liveData.getComputeType(), liveData.getSensor().getName())));
 			}
 			valuesBuilder.add(tableJsonBuilder.buildRow(columnsList, valuesList));
 		}
@@ -156,15 +240,6 @@ public class TableService {
 		tableBuilder.add(columnsBuilder.build());
 		tableBuilder.add(valuesBuilder.build());
 		return tableBuilder.build();		
-	}
-	
-	public double computeLiveData(Long userId, LiveData liveData) {
-		double res = 0;
-		if (liveData.getComputeType().equals("Sum")) {
-			res = userService.getSumSensorLiveForUser(userId, liveData.getSensor().getName());
-		} else if (liveData.getComputeType().equals("Average")) {
-			res = userService.getAvgSensorLiveForUser(userId, liveData.getSensor().getName());
-		}
-		return res;
-	}
+	}*/
+
 }

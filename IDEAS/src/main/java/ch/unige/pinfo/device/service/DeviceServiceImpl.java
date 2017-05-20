@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Device;
@@ -48,6 +49,16 @@ public class DeviceServiceImpl implements DeviceService {
 	@Override
 	public Device getDeviceById(Long id) {
 		return entityManager.find(Device.class, id);
+	}
+	
+	public Device getDeviceByDeviceId(String deviceId) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Device> c = cb.createQuery(Device.class);
+		Root<Device> user = c.from(Device.class);
+		Predicate condition = cb.equal(user.get("deviceId"), deviceId);
+		c.where(condition);
+		TypedQuery<Device> query = entityManager.createQuery(c);
+		return query.getResultList().get(0);
 	}
 
 	@Override
