@@ -7,8 +7,8 @@
 <div class="col-sm-9">
     <ul class="menu">
 
-      <li *ngFor="let dat of data"><a href="#">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
-        <!--<button class="close">x</button>--></a></li>
+      <li *ngFor="let dat of data"><a href="">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
+        <!--<button class="close">x</button>--><div align="right"><a (click)=deleteLiveData()>x</a></div></a></li>
 
       <div class="dropdown">
         <button class="dropbtn">+</button>
