@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 import { AuthGuard } from './guard/auth-guard.service';
 import { RoleGuard } from './guard/role-guard.service';
+import {ErrorComponent} from './error.component';
 
 const routes: Routes = [
   	{
@@ -46,6 +47,10 @@ const routes: Routes = [
 		path: 'editing-menu',
 		component: EditingMenuComponent
 	},
+  {
+    path: 'error',
+    component: ErrorComponent
+  }
 ];
 
 @NgModule({

@@ -18,6 +18,7 @@ import {MiddlescreenComponent} from './overview/middlescreen/middlescreen.compon
 import { ChartComponent } from './chart/chart.component';
 import {TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
+import {ErrorComponent} from './error.component';
 
 import { AuthGuard } from './guard/auth-guard.service';
 import { RoleGuard } from './guard/role-guard.service';
@@ -43,7 +44,9 @@ import { RoleGuard } from './guard/role-guard.service';
       MiddlescreenComponent,
 	  ChartComponent,
 	  TableComponent,
-      EditingMenuComponent,
+    EditingMenuComponent,
+    ErrorComponent,
+
   ],
   bootstrap:    [ AppComponent ],
   providers: [ AuthGuard, RoleGuard ]
