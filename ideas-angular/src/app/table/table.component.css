@@ -95,7 +95,7 @@ li a:hover:not(.active) {
 
 .ngx-datatable {
   text-align: left;
-  width:80%;
+  width:60%;
   height: 350px;
   margin:0 auto;
   border-bottom: 1px solid black;

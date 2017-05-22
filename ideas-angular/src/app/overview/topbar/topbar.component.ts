@@ -11,6 +11,7 @@ export class TopbarComponent {
 	 @Input() hiddenData: any[];
 
 	 public deleteLiveData(): void {
-		 // TO DO: effacer element de la liste pour ne plus l'afficher dans topbar 
+		 // TO DO: effacer element de la liste pour ne plus l'afficher dans topbar
+		 console.log("test");
 	 }
 }
