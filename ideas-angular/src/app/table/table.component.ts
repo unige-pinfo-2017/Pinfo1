@@ -92,11 +92,12 @@ export class TableComponent implements OnInit, OnDestroy {
 				this.startTimer(this.refreshRate);
 			}
 		});
-		this.currentType="device";
+
+		/*this.currentType="device";
 		this.currentSubtype="PowerSocket";
 
 		this.getTableFromStorage(this.currentType, this.currentSubtype);
-		this.startTimer(this.refreshRate);
+		this.startTimer(this.refreshRate);*/
 
 
         //this.showDevice = !this.showDevice;
@@ -174,13 +175,13 @@ export class TableComponent implements OnInit, OnDestroy {
     onActivate(event: any) {}
 
 	public checkType(type: string): boolean {
-		if (type == "device") {
+		if (type === "device") {
 			this.currentType = "device";
-			this.currentSubtype = "PowerSocket";
-		} else if (type == "sensor") {
+			this.currentSubtype = "powerSocket";
+		} else if (type === "sensor") {
 			this.currentType = "sensor";
 			this.currentSubtype = "powerSensor";
-		} else if (type == "user") {
+		} else if (type === "user") {
 			this.currentType = "user";
 			this.currentSubtype = "all";
 		} else {
@@ -202,4 +203,11 @@ export class TableComponent implements OnInit, OnDestroy {
             this.showSensor = !this.showSensor;
         }
     }
+
+	onChange(newSubType: any) {
+		this.currentSubtype = newSubType;
+		console.log(this.currentType);
+		console.log(this.currentSubtype);
+		this.refresh();
+	}
 }

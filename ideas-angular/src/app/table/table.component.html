@@ -14,22 +14,22 @@
 
 <div *ngIf="currentType === 'device'; then primaryBlock1;"></div>
     <ng-template #primaryBlock1>
-      Devices:
-      <select>
-        <option value="volvo">PowerSocket</option>
-        <option value="saab">Beacon</option>
-        <option value="opel">Light</option>
+      Device Type:
+      <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
+        <option value="powerSocket">Power Socket</option>
+        <option value="beacon">Beacon</option>
+        <option value="light">Light</option>
       </select>
   </ng-template>
 
 
 
   <div *ngIf="currentType === 'sensor'; then primaryBlock;"></div>
-  <ng-template #primaryBlock>Sensors:
-      <select>
-        <option value="volvo">Power</option>
-        <option value="saab">Temperature</option>
-        <option value="opel">Current</option>
+  <ng-template #primaryBlock>Sensor:
+      <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
+        <option value="powerSensor">Power</option>
+        <option value="temperatureSensor">Temperature</option>
+        <option value="currentSensor">Current</option>
       </select>
   </ng-template>
 
