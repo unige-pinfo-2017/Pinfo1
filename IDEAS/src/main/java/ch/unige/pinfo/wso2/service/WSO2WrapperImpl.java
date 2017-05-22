@@ -2,6 +2,7 @@ package ch.unige.pinfo.wso2.service;
 
 import java.awt.Color;
 
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -16,7 +17,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	WSO2ClientRest wcr;
 	
 	@Inject
-	DeviceManager dm;
+	Instance<DeviceManager> dm;
 	
 	@Override
 	public String getValueLive(String deviceType, String deviceId,  String SensorType){
@@ -179,7 +180,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	 * {@code true} if correspond, {@code false} otherwise.
 	 */
 	public boolean hasSensor(Long deviceId, String sensorName){
-		Device device = dm.getDeviceBySensorName(sensorName);		
+		Device device = dm.get().getDeviceBySensorName(sensorName);		
 		Long id = device.getId();
 		
 		if(id == deviceId){
