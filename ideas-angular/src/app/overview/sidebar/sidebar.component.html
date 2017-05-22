@@ -2,6 +2,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 
@@ -17,8 +19,11 @@
   <li><button (click)="navigateToTable()" class="btn btn-primary btn-block btn-large">View sensor list</button></li>
   <li><button (click)="navigateToTable()" class="btn btn-primary btn-block btn-large">View user list</button></li>
   <br>
-
-  <div class="floating-box" align="center"><span class="⚠"></span>&nbsp; Notifications: (0)</div>
+  <div class="floating-box" align="center">
+    <div class="w3-container">
+      &nbsp; Notifications <span class="w3-badge w3-red">1</span>
+    </div>
+  </div>
   </ul>
   <br><br><br><br>
   <a routerLink="/login" href="#"><h4> Logout</h4></a>
