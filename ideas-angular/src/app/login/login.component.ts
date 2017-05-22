@@ -51,27 +51,23 @@ export class LoginComponent {
 				} else {
 					this.login = 'Authentication successful.';
 					sessionStorage.setItem('id', this.response);
-					this.getSubordinates(this.response);
-					this.getRole(this.response);
-					//this.loginService.getSubordinates(this.response).then(subordinates => sessionStorage.setItem('subordinates', JSON.stringify(subordinates)));
-					//this.loginService.getRole(this.response).then(role => sessionStorage.setItem('role', role));
-					//Mock avec les id des users assignés au Manager
-					//sessionStorage.setItem('Users', JSON.stringify([{id: 1}, {id: 2}, {id: 3}]));
-					console.log(sessionStorage.getItem('role'));
-					this.router.navigateByUrl(`/overview`);
-					//this.router.navigate(['/overview', this.response]);
+					this.setSubordinates(this.response).then( temp =>
+						this.setRole(this.response).then( temp =>
+							this.router.navigate(['/overview'])
+						)
+					);
 				}
 			}).catch(error => this.login = 'Authentication failed');
 		}
 	}
 
-	private getSubordinates(userId: string): void {
-		this.loginService.getSubordinates(userId)
+	private setSubordinates(userId: string): Promise<any> {
+		return this.loginService.getSubordinates(userId)
 			.then(subordinates => sessionStorage.setItem('subordinates', JSON.stringify(subordinates)));
 	}
 
-	private getRole(userId: string): void {
-		this.loginService.getRole(this.response)
+	private setRole(userId: string): Promise<any> {
+		return this.loginService.getRole(this.response)
 			.then(role => sessionStorage.setItem('role', role));
 	}
 }
