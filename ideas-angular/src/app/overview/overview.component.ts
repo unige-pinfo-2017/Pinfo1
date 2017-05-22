@@ -94,11 +94,4 @@ export class OverviewComponent implements OnInit, OnDestroy {
 		this.overviewService.getHiddenData(userId).then(hiddenData => this.hiddenData = hiddenData);
 
 	}
-
-	public navigateToTable(): void {
-		this.routeSubscripton = this.route.params.subscribe(params => {
-			let userId = params['userId'];
-			this.router.navigate([`/table`]);
-		})
-	}
 }

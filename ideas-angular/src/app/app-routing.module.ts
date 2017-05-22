@@ -50,6 +50,18 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent
+  },
+  {
+    path: 'table/users',
+    component: TableComponent
+  },
+  {
+    path: 'table/device/:deviceType',
+    component: TableComponent
+  },
+  {
+    path: 'table/sensor/:sensorType',
+    component: TableComponent
   }
 ];
 

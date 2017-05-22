@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
@@ -74,6 +74,8 @@ export class TableComponent implements OnInit, OnDestroy {
 	public constructor(
 		private tableService: TableService,
 		private router: Router,
+    private route: ActivatedRoute,
+    private users: number,
 	) {}
 
 	public ngOnInit(): void {
@@ -132,5 +134,9 @@ export class TableComponent implements OnInit, OnDestroy {
 
   public refresh() {
     this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
+  }
+
+  private initTableType(type: string): void {
+    this.router.navigate(['/table', type]);
   }
 }
