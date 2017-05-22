@@ -11,6 +11,7 @@ import { Subscription } from "rxjs";
 
 export class SidebarComponent implements OnInit {
 	private role: string;
+	private show: boolean = false;
 
 	private routeSubscripton: Subscription;
 
@@ -28,5 +29,14 @@ export class SidebarComponent implements OnInit {
 	}
 	public ngOnInit(): void {
 		this.role = sessionStorage.getItem('role');
+		console.log(sessionStorage.getItem('role'));
+		this.hideForBasicUser();
+	}
+
+	public hideForBasicUser(): void {
+		console.log(sessionStorage.getItem('role'));
+		if (sessionStorage.getItem('role') === 'Basic') {
+			this.show = !this.show;
+		}
 	}
 }

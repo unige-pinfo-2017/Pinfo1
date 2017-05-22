@@ -44,6 +44,8 @@ export class TableComponent implements OnInit, OnDestroy {
 	private temp: any[] = [];
 	private columns:any[] = [];
 	private filterString: string = "";
+    public showDevice: boolean = false;
+    public showSensor: boolean = false;
 
 	expanded: any = {};
 	selected: any[] = [];
@@ -92,8 +94,14 @@ export class TableComponent implements OnInit, OnDestroy {
 		});
 		this.currentType="device";
 		this.currentSubtype="PowerSocket";
+
 		this.getTableFromStorage(this.currentType, this.currentSubtype);
 		this.startTimer(this.refreshRate);
+
+
+        //this.showDevice = !this.showDevice;
+
+        //this.showSensor = !this.showSensor;
 	}
 
 	public ngOnDestroy(): void {
@@ -186,4 +194,12 @@ export class TableComponent implements OnInit, OnDestroy {
 	this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
 	}
 
+    public displaySubType(): void {
+        if (this.currentType === "device") {
+            this.showDevice = !this.showDevice;
+        }
+        else if (this.currentType === "sensor") {
+            this.showSensor = !this.showSensor;
+        }
+    }
 }

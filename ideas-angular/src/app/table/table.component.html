@@ -12,18 +12,28 @@
   <button class="icon-refresh" (click)="refresh()"><font color="white">Refresh</font></button>
 	<br><br>
 
-  Devices:
-  <select style="display: inline-block;" align="left">
-    <option value="volvo">PowerSocket</option>
-    <option value="saab">Beacon</option>
-    <option value="opel">Light</option>
-  </select>
-  Sensors:
-  <select style="display: inline-block;" align="right">
-    <option value="volvo">Power</option>
-    <option value="saab">Temperature</option>
-    <option value="opel">Current</option>
-  </select>
+<div *ngIf="currentType === 'device'; then primaryBlock1;"></div>
+    <ng-template #primaryBlock1>
+      Devices:
+      <select>
+        <option value="volvo">PowerSocket</option>
+        <option value="saab">Beacon</option>
+        <option value="opel">Light</option>
+      </select>
+  </ng-template>
+
+
+
+  <div *ngIf="currentType === 'sensor'; then primaryBlock;"></div>
+  <ng-template #primaryBlock>Sensors:
+      <select>
+        <option value="volvo">Power</option>
+        <option value="saab">Temperature</option>
+        <option value="opel">Current</option>
+      </select>
+  </ng-template>
+
+  <!--</div>-->
     <br><br>
 
 	<input
