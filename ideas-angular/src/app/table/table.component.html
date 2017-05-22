@@ -11,12 +11,17 @@
 <div>
   <button class="icon-refresh" (click)="refresh()"><font color="white">Refresh</font></button>
 	<br><br>
-
+	<input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the name column...'
+        (keyup)='updateFilter($event)'
+      />
     <div class="table">
       <ngx-datatable
         class="material"
         style="background-color: #F5F5F5; position:relative; display:block; text-align: center; cursor:pointer"
-        [rows]="rows"
+        [rows]="filteredRows"
         [loadingIndicator]="loadingIndicator"
         [columns]="columns"
         [columnMode]="'force'"

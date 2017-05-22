@@ -36,11 +36,15 @@ export class TableComponent implements OnInit, OnDestroy {
 	private timerSubscription: Subscription;
 
 	private routeSubscription: Subscription;
-  public show: boolean = false;
+    public show: boolean = false;
 	private currentType: string;
 	private currentSubtype: string;
 	private rows:any[] = [];
+	private filteredRows: any[] = [];
+	private temp: any[] = [];
 	private columns:any[] = [];
+	private filterString: string = "";
+
 	expanded: any = {};
 	selected: any[] = [];
 	timeout: any;
@@ -74,11 +78,18 @@ export class TableComponent implements OnInit, OnDestroy {
 	public constructor(
 		private tableService: TableService,
 		private router: Router,
-    private route: ActivatedRoute,
-    private users: number,
+    	private route: ActivatedRoute,
 	) {}
 
 	public ngOnInit(): void {
+		this.route.params.subscribe(params => {
+			console.log(params);
+			let flag:boolean = this.checkType(params['type']);
+			if (flag) {
+				this.getTableFromStorage(this.currentType, this.currentSubtype);
+				this.startTimer(this.refreshRate);
+			}
+		});
 		this.currentType="device";
 		this.currentSubtype="PowerSocket";
 		this.getTableFromStorage(this.currentType, this.currentSubtype);
@@ -105,6 +116,8 @@ export class TableComponent implements OnInit, OnDestroy {
 				this.rows = arr[1];
 				this.currentType = type;
 				this.currentSubtype = subtype;
+
+				this.filteredRows = this.rows;
 			});
 	}
 
@@ -117,8 +130,29 @@ export class TableComponent implements OnInit, OnDestroy {
 		})
 	}
 
-  onSelect(event: any) {
-      //console.log(this.currentType);
+	public filtering(val:any): any[] {
+		let filtered: any[] = [];
+		for(let i=0; i<(this.rows.length); i++){
+			let r = this.rows[i];
+			if (r[Object.keys(r)[1]].toLowerCase().indexOf(val) !== -1) {
+				filtered.push(this.rows[i]);
+			}
+		}
+		if (filtered.length > 0) {
+			return filtered;
+		}
+		return this.rows;
+	}
+
+	public updateFilter(event: any) {
+		let val = event.target.value.toLowerCase();
+		console.log(val);
+		//console.log(val);
+		this.filteredRows = this.filtering(val);
+	}
+
+	onSelect(event: any) {
+	  //console.log(this.currentType);
 		// console.log('Event: select', event, this.selected);
 		console.log(this.currentType);
 		if((this.currentType === "device") || (this.currentType === "sensor")) {
@@ -129,14 +163,30 @@ export class TableComponent implements OnInit, OnDestroy {
 		}
 	}
 
-  onActivate(event: any) {}
+    onActivate(event: any) {}
 
+	public checkType(type: string): boolean {
+		if (type == "device") {
+			this.currentType = "device";
+			this.currentSubtype = "PowerSocket";
+		} else if (type == "sensor") {
+			this.currentType = "sensor";
+			this.currentSubtype = "powerSensor";
+		} else if (type == "user") {
+			this.currentType = "user";
+			this.currentSubtype = "all";
+		} else {
+			this.router.navigate(['/overview']);
+			return false;
+		}
+		return true;
+	}
 
-  public refresh() {
-    this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
-  }
+	public refresh() {
+	this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
+	}
 
-  private initTableType(type: string): void {
-    this.router.navigate(['/table', type]);
-  }
+	private initTableType(type: string): void {
+	this.router.navigate(['/table', type]);
+	}
 }
