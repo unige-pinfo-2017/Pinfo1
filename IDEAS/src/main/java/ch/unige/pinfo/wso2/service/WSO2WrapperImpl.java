@@ -1,6 +1,8 @@
 package ch.unige.pinfo.wso2.service;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
@@ -49,6 +51,43 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			String valueTo = joTo.get(SensorType).toString();
 			
 			return valueTo; // - Double.parseDouble(valueFrom);
+		}
+	}
+	
+	//temporaire:
+	@Override
+	public List<String> getValueLive2(String deviceType, String deviceId,  String SensorType){
+		// Retourne la dernière valeur live
+		// A remplacer quand la vraie methode sera donnee
+		List<String> value = new ArrayList<>();
+		
+		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
+			//Recupere les valeurs se truovant dans colorSensor:
+			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+		
+			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
+			
+			JsonObject valueTo = (JsonObject) joTo.get(SensorType);
+			
+			String hueString = valueTo.get("hue").toString();
+			String satString = valueTo.get("saturation").toString();
+			String briString = valueTo.get("kelvin").toString();
+			
+			value.add(hueString);
+			value.add(satString);
+			value.add(briString);
+			
+			return value;
+		}
+		else{
+			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			
+			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
+			String valueTo = joTo.get(SensorType).toString();
+			
+			value.add(valueTo);
+			
+			return value; // - Double.parseDouble(valueFrom);
 		}
 	}
 
