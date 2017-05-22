@@ -20,10 +20,10 @@ export class SidebarComponent implements OnInit {
 	){}
 
 
-	public navigateToTable(): void {
+	public navigateToTable(type: string): void {
 		this.routeSubscripton = this.route.params.subscribe(params => {
 		let userId = params['userId'];
-		this.router.navigate([`/table`]);
+		this.router.navigate(['/table', type]);
 		})
 	}
 	public ngOnInit(): void {
