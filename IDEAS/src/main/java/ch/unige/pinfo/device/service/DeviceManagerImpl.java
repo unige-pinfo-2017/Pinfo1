@@ -1,5 +1,6 @@
 package ch.unige.pinfo.device.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import javax.inject.Inject;
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
+import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
@@ -23,6 +25,9 @@ public class DeviceManagerImpl implements DeviceManager {
 	
 	@Inject
 	private WSO2Wrapper wso2Wrapper;
+	
+	@Inject
+	private UserService userService;
 	
 	@Override
 	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
@@ -60,12 +65,43 @@ public class DeviceManagerImpl implements DeviceManager {
 
 	@Override
 	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
-		return deviceService.getDevicesByTypeDeviceForUser(userId, typeDevice);
+		List<Device> devices = deviceService.getDevicesByTypeDeviceForUser(userId, typeDevice);
+		String role = userService.getUserRoleById(userId);
+		if (role.equals("Manager")) {
+			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfManager(userId), typeDevice));
+		} else if (role.equals("SysAdmin")) {
+			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfSysAdmin(userId), typeDevice));
+		}
+		return devices;
+	}
+	
+	public List<Device> getAllDevicesForUsersByTypeDevice(List<User> users, String typeDevice) {
+		List<Device> devices = new ArrayList<Device>();
+		for (User user: users) {
+			devices.addAll(deviceService.getDevicesByTypeDeviceForUser(user.getId(), typeDevice));
+		}
+		return devices;
 	}
 
 	@Override
 	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName){
-		return deviceService.getDevicesBySensorForUser(userId, sensorName);
+		List<Device> devices = deviceService.getDevicesBySensorForUser(userId, sensorName);
+		String role = userService.getUserRoleById(userId);
+		if (role.equals("Manager")) {
+			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfManager(userId), sensorName));
+		} else if (role.equals("SysAdmin")) {
+			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfSysAdmin(userId), sensorName));
+		}
+		return devices;
+	}
+	
+	@Override
+	public List<Device> getAllDevicesForUsersBySensorName(List<User> users, String sensorName) {
+		List<Device> devices = new ArrayList<Device>();
+		for (User user: users) {
+			devices.addAll(deviceService.getDevicesBySensorForUser(user.getId(), sensorName));
+		}
+		return devices;
 	}
 	
 	@Override

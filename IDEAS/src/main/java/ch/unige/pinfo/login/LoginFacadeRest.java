@@ -30,5 +30,12 @@ public class LoginFacadeRest {
 	public JsonArray getSubordinates(@PathParam("userId") Long userId) {
 		return loginService.getSubordinates(userId);
 	}
+	
+	@GET
+	@Produces({ MediaType.TEXT_PLAIN })
+	@Path("/get-role/{userId}")
+	public String getRole(@PathParam("userId") Long userId) {
+		return loginService.getRole(userId);
+	}
 }
 

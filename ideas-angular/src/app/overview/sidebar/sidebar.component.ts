@@ -9,7 +9,8 @@ import { Subscription } from "rxjs";
 	styleUrls: ['./sidebar.component.css'],
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+	private role: string;
 
 	private routeSubscripton: Subscription;
 
@@ -24,5 +25,8 @@ export class SidebarComponent {
 		let userId = params['userId'];
 		this.router.navigate([`/table`]);
 		})
+	public ngOnInit(): void {
+		this.role = sessionStorage.getItem('role');
+	}
 	}
 }

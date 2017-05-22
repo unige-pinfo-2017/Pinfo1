@@ -81,4 +81,8 @@ public class LoginService {
 		return loginJsonBuilder.buildIds(users);
 	}
 
+	public String getRole(Long userId) {
+		return backEndFacade.getUserRoleById(userId);
+	}
+
 }

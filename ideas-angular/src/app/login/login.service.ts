@@ -29,6 +29,13 @@ export class LoginService {
 			.then(res => res.json())
 	}
 
+	public getRole(userId: string) {
+		return this.http
+			.get(`${this.baseUrl}/login/get-role/${userId}`, {headers: this.headersService.getHeadersPlainText()})
+			.toPromise()
+			.then(res => res.text() as string)
+	}
+
 	/*
 	getHeroes(): Promise<Hero[]> {
 		return this.http.get(this.heroesUrl)

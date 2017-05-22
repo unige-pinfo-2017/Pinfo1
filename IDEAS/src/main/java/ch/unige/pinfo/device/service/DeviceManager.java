@@ -5,6 +5,7 @@ import java.util.Set;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.user.dom.User;
 
 public interface DeviceManager {
 	String getDeviceDataLive(String deviceId, String sensorName);
@@ -15,4 +16,5 @@ public interface DeviceManager {
 	List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
 	Sensor getSensorFromSensorName(String sensorName);
 	Device getDeviceBySensorName(String sensorName);
+	List<Device> getAllDevicesForUsersBySensorName(List<User> users, String sensorName);
 } 
