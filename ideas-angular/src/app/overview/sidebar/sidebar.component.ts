@@ -25,8 +25,8 @@ export class SidebarComponent implements OnInit {
 		let userId = params['userId'];
 		this.router.navigate([`/table`]);
 		})
+	}
 	public ngOnInit(): void {
 		this.role = sessionStorage.getItem('role');
-	}
 	}
 }
