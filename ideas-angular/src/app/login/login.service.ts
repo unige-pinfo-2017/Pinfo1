@@ -22,14 +22,14 @@ export class LoginService {
 			.then(res => res.text() as string)
 	}
 
-	public getSubordinates(userId: string){
+	public getSubordinates(userId: string): Promise<any[]> {
 		return this.http
 			.get(`${this.baseUrl}/login/get-subordinates/${userId}`, {headers: this.headersService.getHeadersJson()})
 			.toPromise()
 			.then(res => res.json())
 	}
 
-	public getRole(userId: string) {
+	public getRole(userId: string): Promise<string> {
 		return this.http
 			.get(`${this.baseUrl}/login/get-role/${userId}`, {headers: this.headersService.getHeadersPlainText()})
 			.toPromise()

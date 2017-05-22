@@ -17,11 +17,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
-import ch.unige.pinfo.overview.dom.LiveData;
-import ch.unige.pinfo.overview.service.OverviewService;
 import ch.unige.pinfo.user.dom.Basic;
 import ch.unige.pinfo.user.dom.Manager;
 import ch.unige.pinfo.user.dom.SysAdmin;

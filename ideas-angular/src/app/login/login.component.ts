@@ -57,6 +57,7 @@ export class LoginComponent {
 					//this.loginService.getRole(this.response).then(role => sessionStorage.setItem('role', role));
 					//Mock avec les id des users assignés au Manager
 					//sessionStorage.setItem('Users', JSON.stringify([{id: 1}, {id: 2}, {id: 3}]));
+					console.log(sessionStorage.getItem('role'));
 					this.router.navigateByUrl(`/overview`);
 					//this.router.navigate(['/overview', this.response]);
 				}
