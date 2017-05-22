@@ -39,7 +39,7 @@ div.scrollmenu a:hover {
 	height: auto;
 	padding: 15px;
   }
-  .row.content {height: auto;} 
+  .row.content {height: auto;}
 }
 
 .menu {
@@ -78,6 +78,3 @@ li a:hover:not(.active) {
 .menu > li + li:before {
   padding-right: 0.2em;
 }
-
-
-
