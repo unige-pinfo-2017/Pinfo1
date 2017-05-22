@@ -1,6 +1,8 @@
 package ch.unige.pinfo.wso2.service;
 
 import java.awt.Color;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,11 +73,11 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			
 			String hueString = valueTo.get("hue").toString();
 			String satString = valueTo.get("saturation").toString();
-			String briString = valueTo.get("kelvin").toString();
+			String kelString = valueTo.get("kelvin").toString();
 			
 			value.add(hueString);
 			value.add(satString);
-			value.add(briString);
+			value.add(kelString);
 			
 			return value;
 		}
@@ -105,6 +107,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return readings;
 	}
 	
+	@Override
 	public String changePowerSocketStatus(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "PowerSocket";
@@ -116,6 +119,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
+	@Override
 	public String changeLightStatus(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
@@ -127,6 +131,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
+	@Override
 	public String changeLightBrightness(String deviceId, double state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
@@ -139,6 +144,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
+	@Override
 	public String changeLightSaturation(String deviceId, double state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
@@ -151,6 +157,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
+	@Override
 	public String changeLightHue(String deviceId, int state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
@@ -163,6 +170,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
+	@Override
 	public String changeLightKelvin(String deviceId, int state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
@@ -174,6 +182,38 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		}
 		return response;
 	}
+	
+	//TODO: verify if we get String or list<String> at the end. Put String temporarily.
+	@Override
+	public String getLive(String deviceType, String deviceId,  String SensorType){
+		
+		Instant now = Instant.now();
+		Duration duration = Duration.ofMinutes(5);
+		Instant before =  now.minus(duration); 
+		String[] value = null;
+		
+		boolean stop = false;
+		while(stop){
+			
+			String nowString = String.valueOf(now);
+			String beforeString = String.valueOf(before);
+			
+			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, beforeString, nowString);
+			
+			if (states == null){
+				before = before.minus(duration);
+			}
+			else{
+				value = new String[states.size()];
+				for (int i=0; i<states.size(); i++) {
+					value[i] = ((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString();
+				}
+				stop = true;
+			}
+		}
+		return value[0];
+	}
+	
 	
 	/**
 	 * <b>getHSBColor</b>

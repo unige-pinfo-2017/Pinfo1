@@ -7,6 +7,8 @@ public interface WSO2Wrapper {
 	//temporaire
 	List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);
 	
+	String getLive(String deviceType, String deviceId,  String SensorType);
+	
 	/**
 	 * <b>getValueLive</b>
 	 * <p>
