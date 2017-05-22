@@ -29,9 +29,12 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		// A remplacer quand la vraie methode sera donnee
 		
 		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
+			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			JsonArray statesB = getLive(deviceType, deviceId, "brightnessSensor");
+			
 			//Recupere la couleur HSB la converti en RGB et la renvoit en String:
-			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
-			JsonArray statesB = wcr.getStates(deviceType, deviceId, "brightnessSensor", "0", "0");
+			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			//JsonArray statesB = wcr.getStates(deviceType, deviceId, "brightnessSensor", "0", "0");
 			
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 			JsonObject joToB = (JsonObject) statesB.getJsonObject(statesB.size()-1).get("values");
@@ -47,7 +50,9 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			return rgb;
 		}
 		else{
-			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			
+			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 			
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 			String valueTo = joTo.get(SensorType).toString();
@@ -64,8 +69,10 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		List<String> value = new ArrayList<>();
 		
 		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
+			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			
 			//Recupere les valeurs se truovant dans colorSensor:
-			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 		
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 			
@@ -82,7 +89,9 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			return value;
 		}
 		else{
-			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
+			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			
+			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 			
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 			String valueTo = joTo.get(SensorType).toString();
@@ -183,35 +192,30 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return response;
 	}
 	
-	//TODO: verify if we get String or list<String> at the end. Put String temporarily.
 	@Override
-	public String getLive(String deviceType, String deviceId,  String SensorType){
+	public JsonArray getLive(String deviceType, String deviceId,  String SensorType){
 		
 		Instant now = Instant.now();
 		Duration duration = Duration.ofMinutes(5);
 		Instant before =  now.minus(duration); 
-		String[] value = null;
+		JsonArray states = null;
 		
-		boolean stop = false;
+		boolean stop = true;
 		while(stop){
 			
 			String nowString = String.valueOf(now);
 			String beforeString = String.valueOf(before);
 			
-			JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, beforeString, nowString);
+			states = wcr.getStates(deviceType, deviceId, SensorType, beforeString, nowString);
 			
 			if (states == null){
 				before = before.minus(duration);
 			}
 			else{
-				value = new String[states.size()];
-				for (int i=0; i<states.size(); i++) {
-					value[i] = ((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString();
-				}
-				stop = true;
+				stop = false;
 			}
 		}
-		return value[0];
+		return states;
 	}
 	
 	

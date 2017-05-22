@@ -2,12 +2,14 @@ package ch.unige.pinfo.wso2.service;
 
 import java.util.List;
 
+import javax.json.JsonArray;
+
 public interface WSO2Wrapper {
 	
 	//temporaire
 	List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);
 	
-	String getLive(String deviceType, String deviceId,  String SensorType);
+	JsonArray getLive(String deviceType, String deviceId,  String SensorType);
 	
 	/**
 	 * <b>getValueLive</b>
