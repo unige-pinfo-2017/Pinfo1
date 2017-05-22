@@ -78,7 +78,7 @@ export class TableComponent implements OnInit, OnDestroy {
 	public constructor(
 		private tableService: TableService,
 		private router: Router,
-    	private route: ActivatedRoute,
+        private route: ActivatedRoute,
 	) {}
 
 	public ngOnInit(): void {
@@ -186,7 +186,4 @@ export class TableComponent implements OnInit, OnDestroy {
 	this.getTable(Number(sessionStorage.getItem('id')), this.currentType, this.currentSubtype);
 	}
 
-	private initTableType(type: string): void {
-	this.router.navigate(['/table', type]);
-	}
 }
