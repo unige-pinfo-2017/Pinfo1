@@ -13,6 +13,7 @@
 	<br><br>
 
 <div *ngIf="currentType === 'device'; then primaryBlock1;"></div>
+
     <ng-template #primaryBlock1>
       Device Type:
       <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
