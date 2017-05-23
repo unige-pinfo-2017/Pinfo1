@@ -8,7 +8,8 @@ import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
 import {EditingMenuComponent} from './table/editing-menu/editing-menu.component';
 import { AuthGuard } from './guard/auth-guard.service';
-import { RoleGuard } from './guard/role-guard.service';
+import { SubordinateGuard } from './guard/subordinate-guard.service';
+import {RoleGuard} from './guard/role-guard.service';
 import {ErrorComponent} from './error.component';
 
 const routes: Routes = [
@@ -28,7 +29,7 @@ const routes: Routes = [
 	{
 		path: 'overview/:userId',
 		component: OverviewComponent,
-		canActivate: [ AuthGuard, RoleGuard ]
+		canActivate: [ AuthGuard, SubordinateGuard ]
 	},
 	{
 		path: 'login',
@@ -38,11 +39,12 @@ const routes: Routes = [
 		path: 'chart',
 		component: ChartComponent
 	},
-	{
+	/*{
 		path: 'table',
 		component: TableComponent,
 		canActivate: [ AuthGuard ]
 	},
+    */
 	{
 		path: 'editing-menu',
 		component: EditingMenuComponent
@@ -53,7 +55,8 @@ const routes: Routes = [
   },
   {
 	  path: 'table/:type',
-	  component: TableComponent
+	  component: TableComponent,
+      canActivate: [AuthGuard, RoleGuard]
   }
 ];
 

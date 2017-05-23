@@ -1,36 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
-import { Subscription} from "rxjs";
-
-
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
 
-    private sub: Subscription;
-
-
-    constructor(
-		private router: Router,
-		private activatedroute: ActivatedRoute) { }
+    constructor(private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot) {
-      let userId: string = route.params['userId'];
-      let flag:boolean=this.check(userId);
-      if(!flag){
-        this.router.navigate(['/overview']);
-      }
-      return flag;
-  }
+        let type: string = route.params['type'];
 
-	public check(userId: string): boolean{
-		let subordinates: any[] = JSON.parse(sessionStorage.getItem('subordinates'));
-		for(let i =0; i < (subordinates.length); i++ ){
-			if ((JSON.parse(sessionStorage.getItem('subordinates'))[i].id)==userId){
-	    		return true;
-			}
-		}
-		return false;
-	}
+        if(type === 'user') {
 
+            if ((sessionStorage.getItem('role') === 'Manager') || (sessionStorage.getItem('role') === 'SysAdmin')) {
+                return true;
+            }
+            this.router.navigate(['/overview']);
+            return false;
+        }
+        return true;
+    }
 }
