@@ -78,5 +78,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        
+        <sonar.host.url>
+              http://pinfo1.unige.ch:9000
+         </sonar.host.url>
     </properties>
 </project>
