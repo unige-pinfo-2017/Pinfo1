@@ -21,6 +21,21 @@ public class TableService {
 	@Inject
 	private BackEndFacade backEndFacade;	
 	
+	public List<String> addColorToColumns(List<String> columns) {
+		columns.add("Hue [° ]");
+		columns.add("Saturation ");
+		columns.add("Kelvin [K ]");
+		return columns;
+	}
+	
+	public List<String> addColorToValues(List<String> values, String deviceType, String deviceId) {
+		List<String> stringsOfColorSensor = backEndFacade.getDeviceDataLiveColor(deviceType, deviceId);
+		for (String string: stringsOfColorSensor) {
+			values.add(string);
+		}
+		return values;
+	}
+	
 	public JsonArray buildTableForDeviceType(String deviceType, Long userId) {
 		// Initialise data structures
 		List<String> columns = new ArrayList<String>();
@@ -34,7 +49,11 @@ public class TableService {
 		columns.add("DeviceId");
 		columns.add("Owner");
 		for (Sensor sensor: sensors) {
-			columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]" );
+			if (sensor.getName().equals("colorSensor")) {
+				columns = addColorToColumns(columns);
+			} else {
+				columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]" );
+			}
 		}
 		
 		// Construct values list
@@ -43,7 +62,11 @@ public class TableService {
 			values.add(device.getDeviceId());
 			values.add(device.getOwner().getUsername());
 			for (Sensor sensor: sensors) {
-				values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensor.getName()));
+				if (sensor.getName().equals("colorSensor")) {
+					values = addColorToValues(values, deviceType, device.getDeviceId());
+				} else {
+					values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensor.getName()));
+				}
 			}
 			allValues.add(values);
 		}
@@ -90,18 +113,37 @@ public class TableService {
 		columns.add("DeviceId");
 		columns.add("DeviceType");
 		columns.add("Owner");
-		columns.add("Value [" + sensor.getUnit() + " ]");
+		
+		if (sensor.getName().equals("colorSensor")) {
+			columns = addColorToColumns(columns);
+		} else {
+			columns.add("Value [" + sensor.getUnit() + " ]");
+		}
 		
 		for (Device device: devices) {
 			List<String> values = new ArrayList<String>();
 			values.add(device.getDeviceId());
 			values.add(device.getType().getName());
 			values.add(device.getOwner().getUsername());
-			values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));
+			
+			if (sensor.getName().equals("colorSensor")) {
+				values = addColorToValues(values, device.getType().getName(), device.getDeviceId());
+			} else {
+				values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));				
+			}
 			allValues.add(values);
 		}
 		
 		return tableJsonBuilder.buildTable(columns, allValues);
+	}
+	
+	public String getColorTest() {
+		String s="";
+		List<String> values = backEndFacade.getDeviceDataLiveColor("Light", "id9");
+		for (String value: values) {
+			s += value + " ";
+		}
+		return s;
 	}
 	
 	/*public JsonArray buildTableForDeviceType2(String deviceType, Long userId) {

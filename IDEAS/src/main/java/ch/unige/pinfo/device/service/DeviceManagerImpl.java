@@ -46,6 +46,25 @@ public class DeviceManagerImpl implements DeviceManager {
 		return sum/ld.size();
 	}
 	
+	/*public double getAvgSensorLiveForUser2(Long userId, String sensorName) {
+		double sum = 0;
+		
+		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
+		
+		if (ld.size() == 0) {
+			return 0;
+		}
+		
+		for (Device device: ld){
+			List<String> values = wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
+			if (values.size() == 1) {
+				sum += Double.parseDouble(values.get(0));
+			}
+		}
+		
+		return sum/ld.size();
+	}*/
+	
 	@Override
 	public double getSumSensorLiveForUser(Long userId, String sensorName) {
 		double sum = 0;
@@ -57,6 +76,26 @@ public class DeviceManagerImpl implements DeviceManager {
 		
 		return sum;
 	}
+	
+	/*public double getSumSensorLiveForUser2(Long userId, String sensorName) {
+		double sum = 0;
+		
+		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
+		
+		if (ld.size() == 0) {
+			return 0;
+		}
+		
+		for (Device device: ld){
+			List<String> values = wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
+			if (values.size() == 1) {
+				sum += Double.parseDouble(values.get(0));
+			}
+		}
+		
+		return sum;
+		
+	}*/
 
 	@Override
 	public Set<Sensor> getSensorsForTypeDevice(String name) {
@@ -109,6 +148,11 @@ public class DeviceManagerImpl implements DeviceManager {
 		Device device = deviceService.getDeviceByDeviceId(deviceId);
 		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
+	
+	/*public List<String> getDeviceDataLive2(String deviceId, String sensorName) {
+		Device device = deviceService.getDeviceByDeviceId(deviceId);
+		return wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
+	}*/
 
 	@Override
 	public Sensor getSensorFromSensorName(String sensorName) {
@@ -126,5 +170,15 @@ public class DeviceManagerImpl implements DeviceManager {
 			}
 		}
 		return device;
+	}
+
+	@Override
+	public List<String> getDeviceDataLiveColor(String deviceType, String deviceId) {
+		return wso2Wrapper.getValueLiveColor(deviceType, deviceId);
+	}
+
+	@Override
+	public String getDeviceTypeNameFromDeviceId(String deviceId) {
+		return deviceService.getDeviceByDeviceId(deviceId).getType().getName();
 	}
 }

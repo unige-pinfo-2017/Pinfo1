@@ -24,6 +24,10 @@ public class BackEndFacade {
 	@Inject
 	LiveDataService liveDataService;
 	
+	public String getDeviceTypeNameFromDeviceId(String deviceId) {
+		return deviceManager.getDeviceTypeNameFromDeviceId(deviceId);
+	}
+	
 	public List<User> getUsersList(Long userId) {
 		List<User> users; 
 		String role = getUserRoleById(userId);
@@ -35,6 +39,10 @@ public class BackEndFacade {
 			users = new ArrayList<User>();
 		}
 		return users;
+	}
+	
+	public List<String> getDeviceDataLiveColor(String deviceType, String deviceId) {
+		return deviceManager.getDeviceDataLiveColor(deviceType, deviceId);
 	}
 	
 	public Set<Sensor> getSensorsForTypeDevice(String deviceType) {

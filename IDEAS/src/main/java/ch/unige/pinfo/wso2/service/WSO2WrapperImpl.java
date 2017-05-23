@@ -28,7 +28,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		// Retourne la dernière valeur live
 		// A remplacer quand la vraie methode sera donnee
 		
-		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
+		/*if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
 			JsonArray states = polling(deviceType, deviceId, SensorType);
 			JsonArray statesB = polling(deviceType, deviceId, "brightnessSensor");
 			
@@ -49,19 +49,19 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			
 			return rgb;
 		}
-		else{
-			
+		else {*/
 			JsonArray states = polling(deviceType, deviceId, SensorType);
 			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 			
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
-			String valueTo = joTo.get(SensorType).toString();
 			
+			
+			String valueTo = joTo.get(SensorType).toString();
 			return valueTo; // - Double.parseDouble(valueFrom);
-		}
+		//}
 	}
 	
-	//temporaire:
+	/*//temporaire:
 	@Override
 	public List<String> getValueLive2(String deviceType, String deviceId,  String SensorType){
 		// Retourne la dernière valeur live
@@ -100,7 +100,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			
 			return value; // - Double.parseDouble(valueFrom);
 		}
-	}
+	}*/
 
 	@Override
 	public String[] getValue(String deviceType, String deviceId, String SensorType, String From, String To) {
@@ -216,6 +216,18 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			}
 		}
 		return states;
+	}
+	
+	@Override
+	public List<String> getValueLiveColor(String deviceType, String deviceId) {
+		List<String> values = new ArrayList<String>();
+		JsonArray states = polling(deviceType, deviceId, "colorSensor");
+		JsonObject live = (JsonObject) states.getJsonObject(states.size()-1).get("values");
+		live = (JsonObject) live.get("colorSensor");
+		values.add(live.get("hue").toString());
+		values.add(live.get("saturation").toString());
+		values.add(live.get("kelvin").toString());
+		return values;
 	}
 	
 	

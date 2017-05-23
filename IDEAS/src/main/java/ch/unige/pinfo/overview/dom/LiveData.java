@@ -43,7 +43,7 @@ public class LiveData {
     
     //public LiveData() {}
     
-    @Override
+    /*@Override
     public boolean equals(Object obj){
     	LiveData liveData = (LiveData) obj;
     	if (!liveData.getId().equals(this.id)) return false;
@@ -53,7 +53,7 @@ public class LiveData {
     @Override
     public int hashCode(){
     	return this.id.hashCode();
-    }
+    }*/
 
 	// Getters & Setters
 	public Long getId() {

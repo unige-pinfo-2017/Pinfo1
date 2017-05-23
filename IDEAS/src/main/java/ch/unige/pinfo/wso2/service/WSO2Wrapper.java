@@ -7,7 +7,7 @@ import javax.json.JsonArray;
 public interface WSO2Wrapper {
 	
 	//temporaire
-	List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);
+	//List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);
 	
 	JsonArray polling(String deviceType, String deviceId,  String SensorType);
 	
@@ -135,4 +135,6 @@ public interface WSO2Wrapper {
 	 * Response of the server.
 	 */
 	String changeLightKelvin(String deviceId, int state);
+
+	List<String> getValueLiveColor(String deviceType, String deviceId);
 }

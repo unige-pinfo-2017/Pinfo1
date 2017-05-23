@@ -33,17 +33,23 @@ export class TableComponent implements OnInit, OnDestroy {
 	@ViewChild('myTable') table: any;
 
 	private refreshRate: number = 60*1000; // Fréquence de rafraichissement en milliseconde
-	private timerSubscription: Subscription;
 
+	private timerSubscription: Subscription;
 	private routeSubscription: Subscription;
-    public show: boolean = false;
+
+
 	private currentType: string;
 	private currentSubtype: string;
 	private rows:any[] = [];
 	private filteredRows: any[] = [];
-	private temp: any[] = [];
+	//private temp: any[] = [];
 	private columns:any[] = [];
-	private filterString: string = "";
+	//private filterString: string = "";
+
+	private selectedRow:any[] = [];
+	private selectedDeviceType: string;
+
+	public show: boolean = false;
     public showDevice: boolean = false;
     public showSensor: boolean = false;
 
@@ -161,14 +167,20 @@ export class TableComponent implements OnInit, OnDestroy {
 	}
 
 	onSelect(event: any) {
-	  //console.log(this.currentType);
+		//console.log(this.currentType);
 		// console.log('Event: select', event, this.selected);
 		console.log(this.currentType);
 		if((this.currentType === "device") || (this.currentType === "sensor")) {
-				this.show = !this.show;
-			} else if (this.currentType === "user") {
-				let selectedUserId = this.selected[0]['UserId'];
-				this.router.navigate(['/overview', selectedUserId]);
+			this.selectedRow = this.selected;
+			this.show = !this.show;
+			if (this.currentType === "device") {
+				this.selectedDeviceType = this.currentSubtype;
+			} else {
+				this.selectedDeviceType = this.selectedRow[0].DeviceType;
+			}
+		} else if (this.currentType === "user") {
+			let selectedUserId = this.selected[0]['UserId'];
+			this.router.navigate(['/overview', selectedUserId]);
 		}
 	}
 
@@ -177,7 +189,7 @@ export class TableComponent implements OnInit, OnDestroy {
 	public checkType(type: string): boolean {
 		if (type === "device") {
 			this.currentType = "device";
-			this.currentSubtype = "powerSocket";
+			this.currentSubtype = "PowerSocket";
 		} else if (type === "sensor") {
 			this.currentType = "sensor";
 			this.currentSubtype = "powerSensor";

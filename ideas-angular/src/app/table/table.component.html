@@ -17,9 +17,9 @@
     <ng-template #primaryBlock1>
       Device Type:
       <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
-        <option value="powerSocket">Power Socket</option>
-        <option value="beacon">Beacon</option>
-        <option value="light">Light</option>
+        <option value="PowerSocket">Power Socket</option>
+        <option value="Beacon">Beacon</option>
+        <option value="Light">Light</option>
       </select>
   </ng-template>
 
@@ -28,9 +28,16 @@
   <div *ngIf="currentType === 'sensor'; then primaryBlock;"></div>
   <ng-template #primaryBlock>Sensor:
       <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
+		<option value="batterySensor">Battery</option>
+		<option value="brightnessSensor">Brightness</option>
+		<option value="colorSensor">Color</option>
+		<option value="currentSensor">Current</option>
+		<option value="lightSensor">Light Intensity</option>
         <option value="powerSensor">Power</option>
+		<option value="statusSensor">Status</option>
         <option value="temperatureSensor">Temperature</option>
-        <option value="currentSensor">Current</option>
+
+
       </select>
   </ng-template>
 
@@ -99,7 +106,7 @@
 
 <div *ngIf="show">
   <div align="right" style="padding-right: 280px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
-<editing-menu [tableColumns]="columns" [tableRows]="rows"></editing-menu>
+<editing-menu [tableColumns]="columns" [selectedRow]="selectedRow" [selectedDeviceType]="selectedDeviceType"></editing-menu>
 </div>
 
 <!--
