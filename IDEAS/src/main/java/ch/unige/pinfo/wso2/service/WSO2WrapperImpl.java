@@ -29,8 +29,8 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		// A remplacer quand la vraie methode sera donnee
 		
 		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
-			JsonArray states = getLive(deviceType, deviceId, SensorType);
-			JsonArray statesB = getLive(deviceType, deviceId, "brightnessSensor");
+			JsonArray states = polling(deviceType, deviceId, SensorType);
+			JsonArray statesB = polling(deviceType, deviceId, "brightnessSensor");
 			
 			//Recupere la couleur HSB la converti en RGB et la renvoit en String:
 			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
@@ -51,7 +51,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		}
 		else{
 			
-			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			JsonArray states = polling(deviceType, deviceId, SensorType);
 			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 			
 			JsonObject joTo = (JsonObject) states.getJsonObject(states.size()-1).get("values");
@@ -69,7 +69,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		List<String> value = new ArrayList<>();
 		
 		if(deviceType.equals("Light") && SensorType.equals("colorSensor")){
-			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			JsonArray states = polling(deviceType, deviceId, SensorType);
 			
 			//Recupere les valeurs se truovant dans colorSensor:
 			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
@@ -89,7 +89,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			return value;
 		}
 		else{
-			JsonArray states = getLive(deviceType, deviceId, SensorType);
+			JsonArray states = polling(deviceType, deviceId, SensorType);
 			
 			//JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, "0", "0");
 			
@@ -193,7 +193,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}
 	
 	@Override
-	public JsonArray getLive(String deviceType, String deviceId,  String SensorType){
+	public JsonArray polling(String deviceType, String deviceId,  String SensorType){
 		
 		Instant now = Instant.now();
 		Duration duration = Duration.ofMinutes(5);
