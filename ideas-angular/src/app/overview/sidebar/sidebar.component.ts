@@ -12,6 +12,8 @@ import { Subscription } from "rxjs";
 export class SidebarComponent implements OnInit {
 	private role: string;
 	private show: boolean = false;
+	private i: number = 1;
+	private showNotif: boolean = false;
 
 	private routeSubscripton: Subscription;
 
@@ -20,6 +22,10 @@ export class SidebarComponent implements OnInit {
 		private route: ActivatedRoute
 	){}
 
+	public notifClick(){
+      //this.i = this.i-1;
+			this.showNotif = !this.showNotif;
+  }
 
 	public navigateToTable(type: string): void {
 		this.routeSubscripton = this.route.params.subscribe(params => {

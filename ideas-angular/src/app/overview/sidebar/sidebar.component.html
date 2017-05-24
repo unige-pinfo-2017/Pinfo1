@@ -25,13 +25,12 @@
     </ng-template>
 
   <br>
-  <div class="floating-box" align="center">
-    <div class="w3-container">
-      &nbsp; Notifications <span class="w3-badge w3-red">1</span>
+    <div align ="center" class="w3-container">
+      <h4>Notifications <span (click)="notifClick()" class="w3-badge w3-xlarge w3-red">{{i}}</span></h4>
+      <div class="floating-box" align="center" *ngIf="showNotif"> Test
     </div>
   </div>
   </ul>
-  <br><br>
   <!-- a routerLink="/login" href="#"><h4> Logout</h4></a-->
   <a routerLink="/login" (click)="logout()"><h4> Logout</h4></a>
 <br>

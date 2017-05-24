@@ -7,6 +7,9 @@
   height: 100%;
 }
 
+.w3-badge {
+  cursor:pointer;
+}
 /* Set black background color, white text and some padding */
 footer {
   background-color: #555;
