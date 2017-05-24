@@ -2,13 +2,13 @@
 <div class="col-sm-9">
     <ul class="menu">
 
-      <li *ngFor="let dat of data"><a>{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
-        <!--<button class="close">x</button>--><a style="cursor:pointer;" (click)=deleteLiveData()>x</a></a></li>
+      <li *ngFor="let dat of data"><a (click)="changeLiveData(dat.name)">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
+        <!--<button class="close">x</button>--><a style="cursor:pointer;" (click)="deleteLiveData(dat.name)">x</a></a></li>
 
       <div class="dropdown">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
-          <a *ngFor="let da of hiddenData" href="#">{{da.name}}</a>
+          <a *ngFor="let hidden of hiddenData" (click)="addLiveData(hidden.name)">{{hidden.name}}</a>
         </div>
       </div>
     </ul>
