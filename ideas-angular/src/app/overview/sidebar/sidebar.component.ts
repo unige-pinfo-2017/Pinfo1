@@ -39,4 +39,9 @@ export class SidebarComponent implements OnInit {
 			this.show = !this.show;
 		}
 	}
+
+	public logout(): void {
+		sessionStorage.clear();
+		this.router.navigate(['/login']);
+	}
 }
