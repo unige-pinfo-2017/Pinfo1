@@ -19,6 +19,8 @@ import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
+import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.Basic;
 import ch.unige.pinfo.user.dom.Manager;
 import ch.unige.pinfo.user.dom.SysAdmin;
@@ -29,6 +31,9 @@ import ch.unige.pinfo.user.dom.User;
 public class UserServiceImpl implements UserService{
 	@Inject 
 	private DeviceManager deviceManager;
+	
+	@Inject 
+	private LiveDataService liveDataService;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -108,6 +113,20 @@ public class UserServiceImpl implements UserService{
 		return entityManager.find(SysAdmin.class, id);
 	}
 
+	@Override
+	public void addPreference(Long userId, Long liveDataId) {
+		LiveData ld = liveDataService.getLiveDataById(liveDataId);
+		this.getUserById(userId).getPreferences().add(ld);
+		ld.getUsers().add(this.getUserById(userId));
+	}
+	
+	@Override
+	public void RemovePreference(Long userId, Long liveDataId) {
+		LiveData ld = liveDataService.getLiveDataById(liveDataId);
+		this.getUserById(userId).getPreferences().remove(ld);
+		ld.getUsers().remove(this.getUserById(userId));
+	}
+	
 	/*
 	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
 		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);

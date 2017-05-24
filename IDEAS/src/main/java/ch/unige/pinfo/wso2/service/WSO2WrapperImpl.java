@@ -23,6 +23,8 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	@Inject
 	Instance<DeviceManager> dm;
 	
+	private final int decimalNumber = 2;
+	
 	@Override
 	public String getValueLive(String deviceType, String deviceId,  String SensorType){
 		// Retourne la dernière valeur live
@@ -57,7 +59,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			
 			
 			String valueTo = joTo.get(SensorType).toString();
-			return valueTo; // - Double.parseDouble(valueFrom);
+			return Double.toString(roundDecimal(Double.parseDouble(valueTo), decimalNumber)); // - Double.parseDouble(valueFrom);
 		//}
 	}
 	
@@ -225,7 +227,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		JsonObject live = (JsonObject) states.getJsonObject(states.size()-1).get("values");
 		live = (JsonObject) live.get("colorSensor");
 		values.add(live.get("hue").toString());
-		values.add(live.get("saturation").toString());
+		values.add(Double.toString(roundDecimal(Double.parseDouble(live.get("saturation").toString()), decimalNumber)));
 		values.add(live.get("kelvin").toString());
 		return values;
 	}
@@ -284,6 +286,11 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		else{
 			return false;
 		}
+	}
+	
+	public double roundDecimal(double value, int decimalNumber) {
+		double powerOfTen = Math.pow(10, decimalNumber);
+		return Math.round(value*powerOfTen)/powerOfTen;
 	}
 	
 }
