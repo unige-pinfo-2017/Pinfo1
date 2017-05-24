@@ -26,8 +26,9 @@
 
   <br>
     <div align ="center" class="w3-container">
-      <h4>Notifications <span (click)="notifClick()" class="w3-badge w3-xlarge w3-red">{{i}}</span></h4>
-      <div class="floating-box" align="center" *ngIf="showNotif"> Test
+      <h4>Notifications <span (click)="notifClick()" class="w3-badge w3-large w3-red">{{param.length}}</span></h4>
+      <div class="floating-box" align="center" *ngIf="showNotif">
+          <div *ngFor="let i of param"><li>{{i.name}}: {{i.batterie}}%</li></div>
     </div>
   </div>
   </ul>

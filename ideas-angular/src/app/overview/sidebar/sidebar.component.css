@@ -104,7 +104,9 @@ li a:hover:not(.active) {
 }
 .floating-box {
     float: left;
-    font-size: 17px;
+    font-size: 15px;
+    color: gray;
+    background: white;
     width: 270px;
     height: 200px;
     margin: 10px;

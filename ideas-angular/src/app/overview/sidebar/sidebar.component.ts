@@ -3,17 +3,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from "rxjs";
 
 
+
 @Component({
 	selector: 'sidebar',
 	templateUrl: './sidebar.component.html',
 	styleUrls: ['./sidebar.component.css'],
 })
 
+
+
 export class SidebarComponent implements OnInit {
 	private role: string;
 	private show: boolean = false;
 	private i: number = 1;
 	private showNotif: boolean = false;
+	private param: any[] = [
+		{id: 1, name: "powerSocket", batterie: 10, owner:'jacques'},
+		{id: 2, name: "Beacon", batterie: 99, owner:'V'}
+		];
 
 	private routeSubscripton: Subscription;
 
