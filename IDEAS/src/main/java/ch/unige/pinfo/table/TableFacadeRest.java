@@ -16,7 +16,17 @@ import javax.ws.rs.core.MediaType;
 
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
+import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.device.dom.TypeDevice;
+import ch.unige.pinfo.user.dom.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
+
+@Api(value="Table")
 @Path("/table")
 public class TableFacadeRest {
 	@Inject
@@ -26,7 +36,15 @@ public class TableFacadeRest {
 	@Path("/{userId}/device/{type}")
 	@Produces({"application/json"})
 	@Transactional
-	public JsonArray getTableForDeviceType(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
+	@ApiOperation(value="Get table for device type",
+	response=TypeDevice.class,
+	responseContainer="List")
+	@ApiResponses(value= {
+			@ApiResponse(code=400, message = "Invalid device Type"),
+			@ApiResponse(code=404, message = "Device Type not found")
+	})
+	public JsonArray getTableForDeviceType(@ApiParam("User ID") @PathParam("userId") Long userId,
+			@ApiParam("Device Type") @PathParam("type") String deviceType) {
 		return tableService.buildTableForDeviceType(deviceType, userId);
 	}
 	
@@ -34,7 +52,15 @@ public class TableFacadeRest {
 	@Path("/{userId}/sensor/{type}")
 	@Produces({"application/json"})
 	@Transactional
-	public JsonArray getTableForSensorType(@PathParam("userId") Long userId, @PathParam("type") String deviceType) {
+	@ApiOperation(value="Get table for sensor type",
+	response=Sensor.class,
+	responseContainer="List")
+	@ApiResponses(value= {
+			@ApiResponse(code=400, message = "Invalid sensor Type"),
+			@ApiResponse(code=404, message = "sensor type not found")
+	})
+	public JsonArray getTableForSensorType(@ApiParam("User ID") @PathParam("userId") Long userId, 
+			@ApiParam("Sensor Type") @PathParam("type") String deviceType) {
 		return tableService.buildTableForSensorType(deviceType, userId);
 	}
 	
@@ -50,7 +76,14 @@ public class TableFacadeRest {
 	@Path("/{userId}/user/all")
 	@Produces({"application/json"})
 	@Transactional
-	public JsonArray getTableOfUsers(@PathParam("userId") Long userId) {
+	@ApiOperation(value="Get table of users",
+	notes="Available for Managers and SysAdmin",
+	response=User.class,
+	responseContainer="List")
+	@ApiResponses(value= {
+			@ApiResponse(code=404, message = "Users not found")
+	})
+	public JsonArray getTableOfUsers(@ApiParam () @PathParam("userId") Long userId) {
 		return tableService.buildTableForUser(userId);
 	}
 	
@@ -64,7 +97,11 @@ public class TableFacadeRest {
 	
 	@POST
 	@Path("/change-state/{deviceId}/{action}")
-	public void changeState(@PathParam("deviceId") Long deviceId, @PathParam("action") String action, @QueryParam("state") String state){
+	@ApiOperation(value="Change state of a device",
+	notes="Available for a SysAdmin")
+	public void changeState(@ApiParam("Device ID") @PathParam("deviceId") Long deviceId, 
+			@ApiParam("Action") @PathParam("action") String action, 
+			@ApiParam("State") @QueryParam("state") String state){
 		
 	}
 	

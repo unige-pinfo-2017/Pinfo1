@@ -3,5 +3,20 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+         
+         
+    <context-param>
+    <param-name>resteasy.providers</param-name>
+    <param-value>
+      io.swagger.jaxrs.listing.ApiListingResource,
+      io.swagger.jaxrs.listing.SwaggerSerializers,
+    </param-value>
+  </context-param>
+  
+  <servlet>
+        <servlet-name>SwaggerBootstrap</servlet-name>
+        <servlet-class>ch.unige.pinfo.ideas.Bootstrap</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
       
 </web-app>

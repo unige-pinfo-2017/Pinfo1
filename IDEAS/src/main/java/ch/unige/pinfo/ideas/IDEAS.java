@@ -19,8 +19,9 @@ import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.*;
 import ch.unige.pinfo.user.service.UserService;
+import io.swagger.annotations.Api;
 
-
+@Api
 @Path("/")
 public class IDEAS {
 
@@ -34,6 +35,7 @@ public class IDEAS {
 	private DeviceService deviceService;
 	@Inject 
 	private UserService userService;
+	
 	
 	public IDEAS() {}
 	
