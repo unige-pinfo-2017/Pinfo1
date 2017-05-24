@@ -1,5 +1,6 @@
 package ch.unige.pinfo.wso2.rest;
 
+<<<<<<< Updated upstream
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +11,10 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonReader;
+=======
+import java.util.Random;
+
+>>>>>>> Stashed changes
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -81,17 +86,17 @@ public class FakeWSO2Server {
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
-
+		Random rand = new Random();
 		if (sensorType.equals("powerSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"powerSensor\":0.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"powerSensor\":1.98,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("statusSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"statusSensor\":0.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"statusSensor\":1.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"statusSensor\":"+ Integer.toString(rand.nextInt(2)) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"statusSensor\":"+ Integer.toString(rand.nextInt(2)) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("currentSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"currentSensor\":1.2,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"currentSensor\":2.5,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"currentSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"currentSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else{
@@ -107,17 +112,17 @@ public class FakeWSO2Server {
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
-
+		Random rand = new Random();
 		if (sensorType.equals("temperatureSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"temperatureSensor\":20.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"temperatureSensor\":23.50,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"temperatureSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"temperatureSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("lightSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"lightSensor\":20.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"lightSensor\":23.50,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"lightSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"lightSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("batterySensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"batterySensor\":20.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"batterySensor\":23.50,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"batterySensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"batterySensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else{
@@ -133,17 +138,17 @@ public class FakeWSO2Server {
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
-
+		Random rand = new Random();
 		if (sensorType.equals("brightnessSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"brightnessSensor\":20.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"brightnessSensor\":23.50,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("colorSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":{\"hue\":100, \"saturation\":1, \"kelvin\": 5000},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":{\"hue\":100, \"saturation\":1, \"kelvin\": 5000},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":{\"hue\":"+ Double.toString((100 - 0) * rand.nextDouble()) +", \"saturation\":"+ Double.toString((50 - 0) * rand.nextDouble()) +", \"kelvin\": "+ Double.toString((5000 - 0) * rand.nextDouble()) +"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":{\"hue\":"+ Double.toString((100 - 0) * rand.nextDouble()) +", \"saturation\":"+ Double.toString((50 - 0) * rand.nextDouble()) +", \"kelvin\": "+ Double.toString((5000 - 0) * rand.nextDouble()) +"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("powerSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"powerSensor\":20.0,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"powerSensor\":23.50,\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else{
