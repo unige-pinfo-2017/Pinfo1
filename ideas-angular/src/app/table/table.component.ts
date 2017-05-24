@@ -170,7 +170,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		//console.log(this.currentType);
 		// console.log('Event: select', event, this.selected);
 		console.log(this.currentType);
-		if((this.currentType === "device") || (this.currentType === "sensor")) {
+		if ((sessionStorage.getItem('role') === "SysAdmin") && ((this.currentType === "device") || (this.currentType === "sensor"))) {
 			this.selectedRow = this.selected;
 			this.show = !this.show;
 			if (this.currentType === "device") {
