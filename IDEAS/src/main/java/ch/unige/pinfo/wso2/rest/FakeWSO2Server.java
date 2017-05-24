@@ -1,6 +1,5 @@
 package ch.unige.pinfo.wso2.rest;
 
-<<<<<<< Updated upstream
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +10,8 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonReader;
-=======
 import java.util.Random;
 
->>>>>>> Stashed changes
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,7 +22,7 @@ public class FakeWSO2Server {
 	 * here just for powerSocket and his 3 Sensors 
 	 */
 
-	//retourne dans un tableau de String tout les états de "from" à "to".
+	//retourne dans un tableau de String tout les etats de "from" a "to".
 	@GET
 	@Path("/PowerSocketTest/device/stats/{deviceId}")
 	@Produces({ "application/json" })
