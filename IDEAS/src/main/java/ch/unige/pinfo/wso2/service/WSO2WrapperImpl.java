@@ -1,9 +1,13 @@
 package ch.unige.pinfo.wso2.service;
 
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.Instance;
@@ -105,11 +109,19 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}*/
 
 	@Override
-	public String[] getValue(String deviceType, String deviceId, String SensorType, String From, String To) {
+	public String[] getValue(String deviceType, String deviceId, String SensorType, String From, String To) throws ParseException {
 		// Retourne les valeurs entre deux intervalles
 		// Mock pour l'instant
 		
-		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		Date fromDate = format.parse(From);
+		Date toDate = format.parse(To);
+		
+		//date to unix timeStamp to String:
+		String fromString = String.valueOf(fromDate.getTime());
+		String toString = String.valueOf(toDate.getTime());
+
+		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, fromString, toString);
 		String[] readings = new String[states.size()];
 		for (int i=0; i<states.size(); i++) {
 			readings[i] = ((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString();
@@ -200,21 +212,23 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		Instant now = Instant.now();
 		Duration duration = Duration.ofMinutes(5);
 		Instant before =  now.minus(duration); 
+		
 		JsonArray states = null;
 		
-		boolean stop = true;
-		while(stop){
+		int stop = 0;
+		while(stop < 10000){
 			
-			String nowString = String.valueOf(now);
-			String beforeString = String.valueOf(before);
+			String nowString = String.valueOf(now.getEpochSecond());
+			String beforeString = String.valueOf(before.getEpochSecond());
 			
 			states = wcr.getStates(deviceType, deviceId, SensorType, beforeString, nowString);
 			
 			if (states == null){
 				before = before.minus(duration);
+				stop += 1;
 			}
 			else{
-				stop = false;
+				stop = 10001;
 			}
 		}
 		return states;
