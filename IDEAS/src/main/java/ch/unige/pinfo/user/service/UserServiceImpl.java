@@ -114,17 +114,27 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void addPreference(Long userId, Long liveDataId) {
+	public boolean addPreference(Long userId, Long liveDataId) {
 		LiveData ld = liveDataService.getLiveDataById(liveDataId);
-		this.getUserById(userId).getPreferences().add(ld);
-		ld.getUsers().add(this.getUserById(userId));
+		try {
+			this.getUserById(userId).getPreferences().add(ld);
+			ld.getUsers().add(this.getUserById(userId));
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 	
 	@Override
-	public void removePreference(Long userId, Long liveDataId) {
+	public boolean removePreference(Long userId, Long liveDataId) {
 		LiveData ld = liveDataService.getLiveDataById(liveDataId);
-		this.getUserById(userId).getPreferences().remove(ld);
-		ld.getUsers().remove(this.getUserById(userId));
+		try {
+			this.getUserById(userId).getPreferences().remove(ld);
+			ld.getUsers().remove(this.getUserById(userId));
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
 	}
 	
 	@Override

@@ -82,13 +82,17 @@ public class OverviewService {
 
 	public Response addPreference(Long userId, String measureName) {
 		Long preferenceId = backEndFacade.getLiveDataIdFromSensorMeasureName(measureName);
-		backEndFacade.addPreference(userId, preferenceId);
+		if (!backEndFacade.addPreference(userId, preferenceId)) {
+			return Response.status(500).entity("Adding " + measureName + " to preferences failed.").build();
+		}
 		return Response.status(200).entity(measureName + " added to preferences.").build();
 	}
 
 	public Response removePreference(Long userId, String measureName) {
 		Long preferenceId = backEndFacade.getLiveDataIdFromSensorMeasureName(measureName);
-		backEndFacade.removePreference(userId, preferenceId);
+		if (!backEndFacade.removePreference(userId, preferenceId)) {
+			return Response.status(500).entity("Removing " + measureName + " from preferences failed.").build();
+		}
 		return Response.status(200).entity(measureName + " removed from preferences.").build();
 	}
 

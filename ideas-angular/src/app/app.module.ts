@@ -45,8 +45,8 @@ import {RoleGuard} from './guard/role-guard.service';
       MiddlescreenComponent,
 	  ChartComponent,
 	  TableComponent,
-    EditingMenuComponent,
-    ErrorComponent,
+      EditingMenuComponent,
+      ErrorComponent,
 
   ],
   bootstrap:    [ AppComponent ],
