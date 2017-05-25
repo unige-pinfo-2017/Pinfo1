@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.json.JsonArray;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 
@@ -15,6 +16,10 @@ public class EditMenuService {
 	
 	@Inject
 	EditMenuJsonBuilder editMenuJsonBuilder;
+	
+	public String changeDevice(String deviceId, String resource, String state) {
+		return backEndFacade.changeDevice(deviceId,  resource, state);
+	}
 	
 	public JsonArray getEditMenu(String deviceId) {
 		List<String> names = getFieldNames(deviceId);
@@ -63,6 +68,5 @@ public class EditMenuService {
 		}
 		return values;
 	}
-	
 
 }

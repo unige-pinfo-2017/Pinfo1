@@ -19,4 +19,5 @@ public interface DeviceManager {
 	List<Device> getAllDevicesForUsersBySensorName(List<User> users, String sensorName);
 	List<String> getDeviceDataLiveColor(String deviceType, String deviceId);
 	String getDeviceTypeNameFromDeviceId(String deviceId);
+	String changeDevice(String deviceId, String resource, String state);
 } 

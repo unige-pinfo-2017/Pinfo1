@@ -91,7 +91,7 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response of the server.
 	 */
-	String changeLightBrightness(String deviceId, double state);
+	String changeLightBrightness(String deviceId, String state);
 	
 	/**
 	 * <b>changeLightSaturation</b>
@@ -106,7 +106,7 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response of the server.
 	 */
-	String changeLightSaturation(String deviceId, double state);
+	String changeLightSaturation(String deviceId, String state);
 	
 	/**
 	 * <b>changeLightHue</b>
@@ -121,7 +121,7 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response of the server.
 	 */
-	String changeLightHue(String deviceId, int state);
+	String changeLightHue(String deviceId, String state);
 	
 	/**
 	 * <b>changeLightKelvin</b>
@@ -136,7 +136,15 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response of the server.
 	 */
-	String changeLightKelvin(String deviceId, int state);
+	String changeLightKelvin(String deviceId, String state);
 
 	List<String> getValueLiveColor(String deviceType, String deviceId);
+
+	String changeState(String deviceId, String state);
+
+	String changeHue(String deviceId, String state);
+
+	String changeSaturation(String deviceId, String state);
+
+	String changeKelvin(String deviceId, String state);
 }

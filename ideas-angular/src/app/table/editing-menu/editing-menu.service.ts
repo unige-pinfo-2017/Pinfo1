@@ -15,7 +15,7 @@ export class EditingMenuService {
 
 	public getEditingMenu(deviceId: any): Promise<any[]> {
 		return this.http
-		.get(`${this.baseUrl}/edit/${deviceId}`, {headers: this.headersService.getHeadersJson()})
+		.get(`${this.baseUrl}/edit/${deviceId}/menu`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>);
 	}

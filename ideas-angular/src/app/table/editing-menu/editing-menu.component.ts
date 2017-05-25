@@ -21,6 +21,7 @@ export class EditingMenuComponent implements OnInit {
 	@Input() selectedRow: any[];
 	@Input() selectedDeviceType: string;
 	private editMenu: any[] = [];
+	private editMenuBackup: any[] = [];
 
 	public constructor (
 		private editingMenuService: EditingMenuService
@@ -32,13 +33,26 @@ export class EditingMenuComponent implements OnInit {
 		this.getEditingMenu(this.selectedRow[0].DeviceId);
 	}
 
-	private buildEditMenu(): void {
+	public edit(): void {
+		console.log(this.editMenu);
+		for (let i=0; i<this.editMenu.length; i++) {
+			let curr: any = this.editMenu[i];
+			let backup: any = this.editMenuBackup[i];
+			console.log(curr['value']);
+			if (curr['value'] !== backup['value']) {
+				this.changeState(curr['name'], curr['value']);
+			}
+		}
+	}
+
+	public changeState(name: string, value: string){
 
 	}
 
 	private getEditingMenu(deviceId: string): void {
-		this.editingMenuService.getEditingMenu(deviceId).then(menu =>
-			this.editMenu = menu
-		);
+		this.editingMenuService.getEditingMenu(deviceId).then(menu => {
+			this.editMenu = menu;
+			this.editMenuBackup = menu;
+		});
 	}
 }

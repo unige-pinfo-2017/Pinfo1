@@ -30,6 +30,21 @@ public class DeviceManagerImpl implements DeviceManager {
 	private UserService userService;
 	
 	@Override
+	public String changeDevice(String deviceId, String resource, String state) {
+		if (resource.equals("Hue")) {
+			return wso2Wrapper.changeHue(deviceId, state);
+		} else if (resource.equals("Saturation")) {
+			return wso2Wrapper.changeSaturation(deviceId, state);
+		} else if (resource.equals("Kelvin")) {
+			return wso2Wrapper.changeKelvin(deviceId, state);
+		} else if (resource.equals("State")) {
+			return wso2Wrapper.changeState(deviceId, state);
+		} 
+		
+		return "Resource does not exist.";
+	}
+	
+	@Override
 	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
 		double sum = 0;
 		
@@ -46,25 +61,6 @@ public class DeviceManagerImpl implements DeviceManager {
 		return sum/ld.size();
 	}
 	
-	/*public double getAvgSensorLiveForUser2(Long userId, String sensorName) {
-		double sum = 0;
-		
-		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
-		
-		if (ld.size() == 0) {
-			return 0;
-		}
-		
-		for (Device device: ld){
-			List<String> values = wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
-			if (values.size() == 1) {
-				sum += Double.parseDouble(values.get(0));
-			}
-		}
-		
-		return sum/ld.size();
-	}*/
-	
 	@Override
 	public double getSumSensorLiveForUser(Long userId, String sensorName) {
 		double sum = 0;
@@ -76,26 +72,6 @@ public class DeviceManagerImpl implements DeviceManager {
 		
 		return sum;
 	}
-	
-	/*public double getSumSensorLiveForUser2(Long userId, String sensorName) {
-		double sum = 0;
-		
-		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
-		
-		if (ld.size() == 0) {
-			return 0;
-		}
-		
-		for (Device device: ld){
-			List<String> values = wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
-			if (values.size() == 1) {
-				sum += Double.parseDouble(values.get(0));
-			}
-		}
-		
-		return sum;
-		
-	}*/
 
 	@Override
 	public Set<Sensor> getSensorsForTypeDevice(String name) {

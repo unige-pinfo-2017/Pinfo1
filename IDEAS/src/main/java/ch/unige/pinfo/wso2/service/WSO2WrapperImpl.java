@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.inject.Instance;
@@ -67,8 +68,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		//}
 	}
 	
-	/*//temporaire:
-	@Override
+	/*@Override
 	public List<String> getValueLive2(String deviceType, String deviceId,  String SensorType){
 		// Retourne la dernière valeur live
 		// A remplacer quand la vraie methode sera donnee
@@ -131,6 +131,30 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}
 	
 	@Override
+	public String changeState(String deviceId, String state) {
+		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
+		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+	}
+	
+	@Override
+	public String changeHue(String deviceId, String state) {
+		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
+		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+	}
+	
+	@Override
+	public String changeSaturation(String deviceId, String state) {
+		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
+		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+	}
+	
+	@Override
+	public String changeKelvin(String deviceId, String state) {
+		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
+		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+	}
+	
+	@Override
 	public String changePowerSocketStatus(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "PowerSocket";
@@ -155,53 +179,49 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}
 	
 	@Override
-	public String changeLightBrightness(String deviceId, double state){
+	public String changeLightBrightness(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
 		String response = "Error"; 
-		String stateParse = String.valueOf(state);
 		
 		if (hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "brightness", stateParse);
+			response = wcr.postStatus(device, deviceId, "brightness", state);
 		}
 		return response;
 	}
 	
 	@Override
-	public String changeLightSaturation(String deviceId, double state){
+	public String changeLightSaturation(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
 		String response = "Error"; 
-		String stateParse = String.valueOf(state);
 
 		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "saturation", stateParse);
+			response = wcr.postStatus(device, deviceId, "saturation", state);
 		}
 		return response;
 	}
 	
 	@Override
-	public String changeLightHue(String deviceId, int state){
+	public String changeLightHue(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
 		String response = "Error"; 
-		String stateParse = String.valueOf(state);
 
 		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "hue", stateParse);
+			response = wcr.postStatus(device, deviceId, "hue", state);
 		}
 		return response;
 	}
 	
 	@Override
-	public String changeLightKelvin(String deviceId, int state){
+	public String changeLightKelvin(String deviceId, String state){
 		Long id = Long.parseLong(deviceId);
 		String device = "Light";
 		String response = "Error"; 
-		String stateParse = String.valueOf(state);
 
 		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "kelvin", stateParse);
+			response = wcr.postStatus(device, deviceId, "kelvin", state);
 		}
 		return response;
 	}
@@ -307,4 +327,104 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return Math.round(value*powerOfTen)/powerOfTen;
 	}
 	
+	public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType) {
+		/*
+		 * 1) Get current timestamp in epoch
+		 * 2) Compute the 24 timestamps: t-1, t-2, ..., t-23
+		 * 3) V = getValue(from=t-24, to=t)
+		 * 4) Reduce V to only get at most one average point per time interval (t-i, t-i+1)
+		 * 5) For each timestamps t-i, get the closest previous points in reduced V
+		 * */
+		
+		Instant now = Instant.now();
+		List<Instant> timePoints = new ArrayList<Instant>();
+		for (int i=0; i<24; i++) {
+			timePoints.add(now.minus(Duration.ofHours(i)));
+		}
+		//List<Reading> readings = getReadings(deviceType, deviceId, sensorType, timePoints.get(timePoints.size()-1).toString(), timePoints.get(0).toString());
+		List<Reading> readings = mockReadings(now);
+		Collections.reverse(readings); // On inverse l'ordre de 'readings' car la liste est du plus ancient au plus recent alors que timepoints est du plus recent au plus ancien
+		readings = averageValuePerTimeSlot(readings, timePoints);
+		
+		return null;
+	}
+	
+	public List<Reading> averageValuePerTimeSlot(List<Reading> readings, List<Instant> timePoints) {
+		List<Reading> newReadings = new ArrayList<Reading>();
+		for (int i=0; i<timePoints.size()-1; i++) {
+			Instant curr = timePoints.get(i);
+			Instant before = timePoints.get(i+1);
+			
+			// Construction de la liste des readings se trouvant entre curr et before
+			List<Reading> toBeAveraged = new ArrayList<Reading>();
+			for (int j=0; j<readings.size(); j++) {
+				Reading reading = readings.get(j);
+				if (reading.getTimestamp().isBefore(before)) {
+					break;
+				}
+				
+				if (reading.getTimestamp().isBefore(curr) && reading.getTimestamp().isAfter(before)) {
+					toBeAveraged.add(reading);
+				}
+			}
+			// Calcul du reading moyen de la liste des readings se trouvant entre curr et before
+			newReadings.add(averageReading(toBeAveraged));
+		}
+		return newReadings;
+	}
+	
+	public List<Reading> getReadings(String deviceType, String deviceId, String SensorType, String From, String To) {
+		// Retourne les readings du serveur entre from et to
+		List<Reading> readings = new ArrayList<Reading>();
+		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
+		for (int i=0; i<states.size(); i++) {
+			JsonObject jsonObject = (JsonObject) states.getJsonObject(i).get("values");
+			//readings[i] = ((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString();
+			readings.add(new Reading(jsonObject.get("meta_time").toString(), jsonObject.get(SensorType).toString()));
+		}
+		
+		return readings;
+	}
+	
+	public Reading averageReading(List<Reading> readings) {
+		long avgInstant = 0; // In second
+		double avgValue = 0;
+		double size = (double) readings.size();
+		
+		if (size == 0) {
+			return new Reading(Instant.ofEpochSecond(0), "0");
+		}
+		
+		for (Reading reading: readings) {
+			avgInstant += reading.getTimestamp().getEpochSecond();
+			avgValue += Double.parseDouble(reading.getValue());
+		}
+		return new Reading(Instant.ofEpochSecond((long) (avgInstant/size)), Double.toString(avgValue/size));
+	}
+	
+	public List<Double> computeClosestReadings(List<Reading> readings, List<Instant> timePoints) {
+		List<Double> res = new ArrayList<Double>();
+		for (int i=0; i<timePoints.size(); i++) {
+			res.add(computeClosestReading(readings, timePoints.get(i)));
+		}
+		return res;
+	}
+	
+	public double computeClosestReading(List<Reading> readings, Instant timePoint) {
+		for (Reading reading: readings) {
+			if (reading.getTimestamp().isBefore(timePoint)) {
+				return Double.parseDouble(reading.getValue());
+			}
+		}
+		return 0;
+	}
+	
+	public List<Reading> mockReadings(Instant instant) {
+		List<Reading> mock = new ArrayList<Reading>();
+		for (int i=10; i>=0; i--){
+			Instant inst = instant.minus(Duration.ofHours(i));
+			mock.add(new Reading(inst, Integer.toString(i)));
+		}
+		return mock;
+	}
 }

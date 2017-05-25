@@ -98,17 +98,6 @@ export class TableComponent implements OnInit, OnDestroy {
 				this.startTimer(this.refreshRate);
 			}
 		});
-
-		/*this.currentType="device";
-		this.currentSubtype="PowerSocket";
-
-		this.getTableFromStorage(this.currentType, this.currentSubtype);
-		this.startTimer(this.refreshRate);*/
-
-
-        //this.showDevice = !this.showDevice;
-
-        //this.showSensor = !this.showSensor;
 	}
 
 	public ngOnDestroy(): void {
