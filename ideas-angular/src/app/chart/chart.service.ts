@@ -19,6 +19,14 @@ export class ChartService {
 		.then(res => res.json() as Array<any>)
 	}
 
+	public getChartShort(resource: string, time: string) {
+
+	}
+
+	public getChartLong(resource: string, from: string, to: string) {
+		
+	}
+
 	public formatData(data: any[], label: any): any[] {
 		//let values = [{value: 2}, {value: 4}, {value: 3}]
 		//let label = {label: "bob"};

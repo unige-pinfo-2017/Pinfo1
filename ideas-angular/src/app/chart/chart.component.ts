@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts'; // Workaround
 import { ChartService } from './chart.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ChartService } from './chart.service';
 })
 
 export class ChartComponent implements OnInit {
-	@ViewChild(BaseChartDirective) chart: BaseChartDirective;
+	@ViewChild(BaseChartDirective) chart: BaseChartDirective; // Workaround of can't update labels
 
 
 	// Line chart
@@ -18,10 +18,10 @@ export class ChartComponent implements OnInit {
   	public lineChartType:string = 'line';
 
 	public lineChartData:Array<any> = [
-    	{data: [ 65, 34, 56 ], label: 'Series A'}
+    	{data: [], label: 'Default'}
   	];
   	//private lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-	private lineChartLabels:Array<any> = ['January', 'February', 'March'];
+	private lineChartLabels:Array<any> = [];
 	private lineChartOptions:any = {
     	responsive: false
   	};
@@ -33,7 +33,8 @@ export class ChartComponent implements OnInit {
 	      pointBorderColor: '#fff',
 	      pointHoverBackgroundColor: '#fff',
 	      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-	    },
+	    }
+		*/
 		{ // dark grey
 		  backgroundColor: 'rgba(77,83,96,0.2)',
 		  borderColor: 'rgba(77,83,96,1)',
@@ -42,6 +43,7 @@ export class ChartComponent implements OnInit {
 		  pointHoverBackgroundColor: '#fff',
 		  pointHoverBorderColor: 'rgba(77,83,96,1)'
 		},
+		/*
 		{ // grey
 		  backgroundColor: 'rgba(45,59,67,0.2)',
 		  borderColor: 'rgba(45,59,67,1)',
@@ -52,12 +54,6 @@ export class ChartComponent implements OnInit {
 		}
 		*/
 	];
-
-	/*
-	// Pie chart
-	/*public pieChartType:string = 'pie';
-	public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-	public pieChartData:number[] = [300, 500, 100];*/
 
 	public constructor (
 		private chartService: ChartService
@@ -78,7 +74,7 @@ export class ChartComponent implements OnInit {
 			.then(params => {
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
 				this.lineChartLabels = this.chartService.formatLabels(params[2]);
-				this.chart.chart.config.data.labels = this.lineChartLabels;
+				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround
 			});
 	}
 
@@ -115,5 +111,13 @@ export class ChartComponent implements OnInit {
 		}
 	}
 	this.lineChartData = _lineChartData;
+	}
+
+	public chartClicked(e:any):void {
+		console.log(e);
+	}
+
+	public chartHovered(e:any):void {
+		console.log(e);
 	}
 }
