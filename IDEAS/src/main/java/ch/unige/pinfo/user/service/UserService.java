@@ -28,7 +28,9 @@ public interface UserService {
 	Manager getManagerById(Long id);
 	Basic getBasicById(Long id);
 	void addPreference(Long userId, Long liveDataId);
-	void RemovePreference(Long userId, Long liveDataId);
+	void removePreference(Long userId, Long liveDataId);
+	Set<LiveData> getUserPreferenceByUserId(Long userId);
+	
 	
 	//Manager getManagerById(Long id);
 	//SysAdmin getSysAdminById(Long id);

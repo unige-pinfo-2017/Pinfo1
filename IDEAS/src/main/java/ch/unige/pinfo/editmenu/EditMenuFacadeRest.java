@@ -23,5 +23,4 @@ public class EditMenuFacadeRest {
 		return editMenuService.getEditMenu(deviceId);
 	}
 	
-	
 }

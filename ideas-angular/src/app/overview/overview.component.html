@@ -22,6 +22,9 @@
 		<topbar
 			[data]="liveData"
 			[hiddenData]="hiddenData"
+			(added)="addLiveData($event)"
+			(changed)="changeLiveData($event)"
+			(removed)="removeLiveData($event)"
 		></topbar>
 
   <!-- Partie centrale (plot prochainement) -->

@@ -9,24 +9,28 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.ws.rs.core.Response;
+
+import com.google.gson.Gson;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.overview.dom.LiveData;
+import ch.unige.pinfo.user.dom.User;
 
 public class OverviewService {	
 	@Inject
 	private OverviewJsonBuilder overviewJsonBuilder;
 	
 	@Inject
-	private BackEndFacade backendFacade;
+	private BackEndFacade backEndFacade;
 	
 	private final int decimalNumber = 2;
 	
 	public JsonArray buildLiveData(Long userId) {
-		Set<LiveData> preferences = backendFacade.getUserPreferences(userId);
+		Set<LiveData> preferences = backEndFacade.getUserPreferences(userId);
 		List<String> measureNames = getMeasureNames(preferences);
 		List<String> units = getUnits(preferences);
-		List<Double> values = backendFacade.getLiveDatas(userId);
+		List<Double> values = backEndFacade.getLiveDatas(userId);
 		JsonArrayBuilder builder = Json.createArrayBuilder();
 		
 		for (int i=0; i<measureNames.size(); i++) {
@@ -41,8 +45,8 @@ public class OverviewService {
 	}
 	
 	public JsonArray buildHiddenData(Long userId) {
-		List<LiveData> liveDatas = backendFacade.getAllLiveDatas();
-		Set<LiveData> preferences = backendFacade.getUserPreferences(userId);
+		List<LiveData> liveDatas = backEndFacade.getAllLiveDatas();
+		Set<LiveData> preferences = backEndFacade.getUserPreferences(userId);
 		
 		Iterator<LiveData> it = liveDatas.iterator();
 		while (it.hasNext()) {
@@ -75,7 +79,19 @@ public class OverviewService {
 		double powerOfTen = Math.pow(10, decimalNumber);
 		return Math.round(value*powerOfTen)/powerOfTen;
 	}
-	
+
+	public Response addPreference(Long userId, String measureName) {
+		Long preferenceId = backEndFacade.getLiveDataIdFromSensorMeasureName(measureName);
+		backEndFacade.addPreference(userId, preferenceId);
+		return Response.status(200).entity(measureName + " added to preferences.").build();
+	}
+
+	public Response removePreference(Long userId, String measureName) {
+		Long preferenceId = backEndFacade.getLiveDataIdFromSensorMeasureName(measureName);
+		backEndFacade.removePreference(userId, preferenceId);
+		return Response.status(200).entity(measureName + " removed from preferences.").build();
+	}
+
 	
 	/*public JsonArray buildLiveData2(Long userId) {
 		String role = userService.getUserRoleById(userId);

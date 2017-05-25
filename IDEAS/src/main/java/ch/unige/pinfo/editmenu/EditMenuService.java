@@ -30,7 +30,7 @@ public class EditMenuService {
 			names.add("State");
 		} else if (deviceType.equals("Light")) {
 			names = addColorToFieldNames(names);
-			names.add("State");
+			//names.add("State");
 		}
 		return names;
 	}
@@ -42,7 +42,7 @@ public class EditMenuService {
 			values.add(backEndFacade.getDeviceDataLive(deviceId, "statusSensor"));
 		} else if (deviceType.equals("Light")) {
 			values = addColorToFieldValues(deviceId, deviceType, values);
-			values.add(backEndFacade.getDeviceDataLive(deviceId, "statusSensor"));
+			//values.add(backEndFacade.getDeviceDataLive(deviceId, "statusSensor"));
 		}
 		
 		return values;

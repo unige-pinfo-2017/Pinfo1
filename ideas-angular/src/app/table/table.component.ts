@@ -149,7 +149,8 @@ export class TableComponent implements OnInit, OnDestroy {
 		let filtered: any[] = [];
 		for(let i=0; i<(this.rows.length); i++){
 			let r = this.rows[i];
-			if (r[Object.keys(r)[1]].toLowerCase().indexOf(val) !== -1) {
+			console.log(Object.keys(r));
+			if (r[Object.keys(r)[i]].toLowerCase().indexOf(val) !== -1) {
 				filtered.push(this.rows[i]);
 			}
 		}
@@ -166,17 +167,20 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.filteredRows = this.filtering(val);
 	}
 
+
 	onSelect(event: any) {
 		//console.log(this.currentType);
 		// console.log('Event: select', event, this.selected);
 		console.log(this.currentType);
-		if ((sessionStorage.getItem('role') === "SysAdmin") && ((this.currentType === "device") || (this.currentType === "sensor"))) {
-			this.selectedRow = this.selected;
-			this.show = !this.show;
-			if (this.currentType === "device") {
-				this.selectedDeviceType = this.currentSubtype;
-			} else {
-				this.selectedDeviceType = this.selectedRow[0].DeviceType;
+		if (sessionStorage.getItem('role') === "SysAdmin") {
+			if ((this.currentType === "device") || (this.currentType === "sensor")) {
+				this.selectedRow = this.selected;
+				this.show = !this.show;
+				if (this.currentType === "device") {
+					this.selectedDeviceType = this.currentSubtype;
+				} else {
+					this.selectedDeviceType = this.selectedRow[0].DeviceType;
+				}
 			}
 		} else if (this.currentType === "user") {
 			let selectedUserId = this.selected[0]['UserId'];

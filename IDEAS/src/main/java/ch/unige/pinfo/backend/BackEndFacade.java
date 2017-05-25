@@ -24,6 +24,26 @@ public class BackEndFacade {
 	@Inject
 	LiveDataService liveDataService;
 	
+	public void removePreference(Long userId, Long liveDataId) {
+		userService.removePreference(userId, liveDataId);
+	}
+	
+	public void addPreference(Long userId, Long liveDataId) {
+		userService.addPreference(userId, liveDataId);
+	}
+	
+	public Long getLiveDataIdFromSensorMeasureName(String measureName) {
+		List<LiveData> liveDatas = getAllLiveDatas();
+		LiveData liveData = new LiveData();
+		for (int i=0; i<liveDatas.size(); i++) {
+			if (liveDatas.get(i).getSensor().getMeasureName().equals(measureName)) {
+				liveData = liveDatas.get(i);
+				break;
+			}
+		}
+		return liveData.getId();
+	}
+	
 	public String getDeviceTypeNameFromDeviceId(String deviceId) {
 		return deviceManager.getDeviceTypeNameFromDeviceId(deviceId);
 	}

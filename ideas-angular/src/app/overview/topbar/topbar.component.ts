@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
 	selector: 'topbar',
@@ -10,16 +11,19 @@ export class TopbarComponent {
 	 @Input() data: any[];
 	 @Input() hiddenData: any[];
 
-	 public deleteLiveData(name: string): void {
-		 // TO DO: effacer element de la liste pour ne plus l'afficher dans topbar
-		 console.log(name);
-	 }
+	 @Output() added: EventEmitter<string> = new EventEmitter();
+	 @Output() removed: EventEmitter<string> = new EventEmitter();
+	 @Output() changed: EventEmitter<string> = new EventEmitter();
 
 	 public addLiveData(name: string): void {
-		 console.log(name);
+		 this.added.emit(name);
 	 }
 
 	 public changeLiveData(name: string): void {
-		 console.log(name);
+		 this.added.emit(name);
+	 }
+
+	 public removeLiveData(name: string): void {
+		 this.removed.emit(name);
 	 }
 }

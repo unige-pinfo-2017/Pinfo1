@@ -121,10 +121,15 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void RemovePreference(Long userId, Long liveDataId) {
+	public void removePreference(Long userId, Long liveDataId) {
 		LiveData ld = liveDataService.getLiveDataById(liveDataId);
 		this.getUserById(userId).getPreferences().remove(ld);
 		ld.getUsers().remove(this.getUserById(userId));
+	}
+	
+	@Override
+	public Set<LiveData> getUserPreferenceByUserId(Long userId){
+		return getUserById(userId).getPreferences();
 	}
 	
 	/*

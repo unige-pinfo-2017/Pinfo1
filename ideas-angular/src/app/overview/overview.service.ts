@@ -28,11 +28,13 @@ export class OverviewService {
 		.then(res => res.json() as Array<any>)
 	}
 
-	/*private getHeaders() {
-		// Permet de récupérer les headers
-		let headers = new Headers();
-		headers.append('Accept', 'application/json');	// Spécifie le type de données accepté
-		headers.append('Content-Type', 'application/json');
-		return headers;
-	}*/
+	public addLiveData(userId: number, name: string): Promise<Response> {
+		return this.http.post(`${this.baseUrl}/overview/preferences/${userId}/add`, name, {headers: this.headersService.getHeadersPlainText()})
+			.toPromise();
+	}
+
+	public removeLiveData(userId: number, name: string): Promise<Response> {
+		return this.http.post(`${this.baseUrl}/overview/preferences/${userId}/remove`, name, {headers: this.headersService.getHeadersPlainText()})
+			.toPromise();
+	}
 }

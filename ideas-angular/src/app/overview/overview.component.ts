@@ -10,14 +10,6 @@ import { MiddlescreenComponent } from './middlescreen/middlescreen.component';
 
 import { OverviewService } from './overview.service';
 
-// Constante à remplacer
-const DATAH: any[] = [
-	{name: 'Conso', value: 573, unit: 'kW/h'},
-	{name: 'Temperature', value: 25, unit: '°C'},
-	{name: 'elec', value: 450, unit: 'W'},
-	{name: 'blib blab', value: 24874, unit: 'sec'}
-];
-
 @Component({
 	selector: 'overview',
 	templateUrl: './overview.component.html',
@@ -77,21 +69,43 @@ export class OverviewComponent implements OnInit, OnDestroy {
 		return currentId;
 	}
 
-	/*public getLiveDataFromPath(): void {
-		// Récupère userId depuis l'url du browser
-		this.routeSubscripton = this.route.params.subscribe(params => {
-			let userId = params['userId'];
-			// Appel getLiveData
-			this.getLiveData(userId);
-		})
-	}*/
-
 	public getLiveData(userId: number): void {
 		this.overviewService.getLiveData(userId).then(liveData => this.liveData = liveData);
 	}
 
 	public getHiddenData(userId: number): void {
 		this.overviewService.getHiddenData(userId).then(hiddenData => this.hiddenData = hiddenData);
+	}
 
+	public addLiveData(name: string): void {
+		console.log(name);
+		let sessionId: number = Number(sessionStorage.getItem('id'));
+		if (sessionId === this.currentId) {
+			// On peut ajouter une préférence uniquement si on est sur notre propre overview. Ex: Un manager ne peut pas changer les préférences de l'overview d'un de ses subordonnées.
+			this.overviewService.addLiveData(this.currentId, name)
+			.then(res => {
+				console.log(res);
+				this.getLiveData(this.currentId);
+				this.getHiddenData(this.currentId);
+			})
+		}
+	}
+
+	public changeLiveData(name: string): void {
+		console.log(name);
+	}
+
+	public removeLiveData(name: string): void {
+		console.log(name);
+		let sessionId: number = Number(sessionStorage.getItem('id'));
+		if (sessionId === this.currentId) {
+			// On peut enlever une préférence uniquement si on est sur notre propre overview. Ex: Un manager ne peut pas changer les préférences de l'overview d'un de ses subordonnées.
+			this.overviewService.removeLiveData(this.currentId, name)
+			.then(res => {
+				console.log(res);
+				this.getLiveData(this.currentId);
+				this.getHiddenData(this.currentId);
+			})
+		}
 	}
 }
