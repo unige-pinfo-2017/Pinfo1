@@ -1,15 +1,15 @@
 
 <div class="col-sm-9">
-    <ul class="menu">
+    <ul class="menu" style="display: inline-block; float:left">
 
       <li *ngFor="let dat of data"><a (click)="changeLiveData(dat.name)">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
 	  </a><a style="cursor:pointer;" (click)="removeLiveData(dat.name)">x</a></li>
-
-      <div class="dropdown">
+      </ul>
+      <div class="dropdown" style="display: inline-block; float: right ">
         <button class="dropbtn">+</button>
         <div class="dropdown-content">
           <a *ngFor="let hidden of hiddenData" (click)="addLiveData(hidden.name)">{{hidden.name}}</a>
         </div>
-      </div>
-    </ul>
+    </div>
+
 </div>
