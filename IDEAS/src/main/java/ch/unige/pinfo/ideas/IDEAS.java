@@ -1,6 +1,7 @@
 package ch.unige.pinfo.ideas;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -19,6 +20,10 @@ import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.*;
 import ch.unige.pinfo.user.service.UserService;
+import ch.unige.pinfo.wso2.mock.LightData;
+import ch.unige.pinfo.wso2.mock.LightDataService;
+import ch.unige.pinfo.wso2.mock.PowerSocketStatus;
+import ch.unige.pinfo.wso2.mock.PowerSocketStatusService;
 import io.swagger.annotations.Api;
 
 @Api
@@ -35,7 +40,10 @@ public class IDEAS {
 	private DeviceService deviceService;
 	@Inject 
 	private UserService userService;
-	
+	@Inject 
+	private PowerSocketStatusService PowerSocketStatusService;
+	@Inject
+	private LightDataService lightDataService;
 	
 	public IDEAS() {}
 	
@@ -82,6 +90,9 @@ public class IDEAS {
 	@Path("/init")
 	@Transactional
 	public String initDB() {
+		
+		Random rand = new Random();
+
 		Set<TypeDevice> powerSensor = new HashSet<TypeDevice>(); 
 		Set<TypeDevice> statusSensor = new HashSet<TypeDevice>();  
 		Set<TypeDevice> currentSensor = new HashSet<TypeDevice>();  
@@ -110,6 +121,7 @@ public class IDEAS {
 		powerSensor.add(td3);
 		brightnessSensor.add(td3);
 		colorSensor.add(td3);
+		statusSensor.add(td3);
 
 		Sensor s1 = new Sensor("powerSensor", "W", "Power");
 		Sensor s2 = new Sensor("statusSensor", "On/Off", "Status");
@@ -129,7 +141,8 @@ public class IDEAS {
 		LightSensors.add(s7);
 		LightSensors.add(s8);
 		LightSensors.add(s1);
-		
+		LightSensors.add(s2);
+
 		td1.setSensors(PowerSocketSensors);
 		td2.setSensors(BeaconSensors);
 		td3.setSensors(LightSensors);
@@ -213,17 +226,32 @@ public class IDEAS {
 		devicesPowerSocket.add(d1);
 		user1.getDevices().add(d1);
 		
+		PowerSocketStatus pss1 = new PowerSocketStatus();
+		pss1.setDeviceId("id1");
+		pss1.setStatus("1");
+		PowerSocketStatusService.addPowerSocketStatus(pss1);
+		
+		
 		Device d2 = new Device("id2");
 		d2.setType(td2);
 		d2.setOwner(user1);
 		devicesBeacon.add(d2);
 		user1.getDevices().add(d2);
-
+		
 		Device d3 = new Device("id3");
 		d3.setType(td3);
 		d3.setOwner(user1);
 		devicesLight.add(d3);
 		user1.getDevices().add(d3);
+		
+		LightData lightd1 = new LightData();
+		lightd1.setDeviceId("id3");
+		lightd1.setStatus("1");
+		lightd1.setBrightness(Double.toString(rand.nextDouble()));
+		lightd1.setHue(Integer.toString(rand.nextInt(361)));
+		lightd1.setSaturation(Double.toString(rand.nextDouble()));
+		lightd1.setKelvin(Integer.toString(rand.nextInt(5000)+5000));
+		lightDataService.addLightData(lightd1);
 		
 		Device d4 = new Device("id4");
 		d4.setType(td1);
@@ -231,18 +259,31 @@ public class IDEAS {
 		devicesPowerSocket.add(d4);
 		user2.getDevices().add(d4);
 		
+		PowerSocketStatus pss4 = new PowerSocketStatus();
+		pss4.setDeviceId("id4");
+		pss4.setStatus("1");
+		PowerSocketStatusService.addPowerSocketStatus(pss4);
+		
 		Device d5 = new Device("id5");
 		d5.setType(td2);
 		d5.setOwner(user3);
 		devicesBeacon.add(d5);
 		user3.getDevices().add(d5);
-
+		
 		Device d6 = new Device("id6");
 		d6.setType(td3);
 		d6.setOwner(user4);
 		devicesLight.add(d6);
 		user4.getDevices().add(d6);
 		
+		LightData lightd2 = new LightData();
+		lightd2.setDeviceId("id6");
+		lightd2.setStatus("1");
+		lightd2.setBrightness(Double.toString(rand.nextDouble()));
+		lightd2.setHue(Integer.toString(rand.nextInt(361)));
+		lightd2.setSaturation(Double.toString(rand.nextDouble()));
+		lightd2.setKelvin(Integer.toString(rand.nextInt(5000)+5000));
+		lightDataService.addLightData(lightd2);
 		
 		Device d7 = new Device("id7");
 		d7.setType(td1);
@@ -250,17 +291,31 @@ public class IDEAS {
 		devicesPowerSocket.add(d7);
 		user5.getDevices().add(d7);
 		
+		PowerSocketStatus pss7 = new PowerSocketStatus();
+		pss7.setDeviceId("id7");
+		pss7.setStatus("1");
+		PowerSocketStatusService.addPowerSocketStatus(pss7);
+		
 		Device d8 = new Device("id8");
 		d8.setType(td2);
 		d8.setOwner(user6);
 		devicesBeacon.add(d8);
 		user6.getDevices().add(d8);
-
+		
 		Device d9 = new Device("id9");
 		d9.setType(td3);
 		d9.setOwner(user7);
 		devicesLight.add(d9);
 		user7.getDevices().add(d9);
+		
+		LightData lightd3 = new LightData();
+		lightd3.setDeviceId("id9");
+		lightd3.setStatus("0");
+		lightd3.setBrightness(Double.toString(rand.nextDouble()));
+		lightd3.setHue(Integer.toString(rand.nextInt(361)));
+		lightd3.setSaturation(Double.toString(rand.nextDouble()));
+		lightd3.setKelvin(Integer.toString(rand.nextInt(5000)+5000));
+		lightDataService.addLightData(lightd3);
 		
 		Device d10 = new Device("id10");
 		d10.setType(td3);
@@ -268,6 +323,10 @@ public class IDEAS {
 		devicesPowerSocket.add(d10);
 		user8.getDevices().add(d10);
 		
+		PowerSocketStatus pss10 = new PowerSocketStatus();
+		pss10.setDeviceId("id10");
+		pss10.setStatus("0");
+		PowerSocketStatusService.addPowerSocketStatus(pss10);
 
 
 		td1.setDevices(devicesPowerSocket);
