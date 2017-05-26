@@ -2,7 +2,6 @@ package ch.unige.pinfo.overview.service;
 
 import javax.inject.Inject;
 import javax.json.JsonArray;
-import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -37,7 +36,6 @@ public class OverviewFacadeRest {
 	@GET
 	@Path("/live-data/{userId}")
 	@Produces({ "application/json" })
-	@Transactional
 	@ApiOperation(value="Get live data",
 	response=LiveData.class,
 	responseContainer="List")
@@ -51,7 +49,6 @@ public class OverviewFacadeRest {
 	@GET
 	@Path("/hidden-data/{userId}")
 	@Produces({ "application/json" })
-	@Transactional
 	@ApiOperation(value="Get hidden data",
 	response=LiveData.class,
 	responseContainer="List")
@@ -65,7 +62,6 @@ public class OverviewFacadeRest {
 	@POST
 	@Path("/preferences/{userId}/add")
 	@Consumes({ MediaType.TEXT_PLAIN })
-	@Transactional
 	public Response addPreference(@PathParam("userId") Long userId, String measureName) {
 		return overviewService.addPreference(userId, measureName);
 	}
@@ -73,7 +69,6 @@ public class OverviewFacadeRest {
 	@POST
 	@Path("/preferences/{userId}/remove")
 	@Consumes({ MediaType.TEXT_PLAIN })
-	@Transactional
 	public Response removePreference(@PathParam("userId") Long userId, String measureName) {
 		return overviewService.removePreference(userId, measureName);
 	}

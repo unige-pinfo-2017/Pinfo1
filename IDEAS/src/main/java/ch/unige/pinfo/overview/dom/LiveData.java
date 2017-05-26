@@ -41,20 +41,6 @@ public class LiveData {
     @OrderBy("id asc")
     private Set<User> users;
     
-    //public LiveData() {}
-    
-    /*@Override
-    public boolean equals(Object obj){
-    	LiveData liveData = (LiveData) obj;
-    	if (!liveData.getId().equals(this.id)) return false;
-    	return true;
-    }
-    
-    @Override
-    public int hashCode(){
-    	return this.id.hashCode();
-    }*/
-
 	// Getters & Setters
 	public Long getId() {
 		return id;

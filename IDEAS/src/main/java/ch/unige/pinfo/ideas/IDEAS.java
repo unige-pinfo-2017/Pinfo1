@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,8 +12,6 @@ import javax.ws.rs.PathParam;
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
-import ch.unige.pinfo.device.service.DeviceService;
-import ch.unige.pinfo.device.service.SensorService;
 import ch.unige.pinfo.device.service.TypeDeviceService;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
@@ -33,11 +30,7 @@ public class IDEAS {
 	@Inject 
 	private TypeDeviceService typeDeviceService;
 	@Inject 
-	private SensorService sensorService;
-	@Inject 
 	private LiveDataService liveDataService;
-	@Inject 
-	private DeviceService deviceService;
 	@Inject 
 	private UserService userService;
 	@Inject 
@@ -56,7 +49,6 @@ public class IDEAS {
 	
 	@GET
 	@Path("/test/{userId}")
-	@Transactional
 	public String test(@PathParam("userId") Long userId) {
 		
 		LiveData ldDel = null;
@@ -78,7 +70,6 @@ public class IDEAS {
 	
 	@GET
 	@Path("test/role")
-	@Transactional
 	public String testRole() {
 		String manager = userService.getUserRoleById(new Long(1));
 		String basic = userService.getUserRoleById(new Long(2));
@@ -88,7 +79,6 @@ public class IDEAS {
 		
 	@GET
 	@Path("/init")
-	@Transactional
 	public String initDB() {
 		
 		Random rand = new Random();

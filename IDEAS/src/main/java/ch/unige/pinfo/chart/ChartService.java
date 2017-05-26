@@ -3,9 +3,11 @@ package ch.unige.pinfo.chart;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 
+@Stateless
 public class ChartService {
 	@Inject
 	ChartJsonBuilder chartJsonBuilder;

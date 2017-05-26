@@ -3,8 +3,10 @@ package ch.unige.pinfo.wso2.service;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.ejb.Local;
 import javax.json.JsonArray;
 
+@Local
 public interface WSO2Wrapper {
 	
 	//temporaire

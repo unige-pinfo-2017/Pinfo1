@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +20,6 @@ import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 
 @Stateless
-@Default
 public class DeviceServiceImpl implements DeviceService {
 	@Inject 
 	private UserService userService;

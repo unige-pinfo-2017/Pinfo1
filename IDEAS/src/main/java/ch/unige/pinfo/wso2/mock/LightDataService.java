@@ -1,7 +1,6 @@
 package ch.unige.pinfo.wso2.mock;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -11,7 +10,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 @Stateless
-@Default
 public class LightDataService {
 	
 	@PersistenceContext

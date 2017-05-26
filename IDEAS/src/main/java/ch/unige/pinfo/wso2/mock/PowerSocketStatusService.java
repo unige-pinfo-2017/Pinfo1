@@ -1,8 +1,6 @@
 package ch.unige.pinfo.wso2.mock;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -11,10 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ch.unige.pinfo.user.dom.User;
 
 @Stateless
-@Default
 public class PowerSocketStatusService {
 	
 	@PersistenceContext

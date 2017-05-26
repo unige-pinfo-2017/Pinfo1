@@ -3,7 +3,6 @@ package ch.unige.pinfo.overview.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -14,7 +13,6 @@ import javax.persistence.criteria.Root;
 import ch.unige.pinfo.overview.dom.LiveData;
 
 @Stateless
-@Default
 public class LiveDataServiceImpl implements LiveDataService {
 
 	@PersistenceContext

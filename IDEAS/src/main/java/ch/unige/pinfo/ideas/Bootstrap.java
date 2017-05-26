@@ -7,7 +7,12 @@ import javax.servlet.http.HttpServlet;
 import io.swagger.jaxrs.config.BeanConfig;
 
 public class Bootstrap extends HttpServlet {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5586530707000587337L;
+
+	@Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 

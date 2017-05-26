@@ -1,16 +1,7 @@
 package ch.unige.pinfo.wso2.rest;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
 
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonReader;
 import java.util.Random;
 
 import javax.ws.rs.*;
@@ -33,59 +24,6 @@ public class FakeWSO2Server {
 	
 	@Inject
 	LightDataService lightDataService;
-
-	//retourne dans un tableau de String tout les etats de "from" a "to".
-	@GET
-	@Path("/PowerSocketTest/device/stats/{deviceId}")
-	@Produces({ "application/json" })
-	public JsonArray getDataPowerSocket(
-			@QueryParam("from") String from, 
-			@QueryParam("to") String to,
-			@QueryParam("sensorType") String sensorType) throws IOException{
-
-		InputStream fis = new FileInputStream("/json1.json");
-		JsonReader jReader = Json.createReader(fis);
-		JsonArray data = jReader.readArray();
-		jReader.close();
-		fis.close();
-
-		long timeStampFrom = Long.parseLong(from);
-		Date fromTime = new Date(timeStampFrom);
-		long timeStampTo = Long.parseLong(to);
-		Date toTime = new Date(timeStampTo);
-
-		int fromIndex = 0;
-		int toIndex = 0;
-
-		for(int i=0; i<data.size() ; i++){
-			String dataTime = ((JsonObject) data.getJsonObject(i).get("values")).get("meta_time").toString();
-			long timeStampTime = Long.parseLong(dataTime);
-			Date time = new Date(timeStampTime);
-
-			if( time.before(fromTime) ){
-				fromIndex = i;
-			}	
-		}
-
-		for(int i=0; i<data.size() ; i++){
-			String dataTime = ((JsonObject) data.getJsonObject(i).get("values")).get("meta_time").toString();
-			long timeStampTime = Long.parseLong(dataTime);
-			Date time = new Date(timeStampTime);
-
-			if( toTime.after(time) ){
-				toIndex = i;
-			}
-		}
-
-		JsonArrayBuilder builder = Json.createArrayBuilder();
-		for(int j=fromIndex ; j<toIndex; j++ ){
-			builder.add(data.getJsonObject(j));
-		}
-		JsonArray dataFromTo = builder.build();
-
-		return dataFromTo;
-	}
-
 	
 	@GET
 	@Path("/PowerSocket/device/stats/{deviceId}")

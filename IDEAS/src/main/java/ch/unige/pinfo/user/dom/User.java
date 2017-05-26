@@ -53,16 +53,6 @@ public class User {
     @OrderBy("id asc")
     private Set<LiveData> preferences;
 	
-	@Override
-	public boolean equals(Object obj){
-		User user = (User) obj;
-		if (user == null){
-			return false;
-		}
-		return ((this.getUsername().equals(user.username))
-			&& (this.password.equals(user.password)));
-	}
-	
 	public String Json(){
 		return new Gson().toJson(this);
 	}

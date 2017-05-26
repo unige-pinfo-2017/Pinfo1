@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityManager;
@@ -27,7 +26,6 @@ import ch.unige.pinfo.user.dom.SysAdmin;
 import ch.unige.pinfo.user.dom.User;
 
 @Stateless
-@Default
 public class UserServiceImpl implements UserService{
 	@Inject 
 	private DeviceManager deviceManager;

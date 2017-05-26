@@ -1,6 +1,5 @@
 package ch.unige.pinfo.wso2.service;
 
-import java.awt.Color;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +10,7 @@ import java.util.Date;
 import java.util.Collections;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;
@@ -20,6 +20,7 @@ import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.wso2.rest.WSO2ClientRest;
 
+@Stateless
 public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	@Inject
@@ -266,36 +267,6 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return values;
 	}
 	
-	
-	/**
-	 * <b>getHSBColor</b>
-	 * <p>
-	 * {@code private String getHSBColor(String hueS, String saturation, String brightness)}
-	 * <p>
-	 *
-	 * Convert HSB color into hexadecimal value
-	 *
-	 * @param hueS - The hue value. Integer between [0..360].
-	 * @param saturation - The saturation value. Double between [0..1]
-	 * @param brightness - The brightness value. Double between [0..1]
-	 * @return
-	 * hexadecimal {@code String} format
-	 */
-	private String getHSBColor(String hueS, String saturation, String brightness){
-		float hue = Float.parseFloat(hueS); 
-		hue = hue/360f;
-		float sat = Float.parseFloat(saturation);
-		float bri = Float.parseFloat(brightness);
-		
-		int RGB = Color.HSBtoRGB(hue, sat, bri);
-		int red = (RGB >> 16) & 0xFF;
-		int green = (RGB >> 8) & 0xFF;
-		int blue = RGB & 0xFF;
-		
-		String hex = String.format("#%02x%02x%02x", red, green, blue);
-		
-		return hex;
-	}
 	
 	/**
 	 * <b>hasSensor</b>

@@ -5,18 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.ws.rs.core.Response;
 
-import com.google.gson.Gson;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.overview.dom.LiveData;
-import ch.unige.pinfo.user.dom.User;
 
+@Stateless
 public class OverviewService {	
 	@Inject
 	private OverviewJsonBuilder overviewJsonBuilder;

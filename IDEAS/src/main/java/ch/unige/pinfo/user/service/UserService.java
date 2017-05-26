@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.ejb.Local;
 
-import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.user.dom.Basic;
@@ -31,17 +30,4 @@ public interface UserService {
 	boolean removePreference(Long userId, Long liveDataId);
 	Set<LiveData> getUserPreferenceByUserId(Long userId);
 	
-	
-	//Manager getManagerById(Long id);
-	//SysAdmin getSysAdminById(Long id);
-	//Basic getBasicById(Long id);
-	//List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice);
-	//List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName);
-	//String getDeviceDataLive(String deviceId, String sensorName);
-	//Sensor getSensorFromSensorName(String sensorName);
-	//List<LiveData> getAllLiveData();
-	//double getSumSensorLiveForUser(Long userId, String sensorName);
-	//double getAvgSensorLiveForUser(Long userId, String sensorName);
-	//double getSumSensorLiveForUsers(List<User> users, String sensorName);
-	//double getAvgSensorLiveForUsers(List<User> users, String sensorName);
 }

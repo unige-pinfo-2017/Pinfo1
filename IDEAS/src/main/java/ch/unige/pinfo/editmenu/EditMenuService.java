@@ -3,12 +3,13 @@ package ch.unige.pinfo.editmenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonArray;
-import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 
+@Stateless
 public class EditMenuService {
 
 	@Inject

@@ -1,11 +1,9 @@
 package ch.unige.pinfo.table;
 
 
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.json.JsonArray;
-import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -13,8 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
-import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.dom.TypeDevice;
@@ -35,7 +31,6 @@ public class TableFacadeRest {
 	@GET
 	@Path("/{userId}/device/{type}")
 	@Produces({"application/json"})
-	@Transactional
 	@ApiOperation(value="Get table for device type",
 	response=TypeDevice.class,
 	responseContainer="List")
@@ -51,7 +46,6 @@ public class TableFacadeRest {
 	@GET
 	@Path("/{userId}/sensor/{type}")
 	@Produces({"application/json"})
-	@Transactional
 	@ApiOperation(value="Get table for sensor type",
 	response=Sensor.class,
 	responseContainer="List")
@@ -75,7 +69,6 @@ public class TableFacadeRest {
 	@GET
 	@Path("/{userId}/user/all")
 	@Produces({"application/json"})
-	@Transactional
 	@ApiOperation(value="Get table of users",
 	notes="Available for Managers and SysAdmin",
 	response=User.class,
@@ -90,7 +83,6 @@ public class TableFacadeRest {
 	@GET
 	@Path("/color")
 	@Produces({ MediaType.TEXT_PLAIN })
-	@Transactional
 	public String getColorTest() {
 		return tableService.getColorTest();
 	}

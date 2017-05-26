@@ -2,6 +2,7 @@ package ch.unige.pinfo.device.service;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -12,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import ch.unige.pinfo.device.dom.Sensor;
 
+@Stateless
 public class SensorServiceImpl implements SensorService {
 
 	@PersistenceContext

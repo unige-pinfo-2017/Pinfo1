@@ -3,12 +3,14 @@ package ch.unige.pinfo.login;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.user.dom.User;
 
+@Stateless
 public class LoginService {
 	@Inject
 	private LoginJsonBuilder loginJsonBuilder;

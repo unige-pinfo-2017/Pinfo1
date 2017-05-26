@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 
@@ -13,6 +14,7 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.user.dom.User;
 
+@Stateless
 public class TableService {
 	
 	@Inject
