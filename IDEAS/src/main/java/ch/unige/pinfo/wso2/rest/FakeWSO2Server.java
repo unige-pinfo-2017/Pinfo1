@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -16,11 +17,22 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import ch.unige.pinfo.wso2.mock.LightData;
+import ch.unige.pinfo.wso2.mock.LightDataService;
+import ch.unige.pinfo.wso2.mock.PowerSocketStatus;
+import ch.unige.pinfo.wso2.mock.PowerSocketStatusService;
+
 @Path("/fakeWso2")
 public class FakeWSO2Server {
 	/*Faking a wso2 server that has Json object
 	 * here just for powerSocket and his 3 Sensors 
 	 */
+	
+	@Inject
+	PowerSocketStatusService powerSocketStatusService;
+	
+	@Inject
+	LightDataService lightDataService;
 
 	//retourne dans un tableau de String tout les etats de "from" a "to".
 	@GET
@@ -31,8 +43,7 @@ public class FakeWSO2Server {
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType) throws IOException{
 
-		//InputStream fis = new FileInputStream("c:\\powerSensor.json");
-		InputStream fis = new FileInputStream("c:\\json1.json");
+		InputStream fis = new FileInputStream("/json1.json");
 		JsonReader jReader = Json.createReader(fis);
 		JsonArray data = jReader.readArray();
 		jReader.close();
@@ -80,20 +91,27 @@ public class FakeWSO2Server {
 	@Path("/PowerSocket/device/stats/{deviceId}")
 	@Produces({ "application/json" })
 	public String getPowerSocket(
+			@PathParam("deviceId") String deviceId,
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
+		
 		Random rand = new Random();
+		String val = Double.toString((50 - 0) * rand.nextDouble());
+		PowerSocketStatus pss = powerSocketStatusService.getPowerSocketStatusByDeviceId(deviceId);
+		if (pss.getStatus().equals("0"))
+			val = "0";
+		
 		if (sensorType.equals("powerSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"powerSensor\":"+ val +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("statusSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"statusSensor\":"+ Integer.toString(rand.nextInt(2)) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"statusSensor\":"+ Integer.toString(rand.nextInt(2)) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"statusSensor\":"+ pss.getStatus() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"statusSensor\":"+ pss.getStatus() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("currentSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"currentSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"currentSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290847263,\"currentSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"powersocketubiquiti\",\"meta_time\":1493290855191,\"currentSensor\":"+ val +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else{
@@ -106,9 +124,11 @@ public class FakeWSO2Server {
 	@Path("/Beacon/device/stats/{deviceId}")
 	@Produces({ "application/json" })
 	public String getBeacon(
+			@PathParam("deviceId") String deviceId,
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
+		
 		Random rand = new Random();
 		if (sensorType.equals("temperatureSensor")){
 			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290847263,\"temperatureSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"estimotebeacon\",\"meta_time\":1493290855191,\"temperatureSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
@@ -132,20 +152,31 @@ public class FakeWSO2Server {
 	@Path("/Light/device/stats/{deviceId}")
 	@Produces({ "application/json" })
 	public String getLight(
+			@PathParam("deviceId") String deviceId,
 			@QueryParam("from") String from,
 			@QueryParam("to") String to,
 			@QueryParam("sensorType") String sensorType){ 
+		
 		Random rand = new Random();
+		String power = Double.toString((50 - 0) * rand.nextDouble());
+	
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
+
+		
 		if (sensorType.equals("brightnessSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"brightnessSensor\":"+ ld.getBrightness() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("colorSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":{\"hue\":"+ Integer.toString(rand.nextInt(361)) +", \"saturation\":"+ Double.toString((1) * rand.nextDouble()) +", \"kelvin\": "+ Integer.toString(rand.nextInt(5000)+5000) +"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":{\"hue\":"+ Integer.toString(rand.nextInt(361)) +", \"saturation\":"+ Double.toString((1 - 0) * rand.nextDouble()) +", \"kelvin\": "+ Integer.toString(rand.nextInt(5000)+5000)+"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"colorSensor\":{\"hue\":"+ Integer.toString(rand.nextInt(361)) +", \"saturation\":"+ Double.toString((1) * rand.nextDouble()) +", \"kelvin\": "+ Integer.toString(rand.nextInt(5000)+5000) +"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"colorSensor\":{\"hue\":"+ ld.getHue() +", \"saturation\":"+ ld.getSaturation() +", \"kelvin\": "+ ld.getKelvin() +"},\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else if(sensorType.equals("powerSensor")){
-			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"powerSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"powerSensor\":"+ power +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
+			return res;
+		}
+		else if(sensorType.equals("statusSensor")){
+			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"statusSensor\":"+ ld.getStatus() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"statusSensor\":"+ ld.getStatus() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
 			return res;
 		}
 		else{
@@ -154,17 +185,23 @@ public class FakeWSO2Server {
 		}
 	}
 
-	//@POST
-	@GET
+	@POST
 	@Path("/PowerSocket/device/{deviceId}/change-status")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	public Response postPowerSocket(
+			@PathParam("deviceId") String deviceId,
 			@QueryParam("state") String state){
 
-		if (state.equals("ON") || state.equals("OFF")){
-			String st = "status :"+state;
-			return Response.status(200).entity(st).build();
+		PowerSocketStatus pss = powerSocketStatusService.getPowerSocketStatusByDeviceId(deviceId);
+		if (state.equals("ON")){
+			pss.setStatus("1");
+			powerSocketStatusService.updatePowerSocketStatus(pss);
+			return Response.status(200).entity("Status changed").build();
+		}
+		else if (state.equals("OFF")){
+			pss.setStatus("0");
+			powerSocketStatusService.updatePowerSocketStatus(pss);
+			return Response.status(200).entity("Status changed").build();
 		}
 		else{
 			String st = "This status doesn't exist for PowerSocket";
@@ -173,95 +210,119 @@ public class FakeWSO2Server {
 	}
 
 
-	//@POST
-	@GET
+	@POST
 	@Path("/Light/device/{deviceId}/change-status")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	public Response postLightStatus(
-			@QueryParam("state") String state){
-
-		if (state.equals("ON") || state.equals("OFF")){
-			String st = "status :"+state;
-			return Response.status(200).entity(st).build();
+			@PathParam("deviceId") String deviceId,
+			@QueryParam("state") String state) {
+		
+		Random rand = new Random();
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
+		
+		if (state.equals("ON")){
+			ld.setStatus("1");
+			ld.setBrightness(Double.toString(rand.nextDouble()));
+			ld.setHue(Integer.toString(rand.nextInt(361)));
+			ld.setSaturation(Double.toString(rand.nextDouble()));
+			ld.setKelvin(Integer.toString(rand.nextInt(5000)+5000));
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Status changed").build();
+		}
+		else if (state.equals("OFF")){
+			ld.setStatus("0");
+			ld.setBrightness("0");
+			ld.setHue("0");
+			ld.setSaturation("0");
+			ld.setKelvin("0");	
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Status changed").build();
 		}
 		else{
-			String st = "This status doesn't exist for Light";
+			String st = "This status doesn't exist for PowerSocket";
 			return Response.status(500).entity(st).build();
 		}
 	}
 
-	//@POST
-	@GET
+	@POST
 	@Path("/Light/device/{deviceId}/change-brightness")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	public Response postLightBright(
-			@QueryParam("state") double state){
+			@PathParam("deviceId") String deviceId,
+			@QueryParam("state") String state){
+		
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (0 <= state && state <= 1){
-			String st = "status: "+state+" brightness";
-			return Response.status(200).entity(st).build();
+		if (0 <= Double.parseDouble(state) && Double.parseDouble(state) <= 1){
+			ld.setBrightness(state);
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Brightness changed").build();
 		}
 		else{
-			String st = "This status doesn't exist for Light";
+			String st = "This state of brightness doesn't exist for Light";
 			return Response.status(500).entity(st).build();
 		}
 	}
 
-	//@POST
-	@GET
+	@POST
 	@Path("/Light/device/{deviceId}/change-hue")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	//modifie la couleur
 	public Response postLightHue(
-			@QueryParam("state") int state){
+			@PathParam("deviceId") String deviceId,
+			@QueryParam("state") String state){
 
-		if (0 <= state && state <= 360){
-			String st = "status: "+state+" hue";
-			return Response.status(200).entity(st).build();
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
+
+		if (0 <= Integer.parseInt(state) && Integer.parseInt(state) <= 360){
+			ld.setHue(state);
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Hue changed").build();
 		}
 		else{
-			String st = "This status doesn't exist for Light";
+			String st = "This state of hue doesn't exist for Light";
 			return Response.status(500).entity(st).build();
 		}
 	}
 
-	//@POST
-	@GET
+	@POST
 	@Path("/Light/device/{deviceId}/change-saturation")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	//modifie la saturation de la couleur
-	public Response postLightSat(
-			@QueryParam("state") double state){
+	public Response postLightSaturation(
+			@PathParam("deviceId") String deviceId,
+			@QueryParam("state") String state){
+		
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (0 <= state && state <= 1){
-			String st = "status: "+state+" saturation";
-			return Response.status(200).entity(st).build();
+		if (0 <= Double.parseDouble(state) && Double.parseDouble(state) <= 1){
+			ld.setSaturation(state);
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Saturation changed").build();
 		}
 		else{
-			String st = "This status doesn't exist for Light";
+			String st = "This state of saturation doesn't exist for Light";
 			return Response.status(500).entity(st).build();
 		}
 	}
 
-	//@POST
-	@GET
+	@POST
 	@Path("/Light/device/{deviceId}/change-kelvin")
 	@Produces(MediaType.TEXT_PLAIN)
-	//@Consumes(MediaType.TEXT_PLAIN)
 	//imite la lumiere du soleil selon la journee (ex: 2200K = leve du soleil(jaune/orange) 6500: soleil de midi (blanc))
 	public Response postLightKev(
-			@QueryParam("state") int state){
+			@PathParam("deviceId") String deviceId,
+			@QueryParam("state") String state){
 
-		if (5000 <= state && state <= 9999){
-			String st = "status: "+state+" kelvin";
-			return Response.status(200).entity(st).build();
+		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
+
+		if (5000 <= Integer.parseInt(state) && Integer.parseInt(state) <= 9999){
+			ld.setKelvin(state);
+			lightDataService.updateLightData(ld);
+			return Response.status(200).entity("Kelvin changed").build();
 		}
 		else{
-			String st = "This status doesn't exist for Light";
+			String st = "This state of kelvin doesn't exist for Light";
 			return Response.status(500).entity(st).build();
 		}
 	}

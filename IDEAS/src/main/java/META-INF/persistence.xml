@@ -11,6 +11,8 @@
 		<class>ch.unige.pinfo.user.dom.Manager</class>
 		<class>ch.unige.pinfo.user.dom.Basic</class>
 		<class>ch.unige.pinfo.user.dom.SysAdmin</class>
+		<class>ch.unige.pinfo.wso2.mock.PowerSocketStatus</class>
+		<class>ch.unige.pinfo.wso2.mock.LightData</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
