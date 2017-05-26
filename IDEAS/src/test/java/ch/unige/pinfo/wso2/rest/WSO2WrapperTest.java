@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.io.StringReader;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -45,9 +48,17 @@ public class WSO2WrapperTest {
 		String deviceId = "1";
 		String from = "01.05.2017";
 		String to = "07.05.2017";
+
+		DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+		Date fromDate = format.parse(from);
+		Date toDate = format.parse(to);
+		
+		//date to unix timeStamp to String:
+		String fromString = String.valueOf(fromDate.getTime());
+		String toString = String.valueOf(toDate.getTime());
 		
 		// mock the getStates() function of the WSO2Client
-		when(mockClient.getStates(deviceType, deviceId, sensorType, from, to)).thenReturn(testJ);
+		when(mockClient.getStates(deviceType, deviceId, sensorType, fromString, toString)).thenReturn(testJ);
 		
 		// Calculate the result which must be tested
 		String[] res = wrapper.getValue(deviceType, deviceId, sensorType, from, to);
