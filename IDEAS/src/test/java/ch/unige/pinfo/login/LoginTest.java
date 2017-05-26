@@ -2,7 +2,6 @@ package ch.unige.pinfo.login;
 
 
 import static org.junit.Assert.*;
-import ch.unige.pinfo.login.*;
 
 import org.junit.Test;
 
