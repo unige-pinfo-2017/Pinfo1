@@ -10,7 +10,27 @@
 <sidebar></sidebar>
 <div>
 
+
+	<input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the name column...'
+        (keyup)='updateFilter($event)'
+      />
+      <br>
+
+
+
+        <!--</div>-->
+
+  <div style="display: inline-block; float: right; padding-right: 115px; padding-top:15px;">
+      <button align ="center" class="icon-refresh" (click)="refresh()"><font color="white">
+          <svg fill="#FFFFFF" height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/>
+              <path d="M0 0h24v24H0z" fill="none"/></svg></font></button>
+</div>
 <br>
+<div style="display: inline-block; float: left; padding-left: 120px;">
 <div *ngIf="currentType === 'device'; then primaryBlock1;"></div>
 
     <ng-template #primaryBlock1>
@@ -27,34 +47,17 @@
   <div *ngIf="currentType === 'sensor'; then primaryBlock;"></div>
   <ng-template #primaryBlock>Sensor:
       <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
-		<option value="batterySensor">Battery</option>
-		<option value="brightnessSensor">Brightness</option>
-		<option value="colorSensor">Color</option>
-		<option value="currentSensor">Current</option>
-		<option value="lightSensor">Light Intensity</option>
+      <option value="batterySensor">Battery</option>
+      <option value="brightnessSensor">Brightness</option>
+      <option value="colorSensor">Color</option>
+      <option value="currentSensor">Current</option>
+      <option value="lightSensor">Light Intensity</option>
         <option value="powerSensor">Power</option>
-		<option value="statusSensor">Status</option>
+      <option value="statusSensor">Status</option>
         <option value="temperatureSensor">Temperature</option>
-
-
       </select>
   </ng-template>
-
-  <!--</div>-->
-    <br>
-
-	<input
-        type='text'
-        style='padding:8px;margin:15px auto;width:30%;'
-        placeholder='Type to filter the name column...'
-        (keyup)='updateFilter($event)'
-      />
-      <br>
-  <button align ="center" class="icon-refresh" (click)="refresh()"><font color="white">
-  <svg fill="#FFFFFF" height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg">
-  <path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/>
-  <path d="M0 0h24v24H0z" fill="none"/></svg>
-  </font></button>
+</div>
 <br><br>
     <div class="table">
       <ngx-datatable
