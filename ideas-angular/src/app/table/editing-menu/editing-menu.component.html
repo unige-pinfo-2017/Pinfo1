@@ -25,7 +25,7 @@
 
 				<div *ngIf="field.name === 'State'; then blockState;"></div>
 					<ng-template #blockState>
-						<input type="number" placeholder="{{field.name}}" min="0" [(ngModel)]="field.value" max="1" id="days-off-count" />
+						<input class="state" type="number" placeholder="{{field.name}}" min="0" [(ngModel)]="field.value" max="1" id="days-off-count" />
 					</ng-template>
 
 				<div *ngIf="field.name === 'Hue'; then blockHue;"></div>

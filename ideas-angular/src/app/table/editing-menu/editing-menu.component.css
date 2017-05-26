@@ -12,6 +12,16 @@
     align: middle;
 }
 
+.state {
+    width: 40%;
+    clear: both;
+    display: inline-block;
+    text-align: center;
+    float: center;
+    align: middle;
+    margin-left:50px;
+}
+
 .hue {
     width: 40%;
     clear: both;
