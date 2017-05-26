@@ -2,18 +2,42 @@
     float: center;
     font-size: 17px;
     width: 400px;
-    height: 280px;
+    height: 300px;
     margin: 10px;
     border: 5px solid;
 	  border-color: #2B5591;
     border-radius: 5px;
 	  background-color: #f1f1f1;
     text-align: center;
+    align: middle;
 }
 
-input[type=number] {
+.hue {
     width: 40%;
     clear: both;
     display: inline-block;
     text-align: center;
+    float: center;
+    align: middle;
+    margin-left:75px;
+}
+
+.saturation {
+    width: 40%;
+    clear: both;
+    display: inline-block;
+    text-align: center;
+    float: center;
+    align: middle;
+    margin-left:18px;
+}
+
+.kelvin {
+    width: 40%;
+    clear: both;
+    display: inline-block;
+    text-align: center;
+    float: center;
+    align: middle;
+    margin-left:55px;
 }
