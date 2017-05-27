@@ -149,4 +149,10 @@ public interface WSO2Wrapper {
 	String changeSaturation(String deviceId, String state);
 
 	String changeKelvin(String deviceId, String state);
+
+	List<Double> getLastDayData(String deviceType, String deviceId, String sensorType);
+	
+	List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType);
+
+	List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType);
 }

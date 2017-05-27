@@ -29,6 +29,9 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	@Inject
 	Instance<DeviceManager> dm;
 	
+	@Inject
+	ChartDataService chartDataService;
+	
 	private final int decimalNumber = 2;
 	
 	@Override
@@ -298,50 +301,57 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return Math.round(value*powerOfTen)/powerOfTen;
 	}
 	
-	public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType) {
-		/*
-		 * 1) Get current timestamp in epoch
-		 * 2) Compute the 24 timestamps: t-1, t-2, ..., t-23
-		 * 3) V = getValue(from=t-24, to=t)
-		 * 4) Reduce V to only get at most one average point per time interval (t-i, t-i+1)
-		 * 5) For each timestamps t-i, get the closest previous points in reduced V
-		 * */
-		
+	@Override
+	public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType) {		
 		Instant now = Instant.now();
 		List<Instant> timePoints = new ArrayList<Instant>();
 		for (int i=0; i<24; i++) {
 			timePoints.add(now.minus(Duration.ofHours(i)));
 		}
-		//List<Reading> readings = getReadings(deviceType, deviceId, sensorType, timePoints.get(timePoints.size()-1).toString(), timePoints.get(0).toString());
-		List<Reading> readings = mockReadings(now);
+		List<Reading> readings = mockReadingsLastDay(now);
 		Collections.reverse(readings); // On inverse l'ordre de 'readings' car la liste est du plus ancient au plus recent alors que timepoints est du plus recent au plus ancien
-		readings = averageValuePerTimeSlot(readings, timePoints);
+		readings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
+		Collections.reverse(readings); //On renvoit les donnees dans l'ordre old-new
 		
-		return null;
+		return getValuesOfReadings(readings);
 	}
 	
-	public List<Reading> averageValuePerTimeSlot(List<Reading> readings, List<Instant> timePoints) {
-		List<Reading> newReadings = new ArrayList<Reading>();
-		for (int i=0; i<timePoints.size()-1; i++) {
-			Instant curr = timePoints.get(i);
-			Instant before = timePoints.get(i+1);
-			
-			// Construction de la liste des readings se trouvant entre curr et before
-			List<Reading> toBeAveraged = new ArrayList<Reading>();
-			for (int j=0; j<readings.size(); j++) {
-				Reading reading = readings.get(j);
-				if (reading.getTimestamp().isBefore(before)) {
-					break;
-				}
-				
-				if (reading.getTimestamp().isBefore(curr) && reading.getTimestamp().isAfter(before)) {
-					toBeAveraged.add(reading);
-				}
-			}
-			// Calcul du reading moyen de la liste des readings se trouvant entre curr et before
-			newReadings.add(averageReading(toBeAveraged));
+	@Override
+	public List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType) {
+		Instant now = Instant.now();
+		List<Instant> timePoints = new ArrayList<Instant>();
+		for (int i=0; i<7; i++) {
+			timePoints.add(now.minus(Duration.ofDays(i)));
 		}
-		return newReadings;
+		List<Reading> readings = mockReadingsLastWeek(now);
+		Collections.reverse(readings);
+		readings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
+		Collections.reverse(readings); //On renvoit les donnees dans l'ordre old-new
+		
+		return getValuesOfReadings(readings);
+	}
+	
+	@Override
+	public List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType) {
+		Instant now = Instant.now();
+		List<Instant> timePoints = new ArrayList<Instant>();
+		for (int i=0; i<30; i++) {
+			timePoints.add(now.minus(Duration.ofDays(i)));
+		}
+		List<Reading> readings = mockReadingsLastMonth(now);
+		Collections.reverse(readings);
+		readings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
+		Collections.reverse(readings);
+		
+		return getValuesOfReadings(readings);
+	}
+	
+	public List<Double> getValuesOfReadings(List<Reading> readings) {
+		List<Double> values = new ArrayList<Double>();
+		for (Reading reading: readings) {
+			values.add(reading.getValue());
+		}
+		return values;
 	}
 	
 	public List<Reading> getReadings(String deviceType, String deviceId, String SensorType, String From, String To) {
@@ -350,52 +360,45 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
 		for (int i=0; i<states.size(); i++) {
 			JsonObject jsonObject = (JsonObject) states.getJsonObject(i).get("values");
-			//readings[i] = ((JsonObject) states.getJsonObject(i).get("values")).get(SensorType).toString();
 			readings.add(new Reading(jsonObject.get("meta_time").toString(), jsonObject.get(SensorType).toString()));
 		}
 		
 		return readings;
 	}
 	
-	public Reading averageReading(List<Reading> readings) {
-		long avgInstant = 0; // In second
-		double avgValue = 0;
-		double size = (double) readings.size();
-		
-		if (size == 0) {
-			return new Reading(Instant.ofEpochSecond(0), "0");
-		}
-		
-		for (Reading reading: readings) {
-			avgInstant += reading.getTimestamp().getEpochSecond();
-			avgValue += Double.parseDouble(reading.getValue());
-		}
-		return new Reading(Instant.ofEpochSecond((long) (avgInstant/size)), Double.toString(avgValue/size));
-	}
 	
-	public List<Double> computeClosestReadings(List<Reading> readings, List<Instant> timePoints) {
-		List<Double> res = new ArrayList<Double>();
-		for (int i=0; i<timePoints.size(); i++) {
-			res.add(computeClosestReading(readings, timePoints.get(i)));
-		}
-		return res;
-	}
-	
-	public double computeClosestReading(List<Reading> readings, Instant timePoint) {
-		for (Reading reading: readings) {
-			if (reading.getTimestamp().isBefore(timePoint)) {
-				return Double.parseDouble(reading.getValue());
-			}
-		}
-		return 0;
-	}
-	
-	public List<Reading> mockReadings(Instant instant) {
+	public List<Reading> mockReadingsLastDay(Instant instant) {
+		// Create mock Reading list with old to new order
+		// 10 9 8 7 6 5 4 3 2 1 0 0 0 ...
 		List<Reading> mock = new ArrayList<Reading>();
 		for (int i=10; i>=0; i--){
-			Instant inst = instant.minus(Duration.ofHours(i));
-			mock.add(new Reading(inst, Integer.toString(i)));
+			Instant inst = instant.minus(Duration.ofHours(i)); //.minus(Duration.ofMinutes(10)));
+			mock.add(new Reading(inst, (double) i));
+			if (i == 5) {
+				Instant inst2 = instant.minus(Duration.ofHours(i));
+				inst2 = inst2.plus(Duration.ofMinutes(10));
+				mock.add(new Reading(inst2, 10d));
+			}
 		}
 		return mock;
 	}
+	
+	public List<Reading> mockReadingsLastWeek(Instant instant) {
+		List<Reading> mock = new ArrayList<Reading>();
+		for (int i=6; i>=0; i--) {
+			Instant inst = instant.minus(Duration.ofDays(i));
+			mock.add(new Reading(inst, (double) i));
+		}
+		return mock;
+	}
+	
+	private List<Reading> mockReadingsLastMonth(Instant instant) {
+		List<Reading> mock = new ArrayList<Reading>();
+		for (int i=29; i>=0; i--) {
+			Instant inst = instant.minus(Duration.ofDays(i));
+			mock.add(new Reading(inst, (double) i));
+		}
+		return mock;
+	}
+
 }
