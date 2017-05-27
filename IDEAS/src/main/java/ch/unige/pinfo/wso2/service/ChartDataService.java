@@ -22,9 +22,9 @@ public class ChartDataService {
 			List<Reading> toBeAveraged = new ArrayList<Reading>();
 			for (int j=0; j<readings.size(); j++) {
 				Reading reading = readings.get(j);
-				if (reading.getTimestamp().isBefore(before)) {
+				/*if (reading.getTimestamp().isBefore(before)) {
 					break;
-				}
+				}*/
 				
 				if ((reading.getTimestamp().isBefore(curr) || reading.getTimestamp().equals(curr)) && reading.getTimestamp().isAfter(before)) {
 					toBeAveraged.add(reading);

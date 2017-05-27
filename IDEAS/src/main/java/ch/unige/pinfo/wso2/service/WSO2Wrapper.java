@@ -155,4 +155,6 @@ public interface WSO2Wrapper {
 	List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType);
 
 	List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType);
+
+	List<Double> getDataForYear(String deviceId, String sensorType, int year);
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonArray;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 
@@ -20,6 +21,10 @@ public class EditMenuService {
 	
 	public String changeDevice(String deviceId, String resource, String state) {
 		return backEndFacade.changeDevice(deviceId,  resource, state);
+	}
+	
+	public Response changeDevice2(String deviceId, String resource, String state) {
+		return Response.status(200).entity(deviceId + " " + resource + " " + state).build();
 	}
 	
 	public JsonArray getEditMenu(String deviceId) {

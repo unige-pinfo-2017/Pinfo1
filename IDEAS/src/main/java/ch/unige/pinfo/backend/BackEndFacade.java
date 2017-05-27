@@ -13,6 +13,7 @@ import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
+import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 public class BackEndFacade {
 	@Inject
@@ -23,6 +24,26 @@ public class BackEndFacade {
 	
 	@Inject
 	LiveDataService liveDataService;
+	
+	// Temp, For testing
+	@Inject
+	WSO2Wrapper wso2Wrapper;
+	
+	public List<Double> getDataYear(String deviceId, String sensorType, int year) {
+		return wso2Wrapper.getDataForYear(deviceId, sensorType, year);
+	}
+	
+	public List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType) {
+		return wso2Wrapper.getLastMonthData(deviceType, deviceId, sensorType);
+	}
+	
+	public List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType) {
+		return wso2Wrapper.getLastWeekData(deviceType, deviceId, sensorType);
+	}
+	
+	public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType) {
+		return wso2Wrapper.getLastDayData(deviceType, deviceId, sensorType);
+	}
 	
 	public boolean isMeasureName(String measureName) {
 		List<LiveData> liveDatas = getAllLiveDatas();

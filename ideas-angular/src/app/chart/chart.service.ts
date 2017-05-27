@@ -19,12 +19,14 @@ export class ChartService {
 		.then(res => res.json() as Array<any>)
 	}
 
-	public getChartShort(resource: string, time: string) {
-
+	public getChartShort(resource: string, time: string): Promise<any[]> {
+		return this.http.get(`${this.baseUrl}/chart/${resource}/mock-last-${time}`, {headers: this.headersService.getHeadersJson()})
+		.toPromise()
+		.then(res => res.json() as Array<any>)
 	}
 
 	public getChartLong(resource: string, from: string, to: string) {
-		
+
 	}
 
 	public formatData(data: any[], label: any): any[] {

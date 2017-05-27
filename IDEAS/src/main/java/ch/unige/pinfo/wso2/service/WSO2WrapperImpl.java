@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Instance;
@@ -346,6 +348,36 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return getValuesOfReadings(readings);
 	}
 	
+	
+	@Override
+	public List<Double> getDataForYear(String deviceId, String sensorType, int year) {
+		Calendar cal = Calendar.getInstance();
+		
+		List<Instant> timePoints = new ArrayList<Instant>();
+		
+		for (int i=12; i>=0; i--) {
+			if ( (i == 1) || (i == 3) || (i == 5) || (i == 7) ||  (i == 8) || (i == 10) || (i == 12)) {
+				cal.set(year, i, 31);
+			}  else if ( (i==4) || (i==6) || (i==9) || (i==11) ) {
+				cal.set(year, i, 30);
+			} else if (i==2) {
+				cal.set(year, i, 28);
+			} else if (i==0) {
+				cal.set(year, i, 1);
+			}
+			timePoints.add(cal.toInstant());
+		}
+		
+		
+		List<Reading> readings = mockReadingsYear(year);
+		Collections.reverse(readings);
+		readings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
+		Collections.reverse(readings);
+		readings.remove(0);
+		
+		return getValuesOfReadings(readings);
+	}
+
 	public List<Double> getValuesOfReadings(List<Reading> readings) {
 		List<Double> values = new ArrayList<Double>();
 		for (Reading reading: readings) {
@@ -369,16 +401,12 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	public List<Reading> mockReadingsLastDay(Instant instant) {
 		// Create mock Reading list with old to new order
-		// 10 9 8 7 6 5 4 3 2 1 0 0 0 ...
 		List<Reading> mock = new ArrayList<Reading>();
-		for (int i=10; i>=0; i--){
+		Random r = new Random();
+		for (int i=23; i>=0; i--){
 			Instant inst = instant.minus(Duration.ofHours(i)); //.minus(Duration.ofMinutes(10)));
-			mock.add(new Reading(inst, (double) i));
-			if (i == 5) {
-				Instant inst2 = instant.minus(Duration.ofHours(i));
-				inst2 = inst2.plus(Duration.ofMinutes(10));
-				mock.add(new Reading(inst2, 10d));
-			}
+			int randomValue = r.nextInt(10);
+			mock.add(new Reading(inst, (double) randomValue));
 		}
 		return mock;
 	}
@@ -396,6 +424,27 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		List<Reading> mock = new ArrayList<Reading>();
 		for (int i=29; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays(i));
+			mock.add(new Reading(inst, (double) i));
+		}
+		return mock;
+	}
+	
+	private List<Reading> mockReadingsLastYear(Instant instant) {
+		List<Reading> mock = new ArrayList<Reading>();
+		for (int i=11; i>=0; i--) {
+			Instant inst = instant.minus(Duration.ofDays(30*i));
+			mock.add(new Reading(inst, (double) i));
+		}
+		return mock;
+	}
+	
+	private List<Reading> mockReadingsYear(int year) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, 15, 12);
+		Instant instant = cal.toInstant();
+		List<Reading> mock = new ArrayList<Reading>();
+		for (int i=11; i>=0; i--) {
+			Instant inst = instant.minus(Duration.ofDays(30*i));
 			mock.add(new Reading(inst, (double) i));
 		}
 		return mock;

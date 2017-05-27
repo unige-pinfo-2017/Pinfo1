@@ -55,6 +55,10 @@ export class ChartComponent implements OnInit {
 		*/
 	];
 
+	public shortChartType: string;
+	public resource: string;
+	private years: number[] =[];
+
 	public constructor (
 		private chartService: ChartService
 	) {}
@@ -66,16 +70,24 @@ export class ChartComponent implements OnInit {
 				console.log(params[0]);
 				console.log(params[1]);
 			})*/
-			this.getChartDataMock();
+			this.shortChartType = "day";
+			this.resource = "temperature";
+			this.getChartData(this.resource, this.shortChartType);
+			this.years = this.getYears();
 	}
 
-	public getChartDataMock(): void {
-		this.chartService.getChartDataMock()
+	public getChartData(resource: string, type: string): void {
+		this.chartService.getChartShort(resource, type)
 			.then(params => {
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
 				this.lineChartLabels = this.chartService.formatLabels(params[2]);
 				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround
 			});
+	}
+
+	public onChange(newTime: string):void {
+		this.shortChartType = newTime;
+		this.getChartData(this.resource, this.shortChartType);
 	}
 
 	public switchToBar():void {
@@ -86,7 +98,16 @@ export class ChartComponent implements OnInit {
 		this.lineChartType = this.lineChartType === 'line' ? 'line' : 'line';
 	}
 
-	public switchToPie():void {
+	private getYears(): number[] {
+		let years: number[] = [];
+		let today = new Date();
+		let yy = today.getFullYear();
+		for(var i = (yy-100); i <= yy; i++){
+		   years.push(i);
+		}
+		return years;
+   }
+	/*public switchToPie():void {
 		this.lineChartType = this.lineChartType === 'pie' ? 'pie' : 'pie';
 	}
 
@@ -100,7 +121,7 @@ export class ChartComponent implements OnInit {
 
 	public switchToDoughnut():void {
 		this.lineChartType = this.lineChartType === 'doughnut' ? 'doughnut' : 'doughnut';
-	}
+	}*/
 
 	public randomize():void {
 		let _lineChartData:Array<any> = new Array(this.lineChartData.length);
