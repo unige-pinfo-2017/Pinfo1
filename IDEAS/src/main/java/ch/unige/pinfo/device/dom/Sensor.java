@@ -48,23 +48,7 @@ public class Sensor {
     	this.unit = unitName;
     	this.measureName = measureName;
     }
-    
-	@Override
-	public boolean equals(Object obj){
-		Sensor sensor = (Sensor) obj;
-		if (sensor == null)
-			return false;
-		return (this.getName().equals(sensor.name));
-	}
-
-	@Override
-	public int hashCode(){
-        int hash = 1;
-        hash = hash * 31 + name.hashCode();
-        return hash;
-	}
-	
-	
+ 	
 	public Long getId() {
 		return id;
 	}

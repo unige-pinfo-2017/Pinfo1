@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table( name = "StatusPowerSocket")
+@Table( name = "Mock_StatusPowerSocket")
 public class PowerSocketStatus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

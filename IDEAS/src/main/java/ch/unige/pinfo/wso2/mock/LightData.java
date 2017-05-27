@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table( name = "LightData")
+@Table( name = "Mock_LightData")
 public class LightData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

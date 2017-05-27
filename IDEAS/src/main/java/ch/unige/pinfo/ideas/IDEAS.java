@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -79,6 +80,7 @@ public class IDEAS {
 		
 	@GET
 	@Path("/init")
+	@Transactional
 	public String initDB() {
 		
 		Random rand = new Random();
@@ -202,6 +204,9 @@ public class IDEAS {
         user1.getUsers().add(user7);
         user1.getUsers().add(user8);
 
+        user2.getUsers().add(user1);
+        
+        user3.getUsers().add(user1);
         user3.getUsers().add(user2);
         user3.getUsers().add(user4);
         user3.getUsers().add(user5);
