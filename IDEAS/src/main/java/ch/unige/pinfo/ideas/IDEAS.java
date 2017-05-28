@@ -313,7 +313,7 @@ public class IDEAS {
 		lightDataService.addLightData(lightd3);
 		
 		Device d10 = new Device("id10");
-		d10.setType(td3);
+		d10.setType(td1);
 		d10.setOwner(user8);
 		devicesPowerSocket.add(d10);
 		user8.getDevices().add(d10);
