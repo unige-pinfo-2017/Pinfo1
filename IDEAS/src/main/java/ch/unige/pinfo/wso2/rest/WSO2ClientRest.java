@@ -56,7 +56,7 @@ public class WSO2ClientRest {
 
 		WebTarget targetUpdated = wb
 				.path("/"+deviceType+"/device/"+deviceId+"/change-"+qpState)
-				.queryParam("satate", qpState);
+				.queryParam("state", qpState);
 		String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
 		return response;
 

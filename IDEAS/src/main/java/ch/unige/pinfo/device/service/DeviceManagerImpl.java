@@ -14,7 +14,6 @@ import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
-@Stateless
 public class DeviceManagerImpl implements DeviceManager {	
 	@Inject 
 	private SensorService sensorService;

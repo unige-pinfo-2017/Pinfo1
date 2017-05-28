@@ -22,7 +22,6 @@ import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.wso2.rest.WSO2ClientRest;
 
-@Stateless
 public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	@Inject
