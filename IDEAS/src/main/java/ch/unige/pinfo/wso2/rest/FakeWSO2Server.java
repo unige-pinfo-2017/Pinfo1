@@ -134,7 +134,7 @@ public class FakeWSO2Server {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response postPowerSocket(
 			@PathParam("deviceId") String deviceId,
-			String state){
+			@FormParam("state") String state){
 
 		PowerSocketStatus pss = powerSocketStatusService.getPowerSocketStatusByDeviceId(deviceId);
 		if (state.equals("ON")){
@@ -159,7 +159,7 @@ public class FakeWSO2Server {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response postLightStatus(
 			@PathParam("deviceId") String deviceId,
-			String state) {
+			@FormParam("state") String state) {
 		
 		Random rand = new Random();
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
@@ -193,7 +193,7 @@ public class FakeWSO2Server {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response postLightBright(
 			@PathParam("deviceId") String deviceId,
-			Double state){
+			@FormParam("state") Double state){
 		
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
@@ -214,7 +214,7 @@ public class FakeWSO2Server {
 	//modifie la couleur
 	public Response postLightHue(
 			@PathParam("deviceId") String deviceId,
-			Double state){
+			@FormParam("state") Double state){
 
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
@@ -235,7 +235,7 @@ public class FakeWSO2Server {
 	//modifie la saturation de la couleur
 	public Response postLightSaturation(
 			@PathParam("deviceId") String deviceId,
-			Double state){
+			@FormParam("state") Double state){
 		
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
@@ -256,7 +256,7 @@ public class FakeWSO2Server {
 	//imite la lumiere du soleil selon la journee (ex: 2200K = leve du soleil(jaune/orange) 6500: soleil de midi (blanc))
 	public Response postLightKev(
 			@PathParam("deviceId") String deviceId,
-			Double state){
+			@FormParam("state") Double state){
 
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 

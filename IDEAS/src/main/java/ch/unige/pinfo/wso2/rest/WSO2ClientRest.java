@@ -2,9 +2,11 @@ package ch.unige.pinfo.wso2.rest;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
-
+import javax.ws.rs.core.Response;
 
 import java.io.StringReader;
 
@@ -53,12 +55,14 @@ public class WSO2ClientRest {
 	public String postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
-
+		
+		Form form = new Form();
+		form.param("state", qpState);
+		
 		WebTarget targetUpdated = wb
-				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status)
-				.queryParam("state", qpState);
-		String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
-		return response;
+				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status);
+		Response response = targetUpdated.request(MediaType.TEXT_PLAIN).post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE));
+		return String.valueOf(response.getStatus());
 
 	}
 
