@@ -1,0 +1,126 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<sidebar></sidebar>
+<div>
+
+
+	<input
+        type='text'
+        style='padding:8px;margin:15px auto;width:30%;'
+        placeholder='Type to filter the name column...'
+        (keyup)='updateFilter($event)'
+      />
+      <br>
+
+
+
+        <!--</div>-->
+
+  <div style="display: inline-block; float: right; padding-right: 115px; padding-top:15px;">
+      <button align ="center" class="icon-refresh" (click)="refresh()"><font color="white">
+          <svg fill="#FFFFFF" height="25" viewBox="0 0 24 24" width="25" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/>
+              <path d="M0 0h24v24H0z" fill="none"/></svg></font></button>
+</div>
+<br>
+<div style="display: inline-block; float: left; padding-left: 120px;">
+<div *ngIf="currentType === 'device'; then primaryBlock1;"></div>
+
+    <ng-template #primaryBlock1>
+      Device Type:
+      <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
+        <option value="PowerSocket">Power Socket</option>
+        <option value="Beacon">Beacon</option>
+        <option value="Light">Light</option>
+      </select>
+  </ng-template>
+
+
+
+  <div *ngIf="currentType === 'sensor'; then primaryBlock;"></div>
+  <ng-template #primaryBlock>Sensor:
+      <select [(ngModel)]="currentSubtype" (ngModelChange)="onChange($event)">
+      <option value="batterySensor">Battery</option>
+      <option value="brightnessSensor">Brightness</option>
+      <option value="colorSensor">Color</option>
+      <option value="currentSensor">Current</option>
+      <option value="lightSensor">Light Intensity</option>
+        <option value="powerSensor">Power</option>
+      <option value="statusSensor">Status</option>
+        <option value="temperatureSensor">Temperature</option>
+      </select>
+  </ng-template>
+</div>
+<br><br>
+    <div class="table">
+      <ngx-datatable
+        class="material"
+        style="background-color: #F5F5F5; position:relative; display:block; text-align: center; cursor:pointer"
+        [rows]="filteredRows"
+        [loadingIndicator]="loadingIndicator"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [scrollbarV]="true"
+        [reorderable]="reorderable"
+        [selected]="selected"
+        [selectionType]="'cell'"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)">
+      </ngx-datatable>
+  </div>
+</div>
+
+<!--div>
+  <button (click)="getTableFromStorage('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+  <button (click)="getTableFromStorage('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+  <button (click)="getTableFromStorage('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
+</div>
+<div>
+  <button (click)="getTableFromStorage('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
+  <button (click)="getTableFromStorage('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
+  <button (click)="getTableFromStorage('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
+</div>
+<div>
+  <button (click)="getTableFromStorage('user', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
+</div-->
+
+<!--ul class="menu">
+  <li><div class="dropdown">
+    <button class="dropbtn">Devices &nbsp; &or;</button>
+    <div class="dropdown-content">
+      <a href="#">PowerSocket</a>
+      <a href="#">Beacon</a>
+      <a href="#">Light</a></div></div></li>
+
+      <li><div class="dropdown">
+        <button class="dropbtn">Sensor &nbsp; &or;</button>
+        <div class="dropdown-content">
+          <a href="#">Power</a>
+          <a href="#">Temperature</a>
+          <a href="#">Current</a>
+        </div>
+        </div></li>
+</ul-->
+
+
+<div *ngIf="show">
+  <div align="right" style="padding-right: 280px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
+<editing-menu [tableColumns]="columns" [selectedRow]="selectedRow" [selectedDeviceType]="selectedDeviceType" [selectedDeviceId]="selectedDeviceId" (edited)="refresh()"></editing-menu>
+</div>
+
+<!--
+<div>
+	<button (click)="getDemo()" class="btn btn-primary btn-block btn-large">Demo</button>
+	<button (click)="getDeviceTable('powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
+	<button (click)="getDeviceTable('beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
+</div>
+-->

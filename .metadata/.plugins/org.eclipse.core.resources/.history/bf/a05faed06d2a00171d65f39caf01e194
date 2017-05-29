@@ -1,0 +1,33 @@
+package ch.unige.pinfo.user.service;
+
+import static org.junit.Assert.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.junit.Test;
+
+import ch.unige.pinfo.user.dom.User;
+
+public class UserServiceImplTest {
+	
+	@Test
+	public void testGetUserById(){
+		UserServiceImpl usi = new UserServiceImpl();
+		
+		User user = new User();
+		user.setUsername("IDEAS");
+		user.setPassword("IDEASPW");
+		
+		assertTrue(user.equals(usi.getUserByID(9)));
+	}
+	
+	@Test
+	public void testAddUser(){
+		UserServiceImpl usi = new UserServiceImpl();
+		
+		User addedUser = new User();
+		addedUser.setUsername("testUsername");
+		addedUser.setPassword("testPassword");
+	}
+}

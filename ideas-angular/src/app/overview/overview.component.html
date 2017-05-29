@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>I.D.E.A.S Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!-- Partie à gauche de l'écran pour le choix de la station/labo... -->
+<div class="container-fluid">
+	<div class="row content">
+		<sidebar></sidebar>
+
+
+
+<!-- Menu au dessus-->
+		<topbar
+			[data]="liveData"
+			[hiddenData]="hiddenData"
+			(added)="addLiveData($event)"
+			(changed)="changeLiveData($event)"
+			(removed)="removeLiveData($event)"
+		></topbar>
+
+  <!-- Partie centrale (plot prochainement) -->
+		<hr>
+		<br>
+		<middlescreen></middlescreen>
+
+    </div>
+</div>
+
+<!--<footer class="container-fluid">
+  <p>Développé par Benquet0</p>
+</footer>-->
+</body>
+</html>

@@ -3,7 +3,16 @@
 	<persistence-unit name="IDEAS">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>java:jboss/datasources/MysqlIDEAS</jta-data-source>
-		<class>ch.unige.pinfo.user.User</class>
+		<class>ch.unige.pinfo.user.dom.User</class>
+		<class>ch.unige.pinfo.device.dom.Device</class>
+		<class>ch.unige.pinfo.device.dom.TypeDevice</class>
+		<class>ch.unige.pinfo.device.dom.Sensor</class>
+		<class>ch.unige.pinfo.overview.dom.LiveData</class>
+		<class>ch.unige.pinfo.user.dom.Manager</class>
+		<class>ch.unige.pinfo.user.dom.Basic</class>
+		<class>ch.unige.pinfo.user.dom.SysAdmin</class>
+		<class>ch.unige.pinfo.wso2.mock.PowerSocketStatus</class>
+		<class>ch.unige.pinfo.wso2.mock.LightData</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

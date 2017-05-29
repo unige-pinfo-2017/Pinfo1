@@ -1,0 +1,40 @@
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.floating-box {
+    float: center;
+    font-size: 17px;
+    width: 400px;
+    height: 280px;
+    margin: 10px;
+    border: 5px solid;
+	  border-color: #2B5591;
+    border-radius: 5px;
+	  background-color: #f1f1f1;
+    text-align: center;
+}
+
+.⚠ {
+    position: relative; /* So we can position the content as absolute */
+
+    /* Using the borders to create a triangle  */
+    border-left: 0.70em solid transparent;
+    border-right: 0.70em solid transparent;
+    border-bottom: 1.35em solid yellow;
+
+    top: -1.2em;          /* Correction because of the CSS Triangle trick*/
+}
+.⚠::before {
+
+        content: "⚠";
+
+        /* Position the character over the triangle */
+        top: 0.41em;
+        left: -0.45em;
+        position: absolute;
+
+        color: black;
+        font-size: 2em;
+        line-height: 1em;
+}
