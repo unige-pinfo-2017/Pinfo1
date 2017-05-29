@@ -32,13 +32,13 @@ public class DeviceManagerImpl implements DeviceManager {
 	
 	@Override
 	public Response changeDevice(String deviceId, String resource, String state) {
-		if (resource.toLowerCase().equals("hue")) {
+		if ("hue".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeHue(deviceId, state);
-		} else if (resource.toLowerCase().equals("saturation")) {
+		} else if ("saturation".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeSaturation(deviceId, state);
-		} else if (resource.toLowerCase().equals("kelvin")) {
+		} else if ("kelvin".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeKelvin(deviceId, state);
-		} else if (resource.toLowerCase().equals("state")) {
+		} else if ("state".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeState(deviceId, state);
 		} 
 		
@@ -51,7 +51,7 @@ public class DeviceManagerImpl implements DeviceManager {
 		
 		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		
-		if (ld.size() == 0) {
+		if (ld.isEmpty()) {
 			return 0;
 		}
 		
@@ -83,9 +83,9 @@ public class DeviceManagerImpl implements DeviceManager {
 	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
 		List<Device> devices = deviceService.getDevicesByTypeDeviceForUser(userId, typeDevice);
 		String role = userService.getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfManager(userId), typeDevice));
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfSysAdmin(userId), typeDevice));
 		}
 		return devices;
@@ -103,9 +103,9 @@ public class DeviceManagerImpl implements DeviceManager {
 	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName){
 		List<Device> devices = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		String role = userService.getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfManager(userId), sensorName));
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfSysAdmin(userId), sensorName));
 		}
 		return devices;

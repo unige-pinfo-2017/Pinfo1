@@ -83,9 +83,9 @@ public class BackEndFacade {
 	public List<User> getUsersList(Long userId) {
 		List<User> users; 
 		String role = getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			users = getUsersOfManager(userId);
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			users = getUsersOfSysAdmin(userId);
 		} else {
 			users = new ArrayList<User>();
@@ -140,11 +140,11 @@ public class BackEndFacade {
 	// TODO: Traiter le cas d'erreur
 	public List<Double> getLiveDatas(Long userId) {
 		String role = getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			return getLiveDatasManager(userId);
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			return getLiveDatasSysAdmin(userId);
-		} else if (role.equals("Basic")) {
+		} else if ("Basic".equals(role)) {
 			return getLiveDatasBasic(userId);
 		}
 		return new ArrayList<Double>();
@@ -188,18 +188,18 @@ public class BackEndFacade {
 	
 	// TODO: Traiter le cas d'erreur
 	public double getLiveDataValueForUser(Long userId, String computeType, String sensorName) {
-		if (computeType.equals("Sum")) {
+		if ("Sum".equals(computeType)) {
 			return getSumSensorLiveForUser(userId, sensorName);
-		} else if (computeType.equals("Average")) {
+		} else if ("Average".equals(computeType)) {
 			return getAvgSensorLiveForUser(userId, sensorName);
 		}
 		return 0;
 	}
 	
 	public double getLiveDataValueForUsers(List<User> users, String computeType, String sensorName) {
-		if (computeType.equals("Sum")) {
+		if ("Sum".equals(computeType)) {
 			return getSumSensorLiveForUsers(users, sensorName);
-		} else if (computeType.equals("Average")) {
+		} else if ("Average".equals(computeType)) {
 			return getAvgSensorLiveForUsers(users, sensorName);
 		}
 		return 0;
@@ -210,7 +210,7 @@ public class BackEndFacade {
 	}
 	
 	private double getAvgSensorLiveForUsers(List<User> users, String sensorName) {
-		if (users.size() == 0) {
+		if (users.isEmpty()) {
 			return 0;
 		}
 		return getSumSensorLiveForUsers(users, sensorName)/users.size();

@@ -359,14 +359,14 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return mock;
 	}
 	
-	private List<Reading> mockReadingsLastYear(Instant instant) {
+	/*private List<Reading> mockReadingsLastYear(Instant instant) {
 		List<Reading> mock = new ArrayList<Reading>();
 		for (int i=11; i>=0; i--) {
-			Instant inst = instant.minus(Duration.ofDays(30*i));
+			Instant inst = instant.minus(Duration.ofDays( ((long)30) * i));
 			mock.add(new Reading(inst, (double) i));
 		}
 		return mock;
-	}
+	}*/
 	
 	private List<Reading> mockReadingsYear(int year) {
 		Calendar cal = Calendar.getInstance();
@@ -374,7 +374,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		Instant instant = cal.toInstant();
 		List<Reading> mock = new ArrayList<Reading>();
 		for (int i=11; i>=0; i--) {
-			Instant inst = instant.minus(Duration.ofDays(30*i));
+			Instant inst = instant.minus(Duration.ofDays( ((long)30) * i));
 			mock.add(new Reading(inst, (double) i));
 		}
 		return mock;

@@ -133,11 +133,12 @@ public class ChartService {
 	}
 	
 	public boolean isTimeValid(String time) {
-		if (time.equals("day") || time.equals("week") || time.equals("month")) {
+		/*if ("day".equals(time) || "week".equals(time) || "month".equals(time)) {
 			return true;
 		} else {
 			return false;
-		}
+		}*/
+		return ("day".equals(time) || "week".equals(time) || "month".equals(time));
 	}
 
 

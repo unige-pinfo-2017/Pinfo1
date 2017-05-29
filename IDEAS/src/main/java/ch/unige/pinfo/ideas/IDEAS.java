@@ -49,31 +49,6 @@ public class IDEAS {
 	}
 	
 	@GET
-	@Path("/test/{userId}")
-	public String test(@PathParam("userId") Long userId) throws NullPointerException {
-		
-		LiveData ldDel = null;
-		String test = "Liste des preferences avant : ";
-		for (LiveData ld : userService.getUserById(userId).getPreferences()){
-			test = test + ld.getSensor().getMeasureName() + " ";
-			ldDel = ld;
-		}
-		userService.getUserById(userId).getPreferences().remove(ldDel);
-		try {
-			ldDel.getUsers().remove(userService.getUserById(userId));
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-		
-		test = test + " pref apres : ";
-		
-		for (LiveData ld : userService.getUserById(userId).getPreferences()){
-			test = test + ld.getSensor().getMeasureName() + " ";
-		}
-		return test;
-	}
-	
-	@GET
 	@Path("test/role")
 	public String testRole() {
 		String manager = userService.getUserRoleById(new Long(1));

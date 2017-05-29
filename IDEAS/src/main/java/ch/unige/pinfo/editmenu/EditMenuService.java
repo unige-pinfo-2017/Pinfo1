@@ -37,9 +37,9 @@ public class EditMenuService {
 	public List<String> getFieldNames(String deviceId) {
 		List<String> names = new ArrayList<String>();
 		String deviceType = backEndFacade.getDeviceTypeNameFromDeviceId(deviceId);
-		if (deviceType.equals("PowerSocket")) {
+		if ("PowerSocket".equals(deviceType)) {
 			names.add("State");
-		} else if (deviceType.equals("Light")) {
+		} else if ("Light".equals(deviceType)) {
 			names = addColorToFieldNames(names);
 			//names.add("State");
 		}
@@ -49,9 +49,9 @@ public class EditMenuService {
 	public List<String> getFieldValues(String deviceId) {
 		List<String> values = new ArrayList<String>();
 		String deviceType = backEndFacade.getDeviceTypeNameFromDeviceId(deviceId);
-		if (deviceType.equals("PowerSocket")) {
+		if ("PowerSocket".equals(deviceType)) {
 			values.add(backEndFacade.getDeviceDataLive(deviceId, "statusSensor"));
-		} else if (deviceType.equals("Light")) {
+		} else if ("Light".equals(deviceType)) {
 			values = addColorToFieldValues(deviceId, deviceType, values);
 			//values.add(backEndFacade.getDeviceDataLive(deviceId, "statusSensor"));
 		}
