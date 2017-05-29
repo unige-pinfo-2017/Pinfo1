@@ -1,18 +1,30 @@
 
-<div class="col-md-1">
-	<select [(ngModel)]="shortChartType" (ngModelChange)="onChange($event)">
-		<option value="day">Last day</option>
-		<option value="week">Last week</option>
-		<option value="month">Last month</option>
-	</select>
-</div>
 
 <div class="col-md-1">
-		<select>
-              <option  *ngFor="let y of years"  [selected]="yy === y ">{{y}}</option>
-     	</select>
+	<div align="center">
+		<select [(ngModel)]="shortChartType" (ngModelChange)="onChange($event)">
+			<option value="day">Last day</option>
+			<option value="week">Last week</option>
+			<option value="month">Last month</option>
+		</select>
+	</div>
 </div>
-
+<div class="col-md-1">
+	  <select>
+			  <option  *ngFor="let y of years"  [selected]="yy === y ">{{y}}</option>
+	  </select>
+</div>
+<br>
+<br>
+<div class="col-sm-2">
+    <h4>Choose your chart:</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="notactive"><a (click)="switchToLine()"><span style="cursor:pointer"><h4>Line</h4></span></a></li>
+        <li class="notactive"><a (click)="switchToBar()"><span style="cursor:pointer"><h4>Bar</h4></span></a></li>
+      </ul>
+ </div>
+<br>
+<br>
 
   <div class="col-md-6">
     <div style="display: block;">
@@ -23,14 +35,14 @@
           [colors]="lineChartColors"
           [legend]="lineChartLegend"
           [chartType]="lineChartType"
-	        (chartClick)="chartClicked($event)"></canvas>
+	      (chartClick)="chartClicked($event)"></canvas>
     </div>
   </div>
 
-<div class="col-sm-2 sidenav">
+<!--<div class="col-sm-2 sidenav">
     <h4>Choose your chart</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="notactive"><a (click)="switchToLine()"><span style="cursor:pointer"><h4>Line</h4></span></a></li>
         <li class="notactive"><a (click)="switchToBar()"><span style="cursor:pointer"><h4>Bar</h4></span></a></li>
       </ul>
- </div>
+ </div>-->
