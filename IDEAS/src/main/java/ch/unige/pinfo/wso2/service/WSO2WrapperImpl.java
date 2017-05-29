@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import javax.ejb.Stateless;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;

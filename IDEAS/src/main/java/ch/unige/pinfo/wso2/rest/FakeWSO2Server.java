@@ -99,13 +99,6 @@ public class FakeWSO2Server {
 		String power = Double.toString((50 - 0) * rand.nextDouble());
 	
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
-		if (ld.getStatus().equals("1")) {
-			ld.setBrightness(Double.toString(rand.nextDouble()));
-			ld.setHue(Integer.toString(rand.nextInt(361)));
-			ld.setSaturation(Double.toString(rand.nextDouble()));
-			ld.setKelvin(Integer.toString(rand.nextInt(5000)+5000));
-		lightDataService.updateLightData(ld);
-		}
 		
 		if (sensorType.equals("brightnessSensor")){
 			String res = "[{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290847263,\"brightnessSensor\":"+ Double.toString((50 - 0) * rand.nextDouble()) +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"604604ce-7e3f-312a-8ed6-7fb8f2b32113\"},{\"values\":{\"meta_owner\":\"admin\",\"meta_deviceType\":\"lightslifx\",\"meta_time\":1493290855191,\"brightnessSensor\":"+ ld.getBrightness() +",\"_version\":\"1.0.0\",\"meta_deviceId\":\"qxoblpnqwzfp\"},\"id\":\"75bc0fb3-a1e0-35f2-970f-992650ad85c7\"}]";
@@ -197,7 +190,7 @@ public class FakeWSO2Server {
 		
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (0 <= state && state <= 1){
+		if (0 <= state && state <= 1 && ld.getStatus().equals("1")) {
 			ld.setBrightness(Double.toString(state));
 			lightDataService.updateLightData(ld);
 			return Response.status(200).entity("Brightness changed").build();
@@ -218,7 +211,7 @@ public class FakeWSO2Server {
 
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (0 <= state && state <= 360){
+		if (0 <= state && state <= 360 && ld.getStatus().equals("1")){
 			ld.setHue(Double.toString(state));
 			lightDataService.updateLightData(ld);
 			return Response.status(200).entity("Hue changed").build();
@@ -239,7 +232,7 @@ public class FakeWSO2Server {
 		
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (0 <= state && state <= 1){
+		if (0 <= state && state <= 1 && ld.getStatus().equals("1")){
 			ld.setSaturation(Double.toString(state));
 			lightDataService.updateLightData(ld);
 			return Response.status(200).entity("Saturation changed").build();
@@ -260,7 +253,7 @@ public class FakeWSO2Server {
 
 		LightData ld = lightDataService.getLightDataByDeviceId(deviceId);
 
-		if (5000 <= state && state <= 9999){
+		if (5000 <= state && state <= 9999 && ld.getStatus().equals("1")){
 			ld.setKelvin(Double.toString(state));
 			lightDataService.updateLightData(ld);
 			return Response.status(200).entity("Kelvin changed").build();
