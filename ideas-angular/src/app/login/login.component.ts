@@ -42,12 +42,12 @@ export class LoginComponent {
 
 	private authentication(username: string, pw: string): void {
 		if (username === ''){
-			this.login='Authentication failed.';
+			this.error='Authentication failed.';
 		} else {
 			this.loginService.authentication(username, pw)
 			.then(r => this.response = r).then(r => {
 				if (this.response == 'error') {
-					this.login = 'Authentication failed.';
+					this.error = 'Authentication failed.';
 				} else {
 					this.login = 'Authentication successful.';
 					sessionStorage.setItem('id', this.response);
@@ -57,7 +57,7 @@ export class LoginComponent {
 						)
 					);
 				}
-			}).catch(error => this.login = 'Authentication failed');
+			}).catch(error => this.error = 'Authentication failed');
 		}
 	}
 
