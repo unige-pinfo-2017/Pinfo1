@@ -35,14 +35,14 @@ export class ChartComponent implements OnInit {
 	      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
 	    }
 		*/
-		{ // dark grey
+		/*{ // dark grey
 		  backgroundColor: 'rgba(77,83,96,0.2)',
 		  borderColor: 'rgba(77,83,96,1)',
 		  pointBackgroundColor: 'rgba(77,83,96,1)',
 		  pointBorderColor: '#fff',
 		  pointHoverBackgroundColor: '#fff',
 		  pointHoverBorderColor: 'rgba(77,83,96,1)'
-		},
+	  },*/
 		/*
 		{ // grey
 		  backgroundColor: 'rgba(45,59,67,0.2)',
@@ -59,6 +59,7 @@ export class ChartComponent implements OnInit {
 	public longChartType: string;
 	public resource: string;
 	private years: number[] =[];
+	private selectedYear: number;
 
 	public constructor (
 		private chartService: ChartService
@@ -73,11 +74,11 @@ export class ChartComponent implements OnInit {
 			})*/
 			this.shortChartType = "day";
 			this.resource = "temperature";
-			this.getChartData(this.resource, this.shortChartType);
+			this.getChartDataShort(this.resource, this.shortChartType);
 			this.years = this.getYears();
 	}
 
-	public getChartData(resource: string, type: string): void {
+	public getChartDataShort(resource: string, type: string): void {
 		this.chartService.getChartShort(resource, type)
 			.then(params => {
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
@@ -86,10 +87,19 @@ export class ChartComponent implements OnInit {
 			});
 	}
 
-	public onChange(newTime: string):void {
-		this.shortChartType = newTime;
-		this.getChartData(this.resource, this.shortChartType);
+	public getChartDataYear(resource: string, yearNum: number): void {
+		this.chartService.getChartYear(resource, yearNum)
+			.then(params => {
+				this.lineChartData = this.chartService.formatData(params[0], params[1]);
+				this.lineChartLabels = this.chartService.formatLabels(params[2]);
+				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround
+			});
 	}
+
+	/*public onChange(newTime: string):void {
+		this.shortChartType = newTime;
+		this.getChartDataShort(this.resource, this.shortChartType);
+	}*/
 
 	public switchToBar():void {
 		this.lineChartType = this.lineChartType === 'bar' ? 'bar' : 'bar';

@@ -2,7 +2,7 @@
 
 <div class="col-md-1">
 	<div align="center">
-		<select [(ngModel)]="shortChartType" (ngModelChange)="onChange($event)">
+		<select [(ngModel)]="shortChartType" (ngModelChange)="getChartDataShort(this.resource, shortChartType)">
 			<option value="day">Last day</option>
 			<option value="week">Last week</option>
 			<option value="month">Last month</option>
@@ -10,7 +10,7 @@
 	</div>
 </div>
 <div class="col-md-1">
-	  <select>
+	  <select [(ngModel)]="selectedYear" (ngModelChange)="getChartDataYear(this.resource, selectedYear)">
 			  <option  *ngFor="let y of years"  [selected]="yy === y ">{{y}}</option>
 	  </select>
 </div>
