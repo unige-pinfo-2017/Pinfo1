@@ -28,7 +28,8 @@ list-style: none;
 border-bottom: 0em solid white;
 margin-bottom: 0em;
 overflow: auto;
-width: 90%;
+overflow-y:hidden;
+width: 72%;
 white-space: nowrap;
 padding: 17px;
 }
