@@ -23,6 +23,18 @@ public class TableService {
 	@Inject
 	private BackEndFacade backEndFacade;	
 	
+    /**
+     * <b>addColorToColumns</b>
+     * <p>
+     * {@code public List<String> addColorToColumns(List<String> columns)}
+     * <p>
+     * 
+     * add name resource of color in column.
+     * 
+     * @param columns - column's names
+     * @return
+     * A list of column's name in {@code String} format.
+     */
 	public List<String> addColorToColumns(List<String> columns) {
 		columns.add("Hue [° ]");
 		columns.add("Saturation ");
@@ -30,6 +42,20 @@ public class TableService {
 		return columns;
 	}
 	
+	/**
+     * <b>addColorToValues</b>
+     * <p>
+     * {@code public List<String> addColorToValues(List<String> values, String deviceType, String deviceId)}
+     * <p>
+     * 
+     * Add the values of color.
+     * 
+     * @param values - values to add.
+     * @param deviceType - The type of device to add values
+     * @param deviceId - The device's id.
+     * @return
+     * A list of values in {@code String} format.
+     */
 	public List<String> addColorToValues(List<String> values, String deviceType, String deviceId) {
 		List<String> stringsOfColorSensor = backEndFacade.getDeviceDataLiveColor(deviceType, deviceId);
 		for (String string: stringsOfColorSensor) {
@@ -38,6 +64,19 @@ public class TableService {
 		return values;
 	}
 	
+	/**
+     * <b>buildTableForDeviceType</b>
+     * <p>
+     * {@code public JsonArray buildTableForDeviceType(String deviceType, Long userId)}
+     * <p>
+     * 
+     * Build a table with column's names: DeviceId, Owner; and their values.
+     * 
+     * @param deviceType - The device type.
+     * @param userId - The user's id.
+     * @return
+     * A {@code JsonArray}.
+     */
 	public JsonArray buildTableForDeviceType(String deviceType, Long userId) {
 		// Initialise data structures
 		List<String> columns = new ArrayList<String>();
@@ -77,7 +116,18 @@ public class TableService {
 		return tableJsonBuilder.buildTable(columns, allValues);
 	}
 	
-	
+	/**
+     * <b>buildTableForUser</b>
+     * <p>
+     * {@code public JsonArray buildTableForUser(Long userId)}
+     * <p>
+     * 
+     * Build a table for a user with column's names: UserId, Username; and their values
+     * 
+     * @param userId - The user's id
+     * @return
+     * A {@code JsonArray} .
+     */
 	public JsonArray buildTableForUser(Long userId) {
 		List<String> columns = new ArrayList<String>();
 		List<List<String>> allValues = new ArrayList<List<String>>();
@@ -105,6 +155,18 @@ public class TableService {
 		return tableJsonBuilder.buildTable(columns, allValues);
 	}
 
+    /**
+     * <b>buildTableForSensorType</b>
+     * <p>
+     * {@code public JsonArray buildTableForSensorType(String sensorName, Long userId)}
+     * <p>
+     * 
+     * Build a table with cilumn's names: DeviceId, DeviceType, Owner, nad their values. 
+     * 
+     * @param sensorName
+     * @param userId
+     * @return
+     */
 	public JsonArray buildTableForSensorType(String sensorName, Long userId) {
 		List<String> columns = new ArrayList<String>();
 		List<List<String>> allValues = new ArrayList<List<String>>();
@@ -139,6 +201,17 @@ public class TableService {
 		return tableJsonBuilder.buildTable(columns, allValues);
 	}
 	
+    /**
+     * <b>getColorTest</b>
+     * <p>
+     * {@code public String getColorTest()}
+     * <p>
+     * 
+     * Get color's values.
+     * 
+     * @return
+     * A {@code String}
+     */
 	public String getColorTest() {
 		String s="";
 		List<String> values = backEndFacade.getDeviceDataLiveColor("Light", "id9");
