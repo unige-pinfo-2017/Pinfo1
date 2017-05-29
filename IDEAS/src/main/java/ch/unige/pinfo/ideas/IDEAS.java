@@ -50,7 +50,7 @@ public class IDEAS {
 	
 	@GET
 	@Path("/test/{userId}")
-	public String test(@PathParam("userId") Long userId) {
+	public String test(@PathParam("userId") Long userId) throws NullPointerException {
 		
 		LiveData ldDel = null;
 		String test = "Liste des preferences avant : ";
@@ -59,7 +59,11 @@ public class IDEAS {
 			ldDel = ld;
 		}
 		userService.getUserById(userId).getPreferences().remove(ldDel);
-		ldDel.getUsers().remove(userService.getUserById(userId));
+		try {
+			ldDel.getUsers().remove(userService.getUserById(userId));
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 		
 		test = test + " pref apres : ";
 		

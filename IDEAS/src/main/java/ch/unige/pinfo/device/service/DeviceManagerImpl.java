@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -31,18 +32,18 @@ public class DeviceManagerImpl implements DeviceManager {
 	private UserService userService;
 	
 	@Override
-	public String changeDevice(String deviceId, String resource, String state) {
-		if (resource.equals("Hue")) {
+	public Response changeDevice(String deviceId, String resource, String state) {
+		if (resource.toLowerCase().equals("hue")) {
 			return wso2Wrapper.changeHue(deviceId, state);
-		} else if (resource.equals("Saturation")) {
+		} else if (resource.toLowerCase().equals("saturation")) {
 			return wso2Wrapper.changeSaturation(deviceId, state);
-		} else if (resource.equals("Kelvin")) {
+		} else if (resource.toLowerCase().equals("kelvin")) {
 			return wso2Wrapper.changeKelvin(deviceId, state);
-		} else if (resource.equals("State")) {
+		} else if (resource.toLowerCase().equals("state")) {
 			return wso2Wrapper.changeState(deviceId, state);
 		} 
 		
-		return "Resource does not exist.";
+		return Response.status(500).entity("Resource does not exist for this device.").build(); 
 	}
 	
 	@Override

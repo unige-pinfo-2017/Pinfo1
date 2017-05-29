@@ -19,4 +19,11 @@ export class EditingMenuService {
 		.toPromise()
 		.then(res => res.json() as Array<any>);
 	}
+
+	public changeState(deviceId: any, resource: string, newState:string): Promise<string> {
+		return this.http
+		.post(`${this.baseUrl}/edit/${deviceId}/change-${resource}`, newState, {headers: this.headersService.getHeadersPlainText()})
+		.toPromise()
+		.then(res => res.text() as string);
+	}
 }

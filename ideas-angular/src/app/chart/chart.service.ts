@@ -25,6 +25,12 @@ export class ChartService {
 		.then(res => res.json() as Array<any>)
 	}
 
+	public getChartYear(resource: string, yearNum:number): Promise<any[]> {
+		return this.http.get(`${this.baseUrl}/chart/${resource}/year/${yearNum}`, {headers: this.headersService.getHeadersJson()})
+		.toPromise()
+		.then(res => res.json() as Array<any>)
+	}
+
 	public getChartLong(resource: string, from: string, to: string) {
 
 	}

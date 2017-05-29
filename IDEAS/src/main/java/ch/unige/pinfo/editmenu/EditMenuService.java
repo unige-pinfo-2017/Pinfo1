@@ -19,7 +19,7 @@ public class EditMenuService {
 	@Inject
 	EditMenuJsonBuilder editMenuJsonBuilder;
 	
-	public String changeDevice(String deviceId, String resource, String state) {
+	public Response changeDevice(String deviceId, String resource, String state) {
 		return backEndFacade.changeDevice(deviceId,  resource, state);
 	}
 	

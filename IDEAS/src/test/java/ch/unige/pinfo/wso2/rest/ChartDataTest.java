@@ -180,7 +180,7 @@ public class ChartDataTest {
 			timePoints.add(now.minus(Duration.ofHours(i)));
 		}
 		for (int i=0; i<n; i++) { // new to old
-			Instant timestamp = now.minus(Duration.ofHours(n+i));
+			Instant timestamp = now.minus(Duration.ofHours( ((long)n) + i));
 			readings.add(new Reading(timestamp, (double) i));
 		}
 		
@@ -213,7 +213,7 @@ public class ChartDataTest {
 			timePoints.add(now.minus(Duration.ofHours(i)));
 		}
 		for (int i=0; i<n; i++) { // new to old
-			Instant timestamp = now.minus(Duration.ofHours(n-1+i));
+			Instant timestamp = now.minus(Duration.ofHours( ((long) n) - 1 + i));
 			readings.add(new Reading(timestamp, (double) v));
 		}
 		
@@ -246,7 +246,7 @@ public class ChartDataTest {
 			timePoints.add(now.minus(Duration.ofHours(i)));
 		}
 		for (int i=0; i<n; i++) { // new to old
-			Instant timestamp = now.plus(Duration.ofHours(n+i));
+			Instant timestamp = now.plus(Duration.ofHours( ((long)n) + i));
 			readings.add(new Reading(timestamp, (double) i));
 		}
 		
@@ -281,10 +281,10 @@ public class ChartDataTest {
 			timePoints.add(now.minus(Duration.ofHours(i)));
 		}
 		for (int i=0; i<n; i++) { // new to old
-			Instant timestamp = now.plus(Duration.ofHours(n+i));
+			Instant timestamp = now.plus(Duration.ofHours( ((long) n) + i));
 			readings.add(new Reading(timestamp, (double) i));
 		}
-		readings.add(new Reading(now.minus(Duration.ofHours(k-1)).minus(Duration.ofMinutes(10)), (double) v));
+		readings.add(new Reading(now.minus(Duration.ofHours( ((long) k) - 1)).minus(Duration.ofMinutes(10)), (double) v));
 		
 		for (int i=0; i<k; i++) {
 			expected.add(v);

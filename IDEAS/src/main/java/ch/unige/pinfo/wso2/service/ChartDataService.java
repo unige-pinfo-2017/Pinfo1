@@ -52,9 +52,15 @@ public class ChartDataService {
 		// For each time point without an average reading, we copy the value of the closest time point with one
 		
 		for (int i=0; i<readings.size(); i++) {
-			if (readings.get(i).getValue() == emptyValue) { // if reading didn't get any value
+			
+			//if (readings.get(i).getValue() == emptyValue) { // if reading didn't get any value
+			
+			if (isEqualDouble(readings.get(i).getValue(), emptyValue)) {
 				for (int j=i; j<readings.size(); j++) { // find closest reading with a value
-					if (readings.get(j).getValue() != emptyValue) { 
+					
+					//if (readings.get(j).getValue() != emptyValue) {
+					
+					if (!isEqualDouble(readings.get(j).getValue(), emptyValue)) {
 						readings.get(i).setValue(readings.get(j).getValue()); // copy it
 						break;
 					}
@@ -73,7 +79,9 @@ public class ChartDataService {
 		}
 		
 		// Else, the lastTimePoint looks at the latest computed new reading
-		if (newReadings.get(newReadings.size()-1).getValue() != emptyValue) {
+		//if (newReadings.get(newReadings.size()-1).getValue() != emptyValue) {
+			
+		if (!isEqualDouble(newReadings.get(newReadings.size()-1).getValue(), emptyValue)) {
 			return newReadings.get(newReadings.size()-1);
 		}
 		return new Reading(lastTimePoint, 0d);
@@ -84,7 +92,7 @@ public class ChartDataService {
 		
 		long avgInstant = 0; // In second
 		double avgValue = 0;
-		double size = (double) readings.size();
+		int size = readings.size();
 		
 		if (size == 0) {
 			return new Reading(Instant.ofEpochSecond(0), 0d);
@@ -94,7 +102,7 @@ public class ChartDataService {
 			avgInstant += reading.getTimestamp().getEpochSecond();
 			avgValue += reading.getValue();
 		}
-		return new Reading(Instant.ofEpochSecond((long) (avgInstant/size)), (double) avgValue/size);
+		return new Reading(Instant.ofEpochSecond((long) (avgInstant/(double)size)), (double) avgValue/(double) size);
 	}
 	
 	/*public List<Double> computeClosestReadings(List<Reading> readings, List<Instant> timePoints) {
@@ -113,4 +121,9 @@ public class ChartDataService {
 		}
 		return 0;
 	}*/
+	
+	public boolean isEqualDouble(double d1, double d2) {
+		double epsilon = 0.00000000001;
+		return (Math.abs(d1 - d2) < epsilon);
+	}
 }

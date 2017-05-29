@@ -37,6 +37,6 @@ public class EditMenuFacadeRest {
 	@Path("/{deviceId}/change-{resource}")
 	@Consumes({ MediaType.TEXT_PLAIN })
 	public Response changeDevice(@PathParam("deviceId")String deviceId, @PathParam("resource") String resource, String newState) {
-		return editMenuService.changeDevice2(deviceId, resource, newState);
+		return editMenuService.changeDevice(deviceId, resource, newState);
 	}
 }

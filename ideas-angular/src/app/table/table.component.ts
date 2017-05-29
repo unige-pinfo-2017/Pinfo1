@@ -48,6 +48,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
 	private selectedRow:any[] = [];
 	private selectedDeviceType: string;
+	private selectedDeviceId: string;
 
 	public show: boolean = false;
     public showDevice: boolean = false;
@@ -138,10 +139,26 @@ export class TableComponent implements OnInit, OnDestroy {
 		let filtered: any[] = [];
 		for(let i=0; i<(this.rows.length); i++){
 			let r = this.rows[i];
-			console.log(Object.keys(r));
-			if (r[Object.keys(r)[i]].toLowerCase().indexOf(val) !== -1) {
-				filtered.push(this.rows[i]);
+			console.log(r['Owner']);
+
+			if (this.currentType == "device") {
+				if (r['Owner'].toLowerCase().indexOf(val) !== -1) {
+					filtered.push(this.rows[i]);
+				}
+			} else if (this.currentType == "sensor") {
+				if ((r['Owner'].toLowerCase().indexOf(val) !== -1) || (r['DeviceType'].toLowerCase().indexOf(val) !== -1)) {
+					filtered.push(this.rows[i]);
+				}
+			} else if (this.currentType == "user") {
+				if (r['Username'].toLowerCase().indexOf(val) !== -1) {
+					filtered.push(this.rows[i]);
+				}
 			}
+
+			/*if ((r["Owner"].toLowerCase().indexOf(val) !== -1)
+			|| (r['DeviceType'].toLowerCase().indexOf(val) !== -1)) {
+				filtered.push(this.rows[i]);
+			}*/
 		}
 		if (filtered.length > 0) {
 			return filtered;
@@ -159,8 +176,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
 	onSelect(event: any) {
 		//console.log(this.currentType);
-		// console.log('Event: select', event, this.selected);
-		console.log(this.currentType);
+		//console.log('event', event);
+		//console.log('selected', this.selected[0].DeviceId);
 		if (sessionStorage.getItem('role') === "SysAdmin") {
 			if ((this.currentType === "device") || (this.currentType === "sensor")) {
 				this.selectedRow = this.selected;
@@ -170,6 +187,7 @@ export class TableComponent implements OnInit, OnDestroy {
 				} else {
 					this.selectedDeviceType = this.selectedRow[0].DeviceType;
 				}
+				this.selectedDeviceId = this.selectedRow[0].DeviceId;
 			}
 		} else if (this.currentType === "user") {
 			let selectedUserId = this.selected[0]['UserId'];

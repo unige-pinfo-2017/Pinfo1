@@ -56,6 +56,7 @@ export class ChartComponent implements OnInit {
 	];
 
 	public shortChartType: string;
+	public longChartType: string;
 	public resource: string;
 	private years: number[] =[];
 

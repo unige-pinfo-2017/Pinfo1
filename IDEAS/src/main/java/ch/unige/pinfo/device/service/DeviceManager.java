@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Local;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -187,5 +188,5 @@ public interface DeviceManager {
 	 * @return
 	 * The value of the new state in {@code String} format
 	 */
-	String changeDevice(String deviceId, String resource, String state);
+	Response changeDevice(String deviceId, String resource, String state);
 } 

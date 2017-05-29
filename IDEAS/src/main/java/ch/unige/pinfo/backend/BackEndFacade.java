@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -231,7 +232,7 @@ public class BackEndFacade {
 		return deviceManager.getSensorFromSensorName(sensorName);
 	}
 
-	public String changeDevice(String deviceId, String resource, String state) {
+	public Response changeDevice(String deviceId, String resource, String state) {
 		return deviceManager.changeDevice(deviceId, resource, state);
 	}
 }

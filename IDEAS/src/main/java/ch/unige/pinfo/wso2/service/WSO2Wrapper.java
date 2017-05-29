@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.json.JsonArray;
+import javax.ws.rs.core.Response;
 
 @Local
 public interface WSO2Wrapper {
@@ -63,92 +64,16 @@ public interface WSO2Wrapper {
 	 * @return
 	 * Response of the server.
 	 */
-	String changePowerSocketStatus(String deviceId, String state);
-	
-	/**
-	 * <b>changeLightStatus</b>
-	 * <p>
-	 * {@code String changeLightStatus(String deviceId, String state)}
-	 * <p>
-	 * 
-	 * Change the value of the Status of Light device on the server. 
-	 * 
-	 * @param deviceId - The Id of the device
-	 * @param state - The state we want to change. Possible value: "ON" or "OFF"
-	 * @return
-	 * Response of the server.
-	 */
-	String changeLightStatus(String deviceId, String state);
-	
-	/**
-	 * <b>changeLightBrightness</b>
-	 * <p>
-	 * {@code String changeLightBrightness(String deviceId, double state)}
-	 * <p>
-	 * 
-	 * Change the value of the Brightness of Light device on the server. 
-	 * 
-	 * @param deviceId - The Id of the device
-	 * @param state - The state we want to change. Value between [0..1] 
-	 * @return
-	 * Response of the server.
-	 */
-	String changeLightBrightness(String deviceId, String state);
-	
-	/**
-	 * <b>changeLightSaturation</b>
-	 * <p>
-	 * {@code String changeLightSaturation(String deviceId, double state)}
-	 * <p>
-	 * 
-	 * Change the value of the Saturation of Light device on the server. 
-	 * 
-	 * @param deviceId - The Id of the device
-	 * @param state - The state we want to change. Value between [0..1] 
-	 * @return
-	 * Response of the server.
-	 */
-	String changeLightSaturation(String deviceId, String state);
-	
-	/**
-	 * <b>changeLightHue</b>
-	 * <p>
-	 * {@code String changeLightHue(String deviceId, int state)}
-	 * <p>
-	 * 
-	 * Change the value of the Hue of Light device on the server. 
-	 * 
-	 * @param deviceId - The Id of the device
-	 * @param state - The state we want to change. Value between [0..360] 
-	 * @return
-	 * Response of the server.
-	 */
-	String changeLightHue(String deviceId, String state);
-	
-	/**
-	 * <b>changeLightKelvin</b>
-	 * <p>
-	 * {@code String changeLightKelvin(String deviceId, int state)}
-	 * <p>
-	 * 
-	 * Change the value of the temperature/Kelvin color of Light device on the server. 
-	 * 
-	 * @param deviceId - The Id of the device
-	 * @param state - The state we want to change. Value between [5000..9999] 
-	 * @return
-	 * Response of the server.
-	 */
-	String changeLightKelvin(String deviceId, String state);
 
 	List<String> getValueLiveColor(String deviceType, String deviceId);
 
-	String changeState(String deviceId, String state);
+	Response changeState(String deviceId, String state);
 
-	String changeHue(String deviceId, String state);
+	Response changeHue(String deviceId, String state);
 
-	String changeSaturation(String deviceId, String state);
+	Response changeSaturation(String deviceId, String state);
 
-	String changeKelvin(String deviceId, String state);
+	Response changeKelvin(String deviceId, String state);
 
 	List<Double> getLastDayData(String deviceType, String deviceId, String sensorType);
 	

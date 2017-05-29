@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { EditingMenuService } from './editing-menu.service';
+import { Response } from '@angular/http';
 
 const PARAM: any[] = [
 	{name: 'Brightness', value: 0, unit: 'kW/h'},
@@ -20,39 +21,52 @@ export class EditingMenuComponent implements OnInit {
 	@Input() tableColumns: any[];
 	@Input() selectedRow: any[];
 	@Input() selectedDeviceType: string;
+	@Input() selectedDeviceId: string;
+	@Output() edited:EventEmitter<any> = new EventEmitter();
 	private editMenu: any[] = [];
-	private editMenuBackup: any[] = [];
 
 	public constructor (
 		private editingMenuService: EditingMenuService
 	) {}
 
 	public ngOnInit(): void {
-		console.log(this.tableColumns);
-		console.log(this.selectedRow);
 		this.getEditingMenu(this.selectedRow[0].DeviceId);
 	}
 
 	public edit(): void {
-		console.log(this.editMenu);
+		let promises:Promise<string>[] = [];
 		for (let i=0; i<this.editMenu.length; i++) {
 			let curr: any = this.editMenu[i];
-			let backup: any = this.editMenuBackup[i];
-			console.log(curr['value']);
-			if (curr['value'] !== backup['value']) {
-				this.changeState(curr['name'], curr['value']);
-			}
+			let name:string = curr['name'];
+			let value:number = curr['value'];
+			promises.push(this.checkAndChange(name, value));
 		}
+		Promise.all(promises).then(res => this.edited.emit());
 	}
 
-	public changeState(name: string, value: string){
+	public checkAndChange(name: string, value:number):Promise<string> {
+		if (name === "State") {
+			if (value !=0 && value != 1) return;
+		} else if (name === "Hue") {
+			if (value < 0 || value > 360) return;
+		} else if (name === "Saturation") {
+			if (value < 0 || value > 1) return;
+		} else if (name === "Kelvin") {
+			if (value < 5000 || value > 9999) return;
+		} else {
+			return;
+		}
+		return this.changeState(name,value);
+	}
 
+	public changeState(name: string, value: number): Promise<string> {
+		return this.editingMenuService.changeState(this.selectedDeviceId, name, String(value));
 	}
 
 	private getEditingMenu(deviceId: string): void {
+		console.log("getEditMenu called");
 		this.editingMenuService.getEditingMenu(deviceId).then(menu => {
 			this.editMenu = menu;
-			this.editMenuBackup = menu;
 		});
 	}
 }
