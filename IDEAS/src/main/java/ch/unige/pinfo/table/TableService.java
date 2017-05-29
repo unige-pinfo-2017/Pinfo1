@@ -51,7 +51,7 @@ public class TableService {
 		columns.add("DeviceId");
 		columns.add("Owner");
 		for (Sensor sensor: sensors) {
-			if (sensor.getName().equals("colorSensor")) {
+			if ("colorSensor".equals(sensor.getName())) {
 				columns = addColorToColumns(columns);
 			} else {
 				columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]" );
@@ -64,7 +64,7 @@ public class TableService {
 			values.add(device.getDeviceId());
 			values.add(device.getOwner().getUsername());
 			for (Sensor sensor: sensors) {
-				if (sensor.getName().equals("colorSensor")) {
+				if ("colorSensor".equals(sensor.getName())) {
 					values = addColorToValues(values, deviceType, device.getDeviceId());
 				} else {
 					values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensor.getName()));
@@ -116,7 +116,7 @@ public class TableService {
 		columns.add("DeviceType");
 		columns.add("Owner");
 		
-		if (sensor.getName().equals("colorSensor")) {
+		if ("colorSensor".equals(sensor.getName())) {
 			columns = addColorToColumns(columns);
 		} else {
 			columns.add("Value [" + sensor.getUnit() + " ]");
@@ -128,10 +128,10 @@ public class TableService {
 			values.add(device.getType().getName());
 			values.add(device.getOwner().getUsername());
 			
-			if (sensor.getName().equals("colorSensor")) {
+			if ("colorSensor".equals(sensor.getName())) {
 				values = addColorToValues(values, device.getType().getName(), device.getDeviceId());
 			} else {
-				values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));				
+				values.add(backEndFacade.getDeviceDataLive(device.getDeviceId(), sensorName));
 			}
 			allValues.add(values);
 		}
