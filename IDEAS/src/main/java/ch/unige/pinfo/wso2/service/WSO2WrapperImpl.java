@@ -16,6 +16,7 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.service.DeviceManager;
@@ -135,99 +136,27 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}
 	
 	@Override
-	public String changeState(String deviceId, String state) {
+	public Response changeState(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
 		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
 	}
 	
 	@Override
-	public String changeHue(String deviceId, String state) {
+	public Response changeHue(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
 		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
 	}
 	
 	@Override
-	public String changeSaturation(String deviceId, String state) {
+	public Response changeSaturation(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
 		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
 	}
 	
 	@Override
-	public String changeKelvin(String deviceId, String state) {
+	public Response changeKelvin(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
 		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
-	}
-	
-	@Override
-	public String changePowerSocketStatus(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "PowerSocket";
-		String response = "Error"; 
-
-		if (hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "status", state.toUpperCase());
-		}
-		return response;
-	}
-	
-	@Override
-	public String changeLightStatus(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "Light";
-		String response = "Error"; 
-
-		if (hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "status", state.toUpperCase());
-		}
-		return response;
-	}
-	
-	@Override
-	public String changeLightBrightness(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "Light";
-		String response = "Error"; 
-		
-		if (hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "brightness", state);
-		}
-		return response;
-	}
-	
-	@Override
-	public String changeLightSaturation(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "Light";
-		String response = "Error"; 
-
-		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "saturation", state);
-		}
-		return response;
-	}
-	
-	@Override
-	public String changeLightHue(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "Light";
-		String response = "Error"; 
-
-		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "hue", state);
-		}
-		return response;
-	}
-	
-	@Override
-	public String changeLightKelvin(String deviceId, String state){
-		Long id = Long.parseLong(deviceId);
-		String device = "Light";
-		String response = "Error"; 
-
-		if(hasSensor(id, device)){
-			response = wcr.postStatus(device, deviceId, "kelvin", state);
-		}
-		return response;
 	}
 	
 	@Override
