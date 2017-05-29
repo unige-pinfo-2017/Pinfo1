@@ -41,9 +41,17 @@ public class Device {
 	
 	@Override
 	public boolean equals(Object obj){
-		Device device = (Device) obj;
-		if (device == null)
+		if (obj == null) {
 			return false;
+		}
+		
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		Device device = (Device) obj;
+		/*if (device == null)
+			return false;*/
 		return ((this.getDeviceId().equals(device.deviceId)) 
 				&& (this.getType().equals(device.type)));
 	}
