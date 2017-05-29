@@ -52,7 +52,7 @@ public class WSO2ClientRest {
 	}
 
 	//Post peut etre accede avec des strig, int et double pour le query param qpState:
-	public Response postStatus2(String deviceType, String deviceId, String status, String qpState){
+	/*public Response postStatus2(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
 		
@@ -65,7 +65,7 @@ public class WSO2ClientRest {
 		//Response response = targetUpdated.request().get();
 		return response;
 
-	}
+	}*/
 	
 	public Response postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
@@ -74,12 +74,12 @@ public class WSO2ClientRest {
 		WebTarget targetUpdated = wb
 				.path("/"+deviceType+"/device/"+deviceId+"/change-"+status);
 		//String response = targetUpdated.request(MediaType.TEXT_PLAIN).get(String.class);
-		Response response = targetUpdated.request(MediaType.TEXT_PLAIN).post(Entity.entity(qpState, MediaType.TEXT_PLAIN));
-		/*if (response.hasEntity()) {
-			return Response.status(response.getStatus()).entity(response.getEntity()).build();
+		//Response response = targetUpdated.request(MediaType.TEXT_PLAIN).post(Entity.entity(qpState, MediaType.TEXT_PLAIN));
+		Response response = targetUpdated.request(MediaType.TEXT_PLAIN).post(Entity.text(qpState));
+		if (response.hasEntity()) {
+			return Response.status(200).entity(qpState).build();
 		}
-		return Response.status(500).entity("no entity").build();*/
-		return Response.status(200).entity("mock").build();
+		return Response.status(500).entity("no entity").build();
 	}
 
 	//Client officiel (non disponible):

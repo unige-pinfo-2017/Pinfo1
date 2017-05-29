@@ -26,26 +26,30 @@
 				<div *ngIf="field.name === 'State'; then blockState;"></div>
 					<ng-template #blockState>
 						<input class="state" type="number" placeholder="{{field.name}}" min="0" [(ngModel)]="field.value" max="1" id="days-off-count" />
+						<input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="checkAndChange('State', field.value)">
 					</ng-template>
 
 				<div *ngIf="field.name === 'Hue'; then blockHue;"></div>
 					<ng-template #blockHue>
 						<input class="hue" type="number" placeholder="{{field.name}}" min="0" [(ngModel)]="field.value" max="360" id="days-off-count" />
+						<input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="checkAndChange('Hue', field.value)">
 					</ng-template>
 
 				<div *ngIf="field.name === 'Saturation'; then blockSaturation;"></div>
 					<ng-template #blockSaturation>
 						<input class="saturation" type="number" placeholder="{{field.name}}" min="0" [(ngModel)]="field.value" max="1" step="0.01" id="days-off-count" />
+						<input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="checkAndChange('Saturation', field.value)">
 					</ng-template>
 
 				<div *ngIf="field.name === 'Kelvin'; then blockKelvin;"></div>
 					<ng-template #blockKelvin>
 						<input class="kelvin" type="number" placeholder="{{field.name}}" min="5000" [(ngModel)]="field.value" max="9999" id="days-off-count" />
+						<input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="checkAndChange('Kelvin', field.value)">
 					</ng-template>
 
 				<br><br>
     		</div>
-			<input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="edit()">
+			<!--input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="edit()"-->
   		</div>
 
   <!--<div> {{a.state}} et {{a.value}}</div>-->

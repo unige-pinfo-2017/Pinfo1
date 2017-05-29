@@ -33,8 +33,9 @@ export class EditingMenuComponent implements OnInit {
 		this.getEditingMenu(this.selectedRow[0].DeviceId);
 	}
 
-	public edit(): void {
+	/*public edit(): void {
 		let promises:Promise<string>[] = [];
+		let p: Promise<string>;
 		for (let i=0; i<this.editMenu.length; i++) {
 			let curr: any = this.editMenu[i];
 			let name:string = curr['name'];
@@ -42,9 +43,9 @@ export class EditingMenuComponent implements OnInit {
 			promises.push(this.checkAndChange(name, value));
 		}
 		Promise.all(promises).then(res => this.edited.emit());
-	}
+	}*/
 
-	public checkAndChange(name: string, value:number):Promise<string> {
+	public checkAndChange(name:string, value:number):void {
 		if (name === "State") {
 			if (value !=0 && value != 1) return;
 		} else if (name === "Hue") {
@@ -56,7 +57,7 @@ export class EditingMenuComponent implements OnInit {
 		} else {
 			return;
 		}
-		return this.changeState(name,value);
+		this.changeState(name,value).then(res => this.edited.emit());
 	}
 
 	public changeState(name: string, value: number): Promise<string> {

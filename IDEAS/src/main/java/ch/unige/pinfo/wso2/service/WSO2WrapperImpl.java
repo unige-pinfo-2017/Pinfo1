@@ -16,6 +16,7 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
@@ -137,6 +138,8 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	@Override
 	public Response changeState(String deviceId, String state) {
+		if (state.equals("1")) state = "ON";
+		if (state.equals("0")) state = "OFF";
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
 		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
 	}
@@ -144,19 +147,19 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	@Override
 	public Response changeHue(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
-		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+		return wcr.postStatus(deviceTypeName, deviceId, "hue", state.toUpperCase());
 	}
 	
 	@Override
 	public Response changeSaturation(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
-		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+		return wcr.postStatus(deviceTypeName, deviceId, "saturation", state.toUpperCase());
 	}
 	
 	@Override
 	public Response changeKelvin(String deviceId, String state) {
 		String deviceTypeName = dm.get().getDeviceTypeNameFromDeviceId(deviceId);
-		return wcr.postStatus(deviceTypeName, deviceId, "status", state.toUpperCase());
+		return wcr.postStatus(deviceTypeName, deviceId, "kelvin", state.toUpperCase());
 	}
 	
 	@Override
