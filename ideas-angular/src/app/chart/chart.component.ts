@@ -82,6 +82,7 @@ export class ChartComponent implements OnInit {
 		this.chartService.getChartShort(resource, type)
 			.then(params => {
 				this.resource = resource;
+				this.shortChartType = type;
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
 				this.lineChartLabels = this.chartService.formatLabels(params[2]);
 				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround

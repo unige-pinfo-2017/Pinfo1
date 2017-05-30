@@ -340,7 +340,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	}
 	
 	public List<Reading> getReadings(String deviceType, String deviceId, String SensorType, String From, String To) {
-		// Retourne les readings du serveur entre from et to
+		// Return readings between 'from' and 'to' from the server
 		List<Reading> readings = new ArrayList<Reading>();
 		JsonArray states = wcr.getStates(deviceType, deviceId, SensorType, From, To);
 		for (int i=0; i<states.size(); i++) {
@@ -366,18 +366,24 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	public List<Reading> mockReadingsLastWeek(Instant instant) {
 		List<Reading> mock = new ArrayList<Reading>();
+		
+		Random r = new Random();
+		
 		for (int i=6; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays(i));
-			mock.add(new Reading(inst, (double) i));
+			mock.add(new Reading(inst, (double) r.nextInt(20)));
 		}
 		return mock;
 	}
 	
 	private List<Reading> mockReadingsLastMonth(Instant instant) {
 		List<Reading> mock = new ArrayList<Reading>();
+		
+		Random r = new Random();
+		
 		for (int i=29; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays(i));
-			mock.add(new Reading(inst, (double) i));
+			mock.add(new Reading(inst, (double) r.nextInt(20)));
 		}
 		return mock;
 	}
@@ -396,9 +402,12 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		cal.set(year, 15, 12);
 		Instant instant = cal.toInstant();
 		List<Reading> mock = new ArrayList<Reading>();
+		
+		Random r = new Random();
+		
 		for (int i=11; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays( ((long)30) * i));
-			mock.add(new Reading(inst, (double) i));
+			mock.add(new Reading(inst, (double) r.nextInt(20)));
 		}
 		return mock;
 	}

@@ -19,7 +19,7 @@ public class ChartFacadeRest {
 	@Inject
 	private ChartService chartService;
 	
-	@GET
+	/*@GET
 	@Produces({"application/json"})
 	@Path("/{resource}/{time}")
 	@ApiOperation(value = "Get chart data for a resource and a specific time")
@@ -27,7 +27,7 @@ public class ChartFacadeRest {
 			@ApiParam(value = "resource") @PathParam("resource") String resource, 
 			@ApiParam(value = "time") @PathParam("time") String time) {
 		return chartService.getChartData(resource, time);
-	}
+	}*/
 	
 	@GET
 	@Path("/{resource}/mock-last-day")

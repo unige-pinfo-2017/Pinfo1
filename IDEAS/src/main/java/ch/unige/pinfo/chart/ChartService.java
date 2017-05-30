@@ -52,14 +52,14 @@ public class ChartService {
 	 * @return
 	 * A {@code JsonArray} of chart with values and labels of the given time.
 	 */
-	public JsonArray getChartData(String resource, String time) {
+	/*public JsonArray getChartData(String resource, String time) {
 		// Mock
 		List<Double> values = backEndFacade.getLastDayData(null, null, null);
 		List<String> labels = getLabelsLastDay();
 		//Collections.reverse(values);
 		//Collections.reverse(labels);
 		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
-	}
+	}*/
 	
 	public JsonArray getChartDataMockLastDay(String resource) {
 		List<Double> values = backEndFacade.getLastDayData(null, null, null);
@@ -190,7 +190,7 @@ public class ChartService {
 	 * @return
 	 * A list of label's names in {@code String} format.
 	 */
-	private List<String> getLabelsYear(int year) {
+	public List<String> getLabelsYear(int year) {
 		List<String> labels = new ArrayList<String>();
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("MMM");
@@ -214,14 +214,14 @@ public class ChartService {
 	 * @return
 	 * {@code true} if it's valid, {@code false} otherwise.
 	 */
-	public boolean isTimeValid(String time) {
-		/*if ("day".equals(time) || "week".equals(time) || "month".equals(time)) {
+	/*public boolean isTimeValid(String time) {
+		if ("day".equals(time) || "week".equals(time) || "month".equals(time)) {
 			return true;
 		} else {
 			return false;
-		}*/
+		}
 		return ("day".equals(time) || "week".equals(time) || "month".equals(time));
-	}
+	}*/
 
 
 }
