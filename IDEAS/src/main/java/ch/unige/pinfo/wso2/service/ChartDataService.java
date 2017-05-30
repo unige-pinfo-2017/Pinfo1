@@ -7,6 +7,19 @@ import java.util.List;
 public class ChartDataService {
 	private final double emptyValue = -1;
 	
+	/**
+	 * <b>averageValuePerTimeSlot</b>
+	 * <p>
+	 * {@code public List<Reading> averageValuePerTimeSlot(List<Reading> readings, List<Instant> timePoints)}
+	 * <p>
+	 * 
+	 * Get the average value per slot time.
+	 * 
+	 * @param readings - readings
+	 * @param timePoints - Times point.
+	 * @return
+	 * A list of {@code Reading} values .
+	 */
 	public List<Reading> averageValuePerTimeSlot(List<Reading> readings, List<Instant> timePoints) {
 		// Interpolate the readings occuring at each timepoint in 'timpoints' based on 'readings'.
 		// The returned list is in new-old order
@@ -48,6 +61,18 @@ public class ChartDataService {
 		return newReadings;
 	}
 	
+	/**
+	 * <b>findClosestNotNull</b>
+	 * <p>
+	 * {@code public List<Reading> findClosestNotNull(List<Reading> readings)}
+	 * <p>
+	 * 
+	 * Find reading with not null values.
+	 * 
+	 * @param readings - List of readings
+	 * @return
+	 * A list of reading with not null values.
+	 */
 	public List<Reading> findClosestNotNull(List<Reading> readings) {
 		// For each time point without an average reading, we copy the value of the closest time point with one
 		
@@ -70,6 +95,18 @@ public class ChartDataService {
 		return readings;
 	}
 	
+	/**
+	 * <b>computeLastReading</b>
+	 * <p>
+	 * {@code public Reading computeLastReading(List<Reading> readings, Instant lastTimePoint, List<Reading> newReadings)}
+	 * <p>
+	 * 
+	 * @param readings
+	 * @param lastTimePoint
+	 * @param newReadings
+	 * @return
+	 * The last Reading of a Reading list.
+	 */
 	public Reading computeLastReading(List<Reading> readings, Instant lastTimePoint, List<Reading> newReadings) {
 		// If there is a reading with a timestamp equals to lastTimePoint
 		for (Reading reading: readings) {
@@ -87,6 +124,17 @@ public class ChartDataService {
 		return new Reading(lastTimePoint, 0d);
 	}
 	
+	
+	/**
+	 * <b>averageReading</b>
+	 * <p>
+	 * {@code public Reading averageReading(List<Reading> readings)}
+	 * <p>
+	 * 
+	 * @param readings 
+	 * @return
+	 * The average Readings of a reading list.
+	 */
 	public Reading averageReading(List<Reading> readings) {
 		// Computes the average Reading of a Reading list
 		

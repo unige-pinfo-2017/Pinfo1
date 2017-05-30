@@ -228,6 +228,19 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		}
 	}
 	
+	/**
+	 * <b>roundDecimal</b>
+	 * <p>
+	 * {@code public double roundDecimal(double value, int decimalNumber)}
+	 * <p>
+	 * 
+	 * Round the given value to the specify decimal.
+	 * 
+	 * @param value - The value to round 
+	 * @param decimalNumber - The decimal.
+	 * @return
+	 * The rounded value.
+	 */
 	public double roundDecimal(double value, int decimalNumber) {
 		double powerOfTen = Math.pow(10, decimalNumber);
 		return Math.round(value*powerOfTen)/powerOfTen;
@@ -308,6 +321,16 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		return getValuesOfReadings(readings);
 	}
 
+	/**
+	 * <b>getValuesOfReadings</b>
+	 * <p>
+	 * {@code public List<Double> getValuesOfReadings(List<Reading> readings)}
+	 * <p>
+	 * 
+	 * @param readings - The readings.
+	 * @return
+	 * A list of reading's values in {@code Double} format.
+	 */
 	public List<Double> getValuesOfReadings(List<Reading> readings) {
 		List<Double> values = new ArrayList<Double>();
 		for (Reading reading: readings) {
