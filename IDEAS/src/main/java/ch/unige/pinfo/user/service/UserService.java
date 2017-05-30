@@ -125,7 +125,7 @@ public interface UserService {
 	/**
 	 * <b>getUsersOfSysAdmin</b>
 	 * <p>
-	 * {@code getUsersOfSysAdmin}
+	 * {@code List<User> getUsersOfSysAdmin(Long userId)}
 	 * <p>
 	 * 
 	 * Get user with role System administrator.

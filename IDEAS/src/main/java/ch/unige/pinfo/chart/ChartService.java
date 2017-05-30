@@ -48,7 +48,7 @@ public class ChartService {
 	 * Get chart data for a resource and a specific time.
 	 * 
 	 * @param resource - The resource we want
-	 * @param time - The spcific time
+	 * @param time - The specific time
 	 * @return
 	 * A {@code JsonArray} of chart with values and labels of the given time.
 	 */

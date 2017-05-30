@@ -31,7 +31,7 @@ public class EditMenuService {
      * @param resource - The resource name to change the state.
      * @param state - The new state.
      * @return
-     * A {@code Respond}.
+     * A {@code Response}: 200 if state is chaged, 500 otherwise.
      */
 	public Response changeDevice(String deviceId, String resource, String state) {
 		return backEndFacade.changeDevice(deviceId,  resource, state);
@@ -49,7 +49,7 @@ public class EditMenuService {
      * @param resource - The resource name to change the state. 
      * @param state - The new state.
      * @return
-     * A {@code Response}
+     * A {@code Response}: 200 if state is chaged, 500 otherwise.
      */
 	public Response changeDevice2(String deviceId, String resource, String state) {
 		return Response.status(200).entity(deviceId + " " + resource + " " + state).build();

@@ -177,7 +177,7 @@ public interface DeviceManager {
 	/**
 	 * <b>changeDevice</b>
 	 * <p>
-	 * {@code String changeDevice(String deviceId, String resource, String state)}
+	 * {@code Response changeDevice(String deviceId, String resource, String state)}
 	 * <p>
 	 * 
 	 * Change the state of a Light's resource specifying his {@code deviceId}.  
@@ -186,7 +186,7 @@ public interface DeviceManager {
 	 * @param resource - The resource of the Light. Can be Hue, Saturation, Kelvin or State
 	 * @param state - The new state we want to set.
 	 * @return
-	 * The value of the new state in {@code String} format
+	 * a {@code Response} : 200 if state is changed, 500 otherwise.
 	 */
 	Response changeDevice(String deviceId, String resource, String state);
 } 

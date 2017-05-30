@@ -57,7 +57,7 @@ public class LoginService {
 	/**
 	 * <b>checkPassword</b> 
 	 * <p>
-	 *   {@code public public boolean checkPassword(String inputPassword, String realPassword)}
+	 *   {@code public boolean checkPassword(String inputPassword, String realPassword)}
 	 * <p>
 	 * Compare {@code realPassword} with {@code inputPassword}. 
 	 * 
