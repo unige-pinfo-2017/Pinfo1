@@ -64,7 +64,7 @@ public class DevicePersistenceTest {
 		utx.begin();
 		em.joinTransaction();
 		System.out.println("clearing Data ...");
-		em.createQuery("delete from User").executeUpdate();
+		em.createQuery("delete from Device").executeUpdate();
 		utx.commit();
 	}
 

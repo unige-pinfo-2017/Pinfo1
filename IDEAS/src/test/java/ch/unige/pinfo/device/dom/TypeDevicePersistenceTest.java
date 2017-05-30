@@ -30,7 +30,7 @@ import ch.unige.pinfo.user.dom.User;
 import junit.framework.Assert;
 
 @RunWith(Arquillian.class)
-public class SensorPersistenceTest {
+public class TypeDevicePersistenceTest {
 	
 	@PersistenceContext
 	EntityManager em;
@@ -49,17 +49,7 @@ public class SensorPersistenceTest {
 	            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	        }
 	
-	private static final String[] SENSOR_NAME = {
-			"abc",
-			"a2c"
-	};
-
-	private static final String[] UNIT_NAME = {
-			"abc",
-			"a2c"
-	};
-
-	private static final String[] MEASURE_NAME = {
+	private static final String[] TYPEDEVICE_NAME = {
 			"abc",
 			"a2c"
 	};
@@ -75,7 +65,7 @@ public class SensorPersistenceTest {
 		utx.begin();
 		em.joinTransaction();
 		System.out.println("clearing Data ...");
-		em.createQuery("delete from Sensor").executeUpdate();
+		em.createQuery("delete from TypeDevice").executeUpdate();
 		utx.commit();
 	}
 
@@ -83,10 +73,11 @@ public class SensorPersistenceTest {
 		utx.begin();
 		em.joinTransaction();
 		System.out.println("Inserting test data ...");
-		Sensor s1 = new Sensor(SENSOR_NAME[0], UNIT_NAME[0], MEASURE_NAME[0]);
-		em.persist(s1);
-		Sensor s2 = new Sensor(SENSOR_NAME[1], UNIT_NAME[1], MEASURE_NAME[1]);
-		em.persist(s2);
+		TypeDevice td1 = new TypeDevice(TYPEDEVICE_NAME[0]);
+		em.persist(td1);
+
+		TypeDevice td2 = new TypeDevice(TYPEDEVICE_NAME[1]);
+		em.persist(td2);
         System.out.println("Data inserted");
         utx.commit();
         em.clear();
@@ -102,29 +93,26 @@ public class SensorPersistenceTest {
 	}
 	
 	@Test
-	public void shouldFindAllUsers() throws Exception {
+	public void shouldFindAllDevices() throws Exception {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Sensor> criteria = builder.createQuery(Sensor.class);
+		CriteriaQuery<TypeDevice> criteria = builder.createQuery(TypeDevice.class);
 		
-		Root<Sensor> sensor = criteria.from(Sensor.class);
-		criteria.select(sensor);
-		criteria.orderBy(builder.asc(sensor.get("id")));
+		Root<TypeDevice> typedevice = criteria.from(TypeDevice.class);
+		criteria.select(typedevice);
+		criteria.orderBy(builder.asc(typedevice.get("id")));
 		
-		List<Sensor> sensors = em.createQuery(criteria).getResultList();
-		assertAllSensors(sensors);
+		List<TypeDevice> typedevices = em.createQuery(criteria).getResultList();
+		System.out.println("la liste: "+ typedevices);
+		assertAllTypeDevices(typedevices);
 	}
 	
-	private static void assertAllSensors(Collection<Sensor> foundSensors) {
-		Assert.assertEquals(SENSOR_NAME.length, foundSensors.size());
-		final Set<String> foundSensorName = new HashSet<String>();
-		final Set<String> foundUnitName = new HashSet<String>();
-		final Set<String> foundMeasureName = new HashSet<String>();
-		for (Sensor sensor : foundSensors) {
-            System.out.println("* " + sensor);
-			foundSensorName.add(sensor.getName());
-			foundUnitName.add(sensor.getUnit());
-			foundMeasureName.add(sensor.getMeasureName());
+	private static void assertAllTypeDevices(Collection<TypeDevice> foundTypeDevices) {
+		Assert.assertEquals(TYPEDEVICE_NAME.length, foundTypeDevices.size());
+		final Set<String> foundDeviceIds = new HashSet<String>();
+		for (TypeDevice typedevice : foundTypeDevices) {
+            System.out.println("* " + typedevice);
+			foundDeviceIds.add(typedevice.getName());
 		}
-		Assert.assertTrue(foundSensorName.containsAll(Arrays.asList(SENSOR_NAME)) && foundUnitName.containsAll(Arrays.asList(UNIT_NAME)) && foundMeasureName.containsAll(Arrays.asList(MEASURE_NAME)));
+		Assert.assertTrue(foundDeviceIds.containsAll(Arrays.asList(TYPEDEVICE_NAME)));
 	}
 }
