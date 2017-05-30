@@ -46,7 +46,7 @@ public class UserPersistenceTest {
 	            .addPackage(Device.class.getPackage())
 	            .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
 	            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-	    }
+	}
 	
 	private static final String[] NAMES = {
 			"test",

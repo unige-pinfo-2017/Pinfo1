@@ -85,9 +85,9 @@ public class LoginService {
 	public JsonArray getSubordinates(Long userId) {
 		String role = backEndFacade.getUserRoleById(userId);
 		List<User> users ;
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			users = backEndFacade.getUsersOfManager(userId);
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			users = backEndFacade.getUsersOfSysAdmin(userId);
 		} else {
 			users = new ArrayList<User>();

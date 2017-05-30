@@ -10,12 +10,10 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
 import ch.unige.pinfo.user.dom.User;
 
 public class LoginJsonBuilderTest {
-	@InjectMocks
 	private LoginJsonBuilder ljb = new LoginJsonBuilder();
 	
 	@Test
@@ -27,7 +25,7 @@ public class LoginJsonBuilderTest {
 								.add("id", mockId)
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 
 	@Test
@@ -54,6 +52,6 @@ public class LoginJsonBuilderTest {
 										.build())
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 }

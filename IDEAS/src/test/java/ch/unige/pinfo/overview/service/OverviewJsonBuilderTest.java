@@ -10,13 +10,11 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.overview.dom.LiveData;
 
 public class OverviewJsonBuilderTest {
-	@InjectMocks
 	private OverviewJsonBuilder ojb = new OverviewJsonBuilder();
 	
 	@Test
@@ -32,7 +30,7 @@ public class OverviewJsonBuilderTest {
 				.add("value", value)
 				.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -48,7 +46,7 @@ public class OverviewJsonBuilderTest {
 								.add("name", mockSensor.getMeasureName())
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -72,6 +70,6 @@ public class OverviewJsonBuilderTest {
 				.add(Json.createObjectBuilder().add("name", mockSensor.getMeasureName()))
 				.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 }

@@ -58,25 +58,25 @@ public class ChartService {
 		List<String> labels = getLabelsLastDay();
 		//Collections.reverse(values);
 		//Collections.reverse(labels);
-		return chartJsonBuilder.buildChartJson("Last day", values, labels);
+		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
 	}
 	
 	public JsonArray getChartDataMockLastDay(String resource) {
 		List<Double> values = backEndFacade.getLastDayData(null, null, null);
 		List<String> labels = getLabelsLastDay();
-		return chartJsonBuilder.buildChartJson("Last day", values, labels);
+		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
 	}
 	
 	public JsonArray getChartDataMockLastWeek(String resource) {
 		List<Double> values = backEndFacade.getLastWeekData(null, null, null);
 		List<String> labels = getLabelsLastWeek();
-		return chartJsonBuilder.buildChartJson("Last week", values, labels);
+		return chartJsonBuilder.buildChartJson(resource + ": Last week", values, labels);
 	}
 	
 	public JsonArray getChartDataMockLastMonth(String resource) {
 		List<Double> values = backEndFacade.getLastMonthData(null, null, null);
 		List<String> labels = getLabelsLastMonth();
-		return chartJsonBuilder.buildChartJson("Last month", values, labels);
+		return chartJsonBuilder.buildChartJson(resource + ": Last month", values, labels);
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class ChartService {
 	public JsonArray getChartDataYear(String resource, int year) {
 		List<Double> values = backEndFacade.getDataYear(null, null, year);
 		List<String> labels = getLabelsYear(year);
-		return chartJsonBuilder.buildChartJson(Integer.toString(year), values, labels);
+		return chartJsonBuilder.buildChartJson(resource + ": " + Integer.toString(year), values, labels);
 	}
 
 	/**

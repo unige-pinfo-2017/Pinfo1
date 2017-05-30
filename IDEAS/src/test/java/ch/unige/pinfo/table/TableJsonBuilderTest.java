@@ -7,14 +7,11 @@ import java.util.List;
 
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
 public class TableJsonBuilderTest {
-	@InjectMocks
 	private TableJsonBuilder tjb = new TableJsonBuilder();
 	
 	@Test
@@ -26,7 +23,7 @@ public class TableJsonBuilderTest {
 								.add("prop", mockCol)
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -69,7 +66,7 @@ public class TableJsonBuilderTest {
 								.add(mockCol, mockVal)
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -101,7 +98,7 @@ public class TableJsonBuilderTest {
 									.build())
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -143,7 +140,7 @@ public class TableJsonBuilderTest {
 										.build())
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 }

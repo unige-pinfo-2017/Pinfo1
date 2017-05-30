@@ -27,7 +27,7 @@ public class EditMenuJsonBuilderTest {
 								.add("value", mockValue)
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 	
 	@Test
@@ -53,6 +53,6 @@ public class EditMenuJsonBuilderTest {
 										.add("value", mockValue))
 								.build();
 		
-		assertEquals(output, expected);
+		assertEquals(expected, output);
 	}
 }
