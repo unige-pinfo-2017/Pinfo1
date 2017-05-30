@@ -70,6 +70,18 @@ public class LoginService {
 		return realPassword.equals(inputPassword);
 	}
 
+	/**
+	 * <b>getSubordinates</b>
+	 * <p>
+	 * {@code public JsonArray getSubordinates(Long userId)}
+	 * <p>
+	 * 
+	 * Build a {@code JsonArray} of subordinate users for a user.
+	 * 
+	 * @param userId - The user's id
+	 * @return
+	 * A {@code JsonArray} of subordinate users, with ids and names.
+	 */
 	public JsonArray getSubordinates(Long userId) {
 		String role = backEndFacade.getUserRoleById(userId);
 		List<User> users ;
@@ -83,6 +95,18 @@ public class LoginService {
 		return loginJsonBuilder.buildIds(users);
 	}
 
+	/**
+	 * <b>getRole</b>
+	 * <p>
+	 * {@code public String getRole(Long userId)}
+	 * <p>
+	 * 
+	 * Get a role of a user.
+	 * 
+	 * @param userId - The user's id.
+	 * @return
+	 * The role in {@code String} format.
+	 */
 	public String getRole(Long userId) {
 		return backEndFacade.getUserRoleById(userId);
 	}

@@ -39,6 +39,19 @@ public class ChartService {
 		return chartJsonBuilder.buildChartJson(name, values, labels);
 	}
 	
+	/**
+	 * <b>getChartData</b>
+	 * <p>
+	 * {@code public JsonArray getChartData(String resource, String time)}
+	 * <p>
+	 * 
+	 * Get chart data for a resource and a specific time.
+	 * 
+	 * @param resource - The resource we want
+	 * @param time - The spcific time
+	 * @return
+	 * A {@code JsonArray} of chart with values and labels of the given time.
+	 */
 	public JsonArray getChartData(String resource, String time) {
 		// Mock
 		List<Double> values = backEndFacade.getLastDayData(null, null, null);
@@ -66,12 +79,36 @@ public class ChartService {
 		return chartJsonBuilder.buildChartJson("Last month", values, labels);
 	}
 	
+	/**
+	 * <b>getChartDataYear</b>
+	 * <p>
+	 * {@code public JsonArray getChartDataYear(String resource, int year)}
+	 * <p>
+	 * 
+	 * Get chart data of a resource for the specify year.
+	 * 
+	 * @param resource - The resource
+	 * @param year - The year.
+	 * @return
+	 * A {@code JsonArray} of chart with values and labels of the given year.
+	 */
 	public JsonArray getChartDataYear(String resource, int year) {
 		List<Double> values = backEndFacade.getDataYear(null, null, year);
 		List<String> labels = getLabelsYear(year);
 		return chartJsonBuilder.buildChartJson(Integer.toString(year), values, labels);
 	}
 
+	/**
+	 * <b>getLabelsLastDay</b>
+	 * <p>
+	 * {@code public List<String> getLabelsLastDay()}
+	 * <p>
+	 * 
+	 * Get the labels of the last day
+	 * 
+	 * @return
+	 * A list of label's names in {@code String} format.
+	 */
 	public List<String> getLabelsLastDay() {
 		List<String> labels = new ArrayList<String>();
 		
@@ -88,6 +125,17 @@ public class ChartService {
 		return labels;
 	}
 	
+	/**
+	 * <b>getLabelsLastWeek</b>
+	 * <p>
+	 * {@code public List<String> getLabelsLastWeek()}
+	 * <p>
+	 * 
+	 * Get the labels of the last week.
+	 * 
+	 * @return
+	 * A list of label's names in {@code String} format.
+	 */
 	public List<String> getLabelsLastWeek() {
 		List<String> labels = new ArrayList<String>();
 		
@@ -104,6 +152,17 @@ public class ChartService {
 		return labels;
 	}
 	
+	/**
+	 * <b>getLabelsLastMonth</b>
+	 * <p>
+	 * {@code public List<String> getLabelsLastMonth()}
+	 * <p>
+	 * 
+	 * Get the labels of the last month.
+	 * 
+	 * @return
+	 * A list of label's names in {@code String} format.
+	 */
 	public List<String> getLabelsLastMonth() {
 		List<String> labels = new ArrayList<String>();
 		
@@ -120,6 +179,17 @@ public class ChartService {
 		return labels;
 	}
 	
+	/**
+	 * <b>getLabelsLastYear</b>
+	 * <p>
+	 * {@code public List<String> getLabelsLastYear()}
+	 * <p>
+	 * 
+	 * Get the labels of the last year.
+	 * 
+	 * @return
+	 * A list of label's names in {@code String} format.
+	 */
 	private List<String> getLabelsYear(int year) {
 		List<String> labels = new ArrayList<String>();
 		Calendar cal = Calendar.getInstance();
@@ -132,6 +202,18 @@ public class ChartService {
 		return labels;
 	}
 	
+	/**
+	 * <b>isTimeValid</b>
+	 * <p>
+	 * {@code public boolean isTimeValid(String time)}
+	 * <p>
+	 * 
+	 * Verify if the given time is valid.
+	 * 
+	 * @param time - The time.
+	 * @return
+	 * {@code true} if it's valid, {@code false} otherwise.
+	 */
 	public boolean isTimeValid(String time) {
 		/*if ("day".equals(time) || "week".equals(time) || "month".equals(time)) {
 			return true;
