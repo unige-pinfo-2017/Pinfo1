@@ -32,13 +32,10 @@ public class TableFacadeRest {
 	@Path("/{userId}/device/{type}")
 	@Produces({"application/json"})
 	@ApiOperation(value="Get table for device type",
-	response=TypeDevice.class,
-	responseContainer="List")
-	@ApiResponses(value= {
-			@ApiResponse(code=400, message = "Invalid device Type"),
-			@ApiResponse(code=404, message = "Device Type not found")
-	})
-	public JsonArray getTableForDeviceType(@ApiParam("User ID") @PathParam("userId") Long userId,
+		response=TypeDevice.class,
+		responseContainer="List")
+	public JsonArray getTableForDeviceType(
+			@ApiParam("User's id") @PathParam("userId") Long userId,
 			@ApiParam("Device Type") @PathParam("type") String deviceType) {
 		return tableService.buildTableForDeviceType(deviceType, userId);
 	}
@@ -46,14 +43,9 @@ public class TableFacadeRest {
 	@GET
 	@Path("/{userId}/sensor/{type}")
 	@Produces({"application/json"})
-	@ApiOperation(value="Get table for sensor type",
-	response=Sensor.class,
-	responseContainer="List")
-	@ApiResponses(value= {
-			@ApiResponse(code=400, message = "Invalid sensor Type"),
-			@ApiResponse(code=404, message = "sensor type not found")
-	})
-	public JsonArray getTableForSensorType(@ApiParam("User ID") @PathParam("userId") Long userId, 
+	@ApiOperation(value="Get table for sensor type")
+	public JsonArray getTableForSensorType(
+			@ApiParam("User ID") @PathParam("userId") Long userId, 
 			@ApiParam("Sensor Type") @PathParam("type") String deviceType) {
 		return tableService.buildTableForSensorType(deviceType, userId);
 	}
@@ -70,12 +62,7 @@ public class TableFacadeRest {
 	@Path("/{userId}/user/all")
 	@Produces({"application/json"})
 	@ApiOperation(value="Get table of users",
-	notes="Available for Managers and SysAdmin",
-	response=User.class,
-	responseContainer="List")
-	@ApiResponses(value= {
-			@ApiResponse(code=404, message = "Users not found")
-	})
+		notes="Available for Managers and SysAdmin")
 	public JsonArray getTableOfUsers(@ApiParam () @PathParam("userId") Long userId) {
 		return tableService.buildTableForUser(userId);
 	}
@@ -83,6 +70,7 @@ public class TableFacadeRest {
 	@GET
 	@Path("/color")
 	@Produces({ MediaType.TEXT_PLAIN })
+	@ApiOperation(value = "Get a color")
 	public String getColorTest() {
 		return tableService.getColorTest();
 	}
@@ -90,11 +78,10 @@ public class TableFacadeRest {
 	@POST
 	@Path("/change-state/{deviceId}/{action}")
 	@ApiOperation(value="Change state of a device",
-	notes="Available for a SysAdmin")
+		notes="Available for a SysAdmin")
 	public void changeState(@ApiParam("Device ID") @PathParam("deviceId") Long deviceId, 
 			@ApiParam("Action") @PathParam("action") String action, 
 			@ApiParam("State") @QueryParam("state") String state){
-		
 	}
 	
 	
