@@ -173,3 +173,7 @@
         display: inline-block; }
       .datatable .datatable-footer .datatable-pager .pager li.disabled a {
         cursor: not-allowed; }
+
+        input.filter{
+
+        }

@@ -9,9 +9,8 @@ describe("Logout Test", function() {
             
             browser.driver.sleep(1000).then(function(){
                 element.all(by.buttonText("Login")).click();
-
-                    element.all(by.buttonText("Logout")).click();
-                	expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/login');
+                element.all(by.buttonText("Logout")).click();
+                expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/login');
             });
         });
     });
