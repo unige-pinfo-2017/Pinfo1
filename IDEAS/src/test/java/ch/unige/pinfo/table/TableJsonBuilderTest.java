@@ -89,7 +89,7 @@ public class TableJsonBuilderTest {
 		mockAllVals.add(mockVals);
 		mockAllVals.add(mockVals);
 		
-		JsonArray output = tjb.buildTable(mockCols, mockAllVals);
+		JsonArray output = tjb.buildRows(mockCols, mockAllVals);
 		JsonArray expected = Json.createArrayBuilder()
 								.add(Json.createObjectBuilder()
 									.add(mockCol, mockVal)
