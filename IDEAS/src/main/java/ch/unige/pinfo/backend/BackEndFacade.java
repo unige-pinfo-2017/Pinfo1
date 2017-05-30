@@ -35,12 +35,15 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code 	public List<Double> getDataYear(String deviceId, String sensorType, int year) }
 	 * <p>
+	 * Computes the data of a device for a particular sensor over a given year.
+	 * An average value is computed for each month of the given year.
+	 * <p>
 	 * 
-	 * @param deviceId - The device's id 
-	 * @param sensorType - The sensor's type
-	 * @param year - The specify year
+	 * @param deviceId - The identifier of the device
+	 * @param sensorType - The sensor type 
+	 * @param year - The specified year
 	 * @return
-	 * A list of values for a device's sensor for the specify year in {@code Double} format.
+	 * A {@code List} containing the data of a device for the specified sensor over the given year in {@code Double}.
 	 */
 	public List<Double> getDataYear(String deviceId, String sensorType, int year) {
 		return wso2Wrapper.getDataForYear(deviceId, sensorType, year);
@@ -51,12 +54,15 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType) }
 	 * <p>
-	 * 
-	 * @param deviceType - The device's type.
-	 * @param deviceId - The device's id 
-	 * @param sensorType - The sensor's type
+	 * Computes the data of a device for a particular sensor over the past month.
+	 * An average value is computed for each day of the past month starting with the moment the method is called.
+	 * <p>
+	 *
+	 * @param deviceType - The device type
+	 * @param deviceId - The identifier of the device
+	 * @param sensorType - The sensor type
 	 * @return
-	 * A list of values for a device's sensor for the last month in {@code Double} format.
+	 * A {@code List} containing the data of the device for the specified sensor over the last month in {@code Double}.
 	 */
 	public List<Double> getLastMonthData(String deviceType, String deviceId, String sensorType) {
 		return wso2Wrapper.getLastMonthData(deviceType, deviceId, sensorType);
@@ -67,12 +73,15 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType)}
 	 * <p>
+	 * Computes the data of a device for a particular sensor over the past week.
+	 * An average value is computed for each day of the past week starting with the moment the method is called.
+	 * <p>
 	 * 
-	 * @param deviceType - The device's type.
-	 * @param deviceId - The device's id 
-	 * @param sensorType - The sensor's type
+	 * @param deviceType - The device type
+	 * @param deviceId - The identifier of the device
+	 * @param sensorType - The sensor type
 	 * @return
-	 * A list of values for a device's sensor for the last week in {@code Double} format.
+	 * A {@code List} containing the data of the device for the specified sensor over the past week in {@code Double}.
 	 */
 	public List<Double> getLastWeekData(String deviceType, String deviceId, String sensorType) {
 		return wso2Wrapper.getLastWeekData(deviceType, deviceId, sensorType);
@@ -83,12 +92,15 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType)}
 	 * <p>
+	 * Computes the data of a device for a particular sensor over the last day.
+	 * An average value is computed for each hour of the past day starting with the moment the method is called.
+	 * <p>
 	 * 
-	 * @param deviceType - The device's type.
-	 * @param deviceId - The device's id 
-	 * @param sensorType - The sensor's type
+	 * @param deviceType - The device type.
+	 * @param deviceId - The identifier of the device
+	 * @param sensorType - The sensor type
 	 * @return
-	 * A list of values for a device's sensor for the last day in {@code Double} format.
+	 * A {@code List} containing the data of the device for the specified sensor over the past day in {@code Double}.
 	 */
 	public List<Double> getLastDayData(String deviceType, String deviceId, String sensorType) {
 		return wso2Wrapper.getLastDayData(deviceType, deviceId, sensorType);
@@ -99,12 +111,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public boolean isMeasureName(String measureName)}
 	 * <p>
+	 * Verify the validity of a given measure name.
+	 * <p>
 	 * 
-	 * verify if parameter is a measure.
-	 * 
-	 * @param measureName 
+	 * @param measureName - The name of the measure
 	 * @return
-	 * {@code true} if it's valid measure, {@code false} otherwise.
+	 * {@code true} if the measure name is valid, {@code false} otherwise.
 	 */
 	public boolean isMeasureName(String measureName) {
 		List<LiveData> liveDatas = getAllLiveDatas();
@@ -121,13 +133,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public boolean removePreference(Long userId, Long liveDataId)}
 	 * <p>
-	 * 
-	 * Remove livedata form user's preferences.
-	 * 
+	 * Remove a live data from a user's preferences.
+	 * <p>
 	 * @param userId - The user's id
-	 * @param liveDataId - The live data to remove.
+	 * @param liveDataId - The identifier of the live data to  be removed from the user's preferences
 	 * @return
-	 * {@code true} if live data is removed, {@code false} otherwise.
+	 * {@code true} if live data has been successfully removed from the user's preferences, {@code false} otherwise.
 	 */
 	public boolean removePreference(Long userId, Long liveDataId) {
 		return userService.removePreference(userId, liveDataId);
@@ -138,13 +149,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public boolean addPreference(Long userId, Long liveDataId)}
 	 * <p>
-	 * 
-	 * Add livedata to user's preferences.
-	 * 
+	 * Add a live data to a user's preferences.
+	 * <p>
 	 * @param userId - The user's id
-	 * @param liveDataId - The live data to remove.
+	 * @param liveDataId - The identifier of the live data to be added to the user's preferences
 	 * @return
-	 * {@code true} if live data is added, {@code false} otherwise.
+	 * {@code true} if live data has been successfully added to the user's preferences, {@code false} otherwise.
 	 */
 	public boolean addPreference(Long userId, Long liveDataId) {
 		return userService.addPreference(userId, liveDataId);
@@ -155,10 +165,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public Long getLiveDataIdFromSensorMeasureName(String measureName)}
 	 * <p>
+	 * Computes the identifier of a live data from it's measure name.
+	 * <p>
 	 * 
-	 * @param measureName - The specify measure name
+	 * @param measureName - The measure name
 	 * @return
-	 * The value of live data for the measure name.
+	 * A {@code Long} containing the identifier of the live data corresponding to the given measure name
 	 */
 	public Long getLiveDataIdFromSensorMeasureName(String measureName) {
 		List<LiveData> liveDatas = getAllLiveDatas();
@@ -177,10 +189,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public String getDeviceTypeNameFromDeviceId(String deviceId)}
 	 * <p>
+	 * Computes the device type name of a device from its device id.
+	 * <p>
 	 * 
 	 * @param deviceId - The device's id
 	 * @return
-	 * Get the name of the device.
+	 * A {@code String} containing the name of the device type.
 	 */
 	public String getDeviceTypeNameFromDeviceId(String deviceId) {
 		return deviceManager.getDeviceTypeNameFromDeviceId(deviceId);
@@ -191,10 +205,11 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<User> getUsersList(Long userId)}
 	 * <p>
-	 * 
+	 * Computes the subordinates list of a user from its user id.
+	 * <p>
 	 * @param userId - The user's id
 	 * @return
-	 * A list of subordinate users for a user.
+	 * A {@code List<User>} containing the subordinates of the user.
 	 */
 	public List<User> getUsersList(Long userId) {
 		List<User> users; 
@@ -214,13 +229,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<String> getDeviceDataLiveColor(String deviceType, String deviceId)}
 	 * <p>
-	 * 
 	 * Get the live Color display by a type device specifying his {@code deviceId}
-	 * 
+	 * <p>
 	 * @param deviceType - The type of the device
- 	 * @param deviceId - The Id of the device.
+ 	 * @param deviceId - The identifier of the device.
 	 * @return
-	 * list containing hue, saturation and kelvin data in {@code String}.
+	 * A {@code List<String>} containing the hue, the saturation and the kelvin of the device.
 	 */
 	public List<String> getDeviceDataLiveColor(String deviceType, String deviceId) {
 		return deviceManager.getDeviceDataLiveColor(deviceType, deviceId);
@@ -236,7 +250,7 @@ public class BackEndFacade {
 	 * 
 	 * @param deviceType - type of a Device
 	 * @return
-	 * A set of sensors.
+	 * A {@code Set<Sensor>} containing all the sensors.
 	 */
 	public Set<Sensor> getSensorsForTypeDevice(String deviceType) {
 		return deviceManager.getSensorsForTypeDevice(deviceType);
@@ -250,10 +264,10 @@ public class BackEndFacade {
 	 * 
 	 * Get all the devices by type device for a user.
 	 * 
-	 * @param userId - The id of the User
+	 * @param userId - The id of the user
 	 * @param deviceType - The type of the device
 	 * @return
-	 * A list of devices.
+	 * A {@code List<Device>} containing all the devices of the device type for the user.
 	 */
 	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String deviceType) {
 		return deviceManager.getAllDevicesForUserByTypeDevice(userId, deviceType);
@@ -270,7 +284,7 @@ public class BackEndFacade {
 	 * @param userId - The id of the user
 	 * @param sensorName - The sensor name.
 	 * @return
-	 * A list of devices.
+	 * A {@code List<Device>} containing the user's devices equipped with the sensor.
 	 */
 	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName) {
 		return deviceManager.getAllDevicesForUserBySensorName(userId, sensorName);
@@ -286,7 +300,7 @@ public class BackEndFacade {
 	 * 
 	 * @param username - The name of the user.
 	 * @return
-	 * A user.
+	 * A {@code User} object corresponding to the username.
 	 */
 	public User getUserByUsername(String username) {
 		return userService.getUserByUsername(username).get(0);
@@ -298,11 +312,11 @@ public class BackEndFacade {
 	 * {@code public String getUserRoleById(Long id)}
 	 * <p>
 	 * 
-	 * Get the user's role specifying the user's id.
+	 * Get the role of a user using its id.
 	 * 
 	 * @param id - The user's id
 	 * @return
-	 * The user's role in {@code String} format.
+	 * A {@code String} containing the role of the user.
 	 */
 	public String getUserRoleById(Long id) {
 		return userService.getUserRoleById(id);
@@ -314,11 +328,11 @@ public class BackEndFacade {
 	 * {@code public List<User> getUsersOfManager(Long userId)}
 	 * <p>
 	 * 
-	 * Get user with role manager
+	 * Get subordinates of a manager
 	 * 
-	 * @param userId - The user's id.
+	 * @param userId - The manager's id
 	 * @return
-	 * A list of manager.
+	 * A {@code List<User>} containing the subordinates of the manager
 	 */
 	public List<User> getUsersOfManager(Long userId) {
 		return userService.getUsersOfManager(userId);
@@ -330,11 +344,11 @@ public class BackEndFacade {
 	 * {@code public List<User> getUsersOfSysAdmin(Long userId)}
 	 * <p>
 	 * 
-	 * Get user with role System administrator.
+	 * Get subordinates of a system administrator.
 	 * 
 	 * @param userId - The user's id.
 	 * @return
-	 * A list of system administrator.
+	 * A {@code List<User>} containing the subordinates of the system administrator.
 	 */
 	public List<User> getUsersOfSysAdmin(Long userId) {
 		return userService.getUsersOfSysAdmin(userId);
@@ -346,12 +360,12 @@ public class BackEndFacade {
      * {@code public String getDeviceDataLive(String deviceId, String sensorName)}
      * <p>
      * 
-     * Get the live data of a device specifying his {@code deviceId} and the sensor we want the data.
+     * Get the live value of a device for a specific sensor.
      * 
      * @param deviceId - The id of the device
      * @param sensorName - The sensor name.
      * @return
-     * The data in {@code String} format.
+     * A {@code String} containing the live value of the device for the specified sensor.
      */
 	public String getDeviceDataLive(String deviceId, String sensorName) {
 		return deviceManager.getDeviceDataLive(deviceId, sensorName);
@@ -363,10 +377,10 @@ public class BackEndFacade {
 	 * {@code public List<LiveData> getAllLiveData()}
 	 * <p>
 	 * 
-	 * Get all the existing data live.
+	 * Get all the live datas.
 	 * 
 	 * @return
-	 * A list of Live data.
+	 * A {@code List<LiveData>} containing all the live datas.
 	 */
 	public List<LiveData> getAllLiveDatas(){
 		return liveDataService.getAllLiveData();
@@ -382,7 +396,7 @@ public class BackEndFacade {
 	 * 
 	 * @param userId - The user's id
 	 * @return
-	 * A set of preferences.
+	 * A {@code Set<LiveData>} containing the live data in the user preferences.
 	 */
 	public Set<LiveData> getUserPreferences(Long userId) {
 		return userService.getUserById(userId).getPreferences();
@@ -394,12 +408,12 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<Double> getLiveDatas(Long userId)}
 	 * <p>
-	 * 
+	 * Get the live data of a user using its user id.
+	 * <p>
 	 * @param userId -The user's id
 	 * @return
-	 * A list of live data for a user in {@code Double} format.
+	 * A {@code List<Double>} containing the live data of the user.
 	 */
-	// TODO: Traiter le cas d'erreur
 	public List<Double> getLiveDatas(Long userId) {
 		String role = getUserRoleById(userId);
 		if ("Manager".equals(role)) {
@@ -421,7 +435,7 @@ public class BackEndFacade {
 	 * 
 	 * @param userId -The user's id
 	 * @return
-	 * A list of live data for a basic user.
+	 * A {@code List<Double>} containing the basic user's live data.
 	 */
 	private List<Double> getLiveDatasBasic(Long userId) {
 		List<Double> values = new ArrayList<Double>();
@@ -439,10 +453,13 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code private List<Double> getLiveDatasManager(Long userId)}
 	 * <p>
+	 * Compute the live data of a manager using its user id.
+	 * The live data of a manager is computed using the live values of its own devices and its subordinates'.
+	 * <p>
 	 * 
 	 * @param userId -The user's id
 	 * @return
-	 * A list of live data for a manager.
+	 * A {@code List<Double>} containing the manager's live data.
 	 */
 	private List<Double> getLiveDatasManager(Long userId) {
 		List<User> users = userService.getUsersOfManager(userId);
@@ -461,10 +478,13 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code private List<Double> getLiveDatasSysAdmin(Long userId)}
 	 * <p>
+	 * Compute the live data of a system administrator using its user id.
+	 * The live data of a system administrator is computed using the live values of its own devices and its subordinates'.
+	 * <p>
 	 * 
 	 * @param userId -The user's id
 	 * @return
-	 * A list of live data for a sys admin.
+	 * A {@code List<Double>} containing the system administrator's live data.
 	 */
 	private List<Double> getLiveDatasSysAdmin(Long userId) {
 		List<User> users = userService.getUsersOfSysAdmin(userId);
@@ -483,6 +503,8 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public double getLiveDataValueForUser(Long userId, String computeType, String sensorName)}
 	 * <p>
+	 * Compute the live data of a basic user using its user id.
+	 * <p>
 	 * 
 	 * Get the value of live data fore a user.
 	 * 
@@ -490,9 +512,8 @@ public class BackEndFacade {
 	 * @param computeType - sum or average
 	 * @param sensorName - sensor's name
 	 * @return
-	 * A value of live data.
+	 * A {@code double} containing the live data of the user.
 	 */
-	// TODO: Traiter le cas d'erreur
 	public double getLiveDataValueForUser(Long userId, String computeType, String sensorName) {
 		if ("Sum".equals(computeType)) {
 			return getSumSensorLiveForUser(userId, sensorName);
@@ -508,13 +529,13 @@ public class BackEndFacade {
 	 * {@code public double getLiveDataValueForUsers(List<User> users, String computeType, String sensorName)}
 	 * <p>
 	 * 
-	 * Get the value of live data fore users.
+	 * Compute the live data for a list of subordinates.
 	 * 
-	 * @param users - List os users
+	 * @param users - List of users
 	 * @param computeType - sum or average
 	 * @param sensorName - sensor's name.
 	 * @return
-	 * A value of live data.
+	 * A {@code double} containing the live data value of the subordinates.
 	 */
 	public double getLiveDataValueForUsers(List<User> users, String computeType, String sensorName) {
 		if ("Sum".equals(computeType)) {
@@ -536,7 +557,7 @@ public class BackEndFacade {
 	 * @param userId - The user's id
 	 * @param sensorName - The sensor's type.
 	 * @return
-	 * The average value.
+	 * A {@code double} containing the average sensor value of the user's sensors.
 	 */
 	private double getAvgSensorLiveForUser(Long userId, String sensorName) {
 		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);
@@ -553,7 +574,7 @@ public class BackEndFacade {
 	 * @param users - List of users
 	 * @param sensorName - The sensor's type.
 	 * @return
-	 * The average value
+	 * A {@code double} containing the average value of the live data.
 	 */
 	private double getAvgSensorLiveForUsers(List<User> users, String sensorName) {
 		if (users.isEmpty()) {
@@ -573,7 +594,7 @@ public class BackEndFacade {
 	 * @param userId - The user's id
 	 * @param sensorName - The sensor's type.
 	 * @return
-	 * The sum value.
+	 * A {@code double} containing the sum value of the live data.
 	 */
 	private double getSumSensorLiveForUser(Long userId, String sensorName) {
 		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
@@ -590,7 +611,7 @@ public class BackEndFacade {
 	 * @param users - List of users
 	 * @param sensorName - The sensor's type.
 	 * @return
-	 * The sum value
+	 * A {double} corresponding to the sum.
 	 */
 	private double getSumSensorLiveForUsers(List<User> users, String sensorName) {
 		double res = 0;
@@ -610,7 +631,7 @@ public class BackEndFacade {
 	 * 
 	 * @param sensorName - The name of the sensor.
 	 * @return
-	 * A sensor.
+	 * A {@code Sensor} object corresponding to the sensor name.
 	 */
 	public Sensor getSensorFromSensorName(String sensorName) {
 		return deviceManager.getSensorFromSensorName(sensorName);
