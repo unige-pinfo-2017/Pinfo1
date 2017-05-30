@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ChartComponent } from '../../chart/chart.component';
 
 @Component({
 	selector: 'middlescreen',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 
 export class MiddlescreenComponent {
+	@ViewChild(ChartComponent) child: ChartComponent;
+
+	public getChartDataShort(resource: string, type: string): void {
+		this.child.getChartDataShort(resource, type);
+	}
 }

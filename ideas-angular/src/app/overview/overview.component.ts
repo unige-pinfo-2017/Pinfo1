@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from "rxjs";
@@ -18,6 +18,8 @@ import { OverviewService } from './overview.service';
 })
 
 export class OverviewComponent implements OnInit, OnDestroy {
+	@ViewChild(MiddlescreenComponent) middlescreenComponent: MiddlescreenComponent;
+
 	private currentId: number; // L'id de l'utilisateur dont on génère la table, n'est pas forcément l'id de l'utilisateur authentifié
 	private refreshRate: number = 5*1000; // refreshRate en milliseconde
 	private timerSubscription: Subscription;
@@ -92,7 +94,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	}
 
 	public changeLiveData(name: string): void {
-		console.log(name);
+		this.middlescreenComponent.getChartDataShort(name.toLowerCase(), "day");
 	}
 
 	public removeLiveData(name: string): void {
