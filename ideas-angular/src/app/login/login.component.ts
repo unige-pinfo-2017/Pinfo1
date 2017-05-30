@@ -57,7 +57,7 @@ export class LoginComponent {
 						)
 					);
 				}
-			}).catch(error => this.error = 'Authentication failed');
+			}).catch(error => this.error = 'Authentication failed.');
 		}
 	}
 
