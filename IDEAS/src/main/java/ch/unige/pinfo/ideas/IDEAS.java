@@ -284,7 +284,7 @@ public class IDEAS {
 		
 		LightData lightd3 = new LightData();
 		lightd3.setDeviceId("id9");
-		lightd3.setStatus("0");
+		lightd3.setStatus("1");
 		lightd3.setBrightness(Double.toString(rand.nextDouble()));
 		lightd3.setHue(Integer.toString(rand.nextInt(361)));
 		lightd3.setSaturation(Double.toString(rand.nextDouble()));
