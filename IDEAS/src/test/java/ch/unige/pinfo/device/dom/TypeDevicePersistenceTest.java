@@ -110,7 +110,7 @@ public class TypeDevicePersistenceTest {
 		Assert.assertEquals(TYPEDEVICE_NAME.length, foundTypeDevices.size());
 		final Set<String> foundDeviceIds = new HashSet<String>();
 		for (TypeDevice typedevice : foundTypeDevices) {
-            System.out.println("* " + typedevice);
+            System.out.println("* " + typedevice.getName());
 			foundDeviceIds.add(typedevice.getName());
 		}
 		Assert.assertTrue(foundDeviceIds.containsAll(Arrays.asList(TYPEDEVICE_NAME)));
