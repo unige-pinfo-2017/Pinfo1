@@ -2,21 +2,21 @@
 
 describe("filter device list", function() {
 
-	var originalTimeout;
-	var num=1;
-	var liste =[]	;
-	var name="Antoine";
+    var originalTimeout;
+    var num=1;
+    var liste =[]   ;
+    var name="Antoine";
 
 
 
 
-	 beforeEach(function() {
+     beforeEach(function() {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     });
 
 
-	it("should login and redirect to device list page and filtrer device list", function(){
+    it("should login and redirect to device list page and filtrer device list", function(){
 
         browser.get('http://localhost:3000/login');
         browser.driver.sleep(1000).then(function(){
@@ -42,21 +42,21 @@ describe("filter device list", function() {
 
                         browser.driver.sleep(4000).then(function() {
                             //var containFilter = element.all(by.css(".ngx-datatable"));
-			element.all(by.css(".datatable-body-row")).each(function(element, index) {
+            element.all(by.css(".datatable-body-row")).each(function(element, index) {
 
-				element.getText().then(function (text) {
-						console.log(text);
+                element.getText().then(function (text) {
+                        console.log(text);
 
-						if(!(text.includes(name))){
-							num=num-1;
-						}
+                        if(!(text.includes(name))){
+                            num=num-1;
+                        }
 
 
 
   }).then(function(){
-		expect(num).toEqual(1);
+        expect(num).toEqual(1);
 
-	})
+    })
 
 });
 
