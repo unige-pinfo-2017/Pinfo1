@@ -3,5 +3,10 @@ exports.config={
     specs: ['filter.spec.js'],
     capabilities: {
         browserName: 'firefox'
-    }
+    },
+
+  
+
+		allScriptsTimeout: 10000000
+
 }
