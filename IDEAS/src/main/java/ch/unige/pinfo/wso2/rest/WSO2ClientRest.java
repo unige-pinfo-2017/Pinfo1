@@ -36,6 +36,22 @@ public class WSO2ClientRest {
 		//urlBase = "<wso2 ip address>:8243";   
 	}
 
+	/**
+	 * <b>getStates</b>
+	 * <p>
+	 * {@code public JsonArray getStates(String deviceType, String deviceId, String qpSensorType, String qpFrom, String qpTo)}
+	 * <p>
+	 * 
+	 * Rest client that get device's sensor data for a time interval
+	 * 
+	 * @param deviceType - The device's type
+	 * @param deviceId - The device's id
+	 * @param qpSensorType - The sensor's type
+	 * @param qpFrom - initial timestamp
+	 * @param qpTo - final timestamp
+	 * @return
+	 * A {@code JsonArray} device's sensor data.
+	 */
 	//Client temporaire fonctionnant avec FakeWSO2Server:
 	public JsonArray getStates(String deviceType, String deviceId, String qpSensorType, String qpFrom, String qpTo){
 		Client client = ClientBuilder.newClient();
@@ -67,6 +83,21 @@ public class WSO2ClientRest {
 
 	}*/
 	
+	/**
+	 * <b>postStatus</b>
+	 * <p>
+	 * {@code public Response postStatus(String deviceType, String deviceId, String status, String qpState)}
+	 * <p>
+	 * 
+	 * Rest client that modifies device's status.
+	 * 
+	 * @param deviceType - The device's type
+	 * @param deviceId - The device's id
+	 * @param status - The resource
+	 * @param qpState - The new state value 
+	 * @return
+	 * A {@code Response}: 200 if state is changed, 500 otherwise.
+	 */
 	public Response postStatus(String deviceType, String deviceId, String status, String qpState){
 		Client client = ClientBuilder.newClient();
 		WebTarget wb = client.target(urlBase);
