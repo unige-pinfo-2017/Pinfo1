@@ -33,7 +33,8 @@
 	  'ng2-table': 'node_modules/ng2-table',
 	  'ng2-charts': 'node_modules/ng2-charts',
 	  'ng2-smart-table': 'node_modules/ng2-smart-table',
-	  '@swimlane/ngx-datatable': 'npm:@swimlane/ngx-datatable/release/index.js'
+	  '@swimlane/ngx-datatable': 'npm:@swimlane/ngx-datatable/release/index.js',
+    'chart.js': 'npm:chart.js/dist/Chart.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -53,9 +54,13 @@
 		  defaultExtension: 'js'
 	  },
 	  'ng2-charts': {
+      main: 'ng2-charts.js',
 		  defaultExtension: 'js'
 	  },
 	  'ng2-smart-table': {
+		  defaultExtension: 'js'
+	  },
+    'chart.js': {
 		  defaultExtension: 'js'
 	  },
   }
