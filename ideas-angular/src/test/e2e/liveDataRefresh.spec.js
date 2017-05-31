@@ -9,7 +9,12 @@ describe("Login Test", function() {
             
             browser.driver.sleep(1000).then(function(){
                 element.all(by.buttonText("Login")).click();
-                expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/overview');
+                browser.sleep(2000);
+                element.all(by.id("value")).click();
+                browser.sleep(2000);
+
+
+                //expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/overview');
             });
         });
     });
