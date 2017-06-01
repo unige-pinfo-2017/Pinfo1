@@ -24,7 +24,7 @@ export class TopbarComponent {
 	 }
 
 	 public removeLiveData(name: string): void {
-		 console.log("remove called");
+		 //console.log("remove called");
 		 this.removed.emit(name);
 	 }
 }
