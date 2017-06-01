@@ -5,7 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import ch.unige.pinfo.device.dom.Sensor;
+import ch.unige.pinfo.device.service.DeviceManager;
 import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.overview.service.LiveDataService;
 import ch.unige.pinfo.user.dom.User;
@@ -25,6 +28,9 @@ public class BackEndFacadeTest {
 	
 	@Mock
 	private UserService mockUserService;
+	
+	@Mock
+	private DeviceManager mockDeviceManager;
 	
 	@InjectMocks
 	private BackEndFacade backEndFacade = new BackEndFacade();
@@ -118,4 +124,52 @@ public class BackEndFacadeTest {
 		when(backEndFacade.getUserRoleById(userId)).thenReturn("Basic");
 		assertEquals(usersBasic, backEndFacade.getUsersList(userId));
 	}	
+	
+	@Test
+	public void getLiveDatasTest() {
+		Long userId = 1l;
+		
+		String role = "Manager";
+		
+		String sensorName = "sensorName";
+		
+		Sensor sensor = new Sensor();
+		sensor.setName("sensor");
+		
+		LiveData pref = new LiveData();
+		pref.setComputeType("Sum");
+		pref.setSensor(sensor);
+		
+		Set<LiveData> managerPref = new HashSet<LiveData>();
+		managerPref.add(pref);
+		
+		User manager = new User();
+		manager.setId(userId);
+		manager.setPreferences(managerPref);
+		
+		User sub = new User();
+		sub.setId(2l);
+		
+		List<User> subs = new ArrayList<User>();
+		subs.add(sub);
+		
+		double liveValue = 1d;
+		
+		when(mockUserService.getUserRoleById(userId))
+			.thenReturn(role);
+		when(mockUserService.getUsersOfManager(userId))
+			.thenReturn(subs);
+		when(mockUserService.getUserById(userId))
+			.thenReturn(manager);
+		when(mockDeviceManager.getSumSensorLiveForUser(subs.get(0).getId(), sensor.getName()))
+			.thenReturn(liveValue);
+		
+		List<Double> expected = new ArrayList<Double>();
+		expected.add(liveValue);
+		
+		List<Double> output = backEndFacade.getLiveDatas(userId);
+		
+		assertEquals(expected, output);
+		
+	}
 }
