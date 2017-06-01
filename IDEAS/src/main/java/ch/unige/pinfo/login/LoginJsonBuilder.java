@@ -1,5 +1,6 @@
 package ch.unige.pinfo.login;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.json.Json;
@@ -9,8 +10,13 @@ import javax.json.JsonObject;
 
 import ch.unige.pinfo.user.dom.User;
 
-public class LoginJsonBuilder {
+public class LoginJsonBuilder implements Serializable {
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -5315565523787604723L;
+
 	/**
 	 * <b>buildId</b>
 	 * <p>

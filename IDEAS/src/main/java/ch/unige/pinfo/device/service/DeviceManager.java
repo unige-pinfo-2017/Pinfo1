@@ -1,5 +1,6 @@
 package ch.unige.pinfo.device.service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.user.dom.User;
 
 @Local
-public interface DeviceManager {
+public interface DeviceManager extends Serializable{
 	
 	/**
      * <b>getDeviceDataLive</b>

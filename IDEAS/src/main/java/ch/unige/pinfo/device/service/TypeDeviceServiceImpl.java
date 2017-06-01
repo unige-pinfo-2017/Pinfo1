@@ -16,6 +16,11 @@ import ch.unige.pinfo.device.dom.TypeDevice;
 @Stateless
 public class TypeDeviceServiceImpl implements TypeDeviceService {
 
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 5309121750888067959L;
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	

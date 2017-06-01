@@ -1,9 +1,16 @@
 
 package ch.unige.pinfo.wso2.service;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class Reading {
+public class Reading implements Serializable {
+	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 2945152924877569609L;
+	
 	private Instant timestamp;
 	private Double value;
 	

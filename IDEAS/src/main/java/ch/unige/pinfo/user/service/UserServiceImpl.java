@@ -27,6 +27,12 @@ import ch.unige.pinfo.user.dom.User;
 
 @Stateless
 public class UserServiceImpl implements UserService{
+	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 933473823595585218L;
+
 	@Inject 
 	private DeviceManager deviceManager;
 	

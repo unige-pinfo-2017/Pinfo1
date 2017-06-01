@@ -1,10 +1,16 @@
 package ch.unige.pinfo.wso2.service;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChartDataService {
+public class ChartDataService implements Serializable {
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 6439313062444735257L;
+	
 	private final double emptyValue = -1;
 	
 	/**

@@ -16,7 +16,6 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
@@ -25,6 +24,11 @@ import ch.unige.pinfo.wso2.rest.WSO2ClientRest;
 
 public class WSO2WrapperImpl implements WSO2Wrapper {
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -3193538432088886844L;
+
 	@Inject
 	WSO2ClientRest wcr;
 	

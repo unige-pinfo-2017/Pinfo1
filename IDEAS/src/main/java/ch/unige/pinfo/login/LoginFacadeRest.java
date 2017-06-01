@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Api(value="Login")
-@Path("/login")
+@Path("/rest/login")
 public class LoginFacadeRest {
 	
 	@Inject

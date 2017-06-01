@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 
 
 @Api(value="Edit")
-@Path("/edit")
+@Path("/rest/edit")
 public class EditMenuFacadeRest {
 	@Inject
 	private EditMenuService editMenuService;

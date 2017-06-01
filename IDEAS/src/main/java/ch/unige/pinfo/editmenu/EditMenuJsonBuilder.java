@@ -1,5 +1,6 @@
 package ch.unige.pinfo.editmenu;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.json.Json;
@@ -7,9 +8,14 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
-public class EditMenuJsonBuilder {
+public class EditMenuJsonBuilder implements Serializable {
 	
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8428281065110112044L;
+
+	/**
      * <b>buildField</b>
      * <p>
      * {@code public JsonObject buildField(String name, String value)}

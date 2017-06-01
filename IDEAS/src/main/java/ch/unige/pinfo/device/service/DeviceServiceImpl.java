@@ -21,6 +21,11 @@ import ch.unige.pinfo.user.service.UserService;
 
 @Stateless
 public class DeviceServiceImpl implements DeviceService {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3718406131267219027L;
+
 	@Inject 
 	private UserService userService;
 	

@@ -1,5 +1,6 @@
 package ch.unige.pinfo.table;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.json.Json;
@@ -8,9 +9,14 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
-public class TableJsonBuilder {
+public class TableJsonBuilder implements Serializable {
 	
     /**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -8102339345267054333L;
+
+	/**
      * <b>buildTable</b>
      * <p>
      * {@code public JsonArray buildTable(List<String> columns, List<List<String>> values) }

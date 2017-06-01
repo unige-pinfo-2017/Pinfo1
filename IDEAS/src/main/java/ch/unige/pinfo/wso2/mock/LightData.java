@@ -1,5 +1,7 @@
 package ch.unige.pinfo.wso2.mock;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "Mock_LightData")
-public class LightData {
+public class LightData implements Serializable {
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -2763696745017571426L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")

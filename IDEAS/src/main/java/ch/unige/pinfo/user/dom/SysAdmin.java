@@ -14,6 +14,11 @@ import javax.persistence.OrderBy;
 @DiscriminatorValue("SysAdmin")
 public class SysAdmin extends User {
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 3078897664177539276L;
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="SysAdmin")
     @OrderBy("id asc")

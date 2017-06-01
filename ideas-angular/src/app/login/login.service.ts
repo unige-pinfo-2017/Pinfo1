@@ -17,21 +17,22 @@ export class LoginService {
 
 	public authentication(username: string, pw: string): Promise<string> {
 		return this.http
-			.get(`${this.baseUrl}/login?username=${username}&pw=${pw}`, {headers: this.headersService.getHeadersPlainText()})
+			.post(`${this.baseUrl}/login`, JSON.stringify({username: username, password: pw}),{headers: this.headersService.getHeadersJsonCORS()})
 			.toPromise()
 			.then(res => res.text() as string)
 	}
 
+
 	public getSubordinates(userId: string): Promise<any[]> {
 		return this.http
-			.get(`${this.baseUrl}/login/get-subordinates/${userId}`, {headers: this.headersService.getHeadersJson()})
+			.get(`${this.baseUrl}/rest/login/get-subordinates/${userId}`, {headers: this.headersService.getHeadersJson()})
 			.toPromise()
 			.then(res => res.json())
 	}
 
 	public getRole(userId: string): Promise<string> {
 		return this.http
-			.get(`${this.baseUrl}/login/get-role/${userId}`, {headers: this.headersService.getHeadersPlainText()})
+			.get(`${this.baseUrl}/rest/login/get-role/${userId}`, {headers: this.headersService.getHeadersPlainText()})
 			.toPromise()
 			.then(res => res.text() as string)
 	}

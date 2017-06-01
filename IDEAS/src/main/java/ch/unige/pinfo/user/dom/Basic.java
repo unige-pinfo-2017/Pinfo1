@@ -7,4 +7,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Basic")
 public class Basic extends User {
 
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 937124364638035252L;
+
 }

@@ -1,5 +1,6 @@
 package ch.unige.pinfo.device.dom;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,9 +18,14 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table( name = "TypeDevices")
-public class TypeDevice {
+public class TypeDevice implements Serializable {
 	
-    @Id
+    /**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 3839711969025811579L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")
 	private Long id;

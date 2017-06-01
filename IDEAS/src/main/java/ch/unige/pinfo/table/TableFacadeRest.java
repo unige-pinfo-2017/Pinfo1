@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiResponses;
 
 
 @Api(value="Table")
-@Path("/table")
+@Path("/rest/table")
 public class TableFacadeRest {
 	@Inject
 	private TableService tableService;

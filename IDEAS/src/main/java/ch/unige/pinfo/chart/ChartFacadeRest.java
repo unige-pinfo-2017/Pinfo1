@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
 
 @Api(value="Chart")
-@Path("/chart")
+@Path("/rest/chart")
 public class ChartFacadeRest {
 	@Inject
 	private ChartService chartService;

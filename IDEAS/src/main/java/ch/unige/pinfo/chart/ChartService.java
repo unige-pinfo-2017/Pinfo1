@@ -1,5 +1,6 @@
 package ch.unige.pinfo.chart;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,7 +14,12 @@ import javax.json.JsonArray;
 import ch.unige.pinfo.backend.BackEndFacade;
 
 @Stateless
-public class ChartService {
+public class ChartService implements Serializable{
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 2303929809384530970L;
+
 	@Inject
 	ChartJsonBuilder chartJsonBuilder;
 	

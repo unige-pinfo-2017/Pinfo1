@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class EditingMenuService {
-	private baseUrl: string = "http://localhost:8080/IDEAS";
+	private baseUrl: string = "http://localhost:8080/IDEAS/rest";
 
 	constructor(private http: Http,
 				private headersService: HeadersService

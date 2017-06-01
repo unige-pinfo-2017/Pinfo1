@@ -1,5 +1,7 @@
 package ch.unige.pinfo.wso2.mock;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,13 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "Mock_StatusPowerSocket")
-public class PowerSocketStatus {
+public class PowerSocketStatus implements Serializable{
+	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -1327307114374810283L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")

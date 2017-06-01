@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.io.Serializable;
+
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
 import ch.unige.pinfo.device.service.DeviceManager;
@@ -16,7 +18,12 @@ import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
-public class BackEndFacade {
+public class BackEndFacade implements Serializable {
+	/**
+	 * The serial-id
+	 */
+	private static final long serialVersionUID = -4722536340334232427L;
+
 	@Inject
 	UserService userService;
 	

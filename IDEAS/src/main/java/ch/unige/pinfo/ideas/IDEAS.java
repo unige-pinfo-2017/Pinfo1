@@ -134,45 +134,45 @@ public class IDEAS {
         
         Manager user1 = new Manager();
         user1.setUsername("ideas");
-        user1.setPassword("ideaspw");
+        user1.setPassword("RW6l0ZcklHjzVMLnZ1GX8FZOXuNDKZSYnuU3HpE5xTo=");
         user1.setUsers(new HashSet<User>());
         user1.setDevices(new HashSet<Device>());
         
         Manager user2 = new Manager();
         user2.setUsername("Quang-Minh");
-        user2.setPassword("Nguyen");
+        user2.setPassword("ITxNLbAm7UNWAIRnCODQVmWPNPq4YHHyl5JeU00gkyU=");
         user2.setUsers(new HashSet<User>());
         user2.setDevices(new HashSet<Device>());
         
         SysAdmin user3 = new SysAdmin();
         user3.setUsername("Luca");
-        user3.setPassword("Joss");
+        user3.setPassword("Zgsc4BuU3GZO2DGHbTlFiRJBgHvdU86+Utt7jsUoqPQ=");
         user3.setUsers(new HashSet<User>());
         user3.setDevices(new HashSet<Device>());
 
         Basic user4 = new Basic();
         user4.setUsername("Melanie");
-        user4.setPassword("Glauser");
+        user4.setPassword("B1jKkwv30KAWtkyrT683L/otUTbACUmnLPEK3WyB/bc=");
         user4.setDevices(new HashSet<Device>());
         
         Basic user5 = new Basic();
         user5.setUsername("Antoine");
-        user5.setPassword("Benquet");
+        user5.setPassword("ZypgyzbJIXNtL51bioKPWK++JyVXRm0VccUVTMB2Ov8=");
         user5.setDevices(new HashSet<Device>());
        
         Basic user6 = new Basic();
         user6.setUsername("Jason");
-        user6.setPassword("Toko");
+        user6.setPassword("SuekiXFIJwz4Bz+5WK0BubASNpNy6M84vfJ5jEST9zk=");
         user6.setDevices(new HashSet<Device>());
         
         Basic user7 = new Basic();
         user7.setUsername("Aziz");
-        user7.setPassword("Ferchiou");
+        user7.setPassword("k4fm/paK2dsH4FmYIetz9OCivMsh9gcIAisW+PgoTNc=");
         user7.setDevices(new HashSet<Device>());
       
         Basic user8 = new Basic();
         user8.setUsername("Joao");
-        user8.setPassword("Ramos");
+        user8.setPassword("A8zy+f36KF5sXppXydAi0NmGNkUydJ2sNXtyPBKUJK8=");
         user8.setDevices(new HashSet<Device>());
       
         user1.getUsers().add(user2);

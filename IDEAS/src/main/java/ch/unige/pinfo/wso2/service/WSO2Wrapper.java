@@ -1,5 +1,6 @@
 package ch.unige.pinfo.wso2.service;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import javax.json.JsonArray;
 import javax.ws.rs.core.Response;
 
 @Local
-public interface WSO2Wrapper {
+public interface WSO2Wrapper extends Serializable {
 	
 	//temporaire
 	//List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);

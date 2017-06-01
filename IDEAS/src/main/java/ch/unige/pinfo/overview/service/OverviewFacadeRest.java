@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Api(value="Overview")
-@Path("/overview")
+@Path("/rest/overview")
 public class OverviewFacadeRest {
 	@Inject
 	private OverviewService overviewService;

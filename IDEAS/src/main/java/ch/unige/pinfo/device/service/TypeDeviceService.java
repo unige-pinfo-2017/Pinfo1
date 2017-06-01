@@ -1,12 +1,13 @@
 package ch.unige.pinfo.device.service;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Local;
 
 import ch.unige.pinfo.device.dom.TypeDevice;
 
 @Local
-public interface TypeDeviceService {
+public interface TypeDeviceService extends Serializable {
 	
 	/**
 	 * <b>addTypeDevice</b>

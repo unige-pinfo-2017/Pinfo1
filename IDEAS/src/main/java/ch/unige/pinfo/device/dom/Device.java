@@ -1,6 +1,8 @@
 package ch.unige.pinfo.device.dom;
 
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +18,12 @@ import ch.unige.pinfo.user.dom.User;
 
 @Entity
 @Table( name = "Devices")
-public class Device {
-	
+public class Device implements Serializable{
+	/**
+	 * The serial-id
+	 */
+	private static final long serialVersionUID = 3950004706048925769L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")

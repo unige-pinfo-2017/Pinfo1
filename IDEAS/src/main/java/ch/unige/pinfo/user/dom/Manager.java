@@ -14,6 +14,11 @@ import javax.persistence.OrderBy;
 @DiscriminatorValue("Manager")
 public class Manager extends User {
 
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 7780398055411761170L;
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="Manager")
     @OrderBy("id asc")

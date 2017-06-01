@@ -1,5 +1,6 @@
 package ch.unige.pinfo.overview.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -7,7 +8,7 @@ import javax.ejb.Local;
 import ch.unige.pinfo.overview.dom.LiveData;
 
 @Local
-public interface LiveDataService {
+public interface LiveDataService extends Serializable {
 	
 	/**
 	 * <b>addLiveData</b>

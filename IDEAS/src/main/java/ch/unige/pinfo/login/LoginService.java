@@ -1,5 +1,6 @@
 package ch.unige.pinfo.login;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,12 @@ import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.user.dom.User;
 
 @Stateless
-public class LoginService {
+public class LoginService implements Serializable{
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 6400130165433633436L;
+
 	@Inject
 	private LoginJsonBuilder loginJsonBuilder;
 	
@@ -19,19 +25,6 @@ public class LoginService {
 	private BackEndFacade backEndFacade;
 	
 	public LoginService(){}
-	
-	/*public void authentication(String username, String password){
-		User user = mu.getUserByUsername(username);
-		
-		if (user == null){
-			sl.display("Username does not exist.");
-		} else if (checkPassword(password, user.getPassword())){
-			sl.display("Authentication successful.");
-			mu.addConnectedUser(user);
-		} else {
-			sl.display("Authentication failed.");
-		}
-	}*/
 	
 	/**
 	 * <b>authenticate</b> 

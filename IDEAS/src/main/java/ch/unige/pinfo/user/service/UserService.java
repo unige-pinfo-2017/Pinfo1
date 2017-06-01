@@ -1,5 +1,6 @@
 package ch.unige.pinfo.user.service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import ch.unige.pinfo.user.dom.SysAdmin;
 import ch.unige.pinfo.user.dom.User;
 
 @Local
-public interface UserService {
+public interface UserService extends Serializable {
 	
 	/**
 	 * <b>addUser</b>

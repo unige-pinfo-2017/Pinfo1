@@ -11,6 +11,14 @@ export class HeadersService {
 		return headers;
 	}
 
+	public getHeadersJsonCORS(): Headers {
+		let headers = new Headers();
+		headers.append('Accept', 'application/json');
+		headers.append('Content-type', 'application/json');
+		headers.append('Access-Control-Allow-Origin','*')
+		return headers;
+	}
+
 	public getHeadersPlainText(): Headers {
 		let headers = new Headers();
 		headers.append('Accept', 'text/plain');	// Spécifie le type de données accepté

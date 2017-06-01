@@ -1,5 +1,6 @@
 package ch.unige.pinfo.editmenu;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,12 @@ import javax.ws.rs.core.Response;
 import ch.unige.pinfo.backend.BackEndFacade;
 
 @Stateless
-public class EditMenuService {
+public class EditMenuService implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2140036917895085472L;
 
 	@Inject
 	BackEndFacade backEndFacade;

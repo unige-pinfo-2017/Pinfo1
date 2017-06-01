@@ -7,7 +7,7 @@ import javax.ws.rs.core.Application;
 
 
 /**
- * Hello world!
+ * IDEAS
  *
  */
 @ApplicationPath("/")

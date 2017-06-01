@@ -1,5 +1,7 @@
 package ch.unige.pinfo.wso2.mock;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +12,12 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 @Stateless
-public class LightDataService {
+public class LightDataService implements Serializable {
+	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -6443286456628547755L;
 	
 	@PersistenceContext
 	private EntityManager entityManager;

@@ -1,5 +1,6 @@
 package ch.unige.pinfo.table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,8 +16,13 @@ import ch.unige.pinfo.overview.dom.LiveData;
 import ch.unige.pinfo.user.dom.User;
 
 @Stateless
-public class TableService {
+public class TableService implements Serializable {
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 8967478107047709760L;
+
 	@Inject
 	private TableJsonBuilder tableJsonBuilder;
 

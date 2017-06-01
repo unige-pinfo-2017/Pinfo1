@@ -1,5 +1,6 @@
 package ch.unige.pinfo.user.dom;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,19 +31,24 @@ import ch.unige.pinfo.overview.dom.LiveData;
 @DiscriminatorColumn(name="Role", discriminatorType = DiscriminatorType.STRING, length = 20)
 @DiscriminatorValue("User")
 @Table( name = "Users")
-public class User {
+public class User implements Serializable {
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 8425321055438293448L;
+
 	// Fields:
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")
 	private Long id;
 	
-	@Column( name = "Username", nullable = false ) 
+	@Column( name = "username", nullable = false ) 
 	@Size(min = 3, max = 40)
 	private String username;
 	
-	@Column( name = "Password", nullable = false ) 
-	@Size(min = 3, max = 40)
+	@Column( name = "password", nullable = false ) 
+	@Size(min = 3, max = 255)
 	private String password;
 	
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")

@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
 
 @Api(value="User")
-@Path("/user")
+@Path("/rest/user")
 public class UserFacadeRest {
 	
 	@Inject 

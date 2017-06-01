@@ -4,10 +4,10 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.io.Serializable;
 import java.io.StringReader;
 
 import javax.json.Json;
@@ -24,8 +24,13 @@ import javax.json.JsonArray;
  *  Le client officiel et ses attributs sont pour l'instant mis en commentaire. 
  */
 
-public class WSO2ClientRest {
+public class WSO2ClientRest implements Serializable {
 
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 6758944176529352716L;
+	
 	private String urlBase;
 
 	public WSO2ClientRest(){

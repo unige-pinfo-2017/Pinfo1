@@ -4,7 +4,17 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
          
-         
+    <!-- filter>
+  		<filter-name>CorsFilter</filter-name>
+  		<filter-class> ch.unige.pinfo.cors.CorsFilterServlet</filter-class>
+	</filter>
+	
+	<filter-mapping>
+ 	 	<filter-name>CorsFilter</filter-name>
+  		<url-pattern>*</url-pattern>
+	</filter-mapping>
+    -->
+    
     <context-param>
     <param-name>resteasy.providers</param-name>
     <param-value>
@@ -18,5 +28,85 @@
         <servlet-class>ch.unige.pinfo.ideas.Bootstrap</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
-      
+    
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>    
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>secureDomain</realm-name>
+    </login-config>
+    
+    <security-constraint>
+        <display-name>Users Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Users Area</web-resource-name>
+            <description></description>
+            <url-pattern>/rest/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Manager</role-name>
+            <role-name>SysAdmin</role-name>
+            <role-name>Basic</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+        
+    <security-constraint>
+        <display-name>Users Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected SysAdmin Area</web-resource-name>
+            <description></description>
+            <url-pattern>/rest/edit/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+            <http-method>HEAD</http-method>
+            <http-method>PUT</http-method>
+            <http-method>OPTIONS</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>SysAdmin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+		<web-resource-collection>
+		<web-resource-name>Logout</web-resource-name>
+        <description/>
+		<url-pattern>/logout</url-pattern>
+		<http-method>GET</http-method>
+		<http-method>POST</http-method>
+		</web-resource-collection>
+	</security-constraint>
+	
+     <security-role>  
+         <role-name>Manager</role-name>  
+     </security-role> 
+     <security-role>  
+         <role-name>SysAdmin</role-name>  
+     </security-role> 
+     <security-role>  
+         <role-name>Basic</role-name>  
+     </security-role>    
+
 </web-app>

@@ -1,5 +1,6 @@
 package ch.unige.pinfo.overview.dom;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,8 +23,13 @@ import ch.unige.pinfo.user.dom.User;
 
 @Entity
 @Table( name = "LiveData")
-public class LiveData {
-    @Id
+public class LiveData implements Serializable {
+    /**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -4339660856808721051L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( name = "Id")
 	private Long id;	

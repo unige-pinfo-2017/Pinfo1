@@ -1,5 +1,6 @@
 package ch.unige.pinfo.overview.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.json.Json;
@@ -9,8 +10,13 @@ import javax.json.JsonObject;
 
 import ch.unige.pinfo.overview.dom.LiveData;
 
-public class OverviewJsonBuilder {
+public class OverviewJsonBuilder implements Serializable {
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -8146477607381645405L;
+
 	/**
 	 * <b>buildLiveDataJson</b>
 	 * <p>

@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class OverviewService {
-	private baseUrl: string = 'http://localhost:8080/IDEAS';
+	private baseUrl: string = 'http://localhost:8080/IDEAS/rest';
 
 	constructor(private http: Http,
 				private headersService: HeadersService

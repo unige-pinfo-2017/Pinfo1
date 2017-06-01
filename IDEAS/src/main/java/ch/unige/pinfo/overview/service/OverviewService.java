@@ -1,5 +1,6 @@
 package ch.unige.pinfo.overview.service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +18,12 @@ import ch.unige.pinfo.backend.BackEndFacade;
 import ch.unige.pinfo.overview.dom.LiveData;
 
 @Stateless
-public class OverviewService {	
+public class OverviewService implements Serializable{	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 6401505798250141721L;
+
 	@Inject
 	private OverviewJsonBuilder overviewJsonBuilder;
 	

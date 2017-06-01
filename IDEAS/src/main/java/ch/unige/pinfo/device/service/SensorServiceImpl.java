@@ -16,6 +16,10 @@ import ch.unige.pinfo.device.dom.Sensor;
 @Stateless
 public class SensorServiceImpl implements SensorService {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5171509159822278356L;
 	@PersistenceContext
 	private EntityManager entityManager;
 	

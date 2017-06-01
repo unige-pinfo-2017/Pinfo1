@@ -15,6 +15,11 @@ import ch.unige.pinfo.overview.dom.LiveData;
 @Stateless
 public class LiveDataServiceImpl implements LiveDataService {
 
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 1472969469935311646L;
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	

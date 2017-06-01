@@ -1,5 +1,6 @@
 package ch.unige.pinfo.chart;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.json.Json;
@@ -7,8 +8,13 @@ import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 
-public class ChartJsonBuilder {
+public class ChartJsonBuilder implements Serializable{
 	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -8780616751927709161L;
+
 	/**
      * <b>buildChartJson</b>
      * <p>

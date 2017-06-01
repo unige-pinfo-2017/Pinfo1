@@ -1,5 +1,6 @@
 package ch.unige.pinfo.device.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -7,7 +8,7 @@ import javax.ejb.Local;
 import ch.unige.pinfo.device.dom.Device;
 
 @Local
-public interface DeviceService {
+public interface DeviceService extends Serializable {
 	
 	/**
 	 * <b>addDevice</b>

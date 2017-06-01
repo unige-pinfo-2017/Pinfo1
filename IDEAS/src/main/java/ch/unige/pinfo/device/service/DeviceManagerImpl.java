@@ -15,6 +15,11 @@ import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
 
 public class DeviceManagerImpl implements DeviceManager {	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = -296921927597374900L;
+
 	@Inject 
 	private SensorService sensorService;
 	

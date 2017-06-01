@@ -1,5 +1,7 @@
 package ch.unige.pinfo.wso2.mock;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +13,12 @@ import javax.persistence.criteria.Root;
 
 
 @Stateless
-public class PowerSocketStatusService {
+public class PowerSocketStatusService implements Serializable{
+	
+	/**
+	 *  The serial-id
+	 */
+	private static final long serialVersionUID = 2843380944414953803L;
 	
 	@PersistenceContext
 	private EntityManager entityManager;
