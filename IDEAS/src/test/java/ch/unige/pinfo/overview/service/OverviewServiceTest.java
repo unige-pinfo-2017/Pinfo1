@@ -162,9 +162,9 @@ public class OverviewServiceTest {
 			.thenReturn(prefId);
 		when(mockBackEndFacade.addPreference(userId, prefId)).thenReturn(false);
 		
-		Response output = os.removePreference(userId, measureName);
+		Response output = os.addPreference(userId, measureName);
 		
-		Response expected = Response.status(500).entity("Removing " + measureName + " from preferences failed.").build();
+		Response expected = Response.status(500).entity("Adding " + measureName + " to preferences failed.").build();
 		
 		assertEquals(expected.getEntity(), output.getEntity());
 		assertEquals(expected.getStatus(), output.getStatus());
