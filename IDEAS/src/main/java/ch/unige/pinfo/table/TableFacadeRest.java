@@ -67,15 +67,15 @@ public class TableFacadeRest {
 		return tableService.buildTableForUser(userId);
 	}
 	
-	@GET
+	/*@GET
 	@Path("/color")
 	@Produces({ MediaType.TEXT_PLAIN })
 	@ApiOperation(value = "Get a color")
 	public String getColorTest() {
 		return tableService.getColorTest();
-	}
+	}*/
 	
-	@POST
+	/*@POST
 	@Path("/change-state/{deviceId}/{action}")
 	@ApiOperation(value="Change state of a device",
 		notes="Available for a SysAdmin")
@@ -83,6 +83,6 @@ public class TableFacadeRest {
 			@ApiParam("Action") @PathParam("action") String action, 
 			@ApiParam("State") @QueryParam("state") String state){
 	}
-	
+	*/
 	
 }

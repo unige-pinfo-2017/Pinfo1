@@ -212,14 +212,14 @@ public class TableService {
      * @return
      * A {@code String}
      */
-	public String getColorTest() {
+	/*public String getColorTest() {
 		String s="";
 		List<String> values = backEndFacade.getDeviceDataLiveColor("Light", "id9");
 		for (String value: values) {
 			s += value + " ";
 		}
 		return s;
-	}
+	}*/
 	
 	/*public JsonArray buildTableForDeviceType2(String deviceType, Long userId) {
 		// Colonnes: Device Id, sensorValue1, sensorValue2, ..., sensorValueN
