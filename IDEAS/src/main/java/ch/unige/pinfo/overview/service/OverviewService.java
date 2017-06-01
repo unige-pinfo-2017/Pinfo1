@@ -32,7 +32,7 @@ public class OverviewService {
 	 * {@code public JsonArray buildLiveData(Long userId)}
 	 * <p>
 	 * 
-	 * Build a {@code JsonArray} of the live data that will be display on the overview for a user.  
+	 * Build a {@code JsonArray} of the live data that will be displayed on the overview for a user.  
 	 * 
 	 * @param userId - The user's id.
 	 * @return
@@ -62,7 +62,7 @@ public class OverviewService {
 	 * {@code public JsonArray buildHiddenData(Long userId)}
 	 * <p>
 	 * 
-	 * Build a {@code JsonArray} of the hidden data that they're not displayed for a user.
+	 * Build a {@code JsonArray} of the hidden data (not displayed by the user)
 	 * 
 	 * @param userId - The user's id.
 	 * @return
@@ -89,7 +89,7 @@ public class OverviewService {
 	 * {@code public List<String> getMeasureNames(Set<LiveData> liveDatas)}
 	 * <p>
 	 * 
-	 * Get the name of the measure for a set of live data.
+	 * Get the measure names for a set of live data.
 	 * 
 	 * @param liveDatas - Set of live data we want the name measure.
 	 * @return
@@ -129,7 +129,7 @@ public class OverviewService {
 	 * {@code public double roundDecimal(double value, int decimalNumber)}
 	 * <p>
 	 * 
-	 * Round the value to a specify decimalNumber 
+	 * Round 'value' to the the n-th decimal, where n is specified by decimalNumber
 	 * 
 	 * @param value - value to round
 	 * @param decimalNumber - decimal to round the value.
@@ -147,7 +147,7 @@ public class OverviewService {
 	 * {@code public Response addPreference(Long userId, String measureName)}
 	 * <p>
 	 * 
-	 * Add a preference for a user int the overview. 
+	 * Add a preference for a user in the overview. 
 	 * 
 	 * @param userId - The user's id 
 	 * @param measureName - The measure name to add.

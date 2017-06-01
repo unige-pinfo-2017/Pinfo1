@@ -306,7 +306,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 			} else if (i==2) {
 				cal.set(year, i, 28);
 			} else if (i==0) {
-				cal.set(year, i, 1);
+				cal.set(year, 1, 1);
 			}
 			timePoints.add(cal.toInstant());
 		}
@@ -358,17 +358,14 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		Random r = new Random();
 		for (int i=23; i>=0; i--){
 			Instant inst = instant.minus(Duration.ofHours(i)); //.minus(Duration.ofMinutes(10)));
-			int randomValue = r.nextInt(10);
-			mock.add(new Reading(inst, (double) randomValue));
+			mock.add(new Reading(inst, (double) r.nextInt(20)));
 		}
 		return mock;
 	}
 	
 	public List<Reading> mockReadingsLastWeek(Instant instant) {
 		List<Reading> mock = new ArrayList<Reading>();
-		
 		Random r = new Random();
-		
 		for (int i=6; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays(i));
 			mock.add(new Reading(inst, (double) r.nextInt(20)));
@@ -378,9 +375,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	private List<Reading> mockReadingsLastMonth(Instant instant) {
 		List<Reading> mock = new ArrayList<Reading>();
-		
 		Random r = new Random();
-		
 		for (int i=29; i>=0; i--) {
 			Instant inst = instant.minus(Duration.ofDays(i));
 			mock.add(new Reading(inst, (double) r.nextInt(20)));
@@ -399,14 +394,14 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	
 	private List<Reading> mockReadingsYear(int year) {
 		Calendar cal = Calendar.getInstance();
-		cal.set(year, 15, 12);
+		cal.set(year, 12, 15);
 		Instant instant = cal.toInstant();
 		List<Reading> mock = new ArrayList<Reading>();
 		
 		Random r = new Random();
 		
 		for (int i=11; i>=0; i--) {
-			Instant inst = instant.minus(Duration.ofDays( ((long)30) * i));
+			Instant inst = instant.minus(Duration.ofDays( ((long)31) * i));
 			mock.add(new Reading(inst, (double) r.nextInt(20)));
 		}
 		return mock;

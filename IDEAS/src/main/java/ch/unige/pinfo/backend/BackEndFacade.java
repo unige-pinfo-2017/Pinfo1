@@ -229,7 +229,7 @@ public class BackEndFacade {
 	 * <p>
 	 * {@code public List<String> getDeviceDataLiveColor(String deviceType, String deviceId)}
 	 * <p>
-	 * Get the live Color display by a type device specifying his {@code deviceId}
+	 * Get the live Color display by a type device specifying its {@code deviceId}
 	 * <p>
 	 * @param deviceType - The type of the device
  	 * @param deviceId - The identifier of the device.
@@ -296,7 +296,7 @@ public class BackEndFacade {
 	 * {@code public User getUserByUsername(String username)}
 	 * <p>
 	 * 
-	 * Get the user by his name.
+	 * Get the user by its name.
 	 * 
 	 * @param username - The name of the user.
 	 * @return
@@ -627,7 +627,7 @@ public class BackEndFacade {
 	 * {@code public Sensor getSensorFromSensorName(String sensorName)}
 	 * <p>
 	 * 
-	 * Get a sensor specifying his {@code sensorName}.
+	 * Get a sensor specifying its {@code sensorName}.
 	 * 
 	 * @param sensorName - The name of the sensor.
 	 * @return
@@ -643,11 +643,11 @@ public class BackEndFacade {
 	 * {@code public Response changeDevice(String deviceId, String resource, String state)}
 	 * <p>
 	 * 
-	 * Change the state of a Light's resource specifying his {@code deviceId}.  
+	 * Change the state of a device resource specified by its {@code deviceId}.  
 	 * 
-	 * @param deviceId - The id of the Light device
-	 * @param resource - The resource of the Light. Can be Hue, Saturation, Kelvin or State
-	 * @param state - The new state we want to set.
+	 * @param deviceId - The id of the device
+	 * @param resource - The resource of the device
+	 * @param state - The new state we want to set
 	 * @return
 	 * A {@code Response} : 200 if state is changed, 500 otherwise.
 	 */

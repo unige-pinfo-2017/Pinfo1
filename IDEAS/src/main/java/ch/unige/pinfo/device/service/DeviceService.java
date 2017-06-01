@@ -37,7 +37,7 @@ public interface DeviceService {
 	 * <p>
 	 * {@code Device getDeviceById(Long id)}
 	 * 
-	 * Get the device by his id.
+	 * Get the device by its id.
 	 * 
 	 * @param id - The Id of the device
 	 * @return
@@ -50,7 +50,7 @@ public interface DeviceService {
 	 * <p>
 	 * {@code List<Device> getAllDevices()}
 	 * 
-	 * Get all devices existing.
+	 * Get all devices.
 	 * 
 	 * @return
 	 * A list of all devices.
@@ -62,7 +62,7 @@ public interface DeviceService {
 	 * <p>
 	 * {@code List<Device> getDevicesBySensorForUser(Long userId, String sensorName)}
 	 * 
-	 * Get devices by sensor for a user specifying his {@code userId} and the {@code sensorName}. 
+	 * Get devices by sensor for a user specified by its {@code userId} and the {@code sensorName}. 
 	 * 
 	 * @param userId - The user id 
 	 * @param sensorName - The sensor name
@@ -77,7 +77,7 @@ public interface DeviceService {
 	 * {@code List<Device> getDevicesByTypeDeviceForUser(Long userId, String typeDeviceName)}
 	 * <p>
 	 * 
-	 * Get device by type of device for a user specifying his {@code userId}.
+	 * Get device by type of device for a user specified by its {@code userId}.
 	 * 
 	 * @param userId - The id of the user.
 	 * @param typeDeviceName - The type of the device.
@@ -91,7 +91,7 @@ public interface DeviceService {
 	 * <p>
 	 * {@code Device getDeviceByDeviceId(String deviceId)}
 	 * 
-	 * Get a device specifying his {@code device Id}.
+	 * Get a device specified by its {@code device Id}.
 	 * 
 	 * @param deviceId - The id of the device.
 	 * @return

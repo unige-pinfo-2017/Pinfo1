@@ -39,7 +39,7 @@ public interface SensorService {
 	 * {@code Sensor getSensorById(Long id)}
 	 * <p>
 	 * 
-	 * Get a sensor specifying his Id.
+	 * Get a sensor specified by its Id.
 	 * 
 	 * @param id - The id of the sensor.
 	 * @return
@@ -52,7 +52,7 @@ public interface SensorService {
 	 * <p>
 	 * {@code List<Sensor> getAllSensors()}
 	 * 
-	 * Get all the existing sensors.
+	 * Get all sensors.
 	 * 
 	 * @return
 	 * A list of sensors.
@@ -65,7 +65,7 @@ public interface SensorService {
 	 * {@code Sensor getSensorByName(String sensorName)}
 	 * <p>
 	 * 
-	 * Get a sensor by his type.
+	 * Get a sensor by its type.
 	 * 
 	 * @param sensorName - The type of the sensor
 	 * @return

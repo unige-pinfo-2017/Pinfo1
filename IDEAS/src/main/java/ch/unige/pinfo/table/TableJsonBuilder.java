@@ -36,7 +36,7 @@ public class TableJsonBuilder {
      * {@code public JsonObject buildRow(List<String> columns, List<String> values)}
      * <p>
      * 
-     * Build a {@code JsonObject} with the contain of a row. Build it with columns and values of columns.
+     * Build a {@code JsonObject} with the content of a row. Build it with columns and values of columns.
      * 
      * @param columns - columns to pass
      * @param values - values of columns
@@ -58,7 +58,7 @@ public class TableJsonBuilder {
      * {@code public JsonArray buildRows(List<String> columns, List<List<String>> allValues)}
      * <p>
      * 
-     * Build a {@code JsonArray} of rows. Build it with all columns and all values off culumns.
+     * Build a {@code JsonArray} of rows. Build it with all columns and all values off columns.
      * 
      * @param columns - list of columns 
      * @param allValues - list of all values.

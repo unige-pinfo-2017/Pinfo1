@@ -38,7 +38,7 @@ public interface TypeDeviceService {
 	 * {@code TypeDevice getTypeDeviceById(Long id)}
 	 * <p>
 	 * 
-	 * Get the type of a device specifying his id.
+	 * Get the type of a device specified by its id.
 	 * 
 	 * @param id - The id of the device 
 	 * @return
@@ -52,7 +52,7 @@ public interface TypeDeviceService {
 	 * {@code List<TypeDevice> getAllTypeDevices()}
 	 * <p>
 	 * 
-	 * Get all existing type of devices.
+	 * Get all type of devices.
 	 * 
 	 * @return
 	 * A list of type devices.
@@ -65,7 +65,7 @@ public interface TypeDeviceService {
 	 * {@code TypeDevice getTypeDeviceByName(String name)}
 	 * <p>
 	 * 
-	 * Get a type of a device by his name 
+	 * Get a type of a device by its name 
 	 * 
 	 * @param name - The type name 
 	 * @return

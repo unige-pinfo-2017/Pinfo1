@@ -30,30 +30,30 @@ public class ChartFacadeRest {
 	}*/
 	
 	@GET
-	@Path("/{resource}/mock-last-day")
+	@Path("/{resource}/last-day")
 	@Produces({"application/json"})
 	@ApiOperation(value="Get chart data of the last day")
 	public JsonArray getChartDataDay(
 			@ApiParam(value = "resource")@PathParam("resource") String resource) {
-		return chartService.getChartDataMockLastDay(resource);
+		return chartService.getChartDataLastDay(resource);
 	}
 	
 	@GET
-	@Path("/{resource}/mock-last-week")
+	@Path("/{resource}/last-week")
 	@Produces({ "application/json" })
 	@ApiOperation(value="Get chart data of the last week")
 	public JsonArray getChartDataWeek(
 			@ApiParam(value="resource")@PathParam("resource") String resource) {
-		return chartService.getChartDataMockLastWeek(resource);
+		return chartService.getChartDataLastWeek(resource);
 	}
 	
 	@GET
-	@Path("/{resource}/mock-last-month")
+	@Path("/{resource}/last-month")
 	@Produces({ "application/json" })
 	@ApiOperation(value="Get chart data of the last month")
 	public JsonArray getChartDataMonth(
 			@ApiParam(value="resource")@PathParam("resource") String resource) {
-		return chartService.getChartDataMockLastMonth(resource);
+		return chartService.getChartDataLastMonth(resource);
 	}
 	
 	@GET

@@ -20,7 +20,7 @@ public class ChartService {
 	@Inject
 	BackEndFacade backEndFacade;
 	
-	public JsonArray getChartDataMock(String resource, String time) {
+	/*public JsonArray getChartDataMock(String resource, String time) {
 		// Mock
 		String name = "Last day";
 		
@@ -37,7 +37,7 @@ public class ChartService {
 		labels.add("21h");
 		
 		return chartJsonBuilder.buildChartJson(name, values, labels);
-	}
+	}*/
 	
 	/**
 	 * <b>getChartData</b>
@@ -61,20 +61,20 @@ public class ChartService {
 		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
 	}*/
 	
-	public JsonArray getChartDataMockLastDay(String resource) {
-		List<Double> values = backEndFacade.getLastDayData(null, null, null);
+	public JsonArray getChartDataLastDay(String resource) {
+		List<Double> values = backEndFacade.getLastDayData(null, null, null); // Mock
 		List<String> labels = getLabelsLastDay();
 		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
 	}
 	
-	public JsonArray getChartDataMockLastWeek(String resource) {
-		List<Double> values = backEndFacade.getLastWeekData(null, null, null);
+	public JsonArray getChartDataLastWeek(String resource) {
+		List<Double> values = backEndFacade.getLastWeekData(null, null, null); // Mock
 		List<String> labels = getLabelsLastWeek();
 		return chartJsonBuilder.buildChartJson(resource + ": Last week", values, labels);
 	}
 	
-	public JsonArray getChartDataMockLastMonth(String resource) {
-		List<Double> values = backEndFacade.getLastMonthData(null, null, null);
+	public JsonArray getChartDataLastMonth(String resource) {
+		List<Double> values = backEndFacade.getLastMonthData(null, null, null); // Mock
 		List<String> labels = getLabelsLastMonth();
 		return chartJsonBuilder.buildChartJson(resource + ": Last month", values, labels);
 	}
@@ -104,7 +104,7 @@ public class ChartService {
 	 * {@code public List<String> getLabelsLastDay()}
 	 * <p>
 	 * 
-	 * Get the labels of the last day
+	 * Get the labels of the last day with format HH:mm:ss. 24 hours past hours
 	 * 
 	 * @return
 	 * A list of label's names in {@code String} format.
@@ -131,7 +131,7 @@ public class ChartService {
 	 * {@code public List<String> getLabelsLastWeek()}
 	 * <p>
 	 * 
-	 * Get the labels of the last week.
+	 * Get the labels of the last week. 6 previous days + today
 	 * 
 	 * @return
 	 * A list of label's names in {@code String} format.
@@ -158,7 +158,7 @@ public class ChartService {
 	 * {@code public List<String> getLabelsLastMonth()}
 	 * <p>
 	 * 
-	 * Get the labels of the last month.
+	 * Get the labels of the last month. 29 previous days + today
 	 * 
 	 * @return
 	 * A list of label's names in {@code String} format.

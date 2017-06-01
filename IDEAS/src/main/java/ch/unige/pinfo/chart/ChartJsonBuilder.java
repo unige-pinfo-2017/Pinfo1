@@ -15,7 +15,8 @@ public class ChartJsonBuilder {
      * {@code public JsonArray buildChartJson(String name, List<Double> values, List<String> labels)}
      * <p>
      * 
-     * Build a {@code JsonArray} of chart containing labels and their values.
+     * Build a {@code JsonArray} of chart containing labels and their values: <br>
+     * [[{value: x}, {value: y}, {value: z}], {name: foo}, [{label: a}, {label: b}, {label: c}]]
      *
      * @param name - The name of label
      * @param values - The value of the label
@@ -37,7 +38,8 @@ public class ChartJsonBuilder {
      * {@code public JsonArray buildValues(List<Double> values)}
      * <p>
      * 
-     * Build a {@code JsonArray} of values.
+     * Build a {@code JsonArray} of values: <br>
+     * [{value: x}, {value: y}, {value: z}]
      * 
      * @param values - List of values.
      * @return
@@ -57,7 +59,8 @@ public class ChartJsonBuilder {
      * {@code public JsonObject buildValue(Double value)}
      * <p>
      * 
-     * Build {@code JsonObject} of value. 
+     * Build {@code JsonObject} of value: <br>
+     * {value: x}
      * 
      * @param value - The value. 
      * @return
@@ -73,7 +76,8 @@ public class ChartJsonBuilder {
      * {@code public JsonArray buildLabels(List<String> labels)}
      * <p>
      * 
-     * Build a {@code JsonArray} of labels.
+     * Build a {@code JsonArray} of labels: <br>
+     * [{label: a}, {label: b}, {label: c}]
      * 
      * @param labels - The list of labels.
      * @return
@@ -93,7 +97,8 @@ public class ChartJsonBuilder {
      * {@code public JsonObject buildLabel(String label)}
      * <p>
      * 
-     * Build {@code JsonObject} of label 
+     * Build {@code JsonObject} of label: <br> 
+     * {label: x}
      * 
      * @param label - label 
      * @return

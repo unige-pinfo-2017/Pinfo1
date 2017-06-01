@@ -67,7 +67,7 @@ public class ChartDataService {
 	 * {@code public List<Reading> findClosestNotNull(List<Reading> readings)}
 	 * <p>
 	 * 
-	 * Find reading with not null values.
+	 * Find closest reading with a value
 	 * 
 	 * @param readings - List of readings
 	 * @return

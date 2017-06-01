@@ -87,7 +87,7 @@ public interface UserService {
 	 * {@code List<User> getAllUsers()}
 	 * <p>
 	 * 
-	 * Get all existing users.
+	 * Get all users.
 	 * 
 	 * @return
 	 * List of user
@@ -114,11 +114,11 @@ public interface UserService {
 	 * {@code List<User> getUsersOfManager(Long userId)}
 	 * <p>
 	 * 
-	 * Get user with role manager
+	 * Get subordinates of manager specified by its user id.
 	 * 
 	 * @param userId - The user's id.
 	 * @return
-	 * A list of manager.
+	 * A list of subordinates
 	 */
 	List<User> getUsersOfManager(Long userId);
 	
@@ -128,11 +128,11 @@ public interface UserService {
 	 * {@code List<User> getUsersOfSysAdmin(Long userId)}
 	 * <p>
 	 * 
-	 * Get user with role System administrator.
+	 * Get subordinates of the system administrator specified by its id.
 	 * 
 	 * @param userId - The user's id.
 	 * @return
-	 * A list of system administrator.
+	 * A list of subordinates
 	 */
 	List<User> getUsersOfSysAdmin(Long userId);
 	
@@ -142,7 +142,7 @@ public interface UserService {
 	 * {@code SysAdmin getSysAdminById(Long id)}
 	 * <p>
 	 * 
-	 * Get user with System Admin role.
+	 * Get the system administrator specified by its id.
 	 * 
 	 * @param id - The user's id.
 	 * @return
@@ -184,7 +184,7 @@ public interface UserService {
 	 * {@code boolean addPreference(Long userId, Long liveDataId)}
 	 * <p>
 	 * 
-	 * Add the displaying preferences of a user in database.  
+	 * Add the displaying preference of a user in database.  
 	 * 
 	 * @param userId - The user's id
 	 * @param liveDataId - The liveData's id
@@ -199,7 +199,7 @@ public interface UserService {
 	 * {@code boolean removePreference(Long userId, Long liveDataId)}
 	 * <p>
 	 * 
-	 * Remove the displaying preferences of a user from database. 
+	 * Remove the preference of a user from database. 
 	 * 
 	 * @param userId - The user's id.
 	 * @param liveDataId - The liveData's id.
@@ -214,7 +214,7 @@ public interface UserService {
 	 * {@code Set<LiveData> getUserPreferenceByUserId(Long userId)}
 	 * <p>
 	 * 
-	 * Get the displaying preferences for a user.
+	 * Get the preferences for a user.
 	 * 
 	 * @param userId - The user's id
 	 * @return

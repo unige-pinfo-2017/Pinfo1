@@ -31,7 +31,7 @@ public class EditMenuService {
      * @param resource - The resource name to change the state.
      * @param state - The new state.
      * @return
-     * A {@code Response}: 200 if state is chaged, 500 otherwise.
+     * A {@code Response}: 200 if state is changed, 500 otherwise.
      */
 	public Response changeDevice(String deviceId, String resource, String state) {
 		return backEndFacade.changeDevice(deviceId,  resource, state);
@@ -49,11 +49,11 @@ public class EditMenuService {
      * @param resource - The resource name to change the state. 
      * @param state - The new state.
      * @return
-     * A {@code Response}: 200 if state is chaged, 500 otherwise.
+     * A {@code Response}: 200 if state is changed, 500 otherwise.
      */
-	public Response changeDevice2(String deviceId, String resource, String state) {
+	/*public Response changeDevice2(String deviceId, String resource, String state) {
 		return Response.status(200).entity(deviceId + " " + resource + " " + state).build();
-	}
+	}*/
 	
 	/**
      * <b>getEditMenu</b>
@@ -136,7 +136,7 @@ public class EditMenuService {
      * A list with name of fields in {@code String} format.
      */
 	public List<String> addColorToFieldNames(List<String> names) {
-		// Attentenion, cet ordre dépend de l'api.
+		// Warning, the order depends on the wso2 server api
 		names.add("Hue");
 		names.add("Saturation");
 		names.add("Kelvin");

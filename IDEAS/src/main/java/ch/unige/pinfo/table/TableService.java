@@ -29,7 +29,7 @@ public class TableService {
      * {@code public List<String> addColorToColumns(List<String> columns)}
      * <p>
      * 
-     * add name resource of color in column.
+     * add resource name of color in column.
      * 
      * @param columns - column's names
      * @return
@@ -161,7 +161,7 @@ public class TableService {
      * {@code public JsonArray buildTableForSensorType(String sensorName, Long userId)}
      * <p>
      * 
-     * Build a table with cilumn's names: DeviceId, DeviceType, Owner, nad their values. 
+     * Build a table with column's names: DeviceId, DeviceType, Owner, nad their values. 
      * 
      * @param sensorName
      * @param userId

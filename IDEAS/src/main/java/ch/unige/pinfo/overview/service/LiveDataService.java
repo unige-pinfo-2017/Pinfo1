@@ -15,9 +15,9 @@ public interface LiveDataService {
 	 * {@code void addLiveData(LiveData liveData)}
 	 * <p>
 	 * 
-	 * Add Live data in database.
+	 * Add live data in database.
 	 * 
-	 * @param liveData - The data Live to add
+	 * @param liveData - The live data to add
 	 */
 	void addLiveData(LiveData liveData);
 	
@@ -39,7 +39,7 @@ public interface LiveDataService {
 	 * {@code LiveData getLiveDataById(Long id)}
 	 * <p>
 	 * 
-	 * Get live data by his id.
+	 * Get live data by its id.
 	 * 
 	 * @param id - The live data's id.
 	 * @return
