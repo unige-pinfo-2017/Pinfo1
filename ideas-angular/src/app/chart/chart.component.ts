@@ -12,7 +12,6 @@ import { ChartService } from './chart.service';
 export class ChartComponent implements OnInit {
 	@ViewChild(BaseChartDirective) chart: BaseChartDirective; // Workaround of can't update labels
 
-
 	// Line chart
 	public lineChartLegend:boolean = true;
   	public lineChartType:string = 'line';
@@ -20,7 +19,7 @@ export class ChartComponent implements OnInit {
 	public lineChartData:Array<any> = [
     	{data: [], label: 'Default'}
   	];
-  	//private lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
 	private lineChartLabels:Array<any> = [];
 	private lineChartOptions:any = {
     	responsive: false
@@ -34,25 +33,6 @@ export class ChartComponent implements OnInit {
 	      pointHoverBackgroundColor: '#fff',
 	      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
 	    }
-
-		/*{ // dark grey
-		  backgroundColor: 'rgba(77,83,96,0.2)',
-		  borderColor: 'rgba(77,83,96,1)',
-		  pointBackgroundColor: 'rgba(77,83,96,1)',
-		  pointBorderColor: '#fff',
-		  pointHoverBackgroundColor: '#fff',
-		  pointHoverBorderColor: 'rgba(77,83,96,1)'
-	  },*/
-		/*
-		{ // grey
-		  backgroundColor: 'rgba(45,59,67,0.2)',
-		  borderColor: 'rgba(45,59,67,1)',
-		  pointBackgroundColor: 'rgba(45,59,67,1)',
-		  pointBorderColor: '#fff',
-		  pointHoverBackgroundColor: '#fff',
-		  pointHoverBorderColor: 'rgba(45,59,67,1)'
-		}
-		*/
 	];
 
 	public shortChartType: string;
@@ -66,12 +46,6 @@ export class ChartComponent implements OnInit {
 	) {}
 
 	public ngOnInit(): void {
-		/*this.getChartDataMock()
-			.then(params => {
-				console.log(params);
-				console.log(params[0]);
-				console.log(params[1]);
-			})*/
 			this.shortChartType = "day";
 			this.resource = "temperature";
 			this.getChartDataShort(this.resource, this.shortChartType);
@@ -83,6 +57,8 @@ export class ChartComponent implements OnInit {
 			.then(params => {
 				this.resource = resource;
 				this.shortChartType = type;
+
+				// params[0] is the data (y-axis), params[1] is the name of the curve, params[2] is the labels (x-axis)
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
 				this.lineChartLabels = this.chartService.formatLabels(params[2]);
 				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround
@@ -93,16 +69,13 @@ export class ChartComponent implements OnInit {
 		this.chartService.getChartYear(resource, yearNum)
 			.then(params => {
 				this.resource = resource;
+
+				// params[0] is the data (y-axis), params[1] is the name of the curve, params[2] is the labels (x-axis)
 				this.lineChartData = this.chartService.formatData(params[0], params[1]);
 				this.lineChartLabels = this.chartService.formatLabels(params[2]);
 				this.chart.chart.config.data.labels = this.lineChartLabels; // Workaround
 			});
 	}
-
-	/*public onChange(newTime: string):void {
-		this.shortChartType = newTime;
-		this.getChartDataShort(this.resource, this.shortChartType);
-	}*/
 
 	public switchToBar():void {
 		this.lineChartType = this.lineChartType === 'bar' ? 'bar' : 'bar';
@@ -121,23 +94,8 @@ export class ChartComponent implements OnInit {
 		}
 		return years;
    }
-	/*public switchToPie():void {
-		this.lineChartType = this.lineChartType === 'pie' ? 'pie' : 'pie';
-	}
 
-	public switchToRadar():void {
-		this.lineChartType = this.lineChartType === 'radar' ? 'radar' : 'radar';
-	}
-
-	public switchToPolarArea():void {
-		this.lineChartType = this.lineChartType === 'polarArea' ? 'polarArea' : 'polarArea';
-	}
-
-	public switchToDoughnut():void {
-		this.lineChartType = this.lineChartType === 'doughnut' ? 'doughnut' : 'doughnut';
-	}*/
-
-	public randomize():void {
+	/*public randomize():void {
 		let _lineChartData:Array<any> = new Array(this.lineChartData.length);
 		for (let i = 0; i < this.lineChartData.length; i++) {
 			_lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -145,14 +103,14 @@ export class ChartComponent implements OnInit {
 			_lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
 		}
 	}
-	this.lineChartData = _lineChartData;
-	}
+		this.lineChartData = _lineChartData;
+	}*/
 
 	public chartClicked(e:any):void {
-		console.log(e);
+		//console.log(e);
 	}
 
 	public chartHovered(e:any):void {
-		console.log(e);
+		//console.log(e);
 	}
 }
