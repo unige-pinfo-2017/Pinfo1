@@ -103,13 +103,6 @@
     				<groupId>org.jacoco</groupId>
     				<artifactId>jacoco-maven-plugin</artifactId>
     				<version>0.7.9</version>
-    				<configuration>
-    				  <excludes>
-    				    <exclude>**/pinfo/ideas/*.java</exclude>
-    				    <exclude>**/FakeWSO2Server.java</exclude>
-    				    <exclude>**/wso2/mock/*.java</exclude>
-    				  </excludes>
-    				</configuration>
     				<executions>
     					<execution>
     						<goals>
