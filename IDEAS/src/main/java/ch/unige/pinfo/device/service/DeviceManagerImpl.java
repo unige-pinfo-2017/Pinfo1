@@ -136,7 +136,7 @@ public class DeviceManagerImpl implements DeviceManager {
 		return sensorService.getSensorByName(sensorName);
 	}
 	
-	@Override
+/*	@Override
 	public Device getDeviceBySensorName(String sensorName){
 		Sensor sensor = sensorService.getSensorByName(sensorName);
 		Device device = new Device();
@@ -147,7 +147,7 @@ public class DeviceManagerImpl implements DeviceManager {
 			}
 		}
 		return device;
-	}
+	}*/
 
 	@Override
 	public List<String> getDeviceDataLiveColor(String deviceType, String deviceId) {

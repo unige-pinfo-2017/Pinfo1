@@ -128,7 +128,7 @@ public interface DeviceManager {
 	 * @return
 	 * A device.
 	 */
-	Device getDeviceBySensorName(String sensorName);
+//	Device getDeviceBySensorName(String sensorName);
 	
 	/**
 	 * <b>getAllDevicesForUsersBySensorName</b>
