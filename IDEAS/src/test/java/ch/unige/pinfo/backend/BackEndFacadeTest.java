@@ -126,7 +126,7 @@ public class BackEndFacadeTest {
 	}	
 	
 	@Test
-	public void getLiveDatasTestManager() {
+	public void getLiveDatasTest_Manager_Sum() {
 		Long userId = 1l;
 		
 		String role = "Manager";
@@ -173,7 +173,7 @@ public class BackEndFacadeTest {
 	}
 	
 	@Test
-	public void getLiveDatasTestManagerAvg() {
+	public void getLiveDatasTest_Manager_Avg() {
 		Long userId = 1l;
 		
 		String role = "Manager";
@@ -220,7 +220,7 @@ public class BackEndFacadeTest {
 	}
 	
 	@Test
-	public void getLiveDatasTestSysAdmin() {
+	public void getLiveDatasTest_SysAdmin_Sum() {
 		Long userId = 1l;
 		
 		String role = "SysAdmin";
@@ -237,9 +237,9 @@ public class BackEndFacadeTest {
 		Set<LiveData> sysAdminPref = new HashSet<LiveData>();
 		sysAdminPref.add(pref);
 		
-		User manager = new User();
-		manager.setId(userId);
-		manager.setPreferences(sysAdminPref);
+		User sysAdmin = new User();
+		sysAdmin.setId(userId);
+		sysAdmin.setPreferences(sysAdminPref);
 		
 		User sub = new User();
 		sub.setId(2l);
@@ -254,12 +254,67 @@ public class BackEndFacadeTest {
 		when(mockUserService.getUsersOfSysAdmin(userId))
 			.thenReturn(subs);
 		when(mockUserService.getUserById(userId))
-			.thenReturn(manager);
+			.thenReturn(sysAdmin);
 		when(mockDeviceManager.getSumSensorLiveForUser(subs.get(0).getId(), sensor.getName()))
 			.thenReturn(liveValue);
 		
 		List<Double> expected = new ArrayList<Double>();
 		expected.add(liveValue);
+		
+		List<Double> output = backEndFacade.getLiveDatas(userId);
+		
+		assertEquals(expected, output);
+	}
+	
+	@Test
+	public void getLiveDatasTest_Basic_Sum() {
+		Long userId = 1l;
+		
+		String role = "Basic";
+		
+		String sensorName = "sensorName";
+		
+		Sensor sensor = new Sensor();
+		sensor.setName(sensorName);
+		
+		LiveData pref = new LiveData();
+		pref.setComputeType("Sum");
+		pref.setSensor(sensor);
+		
+		Set<LiveData> basicPref = new HashSet<LiveData>();
+		basicPref.add(pref);
+		
+		User basic = new User();
+		basic.setId(userId);
+		basic.setPreferences(basicPref);
+		
+		double liveValue = 1d;
+		
+		when(mockUserService.getUserRoleById(userId))
+			.thenReturn(role);
+		when(mockUserService.getUserById(userId))
+			.thenReturn(basic);
+		when(mockDeviceManager.getSumSensorLiveForUser(userId, sensor.getName()))
+			.thenReturn(liveValue);
+		
+		List<Double> expected = new ArrayList<Double>();
+		expected.add(liveValue);
+		
+		List<Double> output = backEndFacade.getLiveDatas(userId);
+		
+		assertEquals(expected, output);
+	}
+	
+	@Test
+	public void getLiveDatasTest_Other() {
+		Long userId = 1l;
+		
+		String role = "Other";
+		
+		when(mockUserService.getUserRoleById(userId))
+			.thenReturn(role);
+		
+		List<Double> expected = new ArrayList<Double>();
 		
 		List<Double> output = backEndFacade.getLiveDatas(userId);
 		
