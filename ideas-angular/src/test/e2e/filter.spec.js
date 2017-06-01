@@ -2,9 +2,8 @@
 
 describe("filter device list", function() {
 
-    var originalTimeout;
+  
     var num=1;
-    var liste =[]   ;
     var name="Antoine";
 
 
@@ -45,7 +44,6 @@ describe("filter device list", function() {
             element.all(by.css(".datatable-body-row")).each(function(element, index) {
 
                 element.getText().then(function (text) {
-                        console.log(text);
 
                         if(!(text.includes(name))){
                             num=num-1;
