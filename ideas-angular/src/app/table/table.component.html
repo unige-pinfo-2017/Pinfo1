@@ -82,7 +82,7 @@
 </div>
 
 <div *ngIf="show">
-  <div align="right" style="padding-right: 280px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
+  <div align="right" style="position:fixed; left:50%; bottom:30%"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
 <editing-menu [tableColumns]="columns" [selectedRow]="selectedRow" [selectedDeviceType]="selectedDeviceType" [selectedDeviceId]="selectedDeviceId" (edited)="refresh()"></editing-menu>
 </div>
 
