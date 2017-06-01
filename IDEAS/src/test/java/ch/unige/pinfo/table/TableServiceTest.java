@@ -450,8 +450,8 @@ public class TableServiceTest {
 				.build();
 		
 		JsonArray expected = Json.createArrayBuilder()
-				.add(outputCols)
-				.add(outputValues)
+				.add(expectedCols)
+				.add(expectedValues)
 				.build();
 		
 		assertEquals(expected, output);
