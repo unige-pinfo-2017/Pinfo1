@@ -1,11 +1,9 @@
 exports.config={
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['filter.spec.js'],
+    specs: ['editingMenuDisplayFromSensor.spec.js'],
     capabilities: {
-        browserName: 'firefox'
+        browserName: 'chrome'
     },
-
-  
 
 		allScriptsTimeout: 10000000
 
