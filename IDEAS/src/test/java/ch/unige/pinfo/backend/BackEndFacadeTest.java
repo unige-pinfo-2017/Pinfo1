@@ -267,7 +267,7 @@ public class BackEndFacadeTest {
 	}
 	
 	@Test
-	public void getLiveDatasTest_Basic_Sum() {
+	public void getLiveDatasTest_Basic() {
 		Long userId = 1l;
 		
 		String role = "Basic";
@@ -296,14 +296,29 @@ public class BackEndFacadeTest {
 			.thenReturn(basic);
 		when(mockDeviceManager.getSumSensorLiveForUser(userId, sensor.getName()))
 			.thenReturn(liveValue);
+		when(mockDeviceManager.getAvgSensorLiveForUser(userId, sensor.getName()))
+			.thenReturn(liveValue);
 		
 		List<Double> expected = new ArrayList<Double>();
 		expected.add(liveValue);
-		
 		List<Double> output = backEndFacade.getLiveDatas(userId);
-		
 		assertEquals(expected, output);
+		
+		pref.setComputeType("Average");
+		List<Double> expected2 = new ArrayList<Double>();
+		expected2.add(liveValue);
+		List<Double> output2 = backEndFacade.getLiveDatas(userId);
+		assertEquals(expected2, output2);
+		
+		pref.setComputeType("Other");
+		List<Double> expected3 = new ArrayList<Double>();
+		expected3.add(0d);
+		List<Double> output3 = backEndFacade.getLiveDatas(userId);
+		assertEquals(expected3, output3);
+		
 	}
+	
+	
 	
 	@Test
 	public void getLiveDatasTest_Other() {
