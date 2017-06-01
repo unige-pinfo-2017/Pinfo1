@@ -13,19 +13,21 @@ export class ChartService {
 		private headersService: HeadersService
 	) {}
 
-	public getChartDataMock(): Promise<any[]> {
+	/*public getChartDataMock(): Promise<any[]> {
 		return this.http.get(`${this.baseUrl}/chart/temperature/last-day`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
-	}
+	}*/
 
 	public getChartShort(resource: string, time: string): Promise<any[]> {
-		return this.http.get(`${this.baseUrl}/chart/${resource}/mock-last-${time}`, {headers: this.headersService.getHeadersJson()})
+		// Received JSON format:  [{value: x}, {value: y}, {value: z}]
+		return this.http.get(`${this.baseUrl}/chart/${resource}/last-${time}`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
 	}
 
 	public getChartYear(resource: string, yearNum:number): Promise<any[]> {
+		// Received JSON format: [{label: a}, {label: b}, {label: c}]
 		return this.http.get(`${this.baseUrl}/chart/${resource}/year/${yearNum}`, {headers: this.headersService.getHeadersJson()})
 		.toPromise()
 		.then(res => res.json() as Array<any>)
@@ -36,8 +38,9 @@ export class ChartService {
 	}
 
 	public formatData(data: any[], label: any): any[] {
-		//let values = [{value: 2}, {value: 4}, {value: 3}]
-		//let label = {label: "bob"};
+		// Convert data JSON received from servers to readable fields for the ng2-charts framework
+		// from: [{value: x}, {value: y}, {value: z}] and {label: A}
+		// to: {data: [x, y, z], label: 'A'}
 		let chartData: Object =  {};
 		let formattedData: any[] = [];
 
@@ -51,7 +54,9 @@ export class ChartService {
 	}
 
 	public formatLabels(labels: any[]): any[] {
-		//let l = [{label: "Monday"}, {label:"Tuesday"}, {label:"Wednesday"}];
+		// Covert labels JSON received from servers to readble fields for the ng2-charts framework
+		// from: [{label: a}, {label: b}, {label: c}]
+		// to: [a, b, c]
 		let formattedLabels:any[] = [];
 		for (let i=0; i<labels.length; i++) {
 			formattedLabels.push(labels[i].label);
