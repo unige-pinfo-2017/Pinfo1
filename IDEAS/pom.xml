@@ -103,11 +103,6 @@
     				<groupId>org.jacoco</groupId>
     				<artifactId>jacoco-maven-plugin</artifactId>
     				<version>0.7.9</version>
-    				<configuration>
-    				  <excludes>
-    				    <exclude>**/src/main/java/ch/unige/pinfo/ideas/*</exclude>
-    				  </excludes>
-    				</configuration>
     				<executions>
     					<execution>
     						<goals>

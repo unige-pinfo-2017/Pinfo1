@@ -81,41 +81,8 @@
   </div>
 </div>
 
-<!--div>
-  <button (click)="getTableFromStorage('device', 'powersocket')" class="btn btn-primary btn-block btn-large">Power socket</button>
-  <button (click)="getTableFromStorage('device', 'beacon')" class="btn btn-primary btn-block btn-large">Beacon</button>
-  <button (click)="getTableFromStorage('device', 'light')" class="btn btn-primary btn-block btn-large">Light</button>
-</div>
-<div>
-  <button (click)="getTableFromStorage('sensor', 'powerSensor')" class="btn btn-primary btn-block btn-large">Power</button>
-  <button (click)="getTableFromStorage('sensor', 'temperatureSensor')" class="btn btn-primary btn-block btn-large">Temperature</button>
-  <button (click)="getTableFromStorage('sensor', 'currentSensor')" class="btn btn-primary btn-block btn-large">Current</button>
-</div>
-<div>
-  <button (click)="getTableFromStorage('user', 'all')" class="btn btn-primary btn-block btn-large">List of users</button>
-</div-->
-
-<!--ul class="menu">
-  <li><div class="dropdown">
-    <button class="dropbtn">Devices &nbsp; &or;</button>
-    <div class="dropdown-content">
-      <a href="#">PowerSocket</a>
-      <a href="#">Beacon</a>
-      <a href="#">Light</a></div></div></li>
-
-      <li><div class="dropdown">
-        <button class="dropbtn">Sensor &nbsp; &or;</button>
-        <div class="dropdown-content">
-          <a href="#">Power</a>
-          <a href="#">Temperature</a>
-          <a href="#">Current</a>
-        </div>
-        </div></li>
-</ul-->
-
-
 <div *ngIf="show">
-  <div align="right" style="padding-right: 280px;"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
+  <div align="right" style="position:fixed; left:50%; bottom:30%"><input type="submit" (click)="show = !show" style="cursor:pointer;" value="Close"></div>
 <editing-menu [tableColumns]="columns" [selectedRow]="selectedRow" [selectedDeviceType]="selectedDeviceType" [selectedDeviceId]="selectedDeviceId" (edited)="refresh()"></editing-menu>
 </div>
 

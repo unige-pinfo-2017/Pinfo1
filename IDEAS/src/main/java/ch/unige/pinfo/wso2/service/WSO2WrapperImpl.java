@@ -216,7 +216,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 	 * @return
 	 * {@code true} if correspond, {@code false} otherwise.
 	 */
-	public boolean hasSensor(Long deviceId, String sensorName){
+/*	public boolean hasSensor(Long deviceId, String sensorName){
 		Device device = dm.get().getDeviceBySensorName(sensorName);		
 		Long id = device.getId();
 		
@@ -226,7 +226,7 @@ public class WSO2WrapperImpl implements WSO2Wrapper {
 		else{
 			return false;
 		}
-	}
+	}*/
 	
 	/**
 	 * <b>roundDecimal</b>
