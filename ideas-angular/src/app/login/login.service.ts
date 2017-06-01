@@ -17,7 +17,7 @@ export class LoginService {
 
 	public authentication(username: string, pw: string): Promise<string> {
 		return this.http
-			.post(`${this.baseUrl}/login`, JSON.stringify({username: username, password: pw}),{headers: this.headersService.getHeadersJsonCORS()})
+			.post(`${this.baseUrl}/login`, JSON.stringify({username: username, password: pw}),{headers: this.headersService.getHeadersJson()})
 			.toPromise()
 			.then(res => res.text() as string)
 	}
