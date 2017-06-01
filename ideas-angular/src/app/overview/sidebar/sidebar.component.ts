@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from "rxjs";
+import { Http, Response} from '@angular/http';
 
 
 
@@ -13,6 +14,8 @@ import { Subscription } from "rxjs";
 
 
 export class SidebarComponent implements OnInit {
+
+	private baseUrl: string = "http://localhost:8080/IDEAS";
 	private role: string;
 	private show: boolean = false;
 	private i: number = 1;
@@ -26,7 +29,8 @@ export class SidebarComponent implements OnInit {
 
 	public constructor(
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private http: Http
 	){}
 
 	public notifClick(){
@@ -55,6 +59,8 @@ export class SidebarComponent implements OnInit {
 
 	public logout(): void {
 		sessionStorage.clear();
+		this.http.get(`${this.baseUrl}/logout`)
+			.toPromise()
 		this.router.navigate(['/login']);
 	}
 }

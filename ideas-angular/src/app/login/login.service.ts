@@ -25,7 +25,7 @@ export class LoginService {
 
 	public getSubordinates(userId: string): Promise<any[]> {
 		return this.http
-			.get(`${this.baseUrl}/rest/login/get-subordinates/${userId}`, {headers: this.headersService.getHeadersJson()})
+			.get(`${this.baseUrl}/rest/login/get-subordinates/${userId}`, { headers: this.headersService.getHeadersJson()})
 			.toPromise()
 			.then(res => res.json())
 	}
