@@ -1,24 +1,16 @@
 <head>
 </head>
 
-<div align="right" style="padding-right: 270px;">
+<div align="center" style="padding-right: 0%;">
+
+	<div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  	</div>
 
 	<div class="floating-box" align="center">
     	<h2><b>Editing menu</b></h2>
 			<br>
-
-			<!--<input type="number" placeholder="Brightness" min="0" max="100" id="days-off-count" />
-			<br>
-			<input type="number" placeholder="H" min="0" max="255" id="days-off-count" />
-			<br>
-			<input type="number" placeholder="S" min="0" max="255" id="days-off-count" />
-			<br>
-			<input type="number" placeholder="V" min="0" max="255" id="days-off-count"/>
-			<br>
-			<input type="number" placeholder="Hue" min="0" max="255" id="days-off-count"/>
-			<br>
-			<input type="submit" value="Update">-->
-
 			<div class="small-2 columns">
 
 			<div *ngFor="let field of editMenu"style="font-size:12pt" align="left" style="margin-left: 15px">{{field.name}}:
@@ -49,9 +41,7 @@
 
 				<br><br>
     		</div>
-			<!--input type="submit" style="height:30px;width:80px;font-size:10pt" value="Update" (click)="edit()"-->
   		</div>
 
-  <!--<div> {{a.state}} et {{a.value}}</div>-->
 	</div>
 </div>
