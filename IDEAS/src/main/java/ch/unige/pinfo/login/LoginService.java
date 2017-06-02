@@ -20,19 +20,6 @@ public class LoginService {
 	
 	public LoginService(){}
 	
-	/*public void authentication(String username, String password){
-		User user = mu.getUserByUsername(username);
-		
-		if (user == null){
-			sl.display("Username does not exist.");
-		} else if (checkPassword(password, user.getPassword())){
-			sl.display("Authentication successful.");
-			mu.addConnectedUser(user);
-		} else {
-			sl.display("Authentication failed.");
-		}
-	}*/
-	
 	/**
 	 * <b>authenticate</b> 
 	 * <p>

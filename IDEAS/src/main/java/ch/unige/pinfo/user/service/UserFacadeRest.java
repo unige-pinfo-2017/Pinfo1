@@ -92,8 +92,6 @@ public class UserFacadeRest {
 	}
 	
 	@GET
-	//@Path("/byUsername/{username}")
-	//@Produces({ "application/json" })
 	public Response getByUsername(@PathParam("username") String username) {
 		return Response.ok().entity(userService.getUserByUsername(username)).build();
 	}
@@ -109,11 +107,5 @@ public class UserFacadeRest {
 			@ApiParam(value ="The user name")@PathParam("username") String username) {
 		return userService.getUserByUsername(username).get(0);
 	}
-	
-	/*@GET
-	@Path("{id}")
-	public Response pathParamTest(@PathParam("id") String id){
-		return Response.status(200).entity("Path parameter is: " + id).build();
-	}*/
 	
 }

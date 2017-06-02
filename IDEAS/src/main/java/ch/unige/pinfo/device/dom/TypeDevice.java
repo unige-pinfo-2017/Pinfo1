@@ -53,8 +53,7 @@ public class TypeDevice {
 		}
 		
 		TypeDevice td = (TypeDevice) obj;
-		/*if (td == null)
-			return false;*/
+
 		return (this.getName().equals(td.name));
 	}
 	

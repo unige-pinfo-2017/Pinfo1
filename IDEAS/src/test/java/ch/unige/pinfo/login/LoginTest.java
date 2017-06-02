@@ -21,15 +21,4 @@ public class LoginTest {
 		String realPassword = "def";
 		assertFalse(login.checkPassword(inputPassword, realPassword));
 	}
-	
-	/*@Test
-	public void authentication(){
-		Login login = new Login();
-		
-		String username = "ideas";
-		String password = "ideaspw";
-		
-		login.authentication(username, password);
-		
-	}*/
 }

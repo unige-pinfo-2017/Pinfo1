@@ -20,25 +20,6 @@ public class ChartService {
 	@Inject
 	BackEndFacade backEndFacade;
 	
-	/*public JsonArray getChartDataMock(String resource, String time) {
-		// Mock
-		String name = "Last day";
-		
-		List<Double> values = new ArrayList<Double>();
-		values.add(100d);
-		values.add(110d);
-		values.add(90d);
-		values.add(130d);
-		
-		List<String> labels = new ArrayList<String>();
-		labels.add("12h");
-		labels.add("15h");
-		labels.add("18h");
-		labels.add("21h");
-		
-		return chartJsonBuilder.buildChartJson(name, values, labels);
-	}*/
-	
 	/**
 	 * <b>getChartData</b>
 	 * <p>
@@ -52,14 +33,6 @@ public class ChartService {
 	 * @return
 	 * A {@code JsonArray} of chart with values and labels of the given time.
 	 */
-	/*public JsonArray getChartData(String resource, String time) {
-		// Mock
-		List<Double> values = backEndFacade.getLastDayData(null, null, null);
-		List<String> labels = getLabelsLastDay();
-		//Collections.reverse(values);
-		//Collections.reverse(labels);
-		return chartJsonBuilder.buildChartJson(resource + ": Last day", values, labels);
-	}*/
 	
 	public JsonArray getChartDataLastDay(String resource) {
 		List<Double> values = backEndFacade.getLastDayData(null, null, null); // Mock
@@ -202,26 +175,4 @@ public class ChartService {
 		return labels;
 	}
 	
-	/**
-	 * <b>isTimeValid</b>
-	 * <p>
-	 * {@code public boolean isTimeValid(String time)}
-	 * <p>
-	 * 
-	 * Verify if the given time is valid.
-	 * 
-	 * @param time - The time.
-	 * @return
-	 * {@code true} if it's valid, {@code false} otherwise.
-	 */
-	/*public boolean isTimeValid(String time) {
-		if ("day".equals(time) || "week".equals(time) || "month".equals(time)) {
-			return true;
-		} else {
-			return false;
-		}
-		return ("day".equals(time) || "week".equals(time) || "month".equals(time));
-	}*/
-
-
 }

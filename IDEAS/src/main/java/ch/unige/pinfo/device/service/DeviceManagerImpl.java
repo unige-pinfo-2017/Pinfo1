@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
-import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
@@ -125,29 +124,11 @@ public class DeviceManagerImpl implements DeviceManager {
 		Device device = deviceService.getDeviceByDeviceId(deviceId);
 		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
-	
-	/*public List<String> getDeviceDataLive2(String deviceId, String sensorName) {
-		Device device = deviceService.getDeviceByDeviceId(deviceId);
-		return wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
-	}*/
 
 	@Override
 	public Sensor getSensorFromSensorName(String sensorName) {
 		return sensorService.getSensorByName(sensorName);
 	}
-	
-/*	@Override
-	public Device getDeviceBySensorName(String sensorName){
-		Sensor sensor = sensorService.getSensorByName(sensorName);
-		Device device = new Device();
-		
-		for (TypeDevice type : sensor.getTypeDevices()){
-			if(device.getType().getId() == type.getId()){
-				return device;
-			}
-		}
-		return device;
-	}*/
 
 	@Override
 	public List<String> getDeviceDataLiveColor(String deviceType, String deviceId) {

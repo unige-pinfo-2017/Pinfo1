@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -42,7 +41,6 @@ public class IDEAS {
 	public IDEAS() {}
 	
 	@GET
-	//@Produces(MediaType.TEXT_HTML)
 	@Path("/home")
 	public String home(){
 		return "Welcome to IDEAS! The application is under construction.";
