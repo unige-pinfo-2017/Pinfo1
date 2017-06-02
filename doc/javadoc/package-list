@@ -1,0 +1,17 @@
+ch.unige.pinfo.backend
+ch.unige.pinfo.chart
+ch.unige.pinfo.cors
+ch.unige.pinfo.device.dom
+ch.unige.pinfo.device.service
+ch.unige.pinfo.editmenu
+ch.unige.pinfo.ideas
+ch.unige.pinfo.login
+ch.unige.pinfo.overview.dom
+ch.unige.pinfo.overview.service
+ch.unige.pinfo.table
+ch.unige.pinfo.user.dom
+ch.unige.pinfo.user.service
+ch.unige.pinfo.wso2.mock
+ch.unige.pinfo.wso2.rest
+ch.unige.pinfo.wso2.service
+com.airhacks
