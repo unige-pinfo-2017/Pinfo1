@@ -350,110 +350,98 @@ public class TableServiceTest {
 	public void buildTableForUserTest() {
 		Long userId = 1l;
 		
+		Long subUserId = 2l;
+		String subUsername = "subUsername";
+		
+		String computeType = "Sum";
+		String sensorName = "powerSensor";
+		
 		Sensor sensor = new Sensor();
-		sensor.setMeasureName("measureName");
+		sensor.setName(sensorName);
+		sensor.setMeasureName("measure");
+		sensor.setUnit("unit");
 		
 		LiveData liveData = new LiveData();
 		liveData.setSensor(sensor);
-		liveData.setComputeType("Sum");
+		liveData.setComputeType(computeType);
+		
 		List<LiveData> liveDatas = new ArrayList<LiveData>();
+		liveDatas.add(liveData);
 		
+		User sub = new User();
+		sub.setId(subUserId);
+		sub.setUsername(subUsername);
 		
-		User u2 = new User();
-		u2.setId(2l);
-		u2.setUsername("u2");
+		List<User> subs = new ArrayList<User>();
+		subs.add(sub);
 		
-		User u3 = new User();
-		u3.setId(3l);
-		u3.setUsername("u3");
-		
-		List<User> users = new ArrayList<User>();
-		users.add(u2);
-		users.add(u3);
+		Double value = 1d;
 		
 		List<String> columns = new ArrayList<String>();
 		columns.add("UserId");
 		columns.add("Username");
-		columns.add(liveData.getSensor().getMeasureName());
+		columns.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]");
 		
 		List<String> values = new ArrayList<String>();
-		values.add("2");
-		values.add("3");
+		values.add(Long.toString(sub.getId()));
+		values.add(sub.getUsername());
+		values.add(Double.toString(value));
 		
 		List<List<String>> allValues = new ArrayList<List<String>>();
 		allValues.add(values);
 		
-		JsonArray outputCols = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-						.add("prop", "UserId")
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("prop", "Username")
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("prop", liveData.getSensor().getMeasureName())
-						.build())
-				.build();
-		
-		JsonArray outputValues = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-						.add("UserId", u2.getId())
-						.add("Username", u2.getUsername())
-						.add("UserId", values.get(0))
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("UserId", u3.getId())
-						.add("Username", u3.getUsername())
-						.add("UserId", values.get(1))
-						.build())
-				.build();
-		
 		JsonArray output = Json.createArrayBuilder()
-				.add(outputCols)
-				.add(outputValues)
+				.add(Json.createArrayBuilder()
+						.add(Json.createObjectBuilder()
+								.add("prop", "UserId")
+								.build())
+						.add(Json.createObjectBuilder()
+								.add("prop", "Username")
+								.build())
+						.add(Json.createObjectBuilder()
+								.add("prop", sensor.getMeasureName() + " [" + sensor.getUnit() + " ]")
+								.build())
+						.build())
+				.add(Json.createArrayBuilder()
+						.add(Json.createObjectBuilder()
+								.add("UserId", Long.toString(sub.getId()))
+								.add("Username", sub.getUsername())
+								.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]", Double.toString(value))
+								.build())
+						.build())
 				.build();
 		
 		when(mockBackEndFacade.getAllLiveDatas())
 			.thenReturn(liveDatas);
 		when(mockBackEndFacade.getUsersList(userId))
-			.thenReturn(users);
-		when(mockBackEndFacade.getLiveDataValueForUser(u2.getId(), liveData.getComputeType(), liveData.getSensor().getName()))
-			.thenReturn(2d);
-		when(mockBackEndFacade.getLiveDataValueForUser(u3.getId(), liveData.getComputeType(), liveData.getSensor().getName()))
-			.thenReturn(3d);
+			.thenReturn(subs);
+		when(mockBackEndFacade.getLiveDataValueForUser(subUserId, computeType, sensorName))
+			.thenReturn(value);
 		when(mockTableJsonBuilder.buildTable(columns, allValues))
 			.thenReturn(output);
 		
-		JsonArray expectedCols = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-						.add("prop", "UserId")
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("prop", "Username")
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("prop", liveData.getSensor().getMeasureName())
-						.build())
-				.build();
-		
-		JsonArray expectedValues = Json.createArrayBuilder()
-				.add(Json.createObjectBuilder()
-						.add("UserId", u2.getId())
-						.add("Username", u2.getUsername())
-						.add("UserId", values.get(0))
-						.build())
-				.add(Json.createObjectBuilder()
-						.add("UserId", u3.getId())
-						.add("Username", u3.getUsername())
-						.add("UserId", values.get(1))
-						.build())
-				.build();
-		
 		JsonArray expected = Json.createArrayBuilder()
-				.add(expectedCols)
-				.add(expectedValues)
+				.add(Json.createArrayBuilder()
+						.add(Json.createObjectBuilder()
+								.add("prop", "UserId")
+								.build())
+						.add(Json.createObjectBuilder()
+								.add("prop", "Username")
+								.build())
+						.add(Json.createObjectBuilder()
+								.add("prop", sensor.getMeasureName() + " [" + sensor.getUnit() + " ]")
+								.build())
+						.build())
+				.add(Json.createArrayBuilder()
+						.add(Json.createObjectBuilder()
+								.add("UserId", Long.toString(sub.getId()))
+								.add("Username", sub.getUsername())
+								.add(sensor.getMeasureName() + " [" + sensor.getUnit() + " ]", Double.toString(value))
+								.build())
+						.build())
 				.build();
 		
+		System.out.println(output);
 		assertEquals(expected, output);
 	}
 }
