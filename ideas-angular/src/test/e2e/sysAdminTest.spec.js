@@ -1,10 +1,9 @@
 describe("filter device list", function() {
 
-    var originalTimeout;
+    //var originalTimeout;
     //var num=0;
 
     beforeEach(function() {
-        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     });
 

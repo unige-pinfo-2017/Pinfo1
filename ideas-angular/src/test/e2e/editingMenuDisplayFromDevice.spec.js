@@ -1,12 +1,11 @@
 describe("sysadmin with edit menu", function() {
 
-	var originalTimeout;
-	//var num=0;
-
 	beforeEach(function() {
-        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     });
+
+	//var originalTimeout;
+	//var num=0;
 
 	it("should open edit menu on click and update values in table from device", function(){
 
