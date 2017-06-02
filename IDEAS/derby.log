@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Jun 02 12:21:39 CEST 2017:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) : instance a816c00e-015c-6853-2a38-000005b5e378 
+dans le répertoire de base de données /private/var/folders/5v/jrj8mtt930s8jbnfcp89qg0r0000gn/T/gfembed1592516141148805554tmp/lib/databases/embedded_default avec le chargeur de classe sun.misc.Launcher$AppClassLoader@58372a00
+Chargé de file:/Users/joao/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/4.1.2/glassfish-embedded-all-4.1.2.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=/Users/joao/Documents/Pinfo1/IDEAS
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.12.5
+derby.system.home=null
+Chargeur de classe de la base de données démarré - derby.database.classpath = ''

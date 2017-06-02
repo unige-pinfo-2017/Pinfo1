@@ -66,6 +66,8 @@ li a:hover:not(.active) {
 
 .dropbtn {
     background-color: #3167A5;
+    height:50px;
+    width:50px;
     color: white;
     padding: 16px;
     font-size: 16px;

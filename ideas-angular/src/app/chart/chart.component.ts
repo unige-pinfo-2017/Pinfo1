@@ -104,9 +104,9 @@ export class ChartComponent implements OnInit {
 		this.getChartDataShort(this.resource, this.shortChartType);
 	}*/
 
-	public switchToBar():void {
+	/*public switchToBar():void {
 		this.lineChartType = this.lineChartType === 'bar' ? 'bar' : 'bar';
-	}
+	}*/
 
 	public switchToLine():void {
 		this.lineChartType = this.lineChartType === 'line' ? 'line' : 'line';
