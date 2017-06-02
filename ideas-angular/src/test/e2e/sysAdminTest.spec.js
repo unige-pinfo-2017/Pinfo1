@@ -26,7 +26,7 @@ describe("filter device list", function() {
 
                     browser.driver.sleep(4000).then(function() {
                     element.all(by.css(".datatable-body-row")).each(function(element,num) {
-                        console.log("num:"+ num);
+                        //console.log("num:"+ num);
                         if(num===0){
                             element.click().then(function () {
                                 browser.sleep(3000);
