@@ -1,10 +1,10 @@
 describe("sysadmin with edit menu", function() {
 
 	var originalTimeout;
-	var num=0;
+	//var num=0;
 
 	beforeEach(function() {
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     });
 
@@ -16,18 +16,18 @@ describe("sysadmin with edit menu", function() {
             inputUsername.sendKeys("Luca");
             var inputPassword = element(by.css('input.password'))
             inputPassword.sendKeys("Joss");
-			
+
             browser.driver.sleep(1000).then(function(){
                 element.all(by.buttonText("Login")).click();
-				
+
                 browser.driver.sleep(6000).then(function() {
                     browser.ignoreSynchronization = true;
                     element.all(by.buttonText("View device list")).click();
-                        
+
 					browser.driver.sleep(4000).then(function() {
 					element.all(by.css(".datatable-body-row")).each(function(element,num) {
-						console.log("num:"+ num);
-						if(num==0){
+						//console.log("num:"+ num);
+						if(num===0){
 							element.click().then(function() {
 								num=num+1;
 							})
@@ -40,7 +40,7 @@ describe("sysadmin with edit menu", function() {
 					expect(element(by.buttonText('Update')).isDisplayed()).toEqual(true);
 					//element.all(by.buttonText(".Close")).click();
 					//browser.driver.sleep(1000);
-					
+
 					});
 
                 });
