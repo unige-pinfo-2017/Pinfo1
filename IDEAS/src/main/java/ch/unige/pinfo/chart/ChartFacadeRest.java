@@ -10,24 +10,12 @@ import javax.ws.rs.Produces;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.ApiResponse;
 
 @Api(value="Chart")
 @Path("/chart")
 public class ChartFacadeRest {
 	@Inject
 	private ChartService chartService;
-	
-	/*@GET
-	@Produces({"application/json"})
-	@Path("/{resource}/{time}")
-	@ApiOperation(value = "Get chart data for a resource and a specific time")
-	public JsonArray getChartData(
-			@ApiParam(value = "resource") @PathParam("resource") String resource, 
-			@ApiParam(value = "time") @PathParam("time") String time) {
-		return chartService.getChartData(resource, time);
-	}*/
 	
 	@GET
 	@Path("/{resource}/last-day")

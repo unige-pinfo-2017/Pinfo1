@@ -50,8 +50,7 @@ public class Device {
 		}
 		
 		Device device = (Device) obj;
-		/*if (device == null)
-			return false;*/
+
 		return ((this.getDeviceId().equals(device.deviceId)) 
 				&& (this.getType().equals(device.type)));
 	}

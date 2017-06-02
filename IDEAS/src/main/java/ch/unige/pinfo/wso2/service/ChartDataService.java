@@ -35,9 +35,6 @@ public class ChartDataService {
 			List<Reading> toBeAveraged = new ArrayList<Reading>();
 			for (int j=0; j<readings.size(); j++) {
 				Reading reading = readings.get(j);
-				/*if (reading.getTimestamp().isBefore(before)) {
-					break;
-				}*/
 				
 				if ((reading.getTimestamp().isBefore(curr) || reading.getTimestamp().equals(curr)) && reading.getTimestamp().isAfter(before)) {
 					toBeAveraged.add(reading);
@@ -78,12 +75,8 @@ public class ChartDataService {
 		
 		for (int i=0; i<readings.size(); i++) {
 			
-			//if (readings.get(i).getValue() == emptyValue) { // if reading didn't get any value
-			
 			if (isEqualDouble(readings.get(i).getValue(), emptyValue)) {
 				for (int j=i; j<readings.size(); j++) { // find closest reading with a value
-					
-					//if (readings.get(j).getValue() != emptyValue) {
 					
 					if (!isEqualDouble(readings.get(j).getValue(), emptyValue)) {
 						readings.get(i).setValue(readings.get(j).getValue()); // copy it
@@ -152,23 +145,6 @@ public class ChartDataService {
 		}
 		return new Reading(Instant.ofEpochSecond((long) (avgInstant/(double)size)), (double) avgValue/(double) size);
 	}
-	
-	/*public List<Double> computeClosestReadings(List<Reading> readings, List<Instant> timePoints) {
-		List<Double> res = new ArrayList<Double>();
-		for (int i=0; i<timePoints.size(); i++) {
-			res.add(computeClosestReading(readings, timePoints.get(i)));
-		}
-		return res;
-	}
-	
-	public double computeClosestReading(List<Reading> readings, Instant timePoint) {
-		for (Reading reading: readings) {
-			if (reading.getTimestamp().isBefore(timePoint)) {
-				return reading.getValue();
-			}
-		}
-		return 0;
-	}*/
 	
 	public boolean isEqualDouble(double d1, double d2) {
 		double epsilon = 0.00000000001;

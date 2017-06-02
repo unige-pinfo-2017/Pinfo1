@@ -117,20 +117,6 @@ public interface DeviceManager {
 	Sensor getSensorFromSensorName(String sensorName);
 	
 	/**
-	 * <b>getDeviceBySensorName</b>
-	 * <p>
-	 * {@code Device getDeviceBySensorName(String sensorName)}
-	 * <p>
-	 * 
-	 * Get a device specified by its {@code sensorName}. 
-	 * 
-	 * @param sensorName - The name of the sensor.
-	 * @return
-	 * A device.
-	 */
-//	Device getDeviceBySensorName(String sensorName);
-	
-	/**
 	 * <b>getAllDevicesForUsersBySensorName</b>
 	 * <p>
 	 * {@code List<Device> getAllDevicesForUsersBySensorName(List<User> users, String sensorName)}

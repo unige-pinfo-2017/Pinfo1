@@ -26,7 +26,6 @@ public class BackEndFacade {
 	@Inject
 	LiveDataService liveDataService;
 	
-	// Temp, For testing
 	@Inject
 	WSO2Wrapper wso2Wrapper;
 	

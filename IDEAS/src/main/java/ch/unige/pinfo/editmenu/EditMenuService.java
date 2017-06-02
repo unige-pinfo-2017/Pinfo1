@@ -37,24 +37,6 @@ public class EditMenuService {
 		return backEndFacade.changeDevice(deviceId,  resource, state);
 	}
 	
-    /**
-     * <b>changeDevice2</b>
-     * <p>
-     * {@code public Response changeDevice2(String deviceId, String resource, String state)}
-     * <p>
-     * 
-     * Change the state of a device's resource.  
-     * 
-     * @param deviceId - The device's id
-     * @param resource - The resource name to change the state. 
-     * @param state - The new state.
-     * @return
-     * A {@code Response}: 200 if state is changed, 500 otherwise.
-     */
-	/*public Response changeDevice2(String deviceId, String resource, String state) {
-		return Response.status(200).entity(deviceId + " " + resource + " " + state).build();
-	}*/
-	
 	/**
      * <b>getEditMenu</b>
      * <p>

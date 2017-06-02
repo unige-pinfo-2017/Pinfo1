@@ -67,7 +67,6 @@ public class BackEndFacadeTest {
 	@Test
 	public void getLiveDataIdFromSensorMeasureNameTest () {
 		String mockMeasure = "measure";
-		String measureName = "measure";
 		
 		Long id1 = (long) 1;
 		Long id2 = (long) 2;

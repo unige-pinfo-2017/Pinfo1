@@ -140,44 +140,4 @@ public class UserServiceImpl implements UserService{
 		return getUserById(userId).getPreferences();
 	}
 	
-	/*
-	public double getAvgSensorLiveForUser(Long userId, String sensorName) {
-		return deviceManager.getAvgSensorLiveForUser(userId, sensorName);
-	}
-	
-	public double getSumSensorLiveForUser(Long userId, String sensorName) {
-		return deviceManager.getSumSensorLiveForUser(userId, sensorName);
-	}
-	
-	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
-		return deviceManager.getAllDevicesForUserByTypeDevice(userId, typeDevice);
-	}	
-	
-	public String getDeviceDataLive(String deviceId, String sensorName) {
-		return deviceManager.getDeviceDataLive(deviceId, sensorName);
-	}
-
-	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName) {
-		return deviceManager.getAllDevicesForUserBySensorName(userId, sensorName);
-	}
-
-	public Sensor getSensorFromSensorName(String sensorName) {
-		return deviceManager.getSensorFromSensorName(sensorName);
-	}
-	
-	public double getSumSensorLiveForUsers(List<User> users, String sensorName) {
-		double res = 0;
-		for (User user: users) {
-			res += getSumSensorLiveForUser(user.getId(), sensorName);
-		}
-		return res;
-	}
-	
-	public double getAvgSensorLiveForUsers(List<User> users, String sensorName) {
-		if (users.size() == 0) {
-			return 0;
-		}
-		return getSumSensorLiveForUsers(users, sensorName)/users.size();
-	}
-	*/
 }
