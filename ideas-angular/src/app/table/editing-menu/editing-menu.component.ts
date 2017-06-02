@@ -65,7 +65,7 @@ export class EditingMenuComponent implements OnInit {
 	}
 
 	private getEditingMenu(deviceId: string): void {
-		console.log("getEditMenu called");
+		//console.log("getEditMenu called");
 		this.editingMenuService.getEditingMenu(deviceId).then(menu => {
 			this.editMenu = menu;
 		});

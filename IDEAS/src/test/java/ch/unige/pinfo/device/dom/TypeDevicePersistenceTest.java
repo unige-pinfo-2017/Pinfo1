@@ -50,8 +50,8 @@ public class TypeDevicePersistenceTest {
 	        }
 	
 	private static final String[] TYPEDEVICE_NAME = {
-			"abc",
-			"a2c"
+			"powerSocket",
+			"colorSocket"
 	};
 	
 	@Before

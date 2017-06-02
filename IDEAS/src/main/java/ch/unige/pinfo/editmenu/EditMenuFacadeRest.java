@@ -33,14 +33,6 @@ public class EditMenuFacadeRest {
 		return editMenuService.getEditMenu(deviceId);
 	}
 	
-	/*
-	@POST
-	@Path("/{deviceId}/change-{resource}")
-	@Consumes({ MediaType.TEXT_PLAIN })
-	public String changeDevice(@PathParam("deviceId") String deviceId, @PathParam("resource") String resource, @QueryParam("value") String state) {
-		return editMenuService.changeDevice(deviceId, resource, state);
-	}*/
-	
 	@POST
 	@Path("/{deviceId}/change-{resource}")
 	@Consumes({ MediaType.TEXT_PLAIN })

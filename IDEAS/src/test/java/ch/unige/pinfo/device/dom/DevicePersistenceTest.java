@@ -49,8 +49,8 @@ public class DevicePersistenceTest {
 	        }
 	
 	private static final String[] DEVICEID = {
-			"abc",
-			"a2c"
+			"1acb",
+			"2dcf"
 	};
 	
 	@Before

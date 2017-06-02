@@ -33,7 +33,6 @@ public class BackEndFacade implements Serializable {
 	@Inject
 	LiveDataService liveDataService;
 	
-	// Temp, For testing
 	@Inject
 	WSO2Wrapper wso2Wrapper;
 	

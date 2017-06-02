@@ -16,9 +16,9 @@ public interface LiveDataService extends Serializable {
 	 * {@code void addLiveData(LiveData liveData)}
 	 * <p>
 	 * 
-	 * Add live data in database.
+	 * Add Live data in database.
 	 * 
-	 * @param liveData - The live data to add
+	 * @param liveData - The data Live to add
 	 */
 	void addLiveData(LiveData liveData);
 	
@@ -40,7 +40,7 @@ public interface LiveDataService extends Serializable {
 	 * {@code LiveData getLiveDataById(Long id)}
 	 * <p>
 	 * 
-	 * Get live data by its id.
+	 * Get live data by his id.
 	 * 
 	 * @param id - The live data's id.
 	 * @return

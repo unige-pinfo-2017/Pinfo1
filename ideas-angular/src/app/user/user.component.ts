@@ -24,13 +24,12 @@ export class UserComponent implements OnInit {
 		private userService: UserService,
 		private route: ActivatedRoute) {}
 
-	ngOnInit(): void { // Procédure qui s'exécute lorsque que le composant est initialisé
-		this.sub = this.route.params.subscribe(params => { // Récupération du paramètre "id" en parsant l'url
-			//let id = Number.parseInt(params['id']);
+	ngOnInit(): void {
+		this.sub = this.route.params.subscribe(params => {
 			let username = params['username'];
 			this.userService
-				.getUserByUsername(username)	// Récupère l'utilisateur spécifié par "id"
-				.subscribe(u => this.user = u); // Assignation à l'objet user local
+				.getUserByUsername(username)
+				.subscribe(u => this.user = u);
 		})
 	}
 

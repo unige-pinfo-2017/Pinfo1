@@ -1,7 +1,6 @@
 package ch.unige.pinfo.chart;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,15 +8,11 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 
 import ch.unige.pinfo.backend.BackEndFacade;
 

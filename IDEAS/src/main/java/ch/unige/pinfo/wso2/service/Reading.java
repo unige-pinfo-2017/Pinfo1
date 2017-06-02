@@ -14,11 +14,6 @@ public class Reading implements Serializable {
 	private Instant timestamp;
 	private Double value;
 	
-	/*public Reading(Instant timestamp, String value) {
-		this.timestamp = timestamp;
-		this.value = Double.parseDouble(value);
-	}*/
-	
 	public Reading(String timestampInMilli, String value) {
 		this.timestamp = Instant.ofEpochMilli(Long.parseLong(timestampInMilli));
 		this.value = Double.parseDouble(value);
@@ -50,6 +45,5 @@ public class Reading implements Serializable {
 	public void setValue(Double value) {
 		this.value = value;
 	}
-	
 	
 }

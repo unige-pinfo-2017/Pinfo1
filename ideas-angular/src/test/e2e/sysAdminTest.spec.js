@@ -1,10 +1,10 @@
 describe("filter device list", function() {
 
     var originalTimeout;
-    var num=0;
+    //var num=0;
 
     beforeEach(function() {
-        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
     });
 
@@ -26,8 +26,8 @@ describe("filter device list", function() {
 
                     browser.driver.sleep(4000).then(function() {
                     element.all(by.css(".datatable-body-row")).each(function(element,num) {
-                        console.log("num:"+ num);
-                        if(num==0){
+                        //console.log("num:"+ num);
+                        if(num===0){
                             element.click().then(function () {
                                 browser.sleep(3000);
                                 num=num+1;

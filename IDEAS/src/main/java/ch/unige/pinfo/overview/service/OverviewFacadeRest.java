@@ -24,15 +24,6 @@ public class OverviewFacadeRest {
 	@Inject
 	private OverviewService overviewService;
 	
-	/*
-	@GET
-	@Path("/live-data2/{userId}")
-	@Produces({ "application/json" })
-	@Transactional
-	public JsonArray getLiveData2(@PathParam("userId") Long userId) {
-		return overviewService.buildLiveData2(userId);
-	}*/
-	
 	@GET
 	@Path("/live-data/{userId}")
 	@Produces({ "application/json" })

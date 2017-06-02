@@ -11,9 +11,6 @@ import javax.ws.rs.core.Response;
 @Local
 public interface WSO2Wrapper extends Serializable {
 	
-	//temporaire
-	//List<String> getValueLive2(String deviceType, String deviceId,  String SensorType);
-	
 	/**
 	 * <b>polling</b>
 	 * <p>

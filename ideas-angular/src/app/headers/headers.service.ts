@@ -5,7 +5,8 @@ import { Headers } from '@angular/http';
 
 @Injectable()
 export class HeadersService {
-
+	// Provides Http headers
+	
 	public getHeadersJson(): Headers {
 		let headers = new Headers();
 		headers.append('Accept', 'application/json');

@@ -74,6 +74,7 @@ public class OverviewJsonBuilder implements Serializable {
 	 * @return
 	 * a {@code JsonObject} of the hidden data.
 	 */
+
 	public JsonObject buildHiddenData(LiveData hiddenData) {
 		return Json.createObjectBuilder()
 				.add("name", hiddenData.getSensor().getMeasureName())

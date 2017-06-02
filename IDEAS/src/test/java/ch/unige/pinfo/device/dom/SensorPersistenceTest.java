@@ -50,18 +50,18 @@ public class SensorPersistenceTest {
 	        }
 	
 	private static final String[] SENSOR_NAME = {
-			"abc",
-			"a2c"
+			"colorSensor",
+			"powerSensor"
 	};
 
 	private static final String[] UNIT_NAME = {
-			"abc",
-			"a2c"
+			"rgb",
+			"watt"
 	};
 
 	private static final String[] MEASURE_NAME = {
-			"abc",
-			"a2c"
+			"current",
+			"power"
 	};
 	
 	@Before

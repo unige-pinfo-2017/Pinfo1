@@ -16,15 +16,15 @@ export class UserService {
 
 	getUser(id: number): Observable<User> {
 		let user$ = this.http
-			 .get(`${this.baseUrl}/user/byId/${id}`, {headers: this.headersService.getHeadersJson()}) // Récupère une donnée à l'url du serveur
-			 .map(res => <User>res.json()); // Conversion des données formatées en JSON vers la classe User
+			 .get(`${this.baseUrl}/user/byId/${id}`, {headers: this.headersService.getHeadersJson()})
+			 .map(res => <User>res.json());
 		return user$;
 	}
 
 	getUserByUsername(username: string): Observable<User>{
 		let user$ = this.http
-		.get(`${this.baseUrl}/user/byUsername/${username}`, {headers: this.headersService.getHeadersJson()}) // Récupère une donnée à l'url du serveur
-		.map(res => <User>res.json()); // Conversion des données formatées en JSON vers la classe User
+		.get(`${this.baseUrl}/user/byUsername/${username}`, {headers: this.headersService.getHeadersJson()})
+		.map(res => <User>res.json());
    		return user$;
 	}
 }
