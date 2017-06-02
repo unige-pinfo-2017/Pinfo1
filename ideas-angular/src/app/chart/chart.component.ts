@@ -77,7 +77,7 @@ export class ChartComponent implements OnInit {
 			});
 	}
 
-	public switchToBar():void {
+	/*public switchToBar():void {
 		this.lineChartType = this.lineChartType === 'bar' ? 'bar' : 'bar';
 	}*/
 
