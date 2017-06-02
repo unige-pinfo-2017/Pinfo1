@@ -20,10 +20,11 @@ export class TopbarComponent {
 	 }
 
 	 public changeLiveData(name: string): void {
-		 this.added.emit(name);
+		 this.changed.emit(name);
 	 }
 
 	 public removeLiveData(name: string): void {
+		 //console.log("remove called");
 		 this.removed.emit(name);
 	 }
 }

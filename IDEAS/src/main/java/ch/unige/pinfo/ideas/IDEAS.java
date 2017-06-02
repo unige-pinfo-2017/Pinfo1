@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
@@ -42,35 +41,9 @@ public class IDEAS {
 	public IDEAS() {}
 	
 	@GET
-	//@Produces(MediaType.TEXT_HTML)
 	@Path("/home")
 	public String home(){
 		return "Welcome to IDEAS! The application is under construction.";
-	}
-	
-	@GET
-	@Path("/test/{userId}")
-	public String test(@PathParam("userId") Long userId) throws NullPointerException {
-		
-		LiveData ldDel = null;
-		String test = "Liste des preferences avant : ";
-		for (LiveData ld : userService.getUserById(userId).getPreferences()){
-			test = test + ld.getSensor().getMeasureName() + " ";
-			ldDel = ld;
-		}
-		userService.getUserById(userId).getPreferences().remove(ldDel);
-		try {
-			ldDel.getUsers().remove(userService.getUserById(userId));
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		}
-		
-		test = test + " pref apres : ";
-		
-		for (LiveData ld : userService.getUserById(userId).getPreferences()){
-			test = test + ld.getSensor().getMeasureName() + " ";
-		}
-		return test;
 	}
 	
 	@GET
@@ -309,7 +282,7 @@ public class IDEAS {
 		
 		LightData lightd3 = new LightData();
 		lightd3.setDeviceId("id9");
-		lightd3.setStatus("0");
+		lightd3.setStatus("1");
 		lightd3.setBrightness(Double.toString(rand.nextDouble()));
 		lightd3.setHue(Integer.toString(rand.nextInt(361)));
 		lightd3.setSaturation(Double.toString(rand.nextDouble()));

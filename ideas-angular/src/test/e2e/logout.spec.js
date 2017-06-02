@@ -10,7 +10,6 @@ describe("Logout Test", function() {
             browser.driver.sleep(2000).then(function(){
                 element.all(by.buttonText("Login")).click();
                 element.all(by.buttonText("Logout")).click();
-
                 expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/login');
             });
         });

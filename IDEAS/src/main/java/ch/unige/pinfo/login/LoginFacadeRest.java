@@ -14,8 +14,6 @@ import ch.unige.pinfo.user.dom.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @Api(value="Login")
 @Path("/login")
@@ -30,10 +28,6 @@ public class LoginFacadeRest {
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/")
 	@ApiOperation(value="Authentificate an user")
-	@ApiResponses(value= {
-			@ApiResponse(code=200, message="Authtification successful"),
-			@ApiResponse(code=400, message ="Authentification failed"),
-	})
 	public String authentication(
 			@ApiParam(value= "The username for login", required=true) @QueryParam("username") String username, 
 			@ApiParam(value="The password for login", required=true) @QueryParam("pw") String inputPw){
@@ -46,18 +40,17 @@ public class LoginFacadeRest {
 	@ApiOperation(value="List of subordinates ID",
 	response = User.class,
 	responseContainer = "List")
-	@ApiResponses(value= {
-			@ApiResponse(code=400, message ="Invalid ID supplied"),
-			@ApiResponse(code=404, message = "Subordinates not found")
-	})
-	public JsonArray getSubordinates(@ApiParam(value="Manager/SysAdmin ID")@PathParam("userId") Long userId) {
+	public JsonArray getSubordinates(
+			@ApiParam(value="Manager/SysAdmin ID")@PathParam("userId") Long userId) {
 		return loginService.getSubordinates(userId);
 	}
 	
 	@GET
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Path("/get-role/{userId}")
-	public String getRole(@PathParam("userId") Long userId) {
+	@ApiOperation(value="Role of a user")
+	public String getRole(
+			@ApiParam(value="the user's id") @PathParam("userId") Long userId) {
 		return loginService.getRole(userId);
 	}
 }

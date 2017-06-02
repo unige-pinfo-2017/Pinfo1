@@ -39,12 +39,6 @@ const routes: Routes = [
 		path: 'chart',
 		component: ChartComponent
 	},
-	/*{
-		path: 'table',
-		component: TableComponent,
-		canActivate: [ AuthGuard ]
-	},
-    */
 	{
 		path: 'editing-menu',
 		component: EditingMenuComponent

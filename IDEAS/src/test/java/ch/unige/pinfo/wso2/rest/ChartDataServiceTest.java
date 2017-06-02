@@ -8,15 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
 import ch.unige.pinfo.wso2.service.ChartDataService;
 import ch.unige.pinfo.wso2.service.Reading;
-import ch.unige.pinfo.wso2.service.WSO2WrapperImpl;
 
-public class ChartDataTest {
-	
-	@InjectMocks
+public class ChartDataServiceTest {
 	ChartDataService chartDataService = new ChartDataService();
 		
 	@Test
@@ -50,7 +46,7 @@ public class ChartDataTest {
 		
 		
 		// Test
-		assertEquals(getValuesOfReadings(newReadings), expected);
+		assertEquals(expected, getValuesOfReadings(newReadings));
 	}
 	
 	@Test
@@ -83,7 +79,7 @@ public class ChartDataTest {
 		List<Reading> newReadings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
 		
 		// Test
-		assertEquals(getValuesOfReadings(newReadings), expected);
+		assertEquals(expected, getValuesOfReadings(newReadings));
 	}
 	
 	@Test 
@@ -117,7 +113,7 @@ public class ChartDataTest {
 		List<Reading> newReadings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
 		
 		// Test
-		assertEquals(getValuesOfReadings(newReadings), expected);
+		assertEquals(expected, getValuesOfReadings(newReadings));
 	}
 	
 	@Test
@@ -160,7 +156,7 @@ public class ChartDataTest {
 		List<Reading> newReadings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
 		
 		// Test
-		assertEquals(getValuesOfReadings(newReadings), expected);
+		assertEquals(expected, getValuesOfReadings(newReadings));
 	}
 	
 	@Test
@@ -192,7 +188,7 @@ public class ChartDataTest {
 		List<Reading> newReadings = chartDataService.averageValuePerTimeSlot(readings, timePoints);
 		
 		// Test
-		assertEquals(getValuesOfReadings(newReadings), expected);
+		assertEquals(expected, getValuesOfReadings(newReadings));
 	}
 	
 	@Test

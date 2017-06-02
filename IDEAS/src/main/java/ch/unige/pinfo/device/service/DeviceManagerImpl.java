@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.device.dom.Device;
 import ch.unige.pinfo.device.dom.Sensor;
-import ch.unige.pinfo.device.dom.TypeDevice;
 import ch.unige.pinfo.user.dom.User;
 import ch.unige.pinfo.user.service.UserService;
 import ch.unige.pinfo.wso2.service.WSO2Wrapper;
@@ -32,13 +31,13 @@ public class DeviceManagerImpl implements DeviceManager {
 	
 	@Override
 	public Response changeDevice(String deviceId, String resource, String state) {
-		if (resource.toLowerCase().equals("hue")) {
+		if ("hue".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeHue(deviceId, state);
-		} else if (resource.toLowerCase().equals("saturation")) {
+		} else if ("saturation".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeSaturation(deviceId, state);
-		} else if (resource.toLowerCase().equals("kelvin")) {
+		} else if ("kelvin".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeKelvin(deviceId, state);
-		} else if (resource.toLowerCase().equals("state")) {
+		} else if ("state".equals(resource.toLowerCase())) {
 			return wso2Wrapper.changeState(deviceId, state);
 		} 
 		
@@ -51,7 +50,7 @@ public class DeviceManagerImpl implements DeviceManager {
 		
 		List<Device> ld = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		
-		if (ld.size() == 0) {
+		if (ld.isEmpty()) {
 			return 0;
 		}
 		
@@ -83,9 +82,9 @@ public class DeviceManagerImpl implements DeviceManager {
 	public List<Device> getAllDevicesForUserByTypeDevice(Long userId, String typeDevice) {
 		List<Device> devices = deviceService.getDevicesByTypeDeviceForUser(userId, typeDevice);
 		String role = userService.getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfManager(userId), typeDevice));
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			devices.addAll(getAllDevicesForUsersByTypeDevice(userService.getUsersOfSysAdmin(userId), typeDevice));
 		}
 		return devices;
@@ -103,9 +102,9 @@ public class DeviceManagerImpl implements DeviceManager {
 	public List<Device> getAllDevicesForUserBySensorName(Long userId, String sensorName){
 		List<Device> devices = deviceService.getDevicesBySensorForUser(userId, sensorName);
 		String role = userService.getUserRoleById(userId);
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfManager(userId), sensorName));
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			devices.addAll(getAllDevicesForUsersBySensorName(userService.getUsersOfSysAdmin(userId), sensorName));
 		}
 		return devices;
@@ -125,28 +124,10 @@ public class DeviceManagerImpl implements DeviceManager {
 		Device device = deviceService.getDeviceByDeviceId(deviceId);
 		return wso2Wrapper.getValueLive(device.getType().getName(), device.getDeviceId(), sensorName);
 	}
-	
-	/*public List<String> getDeviceDataLive2(String deviceId, String sensorName) {
-		Device device = deviceService.getDeviceByDeviceId(deviceId);
-		return wso2Wrapper.getValueLive2(device.getType().getName(), device.getDeviceId(), sensorName);
-	}*/
 
 	@Override
 	public Sensor getSensorFromSensorName(String sensorName) {
 		return sensorService.getSensorByName(sensorName);
-	}
-	
-	@Override
-	public Device getDeviceBySensorName(String sensorName){
-		Sensor sensor = sensorService.getSensorByName(sensorName);
-		Device device = new Device();
-		
-		for (TypeDevice type : sensor.getTypeDevices()){
-			if(device.getType().getId() == type.getId()){
-				return device;
-			}
-		}
-		return device;
 	}
 
 	@Override

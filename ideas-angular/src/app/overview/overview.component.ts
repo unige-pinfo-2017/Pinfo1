@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Subscription } from "rxjs";
@@ -18,6 +18,8 @@ import { OverviewService } from './overview.service';
 })
 
 export class OverviewComponent implements OnInit, OnDestroy {
+	@ViewChild(MiddlescreenComponent) middlescreenComponent: MiddlescreenComponent;
+
 	private currentId: number; // L'id de l'utilisateur dont on génère la table, n'est pas forcément l'id de l'utilisateur authentifié
 	private refreshRate: number = 5*1000; // refreshRate en milliseconde
 	private timerSubscription: Subscription;
@@ -44,11 +46,10 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	}
 
 	public startTimer(refreshRate: number): void {
-		// Rafraichit la liste des données live toutes les N millisecondes
-		// Ne bloque pas l'exécution
-		let timer = TimerObservable.create(1000, refreshRate); // Créer un timer qui s'enclenche toutes les N secondes
+		// Refresh the live data every N milliseconds
+		let timer = TimerObservable.create(1000, refreshRate); // Create a timer that calls the method every N milliseconds
 		this.timerSubscription = timer.subscribe(t => {
-			// A chaque tick du timer, on rafraichit les donnees live
+			// At each timer tick, we refresh the data
 			this.getLiveData(this.currentId);
 		})
 	}
@@ -78,13 +79,13 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	}
 
 	public addLiveData(name: string): void {
-		console.log(name);
+		//console.log(name);
 		let sessionId: number = Number(sessionStorage.getItem('id'));
 		if (sessionId === this.currentId) {
-			// On peut ajouter une préférence uniquement si on est sur notre propre overview. Ex: Un manager ne peut pas changer les préférences de l'overview d'un de ses subordonnées.
+			// We can change preference only if we are on our own overview, i.e. A manager cannot change the preference of one of its subordinate.
 			this.overviewService.addLiveData(this.currentId, name)
 			.then(res => {
-				console.log(res);
+				//console.log(res);
 				this.getLiveData(this.currentId);
 				this.getHiddenData(this.currentId);
 			})
@@ -92,17 +93,17 @@ export class OverviewComponent implements OnInit, OnDestroy {
 	}
 
 	public changeLiveData(name: string): void {
-		console.log(name);
+		this.middlescreenComponent.getChartDataShort(name.toLowerCase(), "day");
 	}
 
 	public removeLiveData(name: string): void {
-		console.log(name);
+		//console.log(name);
 		let sessionId: number = Number(sessionStorage.getItem('id'));
 		if (sessionId === this.currentId) {
-			// On peut enlever une préférence uniquement si on est sur notre propre overview. Ex: Un manager ne peut pas changer les préférences de l'overview d'un de ses subordonnées.
+			// We can change preference only if we are on our own overview, i.e. A manager cannot change the preference of one of its subordinate.
 			this.overviewService.removeLiveData(this.currentId, name)
 			.then(res => {
-				console.log(res);
+				//console.log(res);
 				this.getLiveData(this.currentId);
 				this.getHiddenData(this.currentId);
 			})

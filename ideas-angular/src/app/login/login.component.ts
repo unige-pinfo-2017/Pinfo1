@@ -25,7 +25,7 @@ export class LoginComponent {
 		private loginService: LoginService,
 		private router: Router) {}
 
-    private loginText(usernameValue: string, passwordValue: string): void {
+    /*private loginText(usernameValue: string, passwordValue: string): void {
     	if (usernameValue == '') { // username vide
 				this.error = ``;
     		this.error += `Veuillez ne pas laisser vide le username\n`;
@@ -38,16 +38,18 @@ export class LoginComponent {
 		this.login += `Added user with username :'${usernameValue}' and password :'${passwordValue}'\n`;
 		this.error = ``;
 		}
-	}
+	}*/
 
 	private authentication(username: string, pw: string): void {
 		if (username === ''){
-			this.login='Authentication failed.';
+			this.error='Authentication failed.';
+		} else if (pw === '') {
+			this.error='Authentication failed.';
 		} else {
 			this.loginService.authentication(username, pw)
 			.then(r => this.response = r).then(r => {
 				if (this.response == 'error') {
-					this.login = 'Authentication failed.';
+					this.error = 'Authentication failed.';
 				} else {
 					this.login = 'Authentication successful.';
 					sessionStorage.setItem('id', this.response);
@@ -57,7 +59,7 @@ export class LoginComponent {
 						)
 					);
 				}
-			}).catch(error => this.login = 'Authentication failed');
+			})//.catch(error => this.error = 'Authentication failed.');
 		}
 	}
 

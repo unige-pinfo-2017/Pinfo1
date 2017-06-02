@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServlet;
 import io.swagger.jaxrs.config.BeanConfig;
 
 public class Bootstrap extends HttpServlet {
-    /**
-	 * 
-	 */
+
+
 	private static final long serialVersionUID = 5586530707000587337L;
 
 	@Override
@@ -21,7 +20,12 @@ public class Bootstrap extends HttpServlet {
         beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8080");
         beanConfig.setBasePath("/IDEAS");
-        beanConfig.setResourcePackage("ch.unige.pinfo.login,ch.unige.pinfo.overview.service,ch.unige.pinfo.table");
+        beanConfig.setResourcePackage("ch.unige.pinfo.login,"
+        							+ "ch.unige.pinfo.overview.service,"
+        							+ "ch.unige.pinfo.table,"
+        							+ "ch.unige.pinfo.chart,"
+        							+ "ch.unige.pinfo.editmenu,"
+        							+ "ch.unige.pinfo.user.service");
         beanConfig.setTitle("IDEAS API");
         beanConfig.setScan(true);  
     }

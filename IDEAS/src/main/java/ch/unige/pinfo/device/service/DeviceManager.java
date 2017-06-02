@@ -19,7 +19,7 @@ public interface DeviceManager {
      * {@code String getDeviceDataLive(String deviceId, String sensorName)}
      * <p>
      * 
-     * Get the live data of a device specifying his {@code deviceId} and the sensor we want the data.
+     * Get the live data of a device specified by its {@code deviceId} and the sensor we want the data.
      * 
      * @param deviceId - The id of the device
      * @param sensorName - The sensor name.
@@ -34,7 +34,7 @@ public interface DeviceManager {
 	 * {@code double getAvgSensorLiveForUser(Long userId, String sensorName)}
 	 * <p>
 	 * 
-	 * Calculate the average of live consummation of a sensor for a user specifying his {@code userId}.
+	 * Compute the average live value of a sensor for a user specified by its {@code userId}.
 	 * 
 	 * @param userId - The id of the User
 	 * @param sensorName - The name of the sensor we want 
@@ -49,7 +49,7 @@ public interface DeviceManager {
 	 * {@code double getSumSensorLiveForUser(Long userId, String sensorName)}
 	 * <p>
 	 * 
-	 * Calculate the sum of live consummation of a sensor for a user specifying his {@code userId}.
+	 * Compute the sum of live value of a sensor for a user specified by its {@code userId}.
 	 * 
 	 * @param userId - The id of the User
 	 * @param sensorName - The name of the sensor we want 
@@ -108,27 +108,13 @@ public interface DeviceManager {
 	 * {@code Sensor getSensorFromSensorName(String sensorName)}
 	 * <p>
 	 * 
-	 * Get a sensor specifying his {@code sensorName}.
+	 * Get a sensor specified by its {@code sensorName}.
 	 * 
 	 * @param sensorName - The name of the sensor.
 	 * @return
 	 * A sensor.
 	 */
 	Sensor getSensorFromSensorName(String sensorName);
-	
-	/**
-	 * <b>getDeviceBySensorName</b>
-	 * <p>
-	 * {@code Device getDeviceBySensorName(String sensorName)}
-	 * <p>
-	 * 
-	 * Get a device specifying his {@code sensorName}. 
-	 * 
-	 * @param sensorName - The name of the sensor.
-	 * @return
-	 * A device.
-	 */
-	Device getDeviceBySensorName(String sensorName);
 	
 	/**
 	 * <b>getAllDevicesForUsersBySensorName</b>
@@ -151,7 +137,7 @@ public interface DeviceManager {
 	 * {@code  List<String> getDeviceDataLiveColor(String deviceType, String deviceId)}
 	 * <p>
 	 * 
-	 * Get the live Color display by a type device specifying his {@code deviceId}
+	 * Get the live color value for a device specified by its {@code deviceId} and {@code deviceType}.
 	 * 
 	 * @param deviceType - The type of the device
  	 * @param deviceId - The Id of the device.
@@ -166,7 +152,7 @@ public interface DeviceManager {
 	 * {@code String getDeviceTypeNameFromDeviceId(String deviceId)}
 	 * <p>
 	 * 
-	 * Get the name of a device specifying his {@code deviceId}.
+	 * Get the name of a device specified by its {@code deviceId}.
 	 * 
 	 * @param deviceId - Id of the device
 	 * @return
@@ -177,16 +163,16 @@ public interface DeviceManager {
 	/**
 	 * <b>changeDevice</b>
 	 * <p>
-	 * {@code String changeDevice(String deviceId, String resource, String state)}
+	 * {@code Response changeDevice(String deviceId, String resource, String state)}
 	 * <p>
 	 * 
-	 * Change the state of a Light's resource specifying his {@code deviceId}.  
+	 * Change the state of a device resource specified its {@code deviceId}.  
 	 * 
-	 * @param deviceId - The id of the Light device
-	 * @param resource - The resource of the Light. Can be Hue, Saturation, Kelvin or State
+	 * @param deviceId - The id of the device
+	 * @param resource - The resource of the device
 	 * @param state - The new state we want to set.
 	 * @return
-	 * The value of the new state in {@code String} format
+	 * a {@code Response} : 200 if state is changed, 500 otherwise.
 	 */
 	Response changeDevice(String deviceId, String resource, String state);
 } 

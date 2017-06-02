@@ -32,7 +32,7 @@ public class OverviewService {
 	 * {@code public JsonArray buildLiveData(Long userId)}
 	 * <p>
 	 * 
-	 * Build a {@code JsonArray} of the live data that will be display on the overview for a user.  
+	 * Build a {@code JsonArray} of the live data that will be displayed on the overview for a user.  
 	 * 
 	 * @param userId - The user's id.
 	 * @return
@@ -62,7 +62,7 @@ public class OverviewService {
 	 * {@code public JsonArray buildHiddenData(Long userId)}
 	 * <p>
 	 * 
-	 * Build a {@code JsonArray} of the hidden data that they're not displayed for a user.
+	 * Build a {@code JsonArray} of the hidden data (not displayed by the user)
 	 * 
 	 * @param userId - The user's id.
 	 * @return
@@ -89,7 +89,7 @@ public class OverviewService {
 	 * {@code public List<String> getMeasureNames(Set<LiveData> liveDatas)}
 	 * <p>
 	 * 
-	 * Get the name of the measure for a set of live data.
+	 * Get the measure names for a set of live data.
 	 * 
 	 * @param liveDatas - Set of live data we want the name measure.
 	 * @return
@@ -129,7 +129,7 @@ public class OverviewService {
 	 * {@code public double roundDecimal(double value, int decimalNumber)}
 	 * <p>
 	 * 
-	 * Round the value to a specify decimalNumber 
+	 * Round 'value' to the the n-th decimal, where n is specified by decimalNumber
 	 * 
 	 * @param value - value to round
 	 * @param decimalNumber - decimal to round the value.
@@ -147,7 +147,7 @@ public class OverviewService {
 	 * {@code public Response addPreference(Long userId, String measureName)}
 	 * <p>
 	 * 
-	 * Add a preference for a user int the overview. 
+	 * Add a preference for a user in the overview. 
 	 * 
 	 * @param userId - The user's id 
 	 * @param measureName - The measure name to add.
@@ -183,86 +183,4 @@ public class OverviewService {
 		return Response.status(200).entity(measureName + " removed from preferences.").build();
 	}
 
-	
-	/*public JsonArray buildLiveData2(Long userId) {
-		String role = userService.getUserRoleById(userId);
-		if (role.equals("Manager")) {
-			return buildLiveDataManager(userId);
-		} else if (role.equals("SysAdmin")) {
-			return buildLiveDataSysAdmin(userId);
-		} else if (role.equals("Basic")) {
-			return buildLiveDataBasic(userId);
-		}
-		return null;
-	}
-	
-	public JsonArray buildLiveDataBasic(Long userId) {
-		JsonArrayBuilder builder = Json.createArrayBuilder();
-		List<LiveData> liveDatas = liveDataService.getAllLiveData(); 
-		
-		Basic basic = userService.getBasicById(userId);
-		
-		for (LiveData liveData: liveDatas) {
-			String measure = liveData.getSensor().getMeasureName();
-			String unit = liveData.getSensor().getUnit();
-			String value = Double.toString(computeLiveData(basic.getId(), liveData));
-			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
-		}
-	
-		return builder.build();
-	}
-	
-	public JsonArray buildLiveDataManager(Long userId) {
-		Manager manager = userService.getManagerById(userId);
-		
-		JsonArrayBuilder builder = Json.createArrayBuilder();
-		List<User> users = userService.getUsersOfManager(manager.getId());
-		List<LiveData> liveDatas = liveDataService.getAllLiveData(); 
-		
-		for (LiveData liveData: liveDatas) {
-			String measure = liveData.getSensor().getMeasureName();
-			String unit = liveData.getSensor().getUnit();
-			String value = Double.toString(combineLiveData(users, liveData));
-			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
-		}
-
-		return builder.build();
-	}
-	
-	public JsonArray buildLiveDataSysAdmin(Long userId) {
-		SysAdmin sysAdmin = userService.getSysAdminById(userId);
-		
-		JsonArrayBuilder builder = Json.createArrayBuilder();
-		List<User> users = userService.getUsersOfManager(sysAdmin.getId());
-		List<LiveData> liveDatas = liveDataService.getAllLiveData(); 
-		
-		for (LiveData liveData: liveDatas) {
-			String measure = liveData.getSensor().getMeasureName();
-			String unit = liveData.getSensor().getUnit();
-			String value = Double.toString(combineLiveData(users, liveData));
-			builder.add(overviewJsonBuilder.buildLiveDataJson(measure, unit, value));
-		}
-
-		return builder.build();
-	}
-	
-	public double combineLiveData(List<User> users, LiveData liveData) {
-		double res = 0;
-		if (liveData.getComputeType().equals("Sum")) {
-			res = userService.getSumSensorLiveForUsers(users, liveData.getSensor().getName());
-		} else if (liveData.getComputeType().equals("Average")) {
-			res = userService.getAvgSensorLiveForUsers(users, liveData.getSensor().getName());
-		}
-		return roundDecimal(res,2);
-	}
-	
-	public double computeLiveData(Long userId, LiveData liveData) {
-		double res = 0;
-		if (liveData.getComputeType().equals("Sum")) {
-			res = userService.getSumSensorLiveForUser(userId, liveData.getSensor().getName());
-		} else if (liveData.getComputeType().equals("Average")) {
-			res = userService.getAvgSensorLiveForUser(userId, liveData.getSensor().getName());
-		}
-		return roundDecimal(res,2);
-	}*/
 }

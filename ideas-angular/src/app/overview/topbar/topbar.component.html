@@ -2,8 +2,8 @@
 <div class="col-sm-9">
     <ul class="menu" style="display: inline-block; float:left; margin-right:50px;">
 
-      <li *ngFor="let dat of data"><a (click)="changeLiveData(dat.name)">{{dat.name}}: <b>{{dat.value}}</b> {{dat.unit}}
-	  </a><a style="cursor:pointer;" (click)="removeLiveData(dat.name)">x</a></li>
+      <li *ngFor="let dat of data"><a name="livedata" style="cursor:pointer;" (click)="changeLiveData(dat.name)">{{dat.name}}: <span id="value"><b name="value">{{dat.value}}</b></span> {{dat.unit}}
+	  </a><a name="cross" style="cursor:pointer;" (click)="removeLiveData(dat.name)">x</a></li>
       </ul>
       <div class="dropdown" style="display: inline-block; float: center;">
         <button class="dropbtn">+</button>

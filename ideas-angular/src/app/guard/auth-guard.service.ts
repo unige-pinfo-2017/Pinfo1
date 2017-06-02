@@ -7,6 +7,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot) {
+		// Protects routes against non-authentified access
         if (sessionStorage.getItem('id')) {
             return true;
         }

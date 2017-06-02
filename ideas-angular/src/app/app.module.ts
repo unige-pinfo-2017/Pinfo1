@@ -2,8 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { Ng2TableModule } from 'ng2-table/ng2-table';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 import { PaginationModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -30,7 +29,6 @@ import {RoleGuard} from './guard/role-guard.service';
 	  AppRoutingModule,
 	  HttpModule,
 	  FormsModule,
-	  Ng2TableModule,
 	  ChartsModule,
 	  PaginationModule.forRoot(),
 	  NgxDatatableModule

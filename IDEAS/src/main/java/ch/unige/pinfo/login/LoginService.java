@@ -20,19 +20,6 @@ public class LoginService {
 	
 	public LoginService(){}
 	
-	/*public void authentication(String username, String password){
-		User user = mu.getUserByUsername(username);
-		
-		if (user == null){
-			sl.display("Username does not exist.");
-		} else if (checkPassword(password, user.getPassword())){
-			sl.display("Authentication successful.");
-			mu.addConnectedUser(user);
-		} else {
-			sl.display("Authentication failed.");
-		}
-	}*/
-	
 	/**
 	 * <b>authenticate</b> 
 	 * <p>
@@ -57,7 +44,7 @@ public class LoginService {
 	/**
 	 * <b>checkPassword</b> 
 	 * <p>
-	 *   {@code public public boolean checkPassword(String inputPassword, String realPassword)}
+	 *   {@code public boolean checkPassword(String inputPassword, String realPassword)}
 	 * <p>
 	 * Compare {@code realPassword} with {@code inputPassword}. 
 	 * 
@@ -70,12 +57,24 @@ public class LoginService {
 		return realPassword.equals(inputPassword);
 	}
 
+	/**
+	 * <b>getSubordinates</b>
+	 * <p>
+	 * {@code public JsonArray getSubordinates(Long userId)}
+	 * <p>
+	 * 
+	 * Build a {@code JsonArray} of subordinate users for a user.
+	 * 
+	 * @param userId - The user's id
+	 * @return
+	 * A {@code JsonArray} of subordinate users, with ids and names.
+	 */
 	public JsonArray getSubordinates(Long userId) {
 		String role = backEndFacade.getUserRoleById(userId);
 		List<User> users ;
-		if (role.equals("Manager")) {
+		if ("Manager".equals(role)) {
 			users = backEndFacade.getUsersOfManager(userId);
-		} else if (role.equals("SysAdmin")) {
+		} else if ("SysAdmin".equals(role)) {
 			users = backEndFacade.getUsersOfSysAdmin(userId);
 		} else {
 			users = new ArrayList<User>();
@@ -83,6 +82,18 @@ public class LoginService {
 		return loginJsonBuilder.buildIds(users);
 	}
 
+	/**
+	 * <b>getRole</b>
+	 * <p>
+	 * {@code public String getRole(Long userId)}
+	 * <p>
+	 * 
+	 * Get a role of a user.
+	 * 
+	 * @param userId - The user's id.
+	 * @return
+	 * The role in {@code String} format.
+	 */
 	public String getRole(Long userId) {
 		return backEndFacade.getUserRoleById(userId);
 	}

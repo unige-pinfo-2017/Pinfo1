@@ -46,7 +46,7 @@ public class UserPersistenceTest {
 	            .addPackage(Device.class.getPackage())
 	            .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
 	            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-	    }
+	}
 	
 	private static final String[] NAMES = {
 			"test",
@@ -124,7 +124,7 @@ public class UserPersistenceTest {
 		final Set<String> foundUsersNames = new HashSet<String>();
 		final Set<String> foundUsersPasswords = new HashSet<String>();
 		for (User user : foundUsers) {
-            System.out.println("* " + user);
+            System.out.println("* " + user.getUsername());
 			foundUsersNames.add(user.getUsername());
 			foundUsersPasswords.add(user.getPassword());
 		}

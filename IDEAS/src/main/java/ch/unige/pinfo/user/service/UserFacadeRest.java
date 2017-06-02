@@ -15,7 +15,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import ch.unige.pinfo.user.dom.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
 
+@Api(value="User")
 @Path("/user")
 public class UserFacadeRest {
 	
@@ -30,7 +36,11 @@ public class UserFacadeRest {
 	@GET
 	@Path("{id}")
 	@Produces({ "application/json" })
-	public User getUserByID(@PathParam("id") Long id){
+	@ApiOperation(value = "Create test user class",
+			response= User.class,
+			responseContainer = "List")
+	public User getUserByID(
+			@ApiParam(value="The user'id")@PathParam("id") Long id){
 		User user = new User();
 		user.setId(id);
 		user.setUsername("test" + id);
@@ -41,6 +51,11 @@ public class UserFacadeRest {
 	@PUT
 	@Path("/add")
 	@Produces({ "application/json" })
+	@ApiOperation(value = "Add new user to the data base")
+	@ApiResponses(value={
+			@ApiResponse(code=201, message="User details"),
+			@ApiResponse(code=404, message="not found")
+	})
 	public Response add(@NotNull User user) throws URISyntaxException {
 		userService.addUser(user);
 		return Response.status(201).contentLocation(new URI("user/byId/" + user.getId())).build();
@@ -49,7 +64,13 @@ public class UserFacadeRest {
 	@GET
 	@Path("/byId/{id}")
 	@Produces({ "application/json" })
-	public Response getUserById(@NotNull @Digits(integer = 7, fraction = 0) @PathParam("id") Long id) {
+	@ApiOperation(value = "Get a user by his id")
+	@ApiResponses(value = {
+			@ApiResponse(code=404, message = "not found"),
+			@ApiResponse(code=200, message= "User details")
+	})
+	public Response getUserById(@NotNull @Digits(integer = 7, fraction = 0) 
+		@ApiParam(value="he user's id")@PathParam("id") Long id) {
 		User u = null;
 		try {
 			u = userService.getUserById(id);
@@ -62,13 +83,15 @@ public class UserFacadeRest {
 	@GET
 	@Path("/all")
 	@Produces({ "application/json" })
+	@ApiOperation(value="Get all existing users")
+	@ApiResponses(value={
+			@ApiResponse(code=200, message= "Users details"),
+	})
 	public Response getAll() {
 		return Response.ok().entity(userService.getAllUsers()).build();
 	}
 	
 	@GET
-	//@Path("/byUsername/{username}")
-	//@Produces({ "application/json" })
 	public Response getByUsername(@PathParam("username") String username) {
 		return Response.ok().entity(userService.getUserByUsername(username)).build();
 	}
@@ -76,14 +99,13 @@ public class UserFacadeRest {
 	@GET
 	@Path("/byUsername/{username}")
 	@Produces({ "application/json" })
-	public User getByUsername2(@PathParam("username") String username) {
+	@ApiOperation(value="Get a user by user name")
+	@ApiResponses(value = {
+			@ApiResponse(code=200, message="User details")
+	})
+	public User getByUsername2(
+			@ApiParam(value ="The user name")@PathParam("username") String username) {
 		return userService.getUserByUsername(username).get(0);
 	}
-	
-	/*@GET
-	@Path("{id}")
-	public Response pathParamTest(@PathParam("id") String id){
-		return Response.status(200).entity("Path parameter is: " + id).build();
-	}*/
 	
 }

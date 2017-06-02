@@ -173,6 +173,15 @@
                         <directory>src/test/resources-glassfish-embedded</directory>
                     </testResource>
                 </testResources>
+                <pluginManagement>
+                <plugins>
+                <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                </plugin>
+                </plugins>
+                </pluginManagement>
                 <plugins>
                     <!-- The surefire plugin is configured to pass a system property to GlassFish to retarget the derby log file -->
                     <plugin>
@@ -194,6 +203,11 @@
                     	<artifactId>maven-war-plugin</artifactId>
                     	<version>3.1.0</version>
                     </plugin>
+                    <plugin>
+                    	<groupId>org.wildfly.plugins</groupId>
+                		<artifactId>wildfly-maven-plugin</artifactId>
+                		<version>1.0.1.Final</version>
+                	</plugin>
                 </plugins>
             </build>
         </profile>
